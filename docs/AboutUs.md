@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 <img src="images/linkedink.png" width="200px">
 
 [[github](http://github.com/LinkedInk)]
-[[portfolio](team/HendeyFan.md)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
