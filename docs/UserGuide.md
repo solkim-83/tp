@@ -152,6 +152,26 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+### Search for events : `searchEvents`
+
+* The search is case-insensitive. e.g hans will match Hans
+* If the event contains the particular keyword, the name of the event will appear.
+* Only full words will be matched e.g. Han will not match Hans
+
+Examples:
+* `searchEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
+* `searchEvents seminar` returns `CS Seminar` and  `seminar 1`
+
+
+Format: `searchEvents KEYWORD`
+
+### Viewing all saved events : `viewEvents`
+
+Shows a list of all events saved in the calendar.
+
+Format: `viewEvents`
+
+
 ### Archiving data files `[coming in v2.0]`
 
 _{explain the feature here}_
@@ -176,3 +196,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**search Events** | `searchEvents KEYWORD`<br> e.g., `find Seminar`
+**view Events** | `viewEvents`

@@ -291,8 +291,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to search for a particular event
-2.  AddressBook shows a list of events that match the criteria (e.g. contain a keyword) 
+1.  User requests to search for a particular event 
+2.  AddressBook shows a list of events that match the criteria (e.g. contain a certain keyword) 
 
     Use case ends.
 
