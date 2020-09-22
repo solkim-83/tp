@@ -152,6 +152,65 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+### Adding an event : `addEvent`
+
+Adds an event to the event list.
+
+Format: `addEvent d/DESCRIPTION at/DATE_TIME`
+
+DATE_TIME formats currently accepted
+* dd-MM-yyyy HH:mm
+
+Legend:
+
+Short form | What it represents
+----------- | -----------
+dd | Digits for date
+MM | Digits for month
+yyyy | Digits for year
+HH | Digits for hour of the day in 24hr time
+mm | Digits for minutes of an hour
+
+Examples:
+* addEvent d/CS2103 Team meeting at/12-12-1234 12:34
+* addEvent at/12-12-12 12:34 d/CS2103 Team meeting
+
+
+### Delete an event : `deleteEvent`
+
+Deletes the specified event from the event list.
+
+Format: `deleteEvent INDEX`
+
+* `viewEvents` (command explained below) should be used first to display a list of events to be referenced with an INDEX value.
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `viewEvents` followed by `deleteEvent 2` deletes the 2nd event in the event list
+
+### Editing an event : `editEvent`
+
+Edits an existing event in the event list. DATE_TIME format follows the addEvent command.
+
+Format: `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME]
+[p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`
+
+* `viewEvents` (command explained below) should be used first to display a list of events to be referenced with an INDEX value.
+* Edits the event at the specified INDEX. The index must be a positive integer 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* `p/ATTENDEE_NAME` adds a contact with `ATTENDEE_NAME` to the event.
+* `rp/ATTENDEE_NAME` removes a contact with `ATTENDEE_NAME` from the event.
+* ATTENDEE_NAME must be exactly the same as the name stored in contacts. Case-sensitive.
+* You can remove all the attendees for the event by using rp/*.
+
+Examples:
+* `edit 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
+* `edit 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
+* `edit 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
+
 ### Search for events : `searchEvents`
 
 * The search is case-insensitive. e.g hans will match Hans
@@ -196,5 +255,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add Event** | `addEvent d/DESCRIPTION at/DATE_TIME`<br> e.g., `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
+**Delete Event** | `deleteEvent INDEX`<br> e.g., `deleteEvent 2`
+**Edit Event** | `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `edit 2 at/23-10-1234 12:30 p/Amanda`
 **search Events** | `searchEvents KEYWORD`<br> e.g., `find Seminar`
 **view Events** | `viewEvents`
