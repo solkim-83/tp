@@ -13,7 +13,6 @@ You can reach us at the email `seer[at]u.nus.edu`
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
@@ -21,9 +20,9 @@ You can reach us at the email `seer[at]u.nus.edu`
 
 ###Hendey Fan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/linkedink.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/LinkedInk)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
