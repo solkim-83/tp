@@ -5,11 +5,11 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `seer[at]u.nus.edu`
 
 ## Project team
 
-### John Doe
+###Chan Junda
 
 <img src="images/johndoe.png" width="200px">
 
@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+###Hendey Fan
 
 <img src="images/johndoe.png" width="200px">
 
@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+###Illio Suardi 
 
 <img src="images/johndoe.png" width="200px">
 
@@ -38,17 +38,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+###Kim Sol
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/solkim-83.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/solkim-83)]
+[[portfolio](team/solkim-83.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation, In charge of Events
 
-### James Doe
+### Wu Bangyi
 
 <img src="images/johndoe.png" width="200px">
 
