@@ -274,7 +274,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. User input missing one or multiple fields, placeholder not used for empty fields
+* 2a. User input missing one or multiple fields
     * 2a1. Athena shows an error message.
     
   Use case ends.
