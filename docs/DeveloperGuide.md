@@ -287,7 +287,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: search for events**
+
+**MSS**
+
+1.  User requests to search for a particular event
+2.  AddressBook shows a list of events that match the criteria (e.g. contain a keyword) 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given keyword is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: view events**
+
+**MSS**
+
+1.  User requests to view all events recorded 
+2.  AddressBook shows a list of events  
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
