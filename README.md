@@ -2,11 +2,11 @@
 
 ![Ui](docs/images/Ui.png)
 
-###### This is project **Athena**, a contact book and events manager.<br>
+#### This is project **Athena**, a contact book and events manager.<br>
 
 * Athena provides support to manage large number of contacts and events at the same time.
 * Athena also facilitates seamless integration between contacts management and events management.
 * For the detailed documentation of this project, see the **[Athena Project Website](https://ay2021s1-cs2103t-w10-4.github.io/tp/)**.
 
-###### Acknowledgements
+#### Acknowledgements
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
