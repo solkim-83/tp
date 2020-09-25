@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 
 <img src="images/chan-j-d.png" width="200px">
 
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/chan-j-d)]
 [[portfolio](team/chan-j-d.md)]
 
 * Role: Developer
