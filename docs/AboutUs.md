@@ -9,14 +9,15 @@ You can reach us at the email `seer[at]u.nus.edu`
 
 ## Project team
 
-###Chan Junda
+### Chan Jun Da
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chan-j-d.png" width="200px">
 
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chan-j-d.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation, In charge of Contacts Search and Edit  
 
 ###Hendey Fan
 
