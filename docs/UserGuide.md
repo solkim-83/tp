@@ -99,7 +99,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Sorting your contacts : `delete`
+### Sorting your contacts : `sort`
 
 View your contacts in a sorted manner
 
