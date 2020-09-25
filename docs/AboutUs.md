@@ -9,16 +9,17 @@ You can reach us at the email `seer[at]u.nus.edu`
 
 ## Project team
 
-###Chan Junda
+### Chan Jun Da
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chan-j-d.png" width="200px">
 
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chan-j-d.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Documentation, In charge of Contacts Search and Edit  
 
-###Hendey Fan
+### Hendey Fan
 
 <img src="images/linkedink.png" width="200px">
 
@@ -28,7 +29,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 * Role: Team Lead
 * Responsibilities: UI
 
-###Illio Suardi
+### Illio Suardi
 
 <img src="images/johndoe.png" width="200px">
 
@@ -37,7 +38,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 * Role: Developer
 * Responsibilities: Data
 
-###Kim Sol
+### Kim Sol
 
 <img src="images/solkim-83.png" width="200px">
 
@@ -47,7 +48,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 * Role: Developer
 * Responsibilities: Documentation, In charge of Events
 
-###Wu Bangyi
+### Wu Bangyi
 
 <img src="images/bangyiwu.png" width="200px">
 
