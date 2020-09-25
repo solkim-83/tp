@@ -324,6 +324,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+      
+**Use case: Editing contact information**
+
+Preconditions: The contact the user wishes to edit is displayed on the UI.
+
+**MSS**
+
+1.  User uses the edit command to inform the system of which fields of the contact they wish to change.
+2.  Athena updates the contact information.
+3.  Athena sends an acknowledgement message to the user to notify of the edits made.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Tag to be removed does not exist.
+    * 1a1. Athena notifies the user of the error.
+    * 1a2. Athena aborts the command without making changes.
+    
+      Use case ends.
+     
+**Use case: Searching for contacts**
+
+**MSS**
+
+1. User uses the find command and informs the systems of keywords and additional fields the contact has to match.
+2. Athena displays a list of contacts that matches the keywords and contains the additional fields.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    * 2a1. Athena informs the user that their search did not come up with any valid matches.
+    
+       Use case ends.
 
 **Use case: Add an event**
 
