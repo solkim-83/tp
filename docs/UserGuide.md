@@ -125,41 +125,51 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Tags that are not mentioned will *NOT* be affected.
+* `t/TAG` adds `TAG` to the user.
+* `rt/TAG` removes `TAG` from the user .
+* Tag removal is done before new tags are added.
+* You can remove all the person’s tags by typing `rt/*`.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` 
+and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd person to be `Betsy Crower` and adds the tag `CS2030`.
+* `edit 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `CS2103` to it.
 
-### Locating persons by name: `find`
+### Finding a contact : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. Also supports search with additional specifiers such as 
+phone number or email.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/KEYWORDS]… [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
+* Search field must contain at least one of the optional fields.
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* For name keywords, only full words will be matched. e.g. `Han` will not match `Hans`
+* The `t/TAG` specifier must use an existing tag and does not support partial tag-name searches.
+* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* For search without additional specifiers, persons matching at least one keyword will be returned (i.e. `OR` search).
+e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If additional specifiers are included, only contacts whose specified field contains the specifier details
+ will be returned. `find n/John a/Serangoon` will return only contacts whose names contain `John` **and** with 
+ `Serangoon` as part of the address.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`
+* `find a/Serangoon` returns all contacts with an address that contains `Serangoon` 
+* `find n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
+`Alex Yeoh e/...@hotmail.com` 
 
 
 ### Clearing all entries : `clear`
