@@ -262,7 +262,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Athena` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: View introduction**
+
+1.  User opens Athena for the first time
+
+1.  Athena displays an introduction message, with a guide on how to use basic commands.
+
+    Use case ends.
 
 **Use case: Add a contact**
 
