@@ -499,8 +499,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A person to be tracked by Athena; comprises a name, phone number, email and address, as well as an arbitrary quantity of tags
+* **Event**: An event to be tracked by Athena; comprises a name and a date and time, as well as an arbitrary quantity of tags
+* **Mainstream OS**: Windows, Linux, Unix, OS-X 
 
 --------------------------------------------------------------------------------------------------------------------
 
