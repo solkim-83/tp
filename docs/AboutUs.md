@@ -31,9 +31,9 @@ You can reach us at the email `seer[at]u.nus.edu`
 
 ### Illio Suardi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/fyshhh.png" height="200px" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/fyshhh)] [[portfolio](team/fyshhh.md)]
 
 * Role: Developer
 * Responsibilities: Data
