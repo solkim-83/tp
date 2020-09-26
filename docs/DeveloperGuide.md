@@ -265,6 +265,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
 | `* *`    | user with many events in the address book   | sort events by name                   | so that I can view my events in a more consistent manner and find the events I want quickly               |
+
 *{More to be added}*
 
 ### Use cases
@@ -489,8 +490,10 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should be able to hold up to 1000 contacts and events without a noticeable sluggishness in performance for typical usage.
+1.  Should be sufficiently intuitive for new or inexperienced users to understand and navigate.
+1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should not require an internet connection (bar downloading the app)
 
 *{More to be added}*
 
