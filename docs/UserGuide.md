@@ -201,7 +201,7 @@ Examples:
 * addEvent at/12-12-12 12:34 d/CS2103 Team meeting
 
 
-### Delete an event : `deleteEvent`
+### Deleting an event : `deleteEvent`
 
 Deletes the specified event from the event list.
 
@@ -232,9 +232,9 @@ Format: `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * You can remove all the attendees for the event by using rp/*.
 
 Examples:
-* `edit 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
-* `edit 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
-* `edit 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
+* `editEvent 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
+* `editEvent 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
+* `editEvent 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
 
 ### Finding an event : `findEvents`
 
