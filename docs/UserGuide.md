@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Athena can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,11 +14,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `Athena.jar` (no releases yet).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for Athena.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file or run it with `java -jar Athena.jar` to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -26,11 +26,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to Athena.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`addEvent`**`d/Meeting at/12-12-1234 12:34` : Adds an event named `Meeting` to Athena.
 
    * **`exit`** : Exits the app.
 
@@ -77,50 +77,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you are missing some of the information, like ADDRESS, you can just end the field with a "." (e.g. "a/.")
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/. p/1234567 t/criminal`
 
 ### Deleting a person : `delete`
 
@@ -135,6 +98,79 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Sorting your contacts : `sort`
+
+View your contacts in a sorted manner
+
+Format: `sort INDEX`
+
+* Sorts through all contacts currently on screen and lists them according to the user-requested order
+* INDEX DEFINITIONS:  
+  1: By time added (Default)
+  
+  2: By alphabetical order of their names
+  
+  3: By alphabetical order of their address
+  
+  4: By alphabetical order of their first tag
+
+Examples:
+* `sort 2` would sort all currently displayed contacts by their names in alphabetical order
+
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+### Editing a contact : `edit`
+
+Edits an existing person in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Tags that are not mentioned will *NOT* be affected.
+* `t/TAG` adds `TAG` to the user.
+* `rt/TAG` removes `TAG` from the user .
+* Tag removal is done before new tags are added.
+* You can remove all the person’s tags by typing `rt/*`.
+
+Examples:
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` 
+and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd person to be `Betsy Crower` and adds the tag `CS2030`.
+* `edit 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `CS2103` to it.
+
+### Finding a contact : `find`
+
+Finds persons whose names contain any of the given keywords. Also supports search with additional specifiers such as 
+phone number or email.
+
+Format: `find [n/KEYWORDS]… [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+
+* Search field must contain at least one of the optional fields.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* For name keywords, only full words will be matched. e.g. `Han` will not match `Hans`
+* The `t/TAG` specifier must use an existing tag and does not support partial tag-name searches.
+* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* For search without additional specifiers, persons matching at least one keyword will be returned (i.e. `OR` search).
+e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If additional specifiers are included, only contacts whose specified field contains the specifier details
+ will be returned. `find n/John a/Serangoon` will return only contacts whose names contain `John` **and** with 
+ `Serangoon` as part of the address.
+
+Examples:
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`
+* `find a/Serangoon` returns all contacts with an address that contains `Serangoon` 
+* `find n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
+`Alex Yeoh e/...@hotmail.com` 
+
 
 ### Clearing all entries : `clear`
 
@@ -213,9 +249,9 @@ Examples:
 
 ### Search for events : `searchEvents`
 
-* The search is case-insensitive. e.g hans will match Hans
-* If the event contains the particular keyword, the name of the event will appear.
-* Only full words will be matched e.g. Han will not match Hans
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* If the event contains the particular keyword in the command, the name of the event will appear.
+* Only full words will be matched e.g. `Han` will not match `Hans`
 
 Examples:
 * `searchEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
@@ -226,7 +262,7 @@ Format: `searchEvents KEYWORD`
 
 ### Viewing all saved events : `viewEvents`
 
-Shows a list of all events saved in the calendar.
+Shows a list of all events saved in the calendar for the users to keep track.
 
 Format: `viewEvents`
 
