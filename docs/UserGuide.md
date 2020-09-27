@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Athena is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -154,9 +154,9 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Search for events : `searchEvents`
 
-* The search is case-insensitive. e.g hans will match Hans
-* If the event contains the particular keyword, the name of the event will appear.
-* Only full words will be matched e.g. Han will not match Hans
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* If the event contains the particular keyword in the command, the name of the event will appear.
+* Only full words will be matched e.g. `Han` will not match `Hans`
 
 Examples:
 * `searchEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
@@ -167,7 +167,7 @@ Format: `searchEvents KEYWORD`
 
 ### Viewing all saved events : `viewEvents`
 
-Shows a list of all events saved in the calendar.
+Shows a list of all events saved in the calendar for the users to keep track.
 
 Format: `viewEvents`
 
