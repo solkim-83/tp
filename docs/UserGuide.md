@@ -197,8 +197,8 @@ HH | Digits for hour of the day in 24hr time
 mm | Digits for minutes of an hour
 
 Examples:
-* `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
-* `addEvent at/12-12-12 12:34 d/CS2103 Team meeting`
+* addEvent d/CS2103 Team meeting at/12-12-1234 12:34
+* addEvent at/12-12-12 12:34 d/CS2103 Team meeting
 
 
 ### Deleting an event : `deleteEvent`
@@ -247,8 +247,8 @@ Format: `findEvents KEYWORD`
 * Only full words will be matched e.g. `meetin` will not match `meeting`
 
 Examples:
-* `findEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `findEvents seminar` returns `CS Seminar` and  `seminar 1`
+* `searchEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
+* `searchEvents seminar` returns `CS Seminar` and  `seminar 1`
 
 ### Viewing all saved events : `viewEvents`
 
