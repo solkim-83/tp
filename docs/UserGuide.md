@@ -118,7 +118,6 @@ Format: `sort INDEX`
 Examples:
 * `sort 2` would sort all currently displayed contacts by their names in alphabetical order
 
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -178,16 +177,6 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
 ### Adding an event : `addEvent`
 
 Adds an event to the event list.
@@ -208,11 +197,11 @@ HH | Digits for hour of the day in 24hr time
 mm | Digits for minutes of an hour
 
 Examples:
-* addEvent d/CS2103 Team meeting at/12-12-1234 12:34
-* addEvent at/12-12-12 12:34 d/CS2103 Team meeting
+* `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
+* `addEvent at/12-12-12 12:34 d/CS2103 Team meeting`
 
 
-### Delete an event : `deleteEvent`
+### Deleting an event : `deleteEvent`
 
 Deletes the specified event from the event list.
 
@@ -243,40 +232,46 @@ Format: `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * You can remove all the attendees for the event by using rp/*.
 
 Examples:
-* `edit 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
-* `edit 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
-* `edit 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
+* `editEvent 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
+* `editEvent 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
+* `editEvent 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
 
-### Search for events : `searchEvents`
+### Finding an event : `findEvents`
 
-* The search is case-insensitive. e.g hans will match Hans
-* If the event contains the particular keyword, the name of the event will appear.
-* Only full words will be matched e.g. Han will not match Hans
+Finds events whose names contain any of the given keywords.
+
+Format: `findEvents KEYWORD`
+
+* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* If the event contains the particular keyword in the command, the name of the event will appear.
+* Only full words will be matched e.g. `meetin` will not match `meeting`
 
 Examples:
-* `searchEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `searchEvents seminar` returns `CS Seminar` and  `seminar 1`
-
-
-Format: `searchEvents KEYWORD`
+* `findEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
+* `findEvents seminar` returns `CS Seminar` and  `seminar 1`
 
 ### Viewing all saved events : `viewEvents`
 
-Shows a list of all events saved in the calendar.
+Shows a list of all events saved in the calendar for the users to keep track.
 
 Format: `viewEvents`
 
+### Exiting the program : `exit`
 
-### Archiving data files `[coming in v2.0]`
+Exits the program.
 
-_{explain the feature here}_
+Format: `exit`
+
+### Saving the data
+
+Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Athena home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -285,14 +280,14 @@ _{explain the feature here}_
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Event** | `addEvent d/DESCRIPTION at/DATE_TIME`<br> e.g., `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Event** | `deleteEvent INDEX`<br> e.g., `deleteEvent 2`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Event** | `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `editEvent 2 at/23-10-1234 12:30 p/Amanda`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Events** | `findEvents KEYWORD`<br> e.g., `findEvents Seminar`
 **List** | `list`
 **Help** | `help`
-**Add Event** | `addEvent d/DESCRIPTION at/DATE_TIME`<br> e.g., `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
-**Delete Event** | `deleteEvent INDEX`<br> e.g., `deleteEvent 2`
-**Edit Event** | `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `edit 2 at/23-10-1234 12:30 p/Amanda`
-**search Events** | `searchEvents KEYWORD`<br> e.g., `find Seminar`
-**view Events** | `viewEvents`
+**View Events** | `viewEvents`
