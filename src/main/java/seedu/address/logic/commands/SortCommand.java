@@ -1,11 +1,18 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
+
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Person;
+
+import java.util.List;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class SortCommand extends Command {
 
@@ -22,8 +29,6 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SORT + "Likes to swim.";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Remark command not implemented yet";
-
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
 
     private final Index index;
@@ -38,7 +43,24 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased()));
+        requireNonNull(model);
+        model.sortPerson(index);
+
+        return new CommandResult("Sorted by " + indexMessage(index));
+    }
+
+    public String indexMessage(Index index) {
+        int input = index.getOneBased();
+        switch (input) {
+            case 1:
+                return "name in alphabetical order";
+            case 2:
+                return "address in alphabetical order";
+            case 3:
+                return "primary tag in alphabetical order";
+            default:
+                return "user input";
+        }
     }
 
     @Override

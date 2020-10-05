@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +26,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -110,6 +115,41 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void sortPerson(Index index) {
+        Comparator<Person> nameComparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getName().fullName.compareTo(o2.getName().fullName);
+            }
+        };
+
+        Comparator<Person> addressComparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getAddress().value.compareTo(o2.getAddress().value);
+            }
+        };
+
+        Comparator<Person> tagComparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
+                    return 0;
+                }
+                return o1.getTags().iterator().next().tagName.compareTo(o2.getTags().iterator().next().tagName);
+            }
+        };
+        int indexNumber = index.getOneBased();
+        if (indexNumber == 1) {
+            addressBook.sortPerson(nameComparator);
+        } else if (indexNumber == 2) {
+            addressBook.sortPerson(addressComparator);
+        } else if (indexNumber == 3) {
+            addressBook.sortPerson(tagComparator);
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
