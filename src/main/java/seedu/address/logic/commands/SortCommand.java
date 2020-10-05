@@ -1,18 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.person.Person;
-
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.model.Model;
 
 public class SortCommand extends Command {
 
@@ -34,7 +28,7 @@ public class SortCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
+     * @param index the order in which to sort the address book
      */
     public SortCommand(Index index) {
         requireAllNonNull(index);
@@ -49,17 +43,20 @@ public class SortCommand extends Command {
         return new CommandResult("Sorted by " + indexMessage(index));
     }
 
+    /**
+     * Returns the appropriate console message for the index.
+     */
     public String indexMessage(Index index) {
         int input = index.getOneBased();
         switch (input) {
-            case 1:
-                return "name in alphabetical order";
-            case 2:
-                return "address in alphabetical order";
-            case 3:
-                return "primary tag in alphabetical order";
-            default:
-                return "user input";
+        case 1:
+            return "name in alphabetical order";
+        case 2:
+            return "address in alphabetical order";
+        case 3:
+            return "primary tag in alphabetical order";
+        default:
+            return "user input";
         }
     }
 
