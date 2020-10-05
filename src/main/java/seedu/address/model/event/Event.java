@@ -1,21 +1,26 @@
 package seedu.address.model.event;
 
-public class Event {
-    String description;
+import java.time.LocalDateTime;
 
-    Event(String description) {
+public class Event {
+    Description description;
+    Time time;
+
+    public Event(Description description, Time time) {
         this.description = description;
+        this.time = time;
     }
 
     String getDescription() {
-        return this.description;
+        return this.description.toString();
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" Description: ");
+                .append(" At: ")
+                .append(time.toString());
         return builder.toString();
     }
 }

@@ -120,6 +120,14 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /*
+    TODO: hasEvent temporary place holder to be implemented in future
+     */
+    @Override
+    public boolean hasEvent(Event event) {
+        return false;
+    }
+
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
