@@ -81,6 +81,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getCalendarFilePath() {
+        return userPrefs.getCalendarFilePath();
+    }
+
+    @Override
+    public void setCalendarFilePath(Path calendarFilePath) {
+        requireNonNull(calendarFilePath);
+        userPrefs.setCalendarFilePath(calendarFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -91,6 +102,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void setCalendar(ReadOnlyCalendar calendar) {
+        this.calendar.resetData(calendar);
+    }
+
+    @Override
+    public ReadOnlyCalendar getCalendar() {
+        return calendar;
     }
 
     @Override

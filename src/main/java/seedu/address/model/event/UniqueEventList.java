@@ -2,11 +2,11 @@ package seedu.address.model.event;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.UniquePersonList;
-
 import java.util.Iterator;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
@@ -23,6 +23,20 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.remove(toRemove);
     }
 
+    public void setEvents(UniqueEventList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvents(List<Event> events) {
+        requireAllNonNull(events);
+        internalList.setAll(events);
+    }
+
     public ObservableList<Event> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
@@ -35,7 +49,7 @@ public class UniqueEventList implements Iterable<Event> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
+                || (other instanceof UniqueEventList // instanceof handles nulls
                 && internalList.equals(((UniqueEventList) other).internalList));
     }
 

@@ -40,10 +40,14 @@ public interface Model {
      */
     Path getAddressBookFilePath();
 
+    Path getCalendarFilePath();
+
     /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    void setCalendarFilePath(Path addressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -52,6 +56,11 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    void setCalendar(ReadOnlyCalendar calendar);
+
+    /** Returns the AddressBook */
+    ReadOnlyCalendar getCalendar();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

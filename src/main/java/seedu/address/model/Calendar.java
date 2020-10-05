@@ -3,6 +3,11 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.person.Person;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 public class Calendar implements ReadOnlyCalendar {
     private final UniqueEventList events;
@@ -16,7 +21,19 @@ public class Calendar implements ReadOnlyCalendar {
     public void addEvent(Event e) {
         events.add(e);
     }
+    
+    public void setEvents(List<Event> events) {
+        this.events.setEvents(events);
+    }
 
+    /**
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetData(ReadOnlyCalendar newData) {
+        requireNonNull(newData);
+
+        setEvents(newData.getEventList());
+    }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
