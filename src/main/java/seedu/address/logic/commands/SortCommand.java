@@ -79,4 +79,5 @@ public class SortCommand extends Command {
         SortCommand e = (SortCommand) other;
         return index.equals(e.index);
     }
+
 }
