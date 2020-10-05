@@ -279,6 +279,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
   Use case ends.
       
+<<<<<<< HEAD
+**Use case: Delete a contact**
+=======
 **Use case: Add a contact**
 
 **MSS**
@@ -318,6 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
       
 **Use case: Sort through contacts**
+>>>>>>> 860255ceff5f029722e5528262a66818869dabc6
 
 **MSS**
 
@@ -338,10 +342,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+<<<<<<< HEAD
+      
+**Use case: Sort through contacts**
+=======
     
 **Use case: Editing contact information**
 
 Preconditions: The contact the user wishes to edit is displayed on the UI.
+>>>>>>> 860255ceff5f029722e5528262a66818869dabc6
 
 **MSS**
 
