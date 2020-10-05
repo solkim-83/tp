@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,8 +21,10 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Calendar calendar;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,8 +36,10 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.calendar = new Calendar();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.calendar.getEventList());
     }
 
     public ModelManager() {
@@ -100,9 +105,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteEvent(Event target) {
+        calendar.removeEvent(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        calendar.addEvent(event);
     }
 
     @Override
@@ -121,6 +136,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -63,11 +64,15 @@ public interface Model {
      */
     void deletePerson(Person target);
 
+    void deleteEvent(Event target);
+
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    void addEvent(Event event);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -78,6 +83,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
