@@ -2,6 +2,8 @@ package seedu.address.model.event;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
+    
     public void add(Event toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
@@ -23,7 +25,7 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.remove(toRemove);
     }
 
-    public void setEvents(UniqueEventList replacement) {
+    public void setEvent(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
