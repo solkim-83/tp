@@ -24,7 +24,7 @@ public class Description {
 
 
     public static boolean isValidDescription(String fullDescription) {
-        return fullDescription.equals("");
+        return !fullDescription.equals("");
     }
 
     @Override
