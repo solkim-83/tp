@@ -19,9 +19,9 @@ public class AddEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to Athena. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_DATETIME + "DATE_TIME "
+            + PREFIX_DATETIME + "DATE_TIME \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DESCRIPTION + "CS2103 Team meeting"
+            + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
             + PREFIX_DATETIME + "12-12-1234 12:34";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
