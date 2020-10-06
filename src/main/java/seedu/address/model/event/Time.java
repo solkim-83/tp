@@ -34,10 +34,12 @@ public class Time {
         }
     }
 
+    // TODO: add more formats to be parsed here
     public static LocalDateTime parse(String timeInput) {
         return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
+    // format of time displayed in the response box is controlled by toString
     @Override
     public String toString() {
         return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
