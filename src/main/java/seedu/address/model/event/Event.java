@@ -1,7 +1,5 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Person;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -48,7 +46,7 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" At: ")
-                .append(time.toString());
+                .append(getTime());
         return builder.toString();
     }
 }
