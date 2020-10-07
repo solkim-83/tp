@@ -315,9 +315,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
-2.  Athena shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  Athena deletes the contact
+2.  Athena shows a list of contacts in default order
+3.  User requests to sort the contacts in the list
+4.  Athena displays the contacts in the requested order
 
     Use case ends.
 
@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
     
@@ -338,25 +338,35 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to list contacts
-2.  Athena shows a list of contacts in default order
-3.  User requests to sort the contacts in the list
-4.  Athena displays the contacts in the requested order
+1.  User uses the edit command to inform the system of which fields of the contact they wish to change.
+2.  Athena updates the contact information.
+3.  Athena sends an acknowledgement message to the user to notify of the edits made.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. Tag to be removed does not exist.
+    * 1a1. Athena notifies the user of the error.
+    * 1a2. Athena aborts the command without making changes.
+    
+      Use case ends.
+     
+**Use case: Searching for contacts**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1. User uses the find command and informs the systems of keywords and additional fields the contact has to match.
+2. Athena displays a list of contacts that matches the keywords and contains the additional fields.
+
+    Use case ends.
+
+**Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
-
+    * 2a1. Athena informs the user that their search did not come up with any valid matches.
+    
+       Use case ends.
 
 **Use case: Add an event**
 
@@ -368,15 +378,15 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **Extensions**
 
-* 1a. The description and/or date time is missing.
+* 2a. The description and/or date time is missing.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Athena shows an error message.
     
       Use case ends.
       
-* 1a. The date time format is not accepted.
+* 3a. The date time format is not accepted.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
         
       Use case ends.
           
@@ -385,9 +395,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to view events
-2.  AddressBook shows a list of events
+2.  Athena shows a list of events
 3.  User requests to delete a specific event in the list
-4.  AddressBook deletes the event
+4.  Athena deletes the event
 
     Use case ends.
 
@@ -399,7 +409,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
       
@@ -408,9 +418,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to view events
-2.  AddressBook shows a list of events
+2.  Athena shows a list of events
 3.  User requests to edit a specific event in the list
-4.  AddressBook edits the event
+4.  Athena edits the event
 
     Use case ends.
 
@@ -422,22 +432,22 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
       
 * 4a. The persons to be added or removed is not found.
 
-    * 4a1. AddressBook shows an error message.
+    * 4a1. Athena shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: search for events**
+#### **Use case: search for events**
 
 **MSS**
 
 1.  User requests to search for a particular event 
-2.  AddressBook shows a list of events that match the criteria (e.g. contain a certain keyword) 
+2.  Athena shows a list of events that match the criteria (e.g. contain a certain keyword) 
 
     Use case ends.
 
@@ -449,16 +459,16 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 3a. The given keyword is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
       
-**Use case: view events**
+#### **Use case: view all saved events**
 
 **MSS**
 
 1.  User requests to view all events recorded 
-2.  AddressBook shows a list of events  
+2.  Athena shows a list of events  
 
     Use case ends.
 
@@ -471,15 +481,18 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should be able to hold up to 1000 contacts and events without a noticeable sluggishness in performance for typical usage.
+1.  Should be sufficiently intuitive for new or inexperienced users to understand and navigate.
+1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should not require an internet connection (bar downloading the app)
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A person to be tracked by Athena; comprises a name, phone number, email and address, as well as an arbitrary quantity of tags
+* **Event**: An event to be tracked by Athena; comprises a name and a date and time, as well as an arbitrary quantity of tags
+* **Mainstream OS**: Windows, Linux, Unix, OS-X 
 
 --------------------------------------------------------------------------------------------------------------------
 
