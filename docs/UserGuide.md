@@ -166,9 +166,9 @@ e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`
-* `find a/Serangoon` returns all contacts with an address that contains `Serangoon` 
-* `find n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
-`Alex Yeoh e/...@hotmail.com` 
+* `find a/Serangoon` returns all contacts with an address that contains `Serangoon`
+* `find n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not
+`Alex Yeoh e/...@hotmail.com`
 
 
 ### Clearing all entries : `clear`
