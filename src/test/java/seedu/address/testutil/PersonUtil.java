@@ -66,7 +66,7 @@ public class PersonUtil {
      */
     private static void convertTagsToStringDetails(StringBuilder stringBuilder, Prefix prefix, Set<Tag> tags) {
         if (tags.isEmpty()) {
-            stringBuilder.append(prefix);
+            stringBuilder.append(prefix).append(" ");
         } else {
             tags.forEach(s -> stringBuilder.append(prefix).append(s.tagName).append(" "));
         }
