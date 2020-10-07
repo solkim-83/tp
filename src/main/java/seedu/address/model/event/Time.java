@@ -24,6 +24,9 @@ public class Time {
         this.time = parse(timeInput);
     }
 
+    /**
+     * Returns if a given string is a valid email.
+     */
     public static boolean isValidTime(String timeInput) {
         try {
             LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
