@@ -16,12 +16,13 @@ public class Calendar implements ReadOnlyCalendar {
         events = new UniqueEventList();
     }
 
-    public Calendar() {}
+    public Calendar() {
+    }
 
     public void addEvent(Event e) {
         events.add(e);
     }
-    
+
     public void setEvents(List<Event> events) {
         this.events.setEvents(events);
     }

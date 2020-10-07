@@ -40,7 +40,7 @@ public class Event {
         return otherEvent.getDescription().equals(getDescription())
                 && otherEvent.getTime().equals(getTime());
     }
-    
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

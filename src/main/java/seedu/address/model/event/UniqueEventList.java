@@ -14,7 +14,7 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    
+
     public void add(Event toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
