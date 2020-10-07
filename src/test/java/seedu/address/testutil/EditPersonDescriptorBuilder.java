@@ -72,12 +72,22 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} to be added and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditPersonDescriptorBuilder withTagsToAdd(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTagsToAdd(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} to be removed and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTagsToRemove(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTagsToRemove(tagSet);
         return this;
     }
 
