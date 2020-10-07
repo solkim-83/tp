@@ -111,11 +111,11 @@ public class EditCommand extends Command {
             Optional<Set<Tag>> tagsToRemove) {
         Set<Tag> finalTagSet = new HashSet<>(personToEdit.getTags());
         tagsToRemove.ifPresent(set -> {
-                if (set.contains(Tag.ALL_TAGS_TAG)) {
-                    finalTagSet.clear();
-                } else {
-                    finalTagSet.removeAll(set);
-                }
+            if (set.contains(Tag.ALL_TAGS_TAG)) {
+                finalTagSet.clear();
+            } else {
+                finalTagSet.removeAll(set);
+            }
         });
         tagsToAdd.ifPresent(set -> finalTagSet.addAll(set));
         return finalTagSet;
