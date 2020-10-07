@@ -1,16 +1,15 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 public class Time {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Date time format not accepted, the following are accepted:\n" +
-                    "dd-MM-yyyy HH:mm";
+    public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
+            + "dd-MM-yyyy HH:mm";
 
     public final LocalDateTime time;
 

@@ -22,11 +22,11 @@ public class StatusBarFooter extends UiPart<Region> {
      */
     public StatusBarFooter(Path addressbookSaveLocation, Path calendarSaveLocation) {
         super(FXML);
-        saveLocationStatus.setText(
-                "Addressbook Save Location: " +
-                Paths.get(".").resolve(addressbookSaveLocation).toString() + " | " +
-                "Calendar Save Location: " +
-                Paths.get(".").resolve(calendarSaveLocation).toString());
+        saveLocationStatus.setText("Addressbook Save Location: "
+                + Paths.get(".").resolve(addressbookSaveLocation).toString()
+                + " | "
+                + "Calendar Save Location: "
+                + Paths.get(".").resolve(calendarSaveLocation).toString());
     }
 
 }

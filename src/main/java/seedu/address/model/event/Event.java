@@ -1,13 +1,18 @@
 package seedu.address.model.event;
 
-import java.time.LocalDateTime;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 public class Event {
-    Description description;
-    Time time;
+    private final Description description;
+    private final Time time;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Event(Description description, Time time) {
+        requireAllNonNull(description, time);
         this.description = description;
         this.time = time;
     }
