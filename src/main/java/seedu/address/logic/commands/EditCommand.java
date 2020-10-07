@@ -110,7 +110,13 @@ public class EditCommand extends Command {
     private static Set<Tag> processTagUpdates(Person personToEdit, Optional<Set<Tag>> tagsToAdd,
             Optional<Set<Tag>> tagsToRemove) {
         Set<Tag> finalTagSet = new HashSet<>(personToEdit.getTags());
-        tagsToRemove.ifPresent(set -> finalTagSet.removeAll(set));
+        tagsToRemove.ifPresent(set -> {
+                if (set.contains(Tag.ALL_TAGS_TAG)) {
+                    finalTagSet.clear();
+                } else {
+                    finalTagSet.removeAll(set);
+                }
+        });
         tagsToAdd.ifPresent(set -> finalTagSet.addAll(set));
         return finalTagSet;
     }

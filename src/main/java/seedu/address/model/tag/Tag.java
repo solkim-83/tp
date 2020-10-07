@@ -11,6 +11,12 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String ALL_TAGS_IDENTIFIER = "*";
+
+    /**
+     * Common tag object to identify a tag that equates to all tags a Person has.
+     */
+    public static final Tag ALL_TAGS_TAG = new Tag(ALL_TAGS_IDENTIFIER);
 
     public final String tagName;
 
@@ -29,6 +35,9 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
+        if (test.equals(ALL_TAGS_IDENTIFIER)) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
