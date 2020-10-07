@@ -236,48 +236,41 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts and events
+* requires seamless integration between contact and event tracking (vastly differing participants for different events, for instance)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts and events faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                  | I want to …​                       | So that I can…​                                                                                        |
+| -------- | ------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `* * *`  | new user                                    | see usage instructions                | understand how to get started by adding new contacts, removing sample ones and learning advanced commands |
+| `* * *`  | user                                        | add a new contact                     | keep track of my contacts                                                                                 |
+| `* * *`  | user                                        | delete a contact                      | remove contacts that I no longer need, keeping my contact storage neat and uncluttered                    |
+| `* * *`  | user                                        | view my contacts in an ordered manner | view the details of my contacts                                                                           |
+| `* * *`  | user                                        | add a new event                       | keep track of my events                                                                                   |
+| `* * *`  | user                                        | delete an event                       | remove events that I no longer need, keeping my event storage neat and uncluttered                        |
+| `* * *`  | user                                        | view my events in an ordered manner   | view the details of my events                                                                             |
+| `* *`    | user                                        | search for a contact                  | locate details of contacts without having to go through the entire list                                   |
+| `* *`    | user                                        | edit a contact's details              | change outdated information without having to delete and re-add contacts                                  |
+| `* *`    | user with many contacts in the address book | sort contacts by name                 | so that I can view my contacts in a more consistent manner and find the contacts I want quickly           |
+| `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
+| `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
+| `* *`    | user with many events in the address book   | sort events by name                   | so that I can view my events in a more consistent manner and find the events I want quickly               |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Add a contact**
-
-**MSS**
-
-1.  User requests to add a contact
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User input missing one or multiple fields
-    * 2a1. Athena shows an error message.
-    
-  Use case ends.
+(For all use cases below, the **System** is the `Athena` and the **Actor** is the `user`, unless specified otherwise)
       
 **Use case: Add a contact**
 
