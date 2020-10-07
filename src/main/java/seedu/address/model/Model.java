@@ -40,6 +40,9 @@ public interface Model {
      */
     Path getAddressBookFilePath();
 
+    /**
+     * Returns the user prefs' calendar file path.
+     */
     Path getCalendarFilePath();
 
     /**
@@ -47,7 +50,10 @@ public interface Model {
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
-    void setCalendarFilePath(Path addressBookFilePath);
+    /**
+     * Sets the user prefs' calendar file path.
+     */
+    void setCalendarFilePath(Path calendarFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
