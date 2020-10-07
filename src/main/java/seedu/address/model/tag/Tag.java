@@ -14,7 +14,7 @@ public class Tag {
     public static final String ALL_TAGS_IDENTIFIER = "*";
 
     /**
-     * Common tag object to identify a tag that equates to all tags a Person has.
+     * Unique tag object to identify a tag that equates to all tags a Person has.
      */
     public static final Tag ALL_TAGS_TAG = new Tag(ALL_TAGS_IDENTIFIER);
 
@@ -32,7 +32,7 @@ public class Tag {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid tag name or an all-tags indicator.
      */
     public static boolean isValidTagName(String test) {
         if (test.equals(ALL_TAGS_IDENTIFIER)) {

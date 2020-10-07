@@ -206,7 +206,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
+         * Adds {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTagsToAdd(Set<Tag> tagsToAdd) {
@@ -214,7 +214,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable tag set of tags to be added, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
@@ -222,10 +222,19 @@ public class EditCommand extends Command {
             return (tagsToAdd != null) ? Optional.of(Collections.unmodifiableSet(tagsToAdd)) : Optional.empty();
         }
 
+        /**
+         * Removes {@code tags} from this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
         public void setTagsToRemove(Set<Tag> tagsToRemove) {
             this.tagsToRemove = (tagsToRemove != null) ? new HashSet<>(tagsToRemove) : null;
         }
 
+        /**
+         * Returns an unmodifiable tag set of tags to be removed, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
         public Optional<Set<Tag>> getTagsToRemove() {
             return (tagsToRemove != null) ? Optional.of(Collections.unmodifiableSet(tagsToRemove)) : Optional.empty();
         }
