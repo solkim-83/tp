@@ -229,7 +229,7 @@ Format: `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * `p/ATTENDEE_NAME` adds a contact with `ATTENDEE_NAME` to the event.
 * `rp/ATTENDEE_NAME` removes a contact with `ATTENDEE_NAME` from the event.
 * ATTENDEE_NAME must be exactly the same as the name stored in contacts. Case-sensitive.
-* You can remove all the attendees for the event by using `rp/*`.
+* You can remove all the attendees for the event by using rp/*.
 
 Examples:
 * `editEvent 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
