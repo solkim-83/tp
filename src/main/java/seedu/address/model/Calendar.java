@@ -27,7 +27,7 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Calendar} with {@code newData}.
      */
     public void resetData(ReadOnlyCalendar newData) {
         requireNonNull(newData);
@@ -36,7 +36,7 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code Calendar}.
      * {@code key} must exist in the address book.
      */
     public void removeEvent(Event key) {

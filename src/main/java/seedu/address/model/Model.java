@@ -63,9 +63,12 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
     void setCalendar(ReadOnlyCalendar calendar);
 
-    /** Returns the AddressBook */
+    /** Returns the Calendar */
     ReadOnlyCalendar getCalendar();
 
     /**
@@ -73,6 +76,9 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    /**
+     * Returns true if a event with the same identity as {@code event} exists in the calendar.
+     */
     boolean hasEvent(Event event);
 
     /**
@@ -81,6 +87,10 @@ public interface Model {
      */
     void deletePerson(Person target);
 
+    /**
+     * Deletes the given event.
+     * The person must exist in the calendar.
+     */
     void deleteEvent(Event target);
 
     /**
@@ -89,6 +99,9 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    /**
+     * Adds the given person.
+     */
     void addEvent(Event event);
 
     /**
@@ -101,6 +114,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
     /**

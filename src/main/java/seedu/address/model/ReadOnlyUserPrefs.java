@@ -15,5 +15,4 @@ public interface ReadOnlyUserPrefs {
 
     Path getCalendarFilePath();
 
-
 }
