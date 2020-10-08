@@ -3,11 +3,13 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Event's Description in the Calendar.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription (String)}
+ */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS =
             "Description should not be blank";
-
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullDescription;
 
