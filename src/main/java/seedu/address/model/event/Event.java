@@ -7,7 +7,6 @@ import java.util.Objects;
 /**
  * Represents an Events in Calendar.
  */
-
 public class Event {
     private final Description description;
     private final Time time;

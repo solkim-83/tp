@@ -41,6 +41,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     /**
      * Adds a person to the list.
+     * The person must not already exist in the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
@@ -92,7 +93,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
-        if (!this.eventsAreUnique(events)) {
+        if (!eventsAreUnique(events)) {
             throw new DuplicatePersonException();
         }
 
@@ -124,7 +125,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code events} contains only unique events.
      */
     private boolean eventsAreUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {
@@ -136,5 +137,4 @@ public class UniqueEventList implements Iterable<Event> {
         }
         return true;
     }
-
 }

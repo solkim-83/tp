@@ -32,11 +32,17 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Returns the Calendar
+     *
+     * @see seedu.address.model.Model#getCalendar()
+     */
     ReadOnlyCalendar getCalendar();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered list of events */
     ObservableList<Event> getFilteredEventList();
 
     /**
@@ -44,6 +50,9 @@ public interface Logic {
      */
     Path getAddressBookFilePath();
 
+    /**
+     * Returns the user prefs' calendar file path.
+     */
     Path getCalendarFilePath();
 
     /**

@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
- * Adds a event to Athena.
+ * Adds an event to Athena.
  */
 public class AddEventCommand extends Command {
 
