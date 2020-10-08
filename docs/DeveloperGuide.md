@@ -80,7 +80,7 @@ The `UI` component,
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+1. `Logic` uses the `Parser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
 1. The command execution can affect the `Model` (e.g. adding a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -272,6 +272,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Athena` and the **Actor** is the `user`, unless specified otherwise)
       
+**Use case: Add a contact**
+
+**MSS**
+
+1.  User requests to add a contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User input missing one or multiple fields
+    * 1a1. Athena shows an error message.
+    
+  Use case ends.
+      
+**Use case: Delete a contact**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  Athena shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  Athena deletes the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Athena shows an error message.
+
+      Use case resumes at step 2.
+      
 **Use case: Sort through contacts**
 
 **MSS**
@@ -286,15 +324,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
-      
+    
 **Use case: Editing contact information**
 
 Preconditions: The contact the user wishes to edit is displayed on the UI.
@@ -343,13 +380,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The description and/or date time is missing.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. Athena shows an error message.
     
       Use case ends.
       
 * 3a. The date time format is not accepted.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
         
       Use case ends.
           
@@ -358,9 +395,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to view events
-2.  AddressBook shows a list of events
+2.  Athena shows a list of events
 3.  User requests to delete a specific event in the list
-4.  AddressBook deletes the event
+4.  Athena deletes the event
 
     Use case ends.
 
@@ -372,7 +409,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
       
@@ -381,9 +418,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to view events
-2.  AddressBook shows a list of events
+2.  Athena shows a list of events
 3.  User requests to edit a specific event in the list
-4.  AddressBook edits the event
+4.  Athena edits the event
 
     Use case ends.
 
@@ -395,13 +432,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
       
 * 4a. The persons to be added or removed is not found.
 
-    * 4a1. AddressBook shows an error message.
+    * 4a1. Athena shows an error message.
 
       Use case resumes at step 2.
 
@@ -410,7 +447,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to search for a particular event 
-2.  AddressBook shows a list of events that match the criteria (e.g. contain a certain keyword) 
+2.  Athena shows a list of events that match the criteria (e.g. contain a certain keyword) 
 
     Use case ends.
 
@@ -422,7 +459,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 3a. The given keyword is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
       
@@ -431,7 +468,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to view all events recorded 
-2.  AddressBook shows a list of events  
+2.  Athena shows a list of events  
 
     Use case ends.
 
