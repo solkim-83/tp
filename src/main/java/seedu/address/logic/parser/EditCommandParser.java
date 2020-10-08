@@ -59,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsToEdit(argMultimap.getAllValues(PREFIX_TAG), false)
                 .ifPresent(editPersonDescriptor::setTagsToAdd);
-        parseTagsToEdit(argMultimap.getAllValues(PREFIX_TAG), true)
+        parseTagsToEdit(argMultimap.getAllValues(PREFIX_REMOVE_TAG), true)
                 .ifPresent(editPersonDescriptor::setTagsToRemove);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

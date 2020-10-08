@@ -16,7 +16,7 @@ public class Tag {
     /**
      * Unique tag object to identify a tag that equates to all tags a Person has.
      */
-    public static final Tag ALL_TAGS_TAG = new Tag(ALL_TAGS_IDENTIFIER);
+    public static final Tag ALL_TAGS_TAG = new Tag(ALL_TAGS_IDENTIFIER, true);
 
     public final String tagName;
 
