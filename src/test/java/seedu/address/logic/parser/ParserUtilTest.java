@@ -214,12 +214,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseTagsWildcard_collectionWithWildcardTagAndFalse_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(ALL_TAGS_IDENTIFIER, VALID_TAG_1)));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseTags(Arrays.asList(ALL_TAGS_IDENTIFIER, VALID_TAG_1), false));
     }
 
     @Test
     public void parseTagsWildcard_collectionWithWildcardTagAndTrue_throwsParseException() throws ParseException {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(ALL_TAGS_IDENTIFIER, VALID_TAG_1));
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(ALL_TAGS_IDENTIFIER, VALID_TAG_1), true);
         Set<Tag> expectedTagSet = Set.of(ALL_TAGS_TAG, new Tag(VALID_TAG_1));
 
         assertEquals(expectedTagSet, actualTagSet);
