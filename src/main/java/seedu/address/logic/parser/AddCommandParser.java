@@ -24,6 +24,10 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    public static final String ADDRESS_PLACEHOLDER = "Address yet to be added";
+    public static final String EMAIL_PLACEHOLDER = "Email yet to be added";
+    public static final String PHONE_PLACEHOLDER = "Phone number yet to be added";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -39,9 +43,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone("Phone number yet to be added");
-        Email email = ParserUtil.parseEmail("Email yet to be added");
-        Address address = ParserUtil.parseAddress("Address yet to be added");
+        Phone phone = ParserUtil.parsePhone(PHONE_PLACEHOLDER);
+        Email email = ParserUtil.parseEmail(EMAIL_PLACEHOLDER);
+        Address address = ParserUtil.parseAddress(ADDRESS_PLACEHOLDER);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         if (arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
