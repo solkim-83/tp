@@ -8,6 +8,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 
+/**
+ * Wraps all data at the calendar level
+ */
+
 public class Calendar implements ReadOnlyCalendar {
     private final UniqueEventList events;
 

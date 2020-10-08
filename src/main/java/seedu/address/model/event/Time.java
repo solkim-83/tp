@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an Event's Time in the Calendar.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime (String)}
+ */
+
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
             + "dd-MM-yyyy HH:mm";
