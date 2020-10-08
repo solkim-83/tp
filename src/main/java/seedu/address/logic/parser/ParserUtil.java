@@ -140,7 +140,7 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /*
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      * Allows for wildcard tags if {@code canBeWildcard} is true.
      */
