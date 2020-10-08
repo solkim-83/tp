@@ -45,8 +45,8 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        String PLACEHOLDER = "Email yet to be added";
-        return test.matches(VALIDATION_REGEX) || test.equals(PLACEHOLDER);
+        String placeholder = "Email yet to be added";
+        return test.matches(VALIDATION_REGEX) || test.equals(placeholder);
     }
 
     @Override
