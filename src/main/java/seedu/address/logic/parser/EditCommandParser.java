@@ -57,8 +57,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTagsToAdd);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_REMOVE_TAG)).ifPresent(editPersonDescriptor::setTagsToRemove);
+        parseTagsToEdit(argMultimap.getAllValues(PREFIX_TAG), false)
+                .ifPresent(editPersonDescriptor::setTagsToAdd);
+        parseTagsToEdit(argMultimap.getAllValues(PREFIX_TAG), true)
+                .ifPresent(editPersonDescriptor::setTagsToRemove);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -71,15 +73,16 @@ public class EditCommandParser implements Parser<EditCommand> {
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
+     * If {@code canBeWildcard} is true, then the Tags produced can be the wildcard tag, i.e. ALL_TAGS_TAG.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTagsToEdit(Collection<String> tags, boolean canBeWildcard) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(ParserUtil.parseTags(tagSet, canBeWildcard));
     }
 
 }
