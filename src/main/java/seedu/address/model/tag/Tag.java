@@ -32,10 +32,30 @@ public class Tag {
     }
 
     /**
-     * Returns true if a given string is a valid tag name or an all-tags indicator.
+     * Constructs a {@code Tag}.
+     * The tag can be a wildcard {@code Tag} which represents all tags the entity has.
+     *
+     * @param tagName A valid tag name or '*'.
+     * @param canBeWildcard Indicator for whether the wildcard tag is allowed in this field.
+     */
+    public Tag(String tagName, boolean canBeWildcard) {
+        requireNonNull(tagName);
+        checkArgument(isValidTagName(tagName, canBeWildcard), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
+    }
+
+    /**
+     * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        if (test.equals(ALL_TAGS_IDENTIFIER)) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid tag name or an all-tags indicator.
+     */
+    public static boolean isValidTagName(String test, boolean canBeWildcard) {
+        if (test.equals(ALL_TAGS_IDENTIFIER) && canBeWildcard) {
             return true;
         }
         return test.matches(VALIDATION_REGEX);
