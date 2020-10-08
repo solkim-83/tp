@@ -25,6 +25,19 @@ public class Event {
         return time;
     }
 
+    /**
+     * Returns true if both events of the have the same description
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getDescription().equals(getDescription())
+                && otherEvent.getTime().equals(getTime());
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
