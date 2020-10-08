@@ -259,7 +259,16 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTagsToAdd().equals(e.getTagsToAdd())
-                    && getTagsToRemove().equals(e.getTagsToRemove());
+                    && (getTagsToRemove().equals(e.getTagsToRemove())
+                            || checksForWildcardTagEquality(getTagsToRemove(), e.getTagsToRemove()));
         }
+    }
+
+    /**
+     * Returns true if both tag sets contains the all_tags_tag.
+     */
+    private static boolean checksForWildcardTagEquality(Optional<Set<Tag>> tagSet1, Optional<Set<Tag>> tagSet2) {
+        return tagSet1.isPresent() && tagSet1.get().contains(Tag.ALL_TAGS_TAG)
+                && (tagSet2.isPresent() && tagSet2.get().contains(Tag.ALL_TAGS_TAG));
     }
 }
