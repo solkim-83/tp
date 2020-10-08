@@ -271,7 +271,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `Athena` and the **Actor** is the `user`, unless specified otherwise)
-      
+
 **Use case: Add a contact**
 
 **MSS**
@@ -284,9 +284,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User input missing one or multiple fields
     * 1a1. Athena shows an error message.
-    
+
   Use case ends.
-      
+
 **Use case: Delete a contact**
 
 **MSS**
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: Sort through contacts**
 
 **MSS**
@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Athena shows an error message.
 
       Use case resumes at step 2.
-    
+
 **Use case: Editing contact information**
 
 Preconditions: The contact the user wishes to edit is displayed on the UI.
@@ -349,9 +349,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 * 1a. Tag to be removed does not exist.
     * 1a1. Athena notifies the user of the error.
     * 1a2. Athena aborts the command without making changes.
-    
+
       Use case ends.
-     
+
 **Use case: Searching for contacts**
 
 **MSS**
@@ -365,7 +365,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
     * 2a1. Athena informs the user that their search did not come up with any valid matches.
-    
+
        Use case ends.
 
 **Use case: Add an event**
@@ -373,7 +373,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User requests to add an event
-    
+
     Use case ends.
 
 **Extensions**
@@ -381,15 +381,15 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 * 2a. The description and/or date time is missing.
 
     * 2a1. Athena shows an error message.
-    
+
       Use case ends.
-      
+
 * 3a. The date time format is not accepted.
 
     * 3a1. Athena shows an error message.
-        
+       
       Use case ends.
-          
+         
 **Use case: Delete an event**
 
 **MSS**

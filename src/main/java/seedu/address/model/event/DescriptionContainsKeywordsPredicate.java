@@ -26,5 +26,4 @@ public class DescriptionContainsKeywordsPredicate implements Predicate<Event> {
                 || (other instanceof DescriptionContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((DescriptionContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }
