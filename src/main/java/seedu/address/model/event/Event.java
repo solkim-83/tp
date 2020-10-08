@@ -7,7 +7,6 @@ import java.util.Objects;
 /**
  * Represents an Events in Calendar.
  */
-
 public class Event {
     private final Description description;
     private final Time time;
@@ -27,6 +26,19 @@ public class Event {
 
     public Time getTime() {
         return time;
+    }
+
+    /**
+     * Returns true if both events of the have the same description
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getDescription().equals(getDescription())
+                && otherEvent.getTime().equals(getTime());
     }
 
     @Override

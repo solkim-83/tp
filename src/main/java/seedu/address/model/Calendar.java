@@ -10,22 +10,39 @@ import seedu.address.model.event.UniqueEventList;
 
 /**
  * Wraps all data at the calendar level
+ * Duplicates are not allowed (by .isSameEvent comparison)
  */
-
 public class Calendar implements ReadOnlyCalendar {
+
     private final UniqueEventList events;
 
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
     {
         events = new UniqueEventList();
     }
 
-    public Calendar() {
+    public Calendar() {}
+
+    /**
+     * Creates an Calendar using the Events in the {@code toBeCopied}
+     */
+    public Calendar(ReadOnlyCalendar toBeCopied) {
+        this();
+        resetData(toBeCopied);
     }
 
-    public void addEvent(Event e) {
-        events.add(e);
-    }
+    //// list overwrite operations
 
+    /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
     public void setEvents(List<Event> events) {
         this.events.setEvents(events);
     }
@@ -39,9 +56,38 @@ public class Calendar implements ReadOnlyCalendar {
         setEvents(newData.getEventList());
     }
 
+    /// event-level operations
+
+    /**
+     * Returns true if a event with the same identity as {@code event} exists in the calendar.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
+     * Adds a event to the calendar.
+     * The event must not already exist in the calendar.
+     */
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the calendar.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the calendar.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
     /**
      * Removes {@code key} from this {@code Calendar}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the calendar.
      */
     public void removeEvent(Event key) {
         events.remove(key);
