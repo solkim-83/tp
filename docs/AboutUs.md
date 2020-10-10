@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 [[portfolio](team/chan-j-d.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, In charge of Contacts Search and Edit  
+* Responsibilities: Documentation, In charge of Contacts Search and Edit
 
 ### Hendey Fan
 
