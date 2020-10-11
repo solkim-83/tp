@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.model.tag.Tag.ALL_TAGS_IDENTIFIER;
+import static seedu.address.model.tag.Tag.ALL_TAGS_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -172,6 +174,22 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTagWildcard_wildcardInputWithWildcardFalse_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(ALL_TAGS_IDENTIFIER));
+    }
+
+    @Test
+    public void parseTagWildcard_validInputWithWildcardFalse_returnsTag() throws ParseException {
+        Tag expectedTag = new Tag(VALID_TAG_1);
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1, false));
+    }
+
+    @Test
+    public void parseTagWildcard_wildcardInputWithWildcardTrue_returnsWildcardTag() throws ParseException {
+        assertEquals(ALL_TAGS_TAG, ParserUtil.parseTag(ALL_TAGS_IDENTIFIER, true));
+    }
+
+    @Test
     public void parseTags_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
     }
@@ -190,6 +208,20 @@ public class ParserUtilTest {
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTagsWildcard_collectionWithWildcardTagAndFalse_throwsParseException() {
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseTags(Arrays.asList(ALL_TAGS_IDENTIFIER, VALID_TAG_1), false));
+    }
+
+    @Test
+    public void parseTagsWildcard_collectionWithWildcardTagAndTrue_throwsParseException() throws ParseException {
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(ALL_TAGS_IDENTIFIER, VALID_TAG_1), true);
+        Set<Tag> expectedTagSet = Set.of(ALL_TAGS_TAG, new Tag(VALID_TAG_1));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

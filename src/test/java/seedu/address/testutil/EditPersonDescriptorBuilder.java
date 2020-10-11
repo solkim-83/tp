@@ -91,7 +91,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTagsToRemove(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Tag> tagSet = Stream.of(tags).map(tag -> new Tag(tag, true)).collect(Collectors.toSet());
         descriptor.setTagsToRemove(tagSet);
         return this;
     }
