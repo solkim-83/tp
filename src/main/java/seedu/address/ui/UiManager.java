@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -45,7 +46,11 @@ public class UiManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
             // todo - change below call to only when no save file is detected
-            mainWindow.executeIntroCommand();
+            File contactsSave = new File("./data/addressbook.json");
+            File eventsSave = new File("./data/calendar.json");
+            if (!contactsSave.isFile() && !eventsSave.isFile()) {
+                mainWindow.executeIntroCommand();
+            }
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
