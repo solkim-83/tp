@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -35,16 +36,19 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "Existing non-tag values will be overwritten by the input values."
+            + "Tag values to be added can be specified with t/ and removed with rt/.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_REMOVE_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_TAG + "CS2103";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -259,7 +263,16 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTagsToAdd().equals(e.getTagsToAdd())
-                    && getTagsToRemove().equals(e.getTagsToRemove());
+                    && (getTagsToRemove().equals(e.getTagsToRemove())
+                            || checksForWildcardTagEquality(getTagsToRemove(), e.getTagsToRemove()));
         }
+    }
+
+    /**
+     * Returns true if both tag sets contains the all_tags_tag.
+     */
+    private static boolean checksForWildcardTagEquality(Optional<Set<Tag>> tagSet1, Optional<Set<Tag>> tagSet2) {
+        return tagSet1.isPresent() && tagSet1.get().contains(Tag.ALL_TAGS_TAG)
+                && (tagSet2.isPresent() && tagSet2.get().contains(Tag.ALL_TAGS_TAG));
     }
 }

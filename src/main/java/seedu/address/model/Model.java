@@ -5,7 +5,11 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+<<<<<<< HEAD
 import seedu.address.commons.core.index.Index;
+=======
+import seedu.address.model.event.Event;
+>>>>>>> master
 import seedu.address.model.person.Person;
 
 /**
@@ -14,6 +18,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -41,9 +46,19 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' calendar file path.
+     */
+    Path getCalendarFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Sets the user prefs' calendar file path.
+     */
+    void setCalendarFilePath(Path calendarFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -54,9 +69,22 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setCalendar(ReadOnlyCalendar calendar);
+
+    /** Returns the Calendar */
+    ReadOnlyCalendar getCalendar();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a event with the same identity as {@code event} exists in the calendar.
+     */
+    boolean hasEvent(Event event);
 
     /**
      * Deletes the given person.
@@ -65,10 +93,21 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given event.
+     * The person must exist in the calendar.
+     */
+    void deleteEvent(Event target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given person.
+     */
+    void addEvent(Event event);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -80,6 +119,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -87,4 +129,9 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void sortPerson(Index index);
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
 }
