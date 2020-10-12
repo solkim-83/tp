@@ -12,8 +12,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class IntroWindow extends UiPart<Stage> {
 
-    public static final String INTRO_MESSAGE
-            = "Hi! I'm Athena! As this is your first time opening the app, I will give you a"
+    public static final String INTRO_MESSAGE =
+            "Hi! I'm Athena! As this is your first time opening the app, I will give you a"
             + " short run-through of some commands to get you started.\n\n"
             + "Although Athena provides storage and management for contacts and events, the methods"
             + " detailed below apply to the contacts component.\n\n"
