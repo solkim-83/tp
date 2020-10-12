@@ -45,7 +45,7 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            // todo - change below call to only when no save file is detected
+
             File contactsSave = new File("./data/addressbook.json");
             File eventsSave = new File("./data/calendar.json");
             if (!contactsSave.isFile() && !eventsSave.isFile()) {
