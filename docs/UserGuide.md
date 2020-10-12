@@ -236,25 +236,25 @@ Examples:
 * `editEvent 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
 * `editEvent 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
 
-### Finding an event : `findEvents`
+### Finding an event : `findEvent`
 
 Finds events whose names contain any of the given keywords.
 
-Format: `findEvents KEYWORD`
+Format: `findEvent KEYWORD`
 
 * The search is case-insensitive. e.g `meeting` will match `Meeting`
 * If the event contains the particular keyword in the command, the name of the event will appear.
 * Only full words will be matched e.g. `meetin` will not match `meeting`
 
 Examples:
-* `findEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `findEvents seminar` returns `CS Seminar` and  `seminar 1`
+* `findEvent Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
+* `findEvent seminar` returns `CS Seminar` and  `seminar 1`
 
-### Viewing all saved events : `viewEvents`
+### Listing all events : `listEvent`
 
 Shows a list of all events saved in the calendar for the users to keep track.
 
-Format: `viewEvents`
+Format: `listEvent`
 
 ### Exiting the program : `exit`
 
@@ -287,7 +287,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Event** | `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `editEvent 2 at/23-10-1234 12:30 p/Amanda`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Events** | `findEvents KEYWORD`<br> e.g., `findEvents Seminar`
+**Find Event** | `findEvent KEYWORD`<br> e.g., `findEvent Seminar`
 **List** | `list`
+**List Events** | `listEvent`
 **Help** | `help`
-**View Events** | `viewEvents`
