@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private IntroWindow introWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -71,6 +72,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        introWindow = new IntroWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -156,6 +158,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the introduction window. Note that focusing is not required as the window opens as
+     * the app opens.
+     */
+    @FXML
+    public void handleIntro() {
+        introWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -192,6 +203,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandResult commandResult = logic.execute("intro");
         logger.info("Result: " + commandResult.getFeedbackToUser());
         resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        handleIntro();
         return commandResult;
     }
 
