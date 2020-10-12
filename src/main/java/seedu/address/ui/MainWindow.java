@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.IntroCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -177,6 +178,21 @@ public class MainWindow extends UiPart<Stage> {
 
     public EventListPanel getEventListPanel() {
         return eventListPanel;
+    }
+
+    /**
+     * Executes the command to show the introduction. As the introduction command should not be
+     * accessible by the user, a commandText should not exist for it and the entire execution
+     * should be handled in the back-end. Note that as this method cannot throw a CommandException
+     * or a ParseException, handling can be ignored. The lack of an access modifier is intentional
+     * - method is supposed to be package private.
+     */
+
+    CommandResult executeIntroCommand() throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute("intro");
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        return commandResult;
     }
 
     /**

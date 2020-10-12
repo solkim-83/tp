@@ -44,7 +44,8 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            // todo - add intro command call here, but only if no save file is detected
+            // todo - change below call to only when no save file is detected
+            mainWindow.executeIntroCommand();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
