@@ -12,11 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-<<<<<<< HEAD
 import seedu.address.commons.core.index.Index;
-=======
 import seedu.address.model.event.Event;
->>>>>>> master
 import seedu.address.model.person.Person;
 
 /**
@@ -168,14 +165,14 @@ public class ModelManager implements Model {
         Comparator<Person> nameComparator = new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getName().fullName.compareTo(o2.getName().fullName);
+                return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
             }
         };
 
         Comparator<Person> addressComparator = new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getAddress().value.compareTo(o2.getAddress().value);
+                return o1.getAddress().value.compareToIgnoreCase(o2.getAddress().value);
             }
         };
 
@@ -185,7 +182,7 @@ public class ModelManager implements Model {
                 if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
                     return 0;
                 }
-                return o1.getTags().iterator().next().tagName.compareTo(o2.getTags().iterator().next().tagName);
+                return o1.getTags().iterator().next().tagName.compareToIgnoreCase(o2.getTags().iterator().next().tagName);
             }
         };
         int indexNumber = index.getOneBased();
