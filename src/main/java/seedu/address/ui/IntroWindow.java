@@ -7,9 +7,26 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
+/**
+ * Controller for an introduction page
+ */
 public class IntroWindow extends UiPart<Stage> {
 
-    public static final String INTRO_MESSAGE = "placeholder";
+    public static final String INTRO_MESSAGE
+            = "Hi! I'm Athena! As this is your first time opening the app, I will give you a"
+            + " short run-through of some commands to get you started.\n\n"
+            + "Although Athena provides storage and management for contacts and events, the methods"
+            + " detailed below apply to the contacts component.\n\n"
+            + "Let's add a person named Jane Doe to the list; do: \"add n/Jane Doe\"\n"
+            + "Hmm... it seems like we have quite a few contacts to sift through. Let's narrow the"
+            + " list down to her alone; do: \"find Jane Doe\"\n"
+            + "Great! It seems like you've managed to get Jane's number. Let's add it to her contact;"
+            + " do: \"edit 1 p/91234567\"\n"
+            + "Looks like you no longer need Jane's contact - let's find her first, then delete it"
+            + " with \"delete 1\"\n\n"
+            + "Good job! You've just learnt how to add, find, edit and delete a contact.\n\n"
+            + "If you'd like a more detailed guide, click on the \"Help\" button found in"
+            + " the toolbar.\n";
 
     private static final Logger logger = LogsCenter.getLogger(IntroWindow.class);
     private static final String FXML = "IntroWindow.fxml";
@@ -24,6 +41,7 @@ public class IntroWindow extends UiPart<Stage> {
      */
     public IntroWindow(Stage root) {
         super(FXML, root);
+        introMessage.setWrapText(true);
         introMessage.setText(INTRO_MESSAGE);
     }
 
@@ -56,13 +74,6 @@ public class IntroWindow extends UiPart<Stage> {
         logger.fine("Showing introduction page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
-    }
-
-    /**
-     * Returns true if the intro window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isShowing();
     }
 
     /**
