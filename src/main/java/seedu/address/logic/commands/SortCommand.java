@@ -40,7 +40,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortPerson(index);
 
-        return new CommandResult("Sorted by " + indexMessage(index));
+        return new CommandResult( indexMessage(index));
     }
 
     /**
@@ -50,13 +50,14 @@ public class SortCommand extends Command {
         int input = index.getOneBased();
         switch (input) {
         case 1:
-            return "name in alphabetical order";
+            return "Sorted by name in alphabetical order";
         case 2:
-            return "address in alphabetical order";
+            return "Sorted by address in alphabetical order";
         case 3:
-            return "primary tag in alphabetical order";
+            return "Sorted by primary tag in alphabetical order";
         default:
-            return "user input";
+            return "Invalid index entered, refer to below for the command's proper usage: "
+                    + MESSAGE_USAGE;
         }
     }
 

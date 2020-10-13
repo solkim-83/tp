@@ -182,8 +182,15 @@ public class ModelManager implements Model {
         Comparator<Person> tagComparator = new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
+                System.out.println(o2.getTags().size());
+                if (o1.getTags().size() == 0 && o2.getTags().size() != 0) {
+                    return 1;
+                }
+                if (o1.getTags().size() != 0 && o2.getTags().size() == 0) {
+                    return -1;
+                }
                 if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
-                    return 0;
+                    return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
                 }
                 return o1.getTags().iterator().next().tagName
                         .compareToIgnoreCase(o2.getTags().iterator().next().tagName);
