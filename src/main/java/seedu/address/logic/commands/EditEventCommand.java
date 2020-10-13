@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.List;
@@ -29,10 +29,10 @@ public class EditEventCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DESCRIPTION + "NAME] "
-            + "[" + PREFIX_TIME + "PHONE] "
+            + "[" + PREFIX_DATETIME + "PHONE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "New description "
-            + PREFIX_TIME + "12-12-1234 12:34";
+            + PREFIX_DATETIME + "12-12-1234 12:34";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
