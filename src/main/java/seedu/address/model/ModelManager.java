@@ -185,8 +185,8 @@ public class ModelManager implements Model {
                 if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
                     return 0;
                 }
-                return o1.getTags().iterator().next().tagName.
-                        compareToIgnoreCase(o2.getTags().iterator().next().tagName);
+                return o1.getTags().iterator().next().tagName
+                        .compareToIgnoreCase(o2.getTags().iterator().next().tagName);
             }
         };
         int indexNumber = index.getOneBased();
