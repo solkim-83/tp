@@ -156,6 +156,13 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        calendar.setEvent(target, editedEvent);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

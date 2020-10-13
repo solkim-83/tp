@@ -112,6 +112,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in Athena.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the Athena.
+     */
+    void setEvent(Event target, Event editedEvent);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
