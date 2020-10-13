@@ -164,46 +164,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortPerson(Index index) {
-        Comparator<Person> nameComparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
-            }
-        };
-
-        Comparator<Person> addressComparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return o1.getAddress().value.compareToIgnoreCase(o2.getAddress().value);
-            }
-        };
-
-        Comparator<Person> tagComparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                System.out.println(o2.getTags().size());
-                if (o1.getTags().size() == 0 && o2.getTags().size() != 0) {
-                    return 1;
-                }
-                if (o1.getTags().size() != 0 && o2.getTags().size() == 0) {
-                    return -1;
-                }
-                if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
-                    return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
-                }
-                return o1.getTags().iterator().next().tagName
-                        .compareToIgnoreCase(o2.getTags().iterator().next().tagName);
-            }
-        };
-        int indexNumber = index.getOneBased();
-        if (indexNumber == 1) {
-            sortedPersons.comparatorProperty().setValue(nameComparator);
-        } else if (indexNumber == 2) {
-            sortedPersons.comparatorProperty().setValue(addressComparator);
-        } else if (indexNumber == 3) {
-            sortedPersons.comparatorProperty().setValue(tagComparator);
-        }
+    public void sortPerson(Comparator<Person> comparator) {
+            sortedPersons.comparatorProperty().setValue(comparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================
