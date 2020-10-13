@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
- * Deletes a event identified using it's displayed index from the Athena.
+ * Deletes an event identified using its displayed index from the Athena.
  */
 public class DeleteEventCommand extends Command {
 
