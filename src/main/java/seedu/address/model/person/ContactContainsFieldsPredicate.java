@@ -34,26 +34,34 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
                 && hasTagMatch(person);
     }
 
-    /** Checks for FULL name keyword matches between the person's name and the provided keywords.
-     *  True if list is empty. */
+    /**
+     * Checks for FULL name keyword matches between the person's name and the provided keywords.
+     * True if list is empty.
+     */
     private boolean hasNameMatch(Person person) {
         return nameKeywords.isEmpty() || nameKeywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
-    /** Checks that the field's string representation contains matchField. If matchField is empty, true by default. */
+    /**
+     * Checks that the field's string representation contains matchField. If matchField is empty, true by default.
+     */
     private boolean checkFieldMatch(Object field, String matchField) {
         return matchField.equals(EMPTY_FIELD) || field.toString().toLowerCase().contains(matchField.toLowerCase());
     }
 
-    /** Checks that the person's phone, email and address matches the provided keywords. */
+    /**
+     * Checks that the person's phone, email and address matches the provided keywords.
+     */
     private boolean hasNonTagMatch(Person person) {
         return checkFieldMatch(person.getPhone(), phoneKeyword)
                 && checkFieldMatch(person.getEmail(), emailKeyword)
                 && checkFieldMatch(person.getAddress(), addressKeyword);
     }
 
-    /** Checks that the person contains all the tags specified */
+    /**
+     * Checks that the person contains all the tags specified
+     */
     private boolean hasTagMatch(Person person) {
         return tags.stream()
                 .map(Tag::new)
@@ -80,7 +88,9 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
         this.tags = tags;
     }
 
-    /** Returns true if all of the fields are the default settings, indicating nothing to test. */
+    /**
+     * Returns true if all of the fields are the default settings, indicating nothing to test.
+     */
     public boolean isEmptyPredicate() {
         return nameKeywords.size() == 0
                 && phoneKeyword.equals(EMPTY_FIELD)
@@ -89,7 +99,9 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
                 && tags.size() == 0;
     }
 
-    /** Checks the validity of the predicate field */
+    /**
+     * Checks the validity of the predicate field
+     */
     public static boolean isValidPredicateField(String predicateField) {
         return !predicateField.isBlank();
     }
