@@ -57,6 +57,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(findPredicate);
     }
 
+    /** Returns a trimmed predicateField. If the field is not valid, throws a ParseException instead. */
     private String parseNonTagPredicateField(String predicateField) throws ParseException {
         if (!ContactContainsFieldsPredicate.isValidPredicateField(predicateField)) {
             throw new ParseException(ContactContainsFieldsPredicate.NON_TAG_CONSTRAINTS);
@@ -65,6 +66,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
+    /** Returns the same list of tags. Throws a ParseException if any of the tags violate Tag requirements. */
     private List<String> parseTagPredicateFields(List<String> tagList) throws ParseException {
         for (String tagString : tagList) {
             if (!Tag.isValidTagName(tagString)) {
