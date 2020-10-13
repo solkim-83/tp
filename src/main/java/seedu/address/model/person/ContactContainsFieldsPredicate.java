@@ -41,7 +41,7 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
     }
 
     private boolean checkFieldMatch(Object field, String matchField) {
-        return matchField.equals(EMPTY_FIELD) || field.toString().contains(matchField);
+        return matchField.equals(EMPTY_FIELD) || field.toString().toLowerCase().contains(matchField.toLowerCase());
     }
 
     private boolean hasNonTagMatch(Person person) {
