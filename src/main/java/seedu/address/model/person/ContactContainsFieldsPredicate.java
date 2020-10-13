@@ -29,7 +29,7 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
     }
 
     public ContactContainsFieldsPredicate(List<String> nameKeywords, String phoneKeyword,
-                                          String emailKeyword, String addressKeyword, List<String> tags) {
+              String emailKeyword, String addressKeyword, List<String> tags) {
         this.nameKeywords = nameKeywords;
         this.phoneKeyword = phoneKeyword;
         this.emailKeyword = emailKeyword;
