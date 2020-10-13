@@ -18,14 +18,17 @@ public class ContactContainsFieldsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        ContactContainsFieldsPredicate firstPredicate = new ContactContainsFieldsPredicate(firstPredicateKeywordList);
-        ContactContainsFieldsPredicate secondPredicate = new ContactContainsFieldsPredicate(secondPredicateKeywordList);
+        ContactContainsFieldsPredicate firstPredicate = new ContactContainsFieldsPredicate();
+        firstPredicate.setNameKeywords(firstPredicateKeywordList);
+        ContactContainsFieldsPredicate secondPredicate = new ContactContainsFieldsPredicate();
+        secondPredicate.setNameKeywords(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ContactContainsFieldsPredicate firstPredicateCopy = new ContactContainsFieldsPredicate(firstPredicateKeywordList);
+        ContactContainsFieldsPredicate firstPredicateCopy = new ContactContainsFieldsPredicate();
+        firstPredicateCopy.setNameKeywords(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -40,36 +43,55 @@ public class ContactContainsFieldsPredicateTest {
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
+        PersonBuilder testPerson1 = new PersonBuilder().withName("Alice John");
+        PersonBuilder testPerson2 = new PersonBuilder().withName("Doe Dark");
+
+        ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate();
+        predicate.setNameKeywords(List.of("Alice"));
+
         // One keyword
-        ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate.test(testPerson1.build()));
 
         // Multiple keywords
-        predicate = new ContactContainsFieldsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate.setNameKeywords(List.of("Alice", "Doe"));
+        assertTrue(predicate.test(testPerson1.build()));
+        assertTrue(predicate.test(testPerson2.build()));
 
-        // Only one matching keyword
-        predicate = new ContactContainsFieldsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        // Matching email with matching name
+        predicate.setEmailKeyword("hotmail");
+        testPerson1.withEmail("abcde@hotmail");
+        assertTrue(predicate.test(testPerson1.build()));
 
-        // Mixed-case keywords
-        predicate = new ContactContainsFieldsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        // Matching email with no name keywords specified
+        testPerson2.withEmail("bcdef@hotmail.com");
+        predicate.setNameKeywords(List.of());
+        assertTrue(predicate.test(testPerson1.build()));
+        assertTrue(predicate.test(testPerson2.build()));
+
+        // Match tags contained by person1
+        predicate.setTagKeywords(List.of("CS2103", "CS2101"));
+        testPerson1.withTags("CS2103", "CS2100", "CS2101");
+        assertTrue(predicate.test(testPerson1.build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
-        ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        PersonBuilder testPerson1 = new PersonBuilder().withName("Alice John");
+        PersonBuilder testPerson2 = new PersonBuilder().withName("Doe Dark");
 
-        // Non-matching keyword
-        predicate = new ContactContainsFieldsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate();
+        predicate.setNameKeywords(List.of("Alice"));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new ContactContainsFieldsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+        // Matching email without matching name
+        testPerson2.withEmail("bcdef@hotmail.com");
+        predicate.setEmailKeyword("hotmail");
+        assertFalse(predicate.test(testPerson2.build()));
+
+        // Matching name and email without matching phone
+        testPerson1.withEmail("abcde@hotmail");
+        testPerson1.withPhone("91234567");
+        predicate.setPhoneKeyword("7654");
+        assertFalse(predicate.test(testPerson1.build()));
+
     }
 }

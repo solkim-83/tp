@@ -72,7 +72,7 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
         this.addressKeyword = addressKeyword;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTagKeywords(List<String> tags) {
         this.tags = tags;
     }
 

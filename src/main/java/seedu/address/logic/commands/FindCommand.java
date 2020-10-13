@@ -40,6 +40,10 @@ public class FindCommand extends Command {
                 && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 
+    public ContactContainsFieldsPredicate getPredicate() {
+        return predicate;
+    }
+
 
 
 }

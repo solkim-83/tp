@@ -47,7 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             String trimmedAddressKeyword = parseNonTagPredicateField(argMultimap.getValue(PREFIX_ADDRESS).get());
             findPredicate.setAddressKeyword(trimmedAddressKeyword);
         }
-        findPredicate.setTags(parseTagPredicateFields(argMultimap.getAllValues(PREFIX_TAG)));
+        findPredicate.setTagKeywords(parseTagPredicateFields(argMultimap.getAllValues(PREFIX_TAG)));
 
         if (findPredicate.isEmptyPredicate()) {
             throw new ParseException(

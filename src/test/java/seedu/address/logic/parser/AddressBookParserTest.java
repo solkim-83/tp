@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -71,9 +74,20 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        String phoneKeyword = "96789";
+        String emailKeyword = "hotmail";
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new ContactContainsFieldsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " "
+                        + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_PHONE + phoneKeyword + " "
+                        + PREFIX_EMAIL + emailKeyword);
+
+        ContactContainsFieldsPredicate builtPredicate = new ContactContainsFieldsPredicate();
+        builtPredicate.setNameKeywords(keywords);
+        builtPredicate.setPhoneKeyword(phoneKeyword);
+        builtPredicate.setEmailKeyword(emailKeyword);
+
+        assertEquals(new FindCommand(builtPredicate), command);
     }
 
     @Test
