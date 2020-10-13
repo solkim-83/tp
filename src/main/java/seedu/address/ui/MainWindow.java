@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private IntroWindow introWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -70,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        introWindow = new IntroWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -155,6 +157,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the introduction window. Note that focusing is not required as the window opens as
+     * the app opens.
+     */
+    @FXML
+    public void handleIntro() {
+        introWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -177,6 +188,22 @@ public class MainWindow extends UiPart<Stage> {
 
     public EventListPanel getEventListPanel() {
         return eventListPanel;
+    }
+
+    /**
+     * Executes the command to show the introduction. As the introduction command should not be
+     * accessible by the user, a commandText should not exist for it and the entire execution
+     * should be handled in the back-end. Note that as this method cannot throw a CommandException
+     * or a ParseException, handling can be ignored. The lack of an access modifier is intentional
+     * - method is supposed to be package private.
+     */
+
+    CommandResult executeIntroCommand() throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute("intro");
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        handleIntro();
+        return commandResult;
     }
 
     /**
