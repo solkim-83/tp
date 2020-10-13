@@ -8,10 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -29,16 +31,23 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         ContactContainsFieldsPredicate findPredicate = new ContactContainsFieldsPredicate();
-        argMultimap.getValue(PREFIX_NAME).ifPresent(nameKeywords -> {
-            findPredicate.setNameKeywords(Arrays.asList(nameKeywords.trim().split("\\s+")));
-        });
-        argMultimap.getValue(PREFIX_PHONE).ifPresent(phoneKeyword ->
-                findPredicate.setPhoneKeyword(phoneKeyword.trim()));
-        argMultimap.getValue(PREFIX_EMAIL).ifPresent(emailKeyword ->
-                findPredicate.setEmailKeyword(emailKeyword.trim()));
-        argMultimap.getValue(PREFIX_ADDRESS).ifPresent(addressKeyword ->
-                findPredicate.setAddressKeyword(addressKeyword.trim()));
-        findPredicate.setTags(argMultimap.getAllValues(PREFIX_TAG));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            String trimmedNameKeywords = parseNonTagPredicateField(argMultimap.getValue(PREFIX_NAME).get());
+            findPredicate.setNameKeywords(Arrays.asList(trimmedNameKeywords.split("\\s+")));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            String trimmedPhoneKeyword = parseNonTagPredicateField(argMultimap.getValue(PREFIX_PHONE).get());
+            findPredicate.setPhoneKeyword(trimmedPhoneKeyword);
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            String trimmedEmailKeyword = parseNonTagPredicateField(argMultimap.getValue(PREFIX_EMAIL).get());
+            findPredicate.setEmailKeyword(trimmedEmailKeyword);
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            String trimmedAddressKeyword = parseNonTagPredicateField(argMultimap.getValue(PREFIX_ADDRESS).get());
+            findPredicate.setAddressKeyword(trimmedAddressKeyword);
+        }
+        findPredicate.setTags(parseTagPredicateFields(argMultimap.getAllValues(PREFIX_TAG)));
 
         if (findPredicate.isEmptyPredicate()) {
             throw new ParseException(
@@ -46,6 +55,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(findPredicate);
+    }
+
+    private String parseNonTagPredicateField(String predicateField) throws ParseException {
+        if (!ContactContainsFieldsPredicate.isValidPredicateField(predicateField)) {
+            throw new ParseException(ContactContainsFieldsPredicate.NON_TAG_CONSTRAINTS);
+        } else {
+            return predicateField.trim();
+        }
+    }
+
+    private List<String> parseTagPredicateFields(List<String> tagList) throws ParseException {
+        for (String tagString : tagList) {
+            if (!Tag.isValidTagName(tagString)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return tagList;
     }
 
 }

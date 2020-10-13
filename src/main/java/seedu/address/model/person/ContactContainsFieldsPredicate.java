@@ -12,6 +12,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ContactContainsFieldsPredicate implements Predicate<Person> {
 
+    public static final String NON_TAG_CONSTRAINTS = "Search specifiers cannot be empty! "
+            + "Specify the field or remove the prefix!";
     private static final String EMPTY_FIELD = "\0";
 
     private List<String> nameKeywords = new ArrayList<>();
@@ -80,6 +82,10 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
                 && emailKeyword.equals(EMPTY_FIELD)
                 && addressKeyword.equals(EMPTY_FIELD)
                 && tags.size() == 0;
+    }
+
+    public static boolean isValidPredicateField(String predicateField) {
+        return !predicateField.isBlank();
     }
 
     @Override
