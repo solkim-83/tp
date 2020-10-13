@@ -40,7 +40,7 @@ public interface Logic {
     ReadOnlyCalendar getCalendar();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Person> getSortedFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of events */
     ObservableList<Event> getFilteredEventList();
