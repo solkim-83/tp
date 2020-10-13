@@ -39,4 +39,7 @@ public class FindCommand extends Command {
                 || (other instanceof FindCommand // instanceof handles nulls
                 && predicate.equals(((FindCommand) other).predicate)); // state check
     }
+
+
+
 }

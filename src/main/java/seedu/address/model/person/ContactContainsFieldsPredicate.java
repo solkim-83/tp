@@ -14,28 +14,17 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
 
     private static final String EMPTY_FIELD = "\0";
 
-    private final List<String> nameKeywords;
-    private final String phoneKeyword;
-    private final String emailKeyword;
-    private final String addressKeyword;
-    private final List<String> tags;
+    private List<String> nameKeywords = new ArrayList<>();
+    private String phoneKeyword = EMPTY_FIELD;
+    private String emailKeyword = EMPTY_FIELD;
+    private String addressKeyword = EMPTY_FIELD;
+    private List<String> tags = new ArrayList<>();
 
     public ContactContainsFieldsPredicate(List<String> nameKeywords) {
         this.nameKeywords = nameKeywords;
-        this.phoneKeyword = EMPTY_FIELD;
-        this.emailKeyword = EMPTY_FIELD;
-        this.addressKeyword = EMPTY_FIELD;
-        this.tags = new ArrayList<>();
     }
 
-    public ContactContainsFieldsPredicate(List<String> nameKeywords, String phoneKeyword,
-              String emailKeyword, String addressKeyword, List<String> tags) {
-        this.nameKeywords = nameKeywords;
-        this.phoneKeyword = phoneKeyword;
-        this.emailKeyword = emailKeyword;
-        this.addressKeyword = addressKeyword;
-        this.tags = tags;
-    }
+    public ContactContainsFieldsPredicate() {}
 
     @Override
     public boolean test(Person person) {
@@ -63,6 +52,34 @@ public class ContactContainsFieldsPredicate implements Predicate<Person> {
         return tags.stream()
                 .map(Tag::new)
                 .allMatch(tag -> person.getTags().contains(tag));
+    }
+
+    public void setNameKeywords(List<String> nameKeywords) {
+        this.nameKeywords = nameKeywords;
+    }
+
+    public void setPhoneKeyword(String phoneKeyword) {
+        this.phoneKeyword = phoneKeyword;
+    }
+
+    public void setEmailKeyword(String emailKeyword) {
+        this.emailKeyword = emailKeyword;
+    }
+
+    public void setAddressKeyword(String addressKeyword) {
+        this.addressKeyword = addressKeyword;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public boolean isEmptyPredicate() {
+        return nameKeywords.size() == 0
+                && phoneKeyword.equals(EMPTY_FIELD)
+                && emailKeyword.equals(EMPTY_FIELD)
+                && addressKeyword.equals(EMPTY_FIELD)
+                && tags.size() == 0;
     }
 
     @Override
