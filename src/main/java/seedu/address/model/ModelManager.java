@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
@@ -27,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
 
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
 
 
@@ -43,6 +45,7 @@ public class ModelManager implements Model {
         this.calendar = new Calendar();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
     }
 
@@ -187,11 +190,11 @@ public class ModelManager implements Model {
         };
         int indexNumber = index.getOneBased();
         if (indexNumber == 1) {
-            addressBook.sortPerson(nameComparator);
+            sortedPersons.comparatorProperty().setValue(nameComparator);
         } else if (indexNumber == 2) {
-            addressBook.sortPerson(addressComparator);
+            sortedPersons.comparatorProperty().setValue(addressComparator);
         } else if (indexNumber == 3) {
-            addressBook.sortPerson(tagComparator);
+            sortedPersons.comparatorProperty().setValue(tagComparator);
         }
     }
 
@@ -202,8 +205,8 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getSortedFilteredPersonList() {
+        return sortedPersons;
     }
 
     @Override
