@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
@@ -165,7 +164,7 @@ public class ModelManager implements Model {
 
     @Override
     public void sortPerson(Comparator<Person> comparator) {
-            sortedPersons.comparatorProperty().setValue(comparator);
+        sortedPersons.comparatorProperty().setValue(comparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================

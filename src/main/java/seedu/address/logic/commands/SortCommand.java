@@ -3,12 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.Comparator;
 
 /**
  * Sorts the currently displayed persons in a specific order.
@@ -74,7 +73,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortPerson(chooseComparator(index));
 
-        return new CommandResult( indexMessage(index));
+        return new CommandResult(indexMessage(index));
     }
 
     /**
@@ -101,12 +100,12 @@ public class SortCommand extends Command {
     public Comparator<Person> chooseComparator(Index index) {
         int input = index.getOneBased();
         switch (input) {
-            case 2:
-                return ADDRESS_COMPARATOR;
-            case 3:
-                return TAG_COMPARATOR;
-            default:
-                return NAME_COMPARATOR;
+        case 2:
+            return ADDRESS_COMPARATOR;
+        case 3:
+            return TAG_COMPARATOR;
+        default:
+            return NAME_COMPARATOR;
         }
     }
 
