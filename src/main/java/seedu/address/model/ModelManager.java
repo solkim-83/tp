@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
@@ -23,8 +25,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final Calendar calendar;
     private final UserPrefs userPrefs;
+
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +44,7 @@ public class ModelManager implements Model {
         this.calendar = new Calendar();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
     }
 
@@ -162,6 +168,10 @@ public class ModelManager implements Model {
 
         calendar.setEvent(target, editedEvent);
     }
+    
+    public void sortPerson(Comparator<Person> comparator) {
+        sortedPersons.comparatorProperty().setValue(comparator);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -170,8 +180,8 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getSortedFilteredPersonList() {
+        return sortedPersons;
     }
 
     @Override

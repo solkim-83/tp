@@ -59,18 +59,18 @@ public class FindCommandTest {
     }
 
     @Test
+
     public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         FindCommand command = new FindCommandParser().parse(" n/Kurz Elle Kunz");
         expectedModel.updateFilteredPersonList(command.getPredicate());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
-
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getSortedFilteredPersonList());
         expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
         command = new FindCommandParser().parse(" e/example");
         expectedModel.updateFilteredPersonList(command.getPredicate());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalPersons(), model.getFilteredPersonList());
+        assertEquals(getTypicalPersons(), model.getSortedFilteredPersonList());
     }
 
 }
