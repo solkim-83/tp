@@ -168,7 +168,7 @@ public class ModelManager implements Model {
 
         calendar.setEvent(target, editedEvent);
     }
-    
+
     public void sortPerson(Comparator<Person> comparator) {
         sortedPersons.comparatorProperty().setValue(comparator);
     }
