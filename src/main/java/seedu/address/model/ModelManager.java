@@ -163,6 +163,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        calendar.setEvent(target, editedEvent);
+    }
+
     public void sortPerson(Comparator<Person> comparator) {
         sortedPersons.comparatorProperty().setValue(comparator);
     }
