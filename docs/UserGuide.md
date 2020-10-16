@@ -150,15 +150,16 @@ and `johndoe@example.com` respectively.
 Finds persons whose names contain any of the given keywords. Also supports search with additional specifiers such as 
 phone number or email.
 
-Format: `find [n/KEYWORDS]… [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+Format: `find [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 * Search field must contain at least one of the optional fields.
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive for all fields except tags. e.g `hans` will match `Hans`
 * For name keywords, only full words will be matched. e.g. `Han` will not match `Hans`
-* The `t/TAG` specifier must use an existing tag and does not support partial tag-name searches.
-* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* For name keywords, you can specify multiple words you would like to match. e.g. `n/Hans John`
 * For search without additional specifiers, persons matching at least one keyword will be returned (i.e. `OR` search).
+* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The `t/TAG` specifier must use an existing tag and does not support partial tag-name searches.
 * If additional specifiers are included, only contacts whose specified field contains the specifier details
  will be returned. `find n/John a/Serangoon` will return only contacts whose names contain `John` **and** with 
  `Serangoon` as part of the address.
@@ -236,25 +237,25 @@ Examples:
 * `editEvent 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
 * `editEvent 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
 
-### Finding an event : `findEvents`
+### Finding an event : `findEvent`
 
 Finds events whose names contain any of the given keywords.
 
-Format: `findEvents KEYWORD`
+Format: `findEvent KEYWORD`
 
 * The search is case-insensitive. e.g `meeting` will match `Meeting`
 * If the event contains the particular keyword in the command, the name of the event will appear.
 * Only full words will be matched e.g. `meetin` will not match `meeting`
 
 Examples:
-* `findEvents Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `findEvents seminar` returns `CS Seminar` and  `seminar 1`
+* `findEvent Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
+* `findEvent seminar` returns `CS Seminar` and  `seminar 1`
 
-### Viewing all saved events : `viewEvents`
+### Listing all events : `listEvent`
 
 Shows a list of all events saved in the calendar for the users to keep track.
 
-Format: `viewEvents`
+Format: `listEvent`
 
 ### Exiting the program : `exit`
 
@@ -287,7 +288,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Event** | `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `editEvent 2 at/23-10-1234 12:30 p/Amanda`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Events** | `findEvents KEYWORD`<br> e.g., `findEvents Seminar`
+**Find Event** | `findEvent KEYWORD`<br> e.g., `findEvent Seminar`
 **List** | `list`
+**List Events** | `listEvent`
 **Help** | `help`
-**View Events** | `viewEvents`
