@@ -169,9 +169,13 @@ public class ModelManager implements Model {
         calendar.setEvent(target, editedEvent);
     }
 
+    @Override
     public void sortPerson(Comparator<Person> comparator) {
         sortedPersons.comparatorProperty().setValue(comparator);
     }
+
+    @Override
+    public void sortAddressBook(Comparator<Person> comparator) {addressBook.sortPerson(comparator);}
 
     //=========== Filtered Person List Accessors =============================================================
 

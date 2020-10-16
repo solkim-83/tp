@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -56,10 +58,18 @@ public class PermaSortCommand extends Command {
 
     private final Index index;
 
+    /**
+     * @param index the order in which to sort the address book
+     */
+    public PermaSortCommand(Index index) {
+        requireAllNonNull(index);
+        this.index = index;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.sortAddressbook(chooseComparator(index));
+        model.sortAddressBook(chooseComparator(index));
 
         return new CommandResult(indexMessage(index));
     }
