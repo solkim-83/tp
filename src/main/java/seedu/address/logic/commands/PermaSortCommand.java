@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,6 +25,9 @@ public class PermaSortCommand extends Command {
             + "3 will be sort by alphabetical order of their first tag\n"
             + "Parameters: INDEX (must be between 1 and 3) "
             + "Example: " + COMMAND_WORD + " 1 ";
+
+    public static final String MESSAGE_INVALID_INDEX = "Invalid index entered, refer to below for the command's proper usage: "
+            + MESSAGE_USAGE;
 
     private static final Comparator<Person> NAME_COMPARATOR = new Comparator<Person>() {
         @Override
@@ -69,6 +73,9 @@ public class PermaSortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (index.getOneBased() < 0 && index.getOneBased() > 3) {
+            throw new CommandException(PermaSortCommand.MESSAGE_INVALID_INDEX);
+        }
         model.sortAddressBook(chooseComparator(index));
 
         return new CommandResult(indexMessage(index));
@@ -105,8 +112,7 @@ public class PermaSortCommand extends Command {
             case 3:
                 return "Sorted by primary tag in alphabetical order";
             default:
-                return "Invalid index entered, refer to below for the command's proper usage: "
-                        + MESSAGE_USAGE;
+                return MESSAGE_INVALID_INDEX;
         }
     }
 
