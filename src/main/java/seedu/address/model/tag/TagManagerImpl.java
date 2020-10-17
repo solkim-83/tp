@@ -24,10 +24,16 @@ public class TagManagerImpl implements TagManager {
         tagPersonSetMap = new HashMap<>();
     }
 
+    private TagManagerImpl(Map<Tag, Set<Person>> mapCopy) {
+        this.tagPersonSetMap = mapCopy;
+    }
+
+    @Override
     public Set<Person> getPersonsUnderTag(Tag tag) {
         return tagPersonSetMap.get(tag);
     }
 
+    @Override
     public void updateExistingPersonTags(Person oldPerson, Person newPerson) {
         for (Tag oldTag : oldPerson.getTags()) {
             Set<Person> tagSet = tagPersonSetMap.get(oldTag);
@@ -48,6 +54,7 @@ public class TagManagerImpl implements TagManager {
         }
     }
 
+    @Override
     public void updateNewPersonTags(Person person) {
         for (Tag newTag : person.getTags()) {
             Optional.ofNullable(tagPersonSetMap.get(newTag))
@@ -58,6 +65,14 @@ public class TagManagerImpl implements TagManager {
         }
     }
 
+    @Override
+    public TagManagerImpl copy() {
+        HashMap<Tag, Set<Person>> newMap = new HashMap<>();
+        for (Map.Entry<Tag, Set<Person>> mapEntry : tagPersonSetMap.entrySet()) {
+            newMap.put(mapEntry.getKey(), new HashSet<>(mapEntry.getValue()));
+        }
+        return new TagManagerImpl(newMap);
+    }
 
 
 }

@@ -34,5 +34,14 @@ public interface TagManager {
      */
     void updateNewPersonTags(Person person);
 
+    /**
+     * Creates and returns a copy of the {@code TagManager}.
+     * The new copy must use a separate underlying structure, only sharing references
+     * to the same {@code Person}s and {@code Tag}s.
+     *
+     * @return copy of the current {@code TagManager}.
+     */
+    TagManager copy();
+
 
 }
