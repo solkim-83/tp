@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagManager;
 import seedu.address.model.tag.TagManagerImpl;
 
@@ -110,6 +112,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void sortPerson(Comparator<Person> c) {
         persons.sortPersons(c);
+    }
+
+    public Set<Person> getPersonsWithTag(Tag tag) {
+        return tagManager.getPersonsUnderTag(tag);
     }
 
     @Override
