@@ -19,6 +19,13 @@ public interface TagManager {
     Set<Person> getPersonsUnderTag(Tag tag);
 
     /**
+     * Returns a set of all {@code Tag}s found in the {@code TagManager}.
+     *
+     * @return a set of {@code Tag}s.
+     */
+    Set<Tag> getTags();
+
+    /**
      * Updates the current tag references in the tag manager.
      * Removes all references to the {@code oldPerson} and adds new references to the {@code newPerson}.
      *
@@ -35,13 +42,11 @@ public interface TagManager {
     void updateNewPersonTags(Person person);
 
     /**
-     * Creates and returns a copy of the {@code TagManager}.
+     * Copies the content of the {@code otherTagManager} into this {@code TagManager}.
      * The new copy must use a separate underlying structure, only sharing references
      * to the same {@code Person}s and {@code Tag}s.
-     *
-     * @return copy of the current {@code TagManager}.
      */
-    TagManager copy();
+    void copy(TagManager otherTagManager);
 
 
 }
