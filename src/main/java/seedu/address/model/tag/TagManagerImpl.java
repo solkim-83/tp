@@ -1,7 +1,5 @@
 package seedu.address.model.tag;
 
-import seedu.address.model.person.Person;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +8,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+
+import seedu.address.model.person.Person;
 
 /**
  * Concrete implementation class of {@code TagManager} that uses a {@code HashMap}.
@@ -59,9 +59,7 @@ public class TagManagerImpl implements TagManager {
         for (Tag newTag : person.getTags()) {
             Optional.ofNullable(tagPersonSetMap.get(newTag))
                     .ifPresentOrElse(
-                            set -> set.add(person),
-                            () -> tagPersonSetMap.put(newTag, new HashSet<>(List.of(person)))
-                    );
+                        set -> set.add(person), () -> tagPersonSetMap.put(newTag, new HashSet<>(List.of(person))));
         }
     }
 
