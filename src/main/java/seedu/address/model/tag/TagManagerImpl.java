@@ -26,7 +26,7 @@ public class TagManagerImpl implements TagManager {
 
     @Override
     public Set<Person> getPersonsUnderTag(Tag tag) {
-        return tagPersonSetMap.get(tag);
+        return tagPersonSetMap.get(tag) == null ? Set.of() : tagPersonSetMap.get(tag);
     }
 
     @Override
@@ -46,6 +46,9 @@ public class TagManagerImpl implements TagManager {
             }
 
             tagSet.remove(person);
+            if (tagSet.size() == 0) {
+                tagPersonSetMap.remove(oldTag);
+            }
         }
     }
 
@@ -87,5 +90,15 @@ public class TagManagerImpl implements TagManager {
         tagPersonSetMap.putAll(newMap);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof TagManagerImpl)) {
+            return false;
+        } else {
+            return tagPersonSetMap.equals(((TagManagerImpl) o).tagPersonSetMap);
+        }
+    }
 
 }
