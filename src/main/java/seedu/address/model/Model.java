@@ -122,13 +122,19 @@ public interface Model {
      */
     void setEvent(Event target, Event editedEvent);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getSortedFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered event list */
+    /**
+     * Returns an unmodifiable view of the filtered event list
+     */
     ObservableList<Event> getFilteredEventList();
 
-    /** Returns a set of all {@code person}s containing the {@code tag}. */
+    /**
+     * Returns a set of all {@code person}s containing the {@code tag}.
+     */
     Set<Person> getPersonsWithTag(Tag tag);
 
     /**

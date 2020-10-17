@@ -11,6 +11,9 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests integration between AddressBook and the TagManager.
+ */
 public class AddressBookTagManagerIntegrationTest {
 
     @Test

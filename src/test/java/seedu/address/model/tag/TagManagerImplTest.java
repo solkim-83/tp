@@ -29,7 +29,9 @@ public class TagManagerImplTest {
         return new TagManagerImpl();
     }
 
-    /** Contains the tags "friends" (ALICE & BENSON) and "owesMoney" (BENSON) */
+    /**
+     * Contains the tags "friends" (ALICE & BENSON) and "owesMoney" (BENSON)
+     */
     public static TagManagerImpl createNonEmptyTagManager() {
         TagManagerImpl tagManager = new TagManagerImpl();
         tagManager.addNewPersonTags(ALICE);
