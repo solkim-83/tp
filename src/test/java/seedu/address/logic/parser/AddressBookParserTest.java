@@ -52,7 +52,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
-                DeleteContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                DeleteContactCommand.COMMAND_WORD + " " + DeleteContactCommand.COMMAND_TYPE + " "
+                        + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -61,7 +62,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + EditContactCommand.COMMAND_TYPE + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditContactCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -78,6 +80,7 @@ public class AddressBookParserTest {
         String emailKeyword = "hotmail";
         FindContactCommand command = (FindContactCommand) parser.parseCommand(
                 FindContactCommand.COMMAND_WORD + " "
+                        + FindContactCommand.COMMAND_TYPE + " "
                         + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" ")) + " "
                         + PREFIX_PHONE + phoneKeyword + " "
                         + PREFIX_EMAIL + emailKeyword);
@@ -98,8 +101,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListContactCommand.COMMAND_WORD) instanceof ListContactCommand);
-        assertTrue(parser.parseCommand(ListContactCommand.COMMAND_WORD + " 3") instanceof ListContactCommand);
+        assertTrue(parser.parseCommand(ListContactCommand.COMMAND_WORD + " " + ListContactCommand.COMMAND_TYPE)
+                instanceof ListContactCommand);
+        assertTrue(parser.parseCommand(
+                ListContactCommand.COMMAND_WORD + " " + ListContactCommand.COMMAND_TYPE + " 3")
+                instanceof ListContactCommand);
     }
 
     @Test
