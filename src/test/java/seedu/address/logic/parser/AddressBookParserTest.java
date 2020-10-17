@@ -22,7 +22,7 @@ import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.commands.EditContactCommand;
 import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindContactCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -76,8 +76,8 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String phoneKeyword = "96789";
         String emailKeyword = "hotmail";
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " "
+        FindContactCommand command = (FindContactCommand) parser.parseCommand(
+                FindContactCommand.COMMAND_WORD + " "
                         + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" ")) + " "
                         + PREFIX_PHONE + phoneKeyword + " "
                         + PREFIX_EMAIL + emailKeyword);
@@ -87,7 +87,7 @@ public class AddressBookParserTest {
         builtPredicate.setPhoneKeyword(phoneKeyword);
         builtPredicate.setEmailKeyword(emailKeyword);
 
-        assertEquals(new FindCommand(builtPredicate), command);
+        assertEquals(new FindContactCommand(builtPredicate), command);
     }
 
     @Test
