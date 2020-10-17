@@ -29,10 +29,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class AddressBookParser {
 
+    private static final String COMMAND_TYPE_CONTACT = "/c";
+
+    private static final String COMMAND_TYPE_EVENT = "/e";
+
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
+            "(?<commandWord>\\S+)\\s*(?<commandType>[\\S]*)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -48,56 +53,78 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
+        final String commandType = matcher.group("commandType");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        switch (commandType) {
 
-        case AddContactCommand.COMMAND_WORD:
-            return new AddContactCommandParser().parse(arguments);
+        case COMMAND_TYPE_CONTACT:
 
-        case EditContactCommand.COMMAND_WORD:
-            return new EditContactCommandParser().parse(arguments);
+            switch (commandWord) {
 
-        case DeleteContactCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            case AddContactCommand.COMMAND_WORD:
+                return new AddContactCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case EditContactCommand.COMMAND_WORD:
+                return new EditContactCommandParser().parse(arguments);
 
-        case FindContactCommand.COMMAND_WORD:
-            return new FindContactCommandParser().parse(arguments);
+            case DeleteContactCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case ListContactCommand.COMMAND_WORD:
-            return new ListContactCommand();
+            case FindContactCommand.COMMAND_WORD:
+                return new FindContactCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ListContactCommand.COMMAND_WORD:
+                return new ListContactCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case SortCommand.COMMAND_WORD:
+                return new SortCommandParser().parse(arguments);
 
-        case SortCommand.COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventCommandParser().parse(arguments);
+        case COMMAND_TYPE_EVENT:
 
-        case EditEventCommand.COMMAND_WORD:
-            return new EditEventCommandParser().parse(arguments);
+            switch (commandWord) {
 
-        case DeleteEventCommand.COMMAND_WORD:
-            return new DeleteEventCommandParser().parse(arguments);
+            case AddEventCommand.COMMAND_WORD:
+                return new AddEventCommandParser().parse(arguments);
 
-        case FindEventCommand.COMMAND_WORD:
-            return new FindEventCommandParser().parse(arguments);
+            case EditEventCommand.COMMAND_WORD:
+                return new EditEventCommandParser().parse(arguments);
 
-        case ListEventCommand.COMMAND_WORD:
-            return new ListEventCommand();
+            case DeleteEventCommand.COMMAND_WORD:
+                return new DeleteEventCommandParser().parse(arguments);
 
-        case IntroCommand.COMMAND_WORD:
-            return new IntroCommand();
+            case FindEventCommand.COMMAND_WORD:
+                return new FindEventCommandParser().parse(arguments);
+
+            case ListEventCommand.COMMAND_WORD:
+                return new ListEventCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            switch (commandWord) {
+
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            case IntroCommand.COMMAND_WORD:
+                return new IntroCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
         }
     }
 
