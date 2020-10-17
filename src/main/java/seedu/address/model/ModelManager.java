@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -187,6 +189,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
+    }
+
+    @Override
+    public Set<Person> getPersonsWithTag(Tag tag) {
+        return addressBook.getPersonsWithTag(tag);
     }
 
     @Override

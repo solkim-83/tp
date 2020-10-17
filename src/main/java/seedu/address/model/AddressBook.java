@@ -4,10 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagManager;
+import seedu.address.model.tag.TagManagerImpl;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final TagManager tagManager;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tagManager = new TagManagerImpl();
     }
 
     public AddressBook() {}
@@ -48,6 +54,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setTagManager(List<Person> persons) {
+        this.tagManager.addNewPersonsTags(persons);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -55,6 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTagManager(newData.getPersonList());
     }
 
     //// person-level operations
@@ -73,6 +84,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        tagManager.addNewPersonTags(p);
     }
 
     /**
@@ -84,6 +96,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        tagManager.updateExistingPersonTags(target, editedPerson);
     }
 
     /**
@@ -92,12 +105,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        tagManager.deletePersonTags(key);
     }
 
     //// util methods
 
     public void sortPerson(Comparator<Person> c) {
         persons.sortPersons(c);
+    }
+
+    public Set<Person> getPersonsWithTag(Tag tag) {
+        return tagManager.getPersonsUnderTag(tag);
     }
 
     @Override
