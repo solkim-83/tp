@@ -24,6 +24,8 @@ public class EditEventCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+    public static final String COMMAND_TYPE = "/e";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "
             + "Existing values will be overwritten by the input values.\n"
