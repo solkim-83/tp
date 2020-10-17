@@ -34,29 +34,25 @@ public class TagManagerImpl implements TagManager {
         return tagPersonSetMap.keySet();
     }
 
-    @Override
-    public void updateExistingPersonTags(Person oldPerson, Person newPerson) {
-        for (Tag oldTag : oldPerson.getTags()) {
+    /**
+     * Removes all references in {@code tagPersonSetMap} to this {@code person} based on the {@code tag}s it has.
+     */
+    private void removeAllTagReferencesOfPerson(Person person) {
+        for (Tag oldTag : person.getTags()) {
             Set<Person> tagSet = tagPersonSetMap.get(oldTag);
             Objects.requireNonNull(tagSet);
-            if (!tagSet.contains(oldPerson)) {
+            if (!tagSet.contains(person)) {
                 throw new NoSuchElementException(MESSAGE_ERROR_PERSON_NOT_FOUND);
             }
 
-            tagSet.remove(oldPerson);
-        }
-
-        for (Tag newTag : newPerson.getTags()) {
-            Optional.ofNullable(tagPersonSetMap.get(newTag))
-                    .ifPresentOrElse(
-                            set -> set.add(newPerson),
-                            () -> tagPersonSetMap.put(newTag, new HashSet<>(List.of(newPerson)))
-                    );
+            tagSet.remove(person);
         }
     }
 
-    @Override
-    public void updateNewPersonTags(Person person) {
+    /**
+     * Adds all references to {@code tagPersonSetMap} from this {@code person} based on the {@code tag}s it has.
+     */
+    private void addAllTagReferencesOfPerson(Person person) {
         for (Tag newTag : person.getTags()) {
             Optional.ofNullable(tagPersonSetMap.get(newTag))
                     .ifPresentOrElse(
@@ -64,6 +60,22 @@ public class TagManagerImpl implements TagManager {
                             () -> tagPersonSetMap.put(newTag, new HashSet<>(List.of(person)))
                     );
         }
+    }
+
+    @Override
+    public void updateExistingPersonTags(Person oldPerson, Person newPerson) {
+        removeAllTagReferencesOfPerson(oldPerson);
+        addAllTagReferencesOfPerson(newPerson);
+    }
+
+    @Override
+    public void addNewPersonTags(Person person) {
+        addAllTagReferencesOfPerson(person);
+    }
+
+    @Override
+    public void deletePersonTags(Person person) {
+        removeAllTagReferencesOfPerson(person);
     }
 
     @Override

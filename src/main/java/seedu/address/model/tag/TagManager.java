@@ -1,5 +1,6 @@
 package seedu.address.model.tag;
 
+import java.util.Collection;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
@@ -29,17 +30,35 @@ public interface TagManager {
      * Updates the current tag references in the tag manager.
      * Removes all references to the {@code oldPerson} and adds new references to the {@code newPerson}.
      *
-     * @param oldPerson {@code Person} that we would like to remove references to.
-     * @param newPerson {@code Person} that we would like to add new references to.
+     * @param oldPerson {@code Person} to remove references to.
+     * @param newPerson {@code Person} to add new references to.
      */
     void updateExistingPersonTags(Person oldPerson, Person newPerson);
 
     /**
      * Updates the tag manager with references to a newly added {@code person}.
      *
-     * @param person new {@person} added.
+     * @param person new {@code person} added.
      */
-    void updateNewPersonTags(Person person);
+    void addNewPersonTags(Person person);
+
+    /**
+     * Updates the tag manager with references to all {@code person} in {@code persons}.
+     *
+     * @param persons new {@code persons} added.
+     */
+    default void addNewPersonsTags(Collection<Person> persons) {
+        for (Person person : persons) {
+            addNewPersonTags(person);
+        }
+    }
+
+    /**
+     * Updates the current {@code tag} references in the {@code tag manager} to remove all references to {@code person}.
+     *
+     * @param person person being deleted.
+     */
+    void deletePersonTags(Person person);
 
     /**
      * Copies the content of the {@code otherTagManager} into this {@code TagManager}.
