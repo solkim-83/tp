@@ -16,19 +16,19 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 
 public class TagManagerImplTest {
 
-    private static final Tag TAG_FRIENDS = new Tag("friends");
-    private static final Tag TAG_OWES_MONEY = new Tag("owesMoney");
-    private static final Tag TAG_MODULE = new Tag("CS2103");
-    private static final Tag TAG_NOT_FOUND = new Tag("asdimsad");
-    private static final Tag TAG_SCHOOL = new Tag("NUS");
-    private static final Person BENSON_EDITED = new PersonBuilder(BENSON).withTags("friends", "CS2103", "NUS").build();
+    public static final Tag TAG_FRIENDS = new Tag("friends");
+    public static final Tag TAG_OWES_MONEY = new Tag("owesMoney");
+    public static final Tag TAG_MODULE = new Tag("CS2103");
+    public static final Tag TAG_NOT_FOUND = new Tag("asdimsad");
+    public static final Tag TAG_SCHOOL = new Tag("NUS");
+    public static final Person BENSON_EDITED = new PersonBuilder(BENSON).withTags("friends", "CS2103", "NUS").build();
 
-    private static TagManagerImpl createEmptyTagManager() {
+    public static TagManagerImpl createEmptyTagManager() {
         return new TagManagerImpl();
     }
 
     /** Contains the tags "friends" (ALICE & BENSON) and "owesMoney" (BENSON) */
-    private static TagManagerImpl createNonEmptyTagManager() {
+    public static TagManagerImpl createNonEmptyTagManager() {
         TagManagerImpl tagManager = new TagManagerImpl();
         tagManager.addNewPersonTags(ALICE);
         tagManager.addNewPersonTags(BENSON);
