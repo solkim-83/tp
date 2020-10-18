@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = CommandWord.LIST.inputString;
 
     public static final String COMMAND_TYPE = CommandType.EVENT.inputString;
 

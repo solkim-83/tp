@@ -6,23 +6,15 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddContactCommand;
-import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.DeleteContactCommand;
-import seedu.address.logic.commands.DeleteEventCommand;
-import seedu.address.logic.commands.EditContactCommand;
-import seedu.address.logic.commands.EditEventCommand;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindContactCommand;
-import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IntroCommand;
 import seedu.address.logic.commands.ListContactCommand;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -49,7 +41,7 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final CommandWord commandWord = CommandWord.get(matcher.group("commandWord"));
         final CommandType commandType = CommandType.get(matcher.group("commandType"));
         final String arguments = matcher.group("arguments");
 
@@ -59,22 +51,22 @@ public class AddressBookParser {
 
             switch (commandWord) {
 
-            case AddContactCommand.COMMAND_WORD:
+            case ADD:
                 return new AddContactCommandParser().parse(arguments);
 
-            case EditContactCommand.COMMAND_WORD:
+            case EDIT:
                 return new EditContactCommandParser().parse(arguments);
 
-            case DeleteContactCommand.COMMAND_WORD:
+            case DELETE:
                 return new DeleteCommandParser().parse(arguments);
 
-            case FindContactCommand.COMMAND_WORD:
+            case FIND:
                 return new FindContactCommandParser().parse(arguments);
 
-            case ListContactCommand.COMMAND_WORD:
+            case LIST:
                 return new ListContactCommand();
 
-            case SortCommand.COMMAND_WORD:
+            case SORT:
                 return new SortCommandParser().parse(arguments);
 
             default:
@@ -85,19 +77,19 @@ public class AddressBookParser {
 
             switch (commandWord) {
 
-            case AddEventCommand.COMMAND_WORD:
+            case ADD:
                 return new AddEventCommandParser().parse(arguments);
 
-            case EditEventCommand.COMMAND_WORD:
+            case EDIT:
                 return new EditEventCommandParser().parse(arguments);
 
-            case DeleteEventCommand.COMMAND_WORD:
+            case DELETE:
                 return new DeleteEventCommandParser().parse(arguments);
 
-            case FindEventCommand.COMMAND_WORD:
+            case FIND:
                 return new FindEventCommandParser().parse(arguments);
 
-            case ListEventCommand.COMMAND_WORD:
+            case LIST:
                 return new ListEventCommand();
 
             default:
@@ -108,16 +100,16 @@ public class AddressBookParser {
 
             switch (commandWord) {
 
-            case ClearCommand.COMMAND_WORD:
+            case CLEAR:
                 return new ClearCommand();
 
-            case ExitCommand.COMMAND_WORD:
+            case EXIT:
                 return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
+            case HELP:
                 return new HelpCommand();
 
-            case IntroCommand.COMMAND_WORD:
+            case INTRO:
                 return new IntroCommand();
 
             default:

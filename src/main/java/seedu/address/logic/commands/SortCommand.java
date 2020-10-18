@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class SortCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_WORD = CommandWord.SORT.inputString;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the currently displayed list"
             + "by the index command entered "

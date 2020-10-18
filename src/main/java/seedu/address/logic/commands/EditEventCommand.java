@@ -22,7 +22,7 @@ import seedu.address.model.event.Time;
  */
 public class EditEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = CommandWord.EDIT.inputString;
 
     public static final String COMMAND_TYPE = CommandType.EVENT.inputString;
 

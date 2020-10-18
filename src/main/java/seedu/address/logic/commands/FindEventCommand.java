@@ -12,7 +12,7 @@ import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
  */
 public class FindEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = CommandWord.FIND.inputString;
 
     public static final String COMMAND_TYPE = CommandType.EVENT.inputString;
 

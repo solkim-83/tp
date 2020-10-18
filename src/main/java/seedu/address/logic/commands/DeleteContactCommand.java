@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = CommandWord.DELETE.inputString;
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
 

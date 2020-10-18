@@ -15,7 +15,7 @@ import seedu.address.model.event.Event;
  */
 public class DeleteEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = CommandWord.DELETE.inputString;
 
     public static final String COMMAND_TYPE = CommandType.EVENT.inputString;
 

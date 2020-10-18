@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
  */
 public class AddEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = CommandWord.ADD.inputString;
 
     public static final String COMMAND_TYPE = CommandType.EVENT.inputString;
 

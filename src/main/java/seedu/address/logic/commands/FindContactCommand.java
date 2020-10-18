@@ -17,7 +17,7 @@ import seedu.address.model.person.ContactContainsFieldsPredicate;
  */
 public class FindContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = CommandWord.FIND.inputString;
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
 
