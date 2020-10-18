@@ -31,7 +31,7 @@ public enum CommandType {
             inputs.put(commandType.inputString, commandType);
         }
     }
-    public final String inputString;
+    private final String inputString;
 
     CommandType(String inputString) {
         this.inputString = inputString;
@@ -39,6 +39,11 @@ public enum CommandType {
 
     public static CommandType get(String inputString) {
         return Optional.ofNullable(inputs.get(inputString)).orElse(DEFAULT);
+    }
+
+    @Override
+    public String toString() {
+        return inputString;
     }
 
 }

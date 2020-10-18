@@ -15,9 +15,9 @@ import seedu.address.model.person.Person;
  */
 public class DeleteContactCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.DELETE.inputString;
+    public static final String COMMAND_WORD = CommandWord.DELETE.toString();
 
-    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
+    public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"

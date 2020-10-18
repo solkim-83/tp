@@ -32,9 +32,9 @@ import seedu.address.model.tag.Tag;
  */
 public class EditContactCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.EDIT.inputString;
+    public static final String COMMAND_WORD = CommandWord.EDIT.toString();
 
-    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
+    public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "

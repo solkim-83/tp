@@ -10,9 +10,9 @@ import seedu.address.model.Model;
  */
 public class ListContactCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.LIST.inputString;
+    public static final String COMMAND_WORD = CommandWord.LIST.toString();
 
-    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
+    public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 

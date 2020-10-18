@@ -36,7 +36,7 @@ public enum CommandWord {
             inputs.put(commandWord.inputString, commandWord);
         }
     }
-    public final String inputString;
+    private final String inputString;
 
     CommandWord(String inputString) {
         this.inputString = inputString;
@@ -44,6 +44,11 @@ public enum CommandWord {
 
     public static CommandWord get(String inputString) {
         return Optional.ofNullable(inputs.get(inputString)).orElse(DEFAULT);
+    }
+
+    @Override
+    public String toString() {
+        return inputString;
     }
 
 }

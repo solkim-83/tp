@@ -12,9 +12,9 @@ import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
  */
 public class FindEventCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.FIND.inputString;
+    public static final String COMMAND_WORD = CommandWord.FIND.toString();
 
-    public static final String COMMAND_TYPE = CommandType.EVENT.inputString;
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events that contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.CLEAR.inputString;
+    public static final String COMMAND_WORD = CommandWord.CLEAR.toString();
 
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 

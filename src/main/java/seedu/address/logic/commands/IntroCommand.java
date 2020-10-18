@@ -4,7 +4,7 @@ import seedu.address.model.Model;
 
 public class IntroCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.INTRO.inputString;
+    public static final String COMMAND_WORD = CommandWord.INTRO.toString();
 
     public static final String SHOWING_INTRO_MESSAGE = "Opened introduction window.";
 
