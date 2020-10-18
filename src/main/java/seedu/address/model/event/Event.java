@@ -1,8 +1,13 @@
 package seedu.address.model.event;
 
+import seedu.address.model.tag.Tag;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents an Events in Calendar.
@@ -10,14 +15,16 @@ import java.util.Objects;
 public class Event {
     private final Description description;
     private final Time time;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Description description, Time time) {
+    public Event(Description description, Time time, Set<Tag> tags) {
         requireAllNonNull(description, time);
         this.description = description;
         this.time = time;
+        this.tags.addAll(tags);
     }
 
     public Description getDescription() {
@@ -26,6 +33,14 @@ public class Event {
 
     public Time getTime() {
         return time;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -43,7 +58,7 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, time);
+        return Objects.hash(description, time, tags);
     }
 
     @Override
@@ -58,7 +73,8 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return otherEvent.getDescription().equals(getDescription())
-                && otherEvent.getTime().equals(getTime());
+                && otherEvent.getTime().equals(getTime())
+                && otherEvent.getTags().equals(getTags());
     }
 
     @Override
@@ -66,7 +82,9 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" At: ")
-                .append(getTime());
+                .append(getTime())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
         return builder.toString();
     }
 }
