@@ -10,8 +10,8 @@ import java.util.Optional;
 public enum CommandType {
 
     /**
-     * Types of commands, along with the inputString to look for. DEFAULT is for commands that should not have
-     * an inputString.
+     * Types of commands by the functionality it targets, along with the inputString to look for. DEFAULT is for
+     * commands that should not have an inputString.
      */
     CONTACT("-c"),
     EVENT("-e"),

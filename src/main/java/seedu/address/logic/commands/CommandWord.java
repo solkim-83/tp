@@ -7,8 +7,8 @@ import java.util.Optional;
 public enum CommandWord {
 
     /**
-     * Types of commands, along with the inputString to look for. DEFAULT is for commands that should not have
-     * an inputString.
+     * Types of commands by its word, along with the inputString to look for. DEFAULT is for commands that should not
+     * have an inputString.
      */
     ADD("add"),
     CLEAR("clear"),
