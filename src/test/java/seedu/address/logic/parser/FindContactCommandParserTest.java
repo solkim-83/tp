@@ -13,17 +13,18 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindContactCommand;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.tag.Tag;
 
-public class FindCommandParserTest {
+public class FindContactCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindContactCommandParser parser = new FindContactCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindContactCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -31,11 +32,11 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate();
         predicate.setNameKeywords(Arrays.asList("Alice", "Bob"));
-        FindCommand expectedFindCommand = new FindCommand(predicate);
-        assertParseSuccess(parser, " " + PREFIX_NAME + "Alice Bob", expectedFindCommand);
+        FindContactCommand expectedFindContactCommand = new FindContactCommand(predicate);
+        assertParseSuccess(parser, " " + PREFIX_NAME + "Alice Bob", expectedFindContactCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " " + PREFIX_NAME + " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_NAME + " \n Alice \n \t Bob  \t", expectedFindContactCommand);
     }
 
     @Test
@@ -43,11 +44,11 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate();
         predicate.setPhoneKeyword("91234");
-        FindCommand expectedFindCommand = new FindCommand(predicate);
-        assertParseSuccess(parser, " " + PREFIX_PHONE + "91234", expectedFindCommand);
+        FindContactCommand expectedFindContactCommand = new FindContactCommand(predicate);
+        assertParseSuccess(parser, " " + PREFIX_PHONE + "91234", expectedFindContactCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " " + PREFIX_PHONE + "\n \t 91234  \t", expectedFindCommand);
+        assertParseSuccess(parser, " " + PREFIX_PHONE + "\n \t 91234  \t", expectedFindContactCommand);
     }
 
     @Test
@@ -55,12 +56,12 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate();
         predicate.setTagKeywords(List.of("CS2103", "CS2030"));
-        FindCommand expectedFindCommand = new FindCommand(predicate);
-        assertParseSuccess(parser, " " + PREFIX_TAG + "CS2103 " + PREFIX_TAG + "CS2030", expectedFindCommand);
+        FindContactCommand expectedFindContactCommand = new FindContactCommand(predicate);
+        assertParseSuccess(parser, " " + PREFIX_TAG + "CS2103 " + PREFIX_TAG + "CS2030", expectedFindContactCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " " + PREFIX_TAG + " \n \t CS2103  \t " + PREFIX_TAG + " \nCS2030",
-                expectedFindCommand);
+                expectedFindContactCommand);
     }
 
     @Test
@@ -73,7 +74,7 @@ public class FindCommandParserTest {
                 + PREFIX_EMAIL + "hotmail "
                 + PREFIX_PHONE + "91234";
 
-        assertParseSuccess(parser, parseString, new FindCommand(predicate));
+        assertParseSuccess(parser, parseString, new FindContactCommand(predicate));
     }
 
     @Test

@@ -6,22 +6,15 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteEventCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditEventCommand;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IntroCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListContactCommand;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -32,7 +25,8 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
+            "(?<commandWord>\\S+)\\s*(?<commandType>[\\S]*)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -47,57 +41,80 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final CommandWord commandWord = CommandWord.get(matcher.group("commandWord"));
+        final CommandType commandType = CommandType.get(matcher.group("commandType"));
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        switch (commandType) {
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case CONTACT:
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            switch (commandWord) {
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case ADD:
+                return new AddContactCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            case EDIT:
+                return new EditContactCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case DELETE:
+                return new DeleteCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case FIND:
+                return new FindContactCommandParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case LIST:
+                return new ListContactCommand();
 
-        case SortCommand.COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            case SORT:
+                return new SortContactCommandParser().parse(arguments);
 
-        case AddEventCommand.COMMAND_WORD:
-            return new AddEventCommandParser().parse(arguments);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
-        case EditEventCommand.COMMAND_WORD:
-            return new EditEventCommandParser().parse(arguments);
+        case EVENT:
 
-        case DeleteEventCommand.COMMAND_WORD:
-            return new DeleteEventCommandParser().parse(arguments);
+            switch (commandWord) {
 
-        case FindEventCommand.COMMAND_WORD:
-            return new FindEventCommandParser().parse(arguments);
+            case ADD:
+                return new AddEventCommandParser().parse(arguments);
 
-        case ListEventCommand.COMMAND_WORD:
-            return new ListEventCommand();
+            case EDIT:
+                return new EditEventCommandParser().parse(arguments);
 
-        case IntroCommand.COMMAND_WORD:
-            return new IntroCommand();
+            case DELETE:
+                return new DeleteEventCommandParser().parse(arguments);
+
+            case FIND:
+                return new FindEventCommandParser().parse(arguments);
+
+            case LIST:
+                return new ListEventCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            switch (commandWord) {
+
+            case CLEAR:
+                return new ClearCommand();
+
+            case EXIT:
+                return new ExitCommand();
+
+            case HELP:
+                return new HelpCommand();
+
+            case INTRO:
+                return new IntroCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
         }
     }
 
