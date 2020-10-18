@@ -22,7 +22,8 @@ public class SortContactCommandParser implements Parser<SortContactCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new SortContactCommand(index);
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortContactCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortContactCommand.MESSAGE_USAGE),
+                    ive);
         }
 
     }
