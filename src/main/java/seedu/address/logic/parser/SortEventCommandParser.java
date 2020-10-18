@@ -22,7 +22,8 @@ public class SortEventCommandParser implements Parser<SortEventCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new SortEventCommand(index);
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortEventCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SortEventCommand.MESSAGE_USAGE), ive);
         }
 
     }
