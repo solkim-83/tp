@@ -12,7 +12,7 @@ public class ListContactCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String COMMAND_TYPE = "/c";
+    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 

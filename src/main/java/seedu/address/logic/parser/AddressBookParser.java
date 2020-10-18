@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddContactCommand;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EditContactCommand;
@@ -28,10 +29,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
-
-    private static final String COMMAND_TYPE_CONTACT = "/c";
-
-    private static final String COMMAND_TYPE_EVENT = "/e";
 
     /**
      * Used for initial separation of command word and args.
@@ -53,11 +50,12 @@ public class AddressBookParser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String commandType = matcher.group("commandType");
+        final CommandType commandType = CommandType.get(matcher.group("commandType"));
         final String arguments = matcher.group("arguments");
+
         switch (commandType) {
 
-        case COMMAND_TYPE_CONTACT:
+        case CONTACT:
 
             switch (commandWord) {
 
@@ -83,7 +81,7 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
-        case COMMAND_TYPE_EVENT:
+        case EVENT:
 
             switch (commandWord) {
 

@@ -18,7 +18,7 @@ public class AddContactCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String COMMAND_TYPE = "/c";
+    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "

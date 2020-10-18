@@ -19,7 +19,7 @@ public class FindContactCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String COMMAND_TYPE = "/c";
+    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
             + "the specified keywords (case-insensitive) and matches the tags specified. "
