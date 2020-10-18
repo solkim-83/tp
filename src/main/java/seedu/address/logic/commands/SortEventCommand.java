@@ -16,13 +16,13 @@ import seedu.address.model.event.Event;
  */
 public class SortEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort-e";
+    public static final String COMMAND_WORD = CommandWord.SORT.toString();
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the currently displayed list of events "
             + "by the index command entered\n"
             + "1 will be sort by alphabetical order of the events' descriptions\n"
             + "2 will be sort by alphabetical order of the events' time\n"
-            + "3 will be sort by alphabetical order of the number of participants of the events\n"
             + "Parameters: INDEX (must be between 1 and 2) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -41,23 +41,6 @@ public class SortEventCommand extends Command {
             return o1.getTime().time.compareTo(o2.getTime().time);
         }
     };
-
-    //    private static final Comparator<Event> TAG_COMPARATOR = new Comparator<Event>() {
-    //        @Override
-    //        public int compare(Event o1, Event o2) {
-    //            if (o1.getTags().size() == 0 && o2.getTags().size() != 0) {
-    //                return 1;
-    //            }
-    //            if (o1.getTags().size() != 0 && o2.getTags().size() == 0) {
-    //                return -1;
-    //            }
-    //            if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
-    //                return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
-    //            }
-    //            return o1.getTags().iterator().next().tagName
-    //                    .compareToIgnoreCase(o2.getTags().iterator().next().tagName);
-    //        }
-    //    };
 
     private final Index index;
 
@@ -87,8 +70,6 @@ public class SortEventCommand extends Command {
             return "Sorted by description in alphabetical order";
         case 2:
             return "Sorted by time in chronological order";
-        case 3:
-            return "Sorted by the number of participants in descending order";
         default:
             return "Invalid index entered, refer to below for the command's proper usage: "
                     + MESSAGE_USAGE;
