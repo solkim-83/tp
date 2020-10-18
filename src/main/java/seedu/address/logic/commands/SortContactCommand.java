@@ -14,9 +14,11 @@ import seedu.address.model.person.Person;
  * Sorts the currently displayed persons in a specific order.
  * Index entered determines the specific order.
  */
-public class SortCommand extends Command {
+public class SortContactCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWord.SORT.inputString;
+
+    public static final String COMMAND_TYPE = CommandType.CONTACT.inputString;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the currently displayed list"
             + "by the index command entered "
@@ -64,7 +66,7 @@ public class SortCommand extends Command {
     /**
      * @param index the order in which to sort the address book
      */
-    public SortCommand(Index index) {
+    public SortContactCommand(Index index) {
         requireAllNonNull(index);
         this.index = index;
     }
@@ -118,12 +120,12 @@ public class SortCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SortCommand)) {
+        if (!(other instanceof SortContactCommand)) {
             return false;
         }
 
         // state check
-        SortCommand e = (SortCommand) other;
+        SortContactCommand e = (SortContactCommand) other;
         return index.equals(e.index);
     }
 

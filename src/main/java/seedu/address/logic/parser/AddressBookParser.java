@@ -67,7 +67,7 @@ public class AddressBookParser {
                 return new ListContactCommand();
 
             case SORT:
-                return new SortCommandParser().parse(arguments);
+                return new SortContactCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
