@@ -130,7 +130,7 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered event list
      */
-    ObservableList<Event> getFilteredEventList();
+    ObservableList<Event> getSortedFilteredEventList();
 
     /**
      * Returns a set of all {@code person}s containing the {@code tag}.
@@ -149,4 +149,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    void sortEvent(Comparator<Event> comparator);
 }
