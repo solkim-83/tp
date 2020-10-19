@@ -37,14 +37,14 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addContact() throws Exception {
         Person person = new PersonBuilder().build();
         AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddContactCommand(person), command);
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_clearContact() throws Exception {
         assertTrue(parser.parseCommand(ClearContactCommand.COMMAND_WORD + " " + ClearContactCommand.COMMAND_TYPE)
                 instanceof ClearContactCommand);
         assertTrue(parser.parseCommand(
@@ -53,7 +53,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deleteContact() throws Exception {
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
                 DeleteContactCommand.COMMAND_WORD + " " + DeleteContactCommand.COMMAND_TYPE + " "
                         + INDEX_FIRST_PERSON.getOneBased());
@@ -61,7 +61,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editContact() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
@@ -77,7 +77,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findContact() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String phoneKeyword = "96789";
         String emailKeyword = "hotmail";
@@ -103,7 +103,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listContact() throws Exception {
         assertTrue(parser.parseCommand(ListContactCommand.COMMAND_WORD + " " + ListContactCommand.COMMAND_TYPE)
                 instanceof ListContactCommand);
         assertTrue(parser.parseCommand(
