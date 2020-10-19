@@ -16,7 +16,7 @@ public class EventBuilder {
     private Time time;
 
     /**
-     * Creates a {@code EventBuilder} with the default details.
+     * Creates an {@code EventBuilder} with the default details.
      */
     public EventBuilder() {
         description = new Description(DEFAULT_DESCRIPTION);
