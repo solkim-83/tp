@@ -22,8 +22,7 @@ public class EditEventDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditEventDescriptor} with fields containing {@code person}'s details.
-     * The tags are such that all prior tags will be removed and the {@code person}'s tags are added.
+     * Returns an {@code EditEventDescriptor} with fields containing {@code event}'s details.
      */
     public EditEventDescriptorBuilder(Event event) {
         descriptor = new EditEventDescriptor();
