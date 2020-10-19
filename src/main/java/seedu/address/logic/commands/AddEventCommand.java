@@ -14,9 +14,11 @@ import seedu.address.model.event.Event;
  */
 public class AddEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "addEvent";
+    public static final String COMMAND_WORD = CommandWord.ADD.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a event to Athena. "
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Athena. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATETIME + "DATE_TIME \n"

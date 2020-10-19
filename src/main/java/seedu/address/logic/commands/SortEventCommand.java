@@ -16,7 +16,8 @@ import seedu.address.model.event.Event;
  */
 public class SortEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort-e";
+    public static final String COMMAND_WORD = CommandWord.SORT.toString();
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the currently displayed list of events "
             + "by the index command entered\n"
