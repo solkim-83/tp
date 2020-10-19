@@ -50,5 +50,5 @@ public class EventBuilder {
     public Event build() {
         return new Event(description, time);
     }
-    
+
 }
