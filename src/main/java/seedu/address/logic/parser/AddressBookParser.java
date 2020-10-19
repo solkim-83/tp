@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearContactCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
@@ -57,6 +57,9 @@ public class AddressBookParser {
             case EDIT:
                 return new EditContactCommandParser().parse(arguments);
 
+            case CLEAR:
+                return new ClearContactCommand();
+
             case DELETE:
                 return new DeleteCommandParser().parse(arguments);
 
@@ -102,9 +105,6 @@ public class AddressBookParser {
         default:
 
             switch (commandWord) {
-
-            case CLEAR:
-                return new ClearCommand();
 
             case EXIT:
                 return new ExitCommand();
