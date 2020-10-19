@@ -45,8 +45,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearContactCommand.COMMAND_WORD) instanceof ClearContactCommand);
-        assertTrue(parser.parseCommand(ClearContactCommand.COMMAND_WORD + " 3") instanceof ClearContactCommand);
+        assertTrue(parser.parseCommand(ClearContactCommand.COMMAND_WORD + " " + ClearContactCommand.COMMAND_TYPE)
+                instanceof ClearContactCommand);
+        assertTrue(parser.parseCommand(
+                ClearContactCommand.COMMAND_WORD + " " + ClearContactCommand.COMMAND_TYPE + " 3")
+                instanceof ClearContactCommand);
     }
 
     @Test
