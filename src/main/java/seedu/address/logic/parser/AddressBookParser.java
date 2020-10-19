@@ -92,6 +92,9 @@ public class AddressBookParser {
             case LIST:
                 return new ListEventCommand();
 
+            case SORT:
+                return new SortEventCommandParser().parse(arguments);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
