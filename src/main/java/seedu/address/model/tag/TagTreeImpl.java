@@ -25,6 +25,11 @@ public class TagTreeImpl extends TagTree {
         tagSuperTagMap = new HashMap<>();
     }
 
+    public TagTreeImpl(Map<Tag, Set<Tag>> tagSubTagMap, Map<Tag, Set<Tag>> tagSuperTagMap) {
+        this.tagSubTagMap = tagSubTagMap;
+        this.tagSuperTagMap = tagSuperTagMap;
+    }
+
     @Override
     public Set<Tag> getSubTagsOf(Tag tag) {
         return tagSubTagMap.containsKey(tag) ? Set.copyOf(tagSubTagMap.get(tag)) : Set.of();
@@ -107,6 +112,7 @@ public class TagTreeImpl extends TagTree {
 
         boolean hasSubTagAsDirectChild = tagSubTagMap.get(superTag).contains(subTag);
         if (hasSubTagAsDirectChild) {
+            System.out.println(superTag + " " + subTag);
             return true;
         }
 
@@ -116,6 +122,23 @@ public class TagTreeImpl extends TagTree {
     @Override
     public String toString() {
         return "Sub-tag map: " + tagSubTagMap + "\nSuper-tag map: " + tagSuperTagMap;
+    }
+
+    boolean hasDirectSuperTag(Tag subTag, Tag superTag) {
+        return tagSuperTagMap.get(subTag) != null && tagSuperTagMap.get(subTag).contains(superTag);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        } else if (!(object instanceof TagTreeImpl)) {
+            return false;
+        } else {
+            TagTreeImpl otherTree = (TagTreeImpl) object;
+            return otherTree.tagSuperTagMap.equals(tagSuperTagMap)
+                    && otherTree.tagSubTagMap.equals(tagSubTagMap);
+        }
     }
 
     public static void main(String[] args) {

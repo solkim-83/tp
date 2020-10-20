@@ -1,0 +1,62 @@
+package seedu.address.testutil;
+
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagTree;
+import seedu.address.model.tag.TagTreeImpl;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * Utility class to help testing of tag trees.
+ */
+public class TagTreeUtil {
+
+    public static Tag TAG_NUS = new Tag("nus");
+    public static Set<Tag> SET_NUS = new HashSet<>(Set.of(TAG_NUS));
+
+    public static Tag TAG_COMPUTING = new Tag("computing");
+    public static Tag TAG_SCIENCE = new Tag("science");
+    public static Tag TAG_ARCHITECTURE = new Tag("architecture");
+    public static Set<Tag> SET_FACULTIES = new HashSet<>(Set.of(TAG_COMPUTING, TAG_SCIENCE, TAG_ARCHITECTURE));
+    public static Set<Tag> SET_SCIENCE_COMP_SUPERTAGS = new HashSet<>(Set.of(TAG_SCIENCE, TAG_COMPUTING));
+
+    public static Tag TAG_SCIENCE_COMP = new Tag("sciencecomp");
+    public static Set<Tag> SET_SCIENCE_COMP = new HashSet<>(Set.of(TAG_SCIENCE_COMP));
+
+    public static Tag TAG_MA1101R = new Tag("ma1101r");
+    public static Tag TAG_CS1231S = new Tag("cs2131s");
+    public static Set<Tag> SET_MODULES = new HashSet<>(Set.of(TAG_MA1101R, TAG_CS1231S));
+
+    public static Tag TAG_NOT_IN_TREE = new Tag("notintree");
+    public static Tag TAG_CS2040S_NOT_TREE = new Tag("cs2040s");
+
+    /**
+     * Returns a sample tag tree for testing.
+     */
+    public static TagTreeImpl buildTestTree() {
+        Map<Tag, Set<Tag>> mapSubTag = new HashMap<>();
+        Map<Tag, Set<Tag>> mapSuperTag = new HashMap<>();
+
+        mapSubTag.put(TAG_NUS, new HashSet<>(SET_FACULTIES));
+
+        mapSubTag.put(TAG_COMPUTING, new HashSet<>(SET_SCIENCE_COMP));
+        mapSubTag.put(TAG_SCIENCE, new HashSet<>(SET_SCIENCE_COMP));
+
+        mapSubTag.put(TAG_SCIENCE_COMP, new HashSet<>(SET_MODULES));
+
+        mapSuperTag.put(TAG_CS1231S, new HashSet<>(SET_SCIENCE_COMP));
+        mapSuperTag.put(TAG_MA1101R, new HashSet<>(SET_SCIENCE_COMP));
+
+        mapSuperTag.put(TAG_SCIENCE_COMP, new HashSet<>(SET_SCIENCE_COMP_SUPERTAGS));
+
+        mapSuperTag.put(TAG_ARCHITECTURE, new HashSet<>(SET_NUS));
+        mapSuperTag.put(TAG_COMPUTING, new HashSet<>(SET_NUS));
+        mapSuperTag.put(TAG_SCIENCE, new HashSet<>(SET_NUS));
+
+        return new TagTreeImpl(new HashMap<>(mapSubTag), new HashMap<>(mapSuperTag));
+    }
+
+}
