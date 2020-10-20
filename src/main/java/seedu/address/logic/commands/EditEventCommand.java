@@ -22,7 +22,9 @@ import seedu.address.model.event.Time;
  */
 public class EditEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "editEvent";
+    public static final String COMMAND_WORD = CommandWord.EDIT.toString();
+
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "
@@ -56,7 +58,7 @@ public class EditEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
+        List<Event> lastShownList = model.getSortedFilteredEventList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);

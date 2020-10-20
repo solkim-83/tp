@@ -10,7 +10,9 @@ import seedu.address.model.Model;
  */
 public class ListEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "listEvent";
+    public static final String COMMAND_WORD = CommandWord.LIST.toString();
+
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_SUCCESS = "Listed all events";
 

@@ -19,6 +19,8 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindEventCommand parse(String args) throws ParseException {
+
+        DescriptionContainsKeywordsPredicate findPredicate = new DescriptionContainsKeywordsPredicate();
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -27,7 +29,9 @@ public class FindEventCommandParser implements Parser<FindEventCommand> {
 
         String[] eventKeywords = trimmedArgs.split("\\s+");
 
-        return new FindEventCommand(new DescriptionContainsKeywordsPredicate(Arrays.asList(eventKeywords)));
+        findPredicate.setKeywords(Arrays.asList(eventKeywords));
+
+        return new FindEventCommand(findPredicate);
     }
 
 }

@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -120,11 +122,20 @@ public interface Model {
      */
     void setEvent(Event target, Event editedEvent);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getSortedFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered event list */
-    ObservableList<Event> getFilteredEventList();
+    /**
+     * Returns an unmodifiable view of the filtered event list
+     */
+    ObservableList<Event> getSortedFilteredEventList();
+
+    /**
+     * Returns a set of all {@code person}s containing the {@code tag}.
+     */
+    Set<Person> getPersonsWithTag(Tag tag);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -141,11 +152,13 @@ public interface Model {
      * Permanently sorts the address book by a specific comparator
      */
     void sortAddressBook(Comparator<Person> chooseComparator);
+
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
 
+    void sortEvent(Comparator<Event> comparator);
 
 }

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,8 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
-
-
+    private final SortedList<Event> sortedEvents;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -46,6 +47,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
+        sortedEvents = new SortedList<>(filteredEvents);
     }
 
     public ModelManager() {
@@ -177,6 +179,10 @@ public class ModelManager implements Model {
     @Override
     public void sortAddressBook(Comparator<Person> comparator) {addressBook.sortPerson(comparator);}
 
+    public void sortEvent(Comparator<Event> comparator) {
+        sortedEvents.comparatorProperty().setValue(comparator);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -189,8 +195,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Event> getFilteredEventList() {
-        return filteredEvents;
+    public ObservableList<Event> getSortedFilteredEventList() {
+        return sortedEvents;
+    }
+
+    @Override
+    public Set<Person> getPersonsWithTag(Tag tag) {
+        return addressBook.getPersonsWithTag(tag);
     }
 
     @Override

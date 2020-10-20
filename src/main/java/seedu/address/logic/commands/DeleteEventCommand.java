@@ -15,7 +15,9 @@ import seedu.address.model.event.Event;
  */
 public class DeleteEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteEvent";
+    public static final String COMMAND_WORD = CommandWord.DELETE.toString();
+
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event identified by the index number used in the displayed event list.\n"
@@ -33,7 +35,7 @@ public class DeleteEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
+        List<Event> lastShownList = model.getSortedFilteredEventList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);

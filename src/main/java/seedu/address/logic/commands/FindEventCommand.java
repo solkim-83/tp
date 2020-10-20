@@ -12,7 +12,9 @@ import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
  */
 public class FindEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "findEvent";
+    public static final String COMMAND_WORD = CommandWord.FIND.toString();
+
+    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events that contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -30,7 +32,7 @@ public class FindEventCommand extends Command {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getSortedFilteredEventList().size()));
     }
 
     @Override
