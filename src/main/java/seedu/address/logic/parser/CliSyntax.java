@@ -14,5 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMOVE_TAG = new Prefix("rt/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_DATETIME = new Prefix("at/");
+    public static final Prefix PREFIX_REMIND_IN = new Prefix("in/");
+
 
 }

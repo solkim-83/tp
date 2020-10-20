@@ -20,6 +20,8 @@ public enum CommandWord {
     INTRO("intro"),
     LIST("list"),
     SORT("sort"),
+    REMIND("remind"),
+    REMINDER("reminder"),
     DEFAULT("");
 
     /**
