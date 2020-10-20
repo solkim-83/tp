@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,9 +13,11 @@ import java.util.Comparator;
  * Sorts the contacts in Athena's address book permanently.
  * Index entered determines the specific order.
  */
-public class PermaSortCommand extends Command {
+public class PermaSortContactCommand extends Command {
 
     public static final String COMMAND_WORD = "psort";
+
+    public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort your contacts permanently "
             + "by the index command entered  "
@@ -65,7 +66,7 @@ public class PermaSortCommand extends Command {
     /**
      * @param index the order in which to sort the address book
      */
-    public PermaSortCommand(Index index) {
+    public PermaSortContactCommand(Index index) {
         requireAllNonNull(index);
         this.index = index;
     }
@@ -74,7 +75,7 @@ public class PermaSortCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (index.getOneBased() < 0 || index.getOneBased() > 3) {
-            throw new CommandException(PermaSortCommand.MESSAGE_INVALID_INDEX);
+            throw new CommandException(PermaSortContactCommand.MESSAGE_INVALID_INDEX);
         }
         model.sortAddressBook(chooseComparator(index));
 
@@ -124,12 +125,12 @@ public class PermaSortCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PermaSortCommand)) {
+        if (!(other instanceof PermaSortContactCommand)) {
             return false;
         }
 
         // state check
-        PermaSortCommand e = (PermaSortCommand) other;
+        PermaSortContactCommand e = (PermaSortContactCommand) other;
         return index.equals(e.index);
     }
 
