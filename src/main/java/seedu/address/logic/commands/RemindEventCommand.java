@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -48,7 +49,11 @@ public class RemindEventCommand extends Command {
 
         Event eventForReminder = lastShownList.get(targetIndex.getZeroBased());
         Reminder toAdd = new Reminder(eventForReminder, daysInAdvance);
-        Reminder.addReminder(toAdd);
+        try {
+            Reminder.addReminder(toAdd);
+        } catch (IOException e) {
+            throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
+        }
 
         return new CommandResult(String.format(MESSAGE_REMIND_EVENT_SUCCESS, daysInAdvance) + eventForReminder.toString());
     }
