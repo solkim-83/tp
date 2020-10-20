@@ -16,10 +16,10 @@ public class FindEventCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events that contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE + ": Finds all events that contain any of "
+            + "the specified keywords (case-insensitive) and displays them as a list.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " meeting";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " meeting";
 
     private final DescriptionContainsKeywordsPredicate predicate;
 
