@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * A concrete implementation of the TagTree. It uses two HashMap to keep track of the two-way relationship of tags.
+ */
 public class TagTreeImpl extends TagTree {
 
     private static final String MESSAGE_NOT_VALID_SUBTAG = "%s is not a valid subtag of %s";
@@ -23,7 +27,7 @@ public class TagTreeImpl extends TagTree {
 
     @Override
     public Set<Tag> getSubTagsOf(Tag tag) {
-        return tagSubTagMap.get(tag);
+        return tagSubTagMap.containsKey(tag) ? Set.copyOf(tagSubTagMap.get(tag)) : Set.of();
     }
 
     @Override
@@ -35,11 +39,16 @@ public class TagTreeImpl extends TagTree {
         addToMapSet(tagSuperTagMap, subTag, superTag);
     }
 
+    /**
+     * Adds the {@code tagToAdd} to the set of sub-tags assigned to {@code key}.
+     * Adds a new HashSet if the {@code key} did not have any sub-tags.
+     */
     private void addToMapSet(Map<Tag, Set<Tag>> map, Tag key, Tag tagToAdd) {
         map.merge(key, new HashSet<>(Set.of(tagToAdd)),
                 (set1, set2) -> {set1.addAll(set2); return set1;});
     }
 
+    @Override
     public void removeSubTagFrom(Tag superTag, Tag subTag) {
         if (!tagSubTagMap.get(superTag).contains(subTag)) {
             throw new NoSuchElementException(String.format(MESSAGE_NOT_VALID_SUBTAG, subTag, superTag));
@@ -51,6 +60,10 @@ public class TagTreeImpl extends TagTree {
         removeEntryFromMap(tagSuperTagMap, subTag, superTag);
     }
 
+    /**
+     * Removes {@code tagToRemove} from the set corresponding to the {@code key}.
+     * If the resulting set is empty, the key-value pair is removed from the map.
+     */
     private void removeEntryFromMap(Map<Tag, Set<Tag>> map, Tag key, Tag tagToRemove) {
         map.get(key).remove(tagToRemove);
         if (map.get(key).isEmpty()) {
@@ -58,11 +71,12 @@ public class TagTreeImpl extends TagTree {
         }
     }
 
+    @Override
     public void deleteTag(Tag tag) {
         Set<Tag> subTagSet = tagSubTagMap.get(tag);
-        boolean hasChildTags = !subTagSet.isEmpty();
+        boolean hasChildTags = subTagSet != null;
         Set<Tag> superTagSet = tagSuperTagMap.get(tag);
-        boolean hasParentTags = !superTagSet.isEmpty();
+        boolean hasParentTags = superTagSet != null;
 
         if (hasParentTags && hasChildTags) {
             connectParentWithChildTags(superTagSet, subTagSet);
@@ -78,13 +92,15 @@ public class TagTreeImpl extends TagTree {
         tagSubTagMap.remove(tag);
     }
 
+    /**
+     * Unions the {@code subTagSet} to existing sub-tags for each tag in the superTagSet.
+     */
     private void connectParentWithChildTags(Set<Tag> superTagSet, Set<Tag> subTagSet) {
         superTagSet.forEach(superTag -> addSubTagsTo(superTag, subTagSet));
     }
 
-    private boolean isSubTagOf(Tag superTag, Tag subTag) {
-        boolean hasNoSubTags = tagSubTagMap.get(superTag) == null
-                || tagSubTagMap.get(superTag).isEmpty();
+    public boolean isSubTagOf(Tag superTag, Tag subTag) {
+        boolean hasNoSubTags = tagSubTagMap.get(superTag) == null;
         if (hasNoSubTags) {
             return false;
         }
@@ -95,6 +111,40 @@ public class TagTreeImpl extends TagTree {
         }
 
         return tagSubTagMap.get(superTag).stream().anyMatch(childTag -> isSubTagOf(childTag, subTag));
+    }
+
+    @Override
+    public String toString() {
+        return "Sub-tag map: " + tagSubTagMap + "\nSuper-tag map: " + tagSuperTagMap;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        TagTree tree = new TagTreeImpl();
+        String currentString = "";
+        while (!currentString.equals("end")) {
+            currentString = scanner.nextLine();
+            try {
+                String[] lineArgs = currentString.split(" ");
+                switch (lineArgs[0]) {
+                case "add":
+                    tree.addSubTagTo(new Tag(lineArgs[1]), new Tag(lineArgs[2]));
+                    break;
+                case "remove":
+                    tree.removeSubTagFrom(new Tag(lineArgs[1]), new Tag(lineArgs[2]));
+                    break;
+                case "delete":
+                    tree.deleteTag(new Tag(lineArgs[1]));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid command!");
+                }
+                System.out.println(tree);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 
