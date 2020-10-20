@@ -73,7 +73,7 @@ public class PermaSortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (index.getOneBased() < 0 && index.getOneBased() > 3) {
+        if (index.getOneBased() < 0 || index.getOneBased() > 3) {
             throw new CommandException(PermaSortCommand.MESSAGE_INVALID_INDEX);
         }
         model.sortAddressBook(chooseComparator(index));
