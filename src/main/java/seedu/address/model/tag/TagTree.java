@@ -1,5 +1,6 @@
 package seedu.address.model.tag;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -8,7 +9,10 @@ import java.util.Set;
  * When relationship between {@code Tag}s are modified, the changes are updated here so that all parts of the program
  * have access to the most updated {@code Tag} relations.
  */
-public abstract class TagTree {
+public abstract class TagTree implements ReadOnlyTagTree {
+
+    @Override
+    public abstract Map<Tag, Set<Tag>> getTagSubTagMap();
 
     /**
      * Returns all sub-{@code tag}s of the {@code tag} argument.

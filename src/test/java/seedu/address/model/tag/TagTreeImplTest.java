@@ -2,6 +2,8 @@ package seedu.address.model.tag;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -23,6 +25,14 @@ import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE_COMP;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
 
 public class TagTreeImplTest {
+
+    @Test
+    public void getTagSubTagMap_editAttempt_errorThrown() {
+        Map<Tag, Set<Tag>> tagMap = buildTestTree().getTagSubTagMap();
+        assertEquals(tagMap, buildTestTree().getInternalTagSubTagMap());
+        assertThrows(UnsupportedOperationException.class, () -> tagMap.put(TAG_NUS, new HashSet<>()));
+        assertThrows(UnsupportedOperationException.class, () -> tagMap.get(TAG_NUS).add(TAG_CS2040S_NOT_TREE));
+    }
 
     @Test
     public void getSubTagsOf_validTag_success() {
