@@ -57,7 +57,9 @@ public class TagTreeImplTest {
 
     @Test
     public void removeSubTag_invalidTag_errorThrown() {
-        assertThrows(NoSuchElementException.class, () -> buildTestTree().removeSubTagFrom(TAG_NUS, TAG_CS1231S));
+        TagTreeImpl tagTree = buildTestTree();
+        buildTestTree().removeSubTagFrom(TAG_NUS, TAG_CS1231S);
+        assertEquals(buildTestTree(), tagTree);
     }
 
     @Test

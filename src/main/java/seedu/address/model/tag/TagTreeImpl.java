@@ -62,12 +62,6 @@ public class TagTreeImpl extends TagTree {
             return;
         }
 
-        if (!tagSubTagMap.get(superTag).contains(subTag)) {
-            throw new NoSuchElementException(String.format(MESSAGE_NOT_VALID_SUBTAG, subTag, superTag));
-        }
-        if (!tagSuperTagMap.get(subTag).contains(superTag)) {
-            throw new NoSuchElementException(String.format(MESSAGE_NOT_VALID_SUPERTAG, superTag, subTag));
-        }
         removeEntryFromMap(tagSubTagMap, superTag, subTag);
         removeEntryFromMap(tagSuperTagMap, subTag, superTag);
     }
@@ -131,6 +125,9 @@ public class TagTreeImpl extends TagTree {
         return "Sub-tag map: " + tagSubTagMap + "\nSuper-tag map: " + tagSuperTagMap;
     }
 
+    /**
+     * Returns true if the superTag is a direct parent of the subTag. Method mainly used for testing.
+     */
     boolean hasDirectSuperTag(Tag subTag, Tag superTag) {
         return tagSuperTagMap.get(subTag) != null && tagSuperTagMap.get(subTag).contains(superTag);
     }
