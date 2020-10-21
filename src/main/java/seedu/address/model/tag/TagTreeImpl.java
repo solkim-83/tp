@@ -37,6 +37,8 @@ public class TagTreeImpl extends TagTree {
 
     @Override
     public void addSubTagTo(Tag superTag, Tag subTag) {
+        assert !superTag.equals(Tag.ALL_TAGS_TAG) && !subTag.equals(Tag.ALL_TAGS_TAG);
+
         if (isSubTagOf(subTag, superTag)) {
             throw new IllegalArgumentException(String.format(MESSAGE_CYCLIC_RELATIONSHIP, superTag, subTag));
         }
@@ -55,6 +57,11 @@ public class TagTreeImpl extends TagTree {
 
     @Override
     public void removeSubTagFrom(Tag superTag, Tag subTag) {
+        if (subTag.equals(Tag.ALL_TAGS_TAG)) {
+            removeSubTagsFrom(superTag, tagSubTagMap.get(superTag));
+            return;
+        }
+
         if (!tagSubTagMap.get(superTag).contains(subTag)) {
             throw new NoSuchElementException(String.format(MESSAGE_NOT_VALID_SUBTAG, subTag, superTag));
         }
@@ -139,35 +146,6 @@ public class TagTreeImpl extends TagTree {
             return otherTree.tagSuperTagMap.equals(tagSuperTagMap)
                     && otherTree.tagSubTagMap.equals(tagSubTagMap);
         }
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        TagTree tree = new TagTreeImpl();
-        String currentString = "";
-        while (!currentString.equals("end")) {
-            currentString = scanner.nextLine();
-            try {
-                String[] lineArgs = currentString.split(" ");
-                switch (lineArgs[0]) {
-                case "add":
-                    tree.addSubTagTo(new Tag(lineArgs[1]), new Tag(lineArgs[2]));
-                    break;
-                case "remove":
-                    tree.removeSubTagFrom(new Tag(lineArgs[1]), new Tag(lineArgs[2]));
-                    break;
-                case "delete":
-                    tree.deleteTag(new Tag(lineArgs[1]));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid command!");
-                }
-                System.out.println(tree);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 
 
