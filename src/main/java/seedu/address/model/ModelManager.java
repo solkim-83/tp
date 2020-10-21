@@ -36,6 +36,11 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
     private final SortedList<Event> sortedEvents;
+
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        this(addressBook, new TagTreeImpl(), userPrefs);
+    }
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
