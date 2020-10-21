@@ -25,6 +25,29 @@ public class TagTreeImpl extends TagTree {
         tagSuperTagMap = new HashMap<>();
     }
 
+    public TagTreeImpl(ReadOnlyTagTree toCopy) {
+        super();
+        copy(toCopy);
+    }
+
+    @Override
+    public void copy(ReadOnlyTagTree toCopy) {
+        tagSubTagMap = new HashMap<>();
+        tagSuperTagMap = new HashMap<>();
+
+        toCopy.getTagSubTagMap().entrySet().stream().forEach(entry ->
+        {
+            // Adds a copy of the key-value mapping to the subtag map.
+            tagSubTagMap.put(entry.getKey(), new HashSet<>(Set.copyOf(entry.getValue())));
+
+            // For each sub-tag, adds an equivalent reverse mapping to the super tag map.
+            entry.getValue().stream().forEach(subTag -> tagSuperTagMap.merge(
+                    subTag, new HashSet<>(Set.of(entry.getKey())),
+                    (set1, set2) -> {set1.addAll(set2); return set1;}
+            ));
+        });
+    }
+
     public TagTreeImpl(Map<Tag, Set<Tag>> tagSubTagMap, Map<Tag, Set<Tag>> tagSuperTagMap) {
         this.tagSubTagMap = tagSubTagMap;
         this.tagSuperTagMap = tagSuperTagMap;

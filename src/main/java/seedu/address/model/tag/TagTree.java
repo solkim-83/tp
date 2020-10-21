@@ -56,6 +56,11 @@ public abstract class TagTree implements ReadOnlyTagTree {
     public abstract boolean isSubTagOf(Tag superTag, Tag subTag);
 
     /**
+     * Copies the equivalent mapping of the {@code otherTree} to the current tag tree.
+     */
+    public abstract void copy(ReadOnlyTagTree otherTree);
+
+    /**
      * Deletes the {@code tag} and all its sub-tags from the tag tree.
      *
      * @param tag Tag to start the deletion.
