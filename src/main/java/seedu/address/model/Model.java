@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,6 +51,11 @@ public interface Model {
     Path getCalendarFilePath();
 
     /**
+     * Returns the user prefs' tagtree file path.
+     */
+    Path getTagTreeFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -58,6 +64,11 @@ public interface Model {
      * Sets the user prefs' calendar file path.
      */
     void setCalendarFilePath(Path calendarFilePath);
+
+    /**
+     * Sets the user prefs' calender file path.
+     */
+    void setTagTreeFilePath(Path tagTreeFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -74,6 +85,16 @@ public interface Model {
 
     /** Returns the Calendar */
     ReadOnlyCalendar getCalendar();
+
+    /**
+     * Replaces the tag tree data with the data in {@code tagTree}.
+     */
+    void setTagTree(ReadOnlyTagTree tagTree);
+
+    /**
+     * Returns the TagTree.
+     */
+    ReadOnlyTagTree getTagTree();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

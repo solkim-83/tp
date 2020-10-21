@@ -16,7 +16,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagTree;
+import seedu.address.model.tag.TagTreeImpl;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,6 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final Calendar calendar;
     private final UserPrefs userPrefs;
+    private final TagTree tagTree;
 
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
@@ -35,14 +39,16 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTagTree tagTree, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, tagTree, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", tag tree: "
+                + tagTree + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.calendar = new Calendar();
+        this.tagTree = new TagTreeImpl(tagTree);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
@@ -51,7 +57,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new TagTreeImpl(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -100,6 +106,17 @@ public class ModelManager implements Model {
         userPrefs.setCalendarFilePath(calendarFilePath);
     }
 
+    @Override
+    public Path getTagTreeFilePath() {
+        return userPrefs.getTagTreeFilePath();
+    }
+
+    @Override
+    public void setTagTreeFilePath(Path tagTreeFilePath) {
+        requireNonNull(tagTreeFilePath);
+        userPrefs.setTagTreeFilePath(tagTreeFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -120,6 +137,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyCalendar getCalendar() {
         return calendar;
+    }
+
+    @Override
+    public void setTagTree(ReadOnlyTagTree tagTree) {
+        this.tagTree.copy(tagTree);
+    }
+
+    @Override
+    public ReadOnlyTagTree getTagTree() {
+        return tagTree;
     }
 
     @Override
