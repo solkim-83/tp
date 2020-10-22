@@ -99,6 +99,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     public void sortPersons(Comparator<Person> c) {
+        assert internalList.size() > 0;
         internalList.sort(c);
     }
 

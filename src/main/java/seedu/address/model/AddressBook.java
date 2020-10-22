@@ -111,6 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     public void sortPerson(Comparator<Person> c) {
+        assert persons.asUnmodifiableObservableList().size() > 0;
         persons.sortPersons(c);
     }
 
