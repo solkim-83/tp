@@ -15,6 +15,7 @@ public enum CommandType {
      */
     CONTACT("-c"),
     EVENT("-e"),
+    TAG("-t"),
     DEFAULT("");
 
     /**

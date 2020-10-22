@@ -159,6 +159,11 @@ public interface Model {
     Set<Person> getPersonsWithTag(Tag tag);
 
     /**
+     * Returns a set of all {@code tag}s present in the {@code Model}.
+     */
+    Set<Tag> getTags();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

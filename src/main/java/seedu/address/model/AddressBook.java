@@ -123,6 +123,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tagManager.getPersonsUnderTag(tag);
     }
 
+    public Set<Tag> getTags() {
+        return tagManager.getTags();
+    }
+
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
