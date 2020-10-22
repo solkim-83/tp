@@ -133,7 +133,4 @@ public class PermaSortContactCommand extends Command {
         PermaSortContactCommand e = (PermaSortContactCommand) other;
         return index.equals(e.index);
     }
-
-
-
-    }
+}
