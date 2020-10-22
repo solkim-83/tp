@@ -6,7 +6,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
@@ -14,6 +13,9 @@ import static seedu.address.logic.commands.ListTagCommand.INDICATOR_SUPERTAG;
 import static seedu.address.logic.commands.ListTagCommand.parsePersonSetIntoString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+/**
+ * Shows the full details of the specified tags in the system-message field.
+ */
 public class ViewTagCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWord.VIEW.toString();
@@ -50,10 +52,18 @@ public class ViewTagCommand extends Command {
         return new CommandResult(constructSetTagDetails(model, tagSetToView));
     }
 
+    /**
+     * Returns true if the {@code tag} is valid, that is it has at least one sub-tag or at least one
+     * {@code person} tagged with it.
+     */
     private static boolean isValidTag(Model model, Tag tag) {
         return model.getPersonTags().contains(tag) || model.getSuperTags().contains(tag);
     }
 
+    /**
+     * Returns a single String containing the full information of each tag within the {@code tagSet}.
+     * For tags that could not be found, it will be stated at the start of the string that these tags could not be found.
+     */
     private static String constructSetTagDetails(Model model, Set<Tag> tagSet) {
         String invalidTagString = tagSet.stream()
                 .filter(tag -> !isValidTag(model, tag))
@@ -69,6 +79,12 @@ public class ViewTagCommand extends Command {
         return invalidTagString + output;
     }
 
+    /**
+     * Returns a StringBuilder of the full details of the {@code tag}.
+     * First, it includes all {@code Person}s with the {@code tag}.
+     * Second, it includes all sub-tags below {@code tag} in the tag hierarchy.
+     * Third, it includes all {@code Person}s related to a sub-tag but not tagged with {@code tag}.
+     */
     private static StringBuilder constructTagDetailString(Model model, Tag tag) {
         StringBuilder sb = new StringBuilder();
 
@@ -86,6 +102,9 @@ public class ViewTagCommand extends Command {
         return sb;
     }
 
+    /**
+     * Returns a String of comma separated sub-tags within curly braces.
+     */
     private static String parseTagSetIntoString(Set<Tag> tagSet) {
         return tagSet.stream()
                 .map(tag -> tag.toString())

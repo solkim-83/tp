@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.ParserUtil.parseTags;
  */
 public class ViewTagCommandParser implements Parser<ViewTagCommand> {
 
+    @Override
     public ViewTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);

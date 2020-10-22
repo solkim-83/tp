@@ -9,6 +9,9 @@ import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Lists all tags in the system-message field.
+ */
 public class ListTagCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWord.LIST.toString();
@@ -32,6 +35,11 @@ public class ListTagCommand extends Command {
         return new CommandResult(message);
     }
 
+    /**
+     * Returns one String containing a summary of all tags present in the system.
+     * For a tag to be present, it has to have at least one {@code Person} with the tag OR has sub-tags.
+     * Summary of each tag contains only the tag name and all contacts directly tagged with the tag.
+     */
     private static String constructTagSummaryMessage(Model model, Set<Tag> tagPersonSet, Set<Tag> superTagSet) {
         Set<Tag> fullTagSet = new HashSet<>(tagPersonSet);
         fullTagSet.addAll(superTagSet);
@@ -43,6 +51,10 @@ public class ListTagCommand extends Command {
                 .orElse(MESSAGE_NO_TAGS_FOUND);
     }
 
+    /**
+     * Returns a string that combines the combines the {@code Person} set by commas, then adds curly braces.
+     * If the set is empty, returns {@code messageIfNoneFound}.
+     */
     protected static String parsePersonSetIntoString(Set<Person> set, String messageIfNoneFound) {
         return set.stream()
                 .map(t -> t.getName().toString())
