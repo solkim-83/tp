@@ -34,7 +34,7 @@ class JsonSerializableTagTree {
     }
 
     /**
-     * Converts a given {@code ReadOnlyTagTree} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyTagTree} into this class for json use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableTagTree}.
      */

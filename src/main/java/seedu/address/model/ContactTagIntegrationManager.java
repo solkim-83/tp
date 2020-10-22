@@ -146,7 +146,7 @@ public class ContactTagIntegrationManager {
     }
 
     /**
-     * returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
+     * Returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
      * {@code tagRemoved} removed.
      */
     private Person copyPersonWithoutTag(Person personToCopy, Tag tagRemoved) {
@@ -160,7 +160,7 @@ public class ContactTagIntegrationManager {
     }
 
     /**
-     * returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
+     * Returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
      * {@code tagAdded} added.
      */
     private Person copyPersonWithTag(Person personToCopy, Tag tagAdded) {

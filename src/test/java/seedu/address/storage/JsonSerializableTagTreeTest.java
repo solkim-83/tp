@@ -25,9 +25,6 @@ public class JsonSerializableTagTreeTest {
                 JsonSerializableTagTree.class).get();
         TagTree tagTreeFromFile = dataFromFile.toModelType();
         TagTree expectedTagTree = buildTestTree();
-        System.out.println(buildTestTree().getTagSubTagMap().equals(tagTreeFromFile.getTagSubTagMap()));
-        System.out.println("expected: " + buildTestTree().getTagSubTagMap());
-        System.out.println("actual: " + tagTreeFromFile.getTagSubTagMap());
         assertEquals(expectedTagTree, tagTreeFromFile);
     }
 
