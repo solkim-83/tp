@@ -10,6 +10,7 @@ import seedu.address.model.tag.TagTreeImpl;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * Class that controls {@code Tag} relationships and interactions between {@code Tag}s and {@Code Person}s.
@@ -29,6 +30,14 @@ public class ContactTagIntegrationManager {
         this.tagTree.copy(tagTree);
     }
 
+    AddressBook getAddressBook() {
+        return addressBook;
+    }
+
+    TagTree getTagTree() {
+        return tagTree;
+    }
+
     /**
      * Returns a {@code set} or {@code person}s that falls under the given {@code tag} and all its sub-tags.
      *
@@ -37,13 +46,17 @@ public class ContactTagIntegrationManager {
      */
     public Set<Person> getAllPersonsUnderTag(Tag tag) {
         Set<Person> finalSet = new HashSet<>();
-        BiConsumer<Set<Person>, Tag> biConsumer = new BiConsumer<Set<Person>, Tag>() {
+        Consumer<Tag> consumer = new Consumer<Tag>() {
             @Override
-            public void accept(Set<Person> personSet, Tag tag) {
-                personSet.addAll(addressBook.getPersonsWithTag(tag));
-                tagTree.getSubTagsOf(tag).stream().forEach(subTag -> accept(finalSet, subTag));
+            public void accept(Tag tag) {
+                if (addressBook.getPersonsWithTag(tag) == null) {
+                    return;
+                }
+                finalSet.addAll(addressBook.getPersonsWithTag(tag));
+                tagTree.getSubTagsOf(tag).stream().forEach(subTag -> accept(subTag));
             }
         };
+        consumer.accept(tag);
         return finalSet;
     }
 
@@ -68,6 +81,8 @@ public class ContactTagIntegrationManager {
      * @param tag {@code tag} to be deleted.
      */
     public void deleteTag(Tag tag) {
+        assert tag != null;
+
         tagTree.deleteTag(tag);
         removeTagFromContactsInAddressBook(tag);
     }
@@ -76,7 +91,8 @@ public class ContactTagIntegrationManager {
      * Replaces each instance of a {@code person} with {@code tag} with a {@code person} without it.
      */
     private void removeTagFromContactsInAddressBook(Tag tag) {
-        addressBook.getPersonsWithTag(tag).stream()
+        Set<Person> setCopy = Set.copyOf(addressBook.getPersonsWithTag(tag));
+        setCopy.stream()
                 .forEach(person -> addressBook.setPerson(person, copyPersonWithoutTag(person, tag)));
     }
 
@@ -108,7 +124,8 @@ public class ContactTagIntegrationManager {
      * Removes all {@code person}s directly under {@code tag} from the {@code addressbook}.
      */
     private void removeContactsUnderTagFromAddressBook(Tag tag) {
-        addressBook.getPersonsWithTag(tag).stream()
+        Set<Person> setCopy = Set.copyOf(addressBook.getPersonsWithTag(tag));
+        setCopy.stream()
                 .forEach(person -> addressBook.removePerson(person));
     }
 
@@ -120,7 +137,7 @@ public class ContactTagIntegrationManager {
      */
     public void deleteTagAndDirectContactsRecursive(Tag tag) {
         removeContactsUnderTagFromAddressBook(tag);
-        tagTree.getSubTagsOf(tag).stream().forEach(subTag -> deleteTagAndDirectContactsRecursive(tag));
+        tagTree.getSubTagsOf(tag).stream().forEach(subTag -> deleteTagAndDirectContactsRecursive(subTag));
         tagTree.deleteTagAndAllSubTags(tag);
     }
 
@@ -150,6 +167,18 @@ public class ContactTagIntegrationManager {
                 personToCopy.getEmail(),
                 personToCopy.getAddress(),
                 newTagSet);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof ContactTagIntegrationManager)) {
+            return false;
+        } else {
+            ContactTagIntegrationManager other = (ContactTagIntegrationManager) o;
+            return other.addressBook.equals(addressBook) && other.tagTree.equals(tagTree);
+        }
     }
 
 }

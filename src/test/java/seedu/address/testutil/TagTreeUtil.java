@@ -27,7 +27,7 @@ public class TagTreeUtil {
     public static Set<Tag> SET_SCIENCE_COMP = new HashSet<>(Set.of(TAG_SCIENCE_COMP));
 
     public static Tag TAG_MA1101R = new Tag("ma1101r");
-    public static Tag TAG_CS1231S = new Tag("cs2131s");
+    public static Tag TAG_CS1231S = new Tag("cs1231s");
     public static Set<Tag> SET_MODULES = new HashSet<>(Set.of(TAG_MA1101R, TAG_CS1231S));
 
     public static Tag TAG_NOT_IN_TREE = new Tag("notintree");

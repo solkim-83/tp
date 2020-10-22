@@ -113,6 +113,17 @@ public class ViewTagCommand extends Command {
                 .orElse(INDICATOR_NO_SUB_TAGS);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof ViewTagCommand)) {
+            return false;
+        } else {
+            return tagSetToView.equals(((ViewTagCommand) o).tagSetToView);
+        }
+    }
+
 
 
 }
