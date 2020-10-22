@@ -26,16 +26,11 @@ public class PermaSortCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-//    @Test
-//    public void execute__sortAddressBook_success() {
-//
-//    }
-
     @Test
     public void execute_invalidIndexSortAddressBook_throwsCommandException() {
-        PermaSortCommand permaSortCommand = new PermaSortCommand(Index.fromZeroBased(5));
+        PermaSortContactCommand permaSortContactCommand = new PermaSortContactCommand(Index.fromZeroBased(5));
 
-        assertCommandFailure(permaSortCommand, model, permaSortCommand.MESSAGE_INVALID_INDEX);
+        assertCommandFailure(permaSortContactCommand, model, PermaSortContactCommand.MESSAGE_INVALID_INDEX);
     }
 
 }
