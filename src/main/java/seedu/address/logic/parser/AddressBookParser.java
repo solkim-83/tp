@@ -110,6 +110,9 @@ public class AddressBookParser {
             case LIST:
                 return new ListTagCommand();
 
+            case VIEW:
+                return new ViewTagCommandParser().parse(arguments);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
