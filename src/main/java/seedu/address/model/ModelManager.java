@@ -233,8 +233,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Set<Tag> getTags() {
+    public Set<Tag> getPersonTags() {
         return addressBook.getTags();
+    }
+
+    @Override
+    public Set<Tag> getSuperTags() {
+        return tagTree.getSuperTags();
     }
 
     @Override

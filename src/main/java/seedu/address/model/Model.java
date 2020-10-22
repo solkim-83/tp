@@ -159,9 +159,14 @@ public interface Model {
     Set<Person> getPersonsWithTag(Tag tag);
 
     /**
-     * Returns a set of all {@code tag}s present in the {@code Model}.
+     * Returns a set of all {@code tag}s with at least one {@code person} tagged, present in the {@code Model}.
      */
-    Set<Tag> getTags();
+    Set<Tag> getPersonTags();
+
+    /**
+     * Returns a set of all {@code tag}s with at least one sub-tag.
+     */
+    Set<Tag> getSuperTags();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

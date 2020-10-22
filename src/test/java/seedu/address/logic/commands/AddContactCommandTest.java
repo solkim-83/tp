@@ -230,9 +230,15 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public Set<Tag> getTags() {
+        public Set<Tag> getPersonTags() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Set<Tag> getSuperTags() {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
