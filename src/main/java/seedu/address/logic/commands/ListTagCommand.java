@@ -21,6 +21,8 @@ public class ListTagCommand extends Command {
 
     public static final String INDICATOR_SUPERTAG = "(supertag)";
 
+    public static final String INDICATOR_NO_CONTACTS_TAGGED = "no contacts tagged";
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -41,7 +43,7 @@ public class ListTagCommand extends Command {
                 .orElse(MESSAGE_NO_TAGS_FOUND);
     }
 
-    private static String parsePersonSetIntoString(Set<Person> set) {
+    protected static String parsePersonSetIntoString(Set<Person> set) {
         return set.stream()
                 .map(t -> t.getName().toString())
                 .reduce((s1, s2) -> s1 + ", " + s2)
