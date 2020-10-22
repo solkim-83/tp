@@ -31,6 +31,7 @@ public class ModelManager implements Model {
     private final Calendar calendar;
     private final UserPrefs userPrefs;
     private final TagTree tagTree;
+    private final ContactTagIntegrationManager contactTagIntegrationManager;
 
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
@@ -55,6 +56,7 @@ public class ModelManager implements Model {
         this.calendar = new Calendar();
         this.tagTree = new TagTreeImpl(tagTree);
         this.userPrefs = new UserPrefs(userPrefs);
+        contactTagIntegrationManager = new ContactTagIntegrationManager(this.addressBook, this.tagTree);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
@@ -227,6 +229,8 @@ public class ModelManager implements Model {
         return sortedEvents;
     }
 
+    // Person-tag related methods
+
     @Override
     public Set<Person> getPersonsWithTag(Tag tag) {
         return addressBook.getPersonsWithTag(tag);
@@ -241,6 +245,18 @@ public class ModelManager implements Model {
     public Set<Tag> getSuperTags() {
         return tagTree.getSuperTags();
     }
+
+    @Override
+    public Set<Tag> getSubTagsRecursive(Tag tag) {
+        return tagTree.getSubTagsRecursive(tag);
+    }
+
+    @Override
+    public Set<Person> getPersonsRecursive(Tag tag) {
+        return contactTagIntegrationManager.getAllPersonsUnderTag(tag);
+    }
+
+    // Filter/sort related methods
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

@@ -153,6 +153,8 @@ public interface Model {
      */
     ObservableList<Event> getSortedFilteredEventList();
 
+    // Tag-related operations
+
     /**
      * Returns a set of all {@code person}s containing the {@code tag}.
      */
@@ -167,6 +169,21 @@ public interface Model {
      * Returns a set of all {@code tag}s with at least one sub-tag.
      */
     Set<Tag> getSuperTags();
+
+    /**
+     * Returns a set of all tags below the provided {@code tag} in the tag hierarchy.
+     * I.e. all sub-tags, all sub-tags of those sub-tags, etc.
+     */
+    Set<Tag> getSubTagsRecursive(Tag tag);
+
+    /**
+     * Returns a set of all {@code person}s under the specified {@code tag} and any of the tags below {@code tag}
+     * in the tag hierarchy.
+     * I.e. all persons with either {@code tag}, and/or any of its sub-tags, sub-tag of sub-tags, etc.
+     */
+    Set<Person> getPersonsRecursive(Tag tag);
+
+    // Filter/sort-list methods
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
