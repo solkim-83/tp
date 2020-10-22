@@ -39,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setCalendarFilePath(newUserPrefs.getCalendarFilePath());
+        setTagTreeFilePath(newUserPrefs.getTagTreeFilePath());
     }
 
     public GuiSettings getGuiSettings() {
