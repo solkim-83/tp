@@ -38,6 +38,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final SortedList<Event> sortedEvents;
 
+    // This constructor was left in so as not to break test cases that do not affect the tagTree.
+    // Use the second constructor the the main program.
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         this(addressBook, new TagTreeImpl(), userPrefs);
     }
