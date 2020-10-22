@@ -23,7 +23,10 @@ public class ViewTagCommand extends Command {
     public static final String HEADER_CONTACTS_DIRECTLY_TAGGED = "Contacts directly tagged: ";
     public static final String HEADER_SUB_TAGS = "All sub-tags: ";
     public static final String HEADER_RELATED_CONTACTS = "Related contacts: ";
+    public static final String INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS = "no directly tagged contacts";
     public static final String INDICATOR_NO_SUB_TAGS = "no sub-tags found";
+    public static final String INDICATOR_NO_RELATED_CONTACTS_FOUND =
+            "no related contacts found (contacts belonging to sub-tags)";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the details of "
             + "one or more tags specified by the input values."
@@ -71,12 +74,14 @@ public class ViewTagCommand extends Command {
 
         boolean isSuperTag = model.getSuperTags().contains(tag);
         sb.append(tag + (isSuperTag ? INDICATOR_SUPERTAG : "") + ':');
-        sb.append(HEADER_CONTACTS_DIRECTLY_TAGGED + parsePersonSetIntoString(model.getPersonsWithTag(tag)));
-        sb.append(HEADER_SUB_TAGS + parseTagSetIntoString(model.getSubTagsRecursive(tag)));
+        sb.append("\n" + HEADER_CONTACTS_DIRECTLY_TAGGED
+                + parsePersonSetIntoString(model.getPersonsWithTag(tag), INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS));
+        sb.append("\n" + HEADER_SUB_TAGS + parseTagSetIntoString(model.getSubTagsRecursive(tag)));
 
         Set<Person> relatedContacts = new HashSet<>(model.getPersonsRecursive(tag));
         relatedContacts.removeAll(model.getPersonsWithTag(tag));
-        sb.append(HEADER_RELATED_CONTACTS + parsePersonSetIntoString(relatedContacts));
+        sb.append("\n" + HEADER_RELATED_CONTACTS + parsePersonSetIntoString(relatedContacts,
+                INDICATOR_NO_RELATED_CONTACTS_FOUND));
 
         return sb;
     }
