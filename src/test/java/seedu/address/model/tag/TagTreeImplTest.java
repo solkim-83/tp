@@ -35,6 +35,13 @@ public class TagTreeImplTest {
     }
 
     @Test
+    public void copy_validTree_success() {
+        TagTree tagTree = new TagTreeImpl();
+        tagTree.copy(buildTestTree());
+        assertEquals(tagTree, buildTestTree());
+    }
+
+    @Test
     public void getSubTagsOf_validTag_success() {
         assertEquals(buildTestTree().getSubTagsOf(TAG_NUS), SET_FACULTIES);
     }
@@ -42,6 +49,20 @@ public class TagTreeImplTest {
     @Test
     public void getSubTagsOf_invalidTag_emptySetReturned() {
         assertEquals(buildTestTree().getSubTagsOf(TAG_NOT_IN_TREE), Set.of());
+    }
+
+    @Test
+    public void getSubTagsRecursive_validTag_success() {
+        TagTree tagTree = buildTestTree();
+        Set<Tag> expectedSet = new HashSet<>();
+        expectedSet.add(TAG_SCIENCE_COMP);
+        expectedSet.addAll(SET_MODULES);
+        assertEquals(expectedSet, tagTree.getSubTagsRecursive(TAG_COMPUTING));
+    }
+
+    @Test
+    public void getSubTagsRecursive_tagNotInTree_emptySetReturned() {
+        assertTrue(buildTestTree().getSubTagsRecursive(TAG_CS2040S_NOT_TREE).isEmpty());
     }
 
     @Test
