@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 /**
- * A concrete implementation of the TagTree. It uses two HashMap to keep track of the two-way relationship of tags.
+ * A concrete implementation of the TagTree. It uses two HashMaps to keep track of the two-way relationship of tags.
  */
 public class TagTreeImpl extends TagTree {
 
@@ -28,7 +28,7 @@ public class TagTreeImpl extends TagTree {
     }
 
     /**
-     * Copys the argument {@code toCopy} tree into this tree.
+     * Copies the argument {@code toCopy} tree into this tree.
      */
     public TagTreeImpl(ReadOnlyTagTree toCopy) {
         super();
@@ -163,7 +163,7 @@ public class TagTreeImpl extends TagTree {
     }
 
     /**
-     * Unions the {@code subTagSet} to existing sub-tags for each tag in the superTagSet.
+     * Adds the {@code subTagSet} to existing sub-tags for each tag in the superTagSet.
      */
     private void connectParentWithChildTags(Set<Tag> superTagSet, Set<Tag> subTagSet) {
         superTagSet.forEach(superTag -> addSubTagsTo(superTag, subTagSet));

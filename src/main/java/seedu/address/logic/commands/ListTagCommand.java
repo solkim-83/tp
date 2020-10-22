@@ -52,7 +52,7 @@ public class ListTagCommand extends Command {
     }
 
     /**
-     * Returns a string that combines the combines the {@code Person} set by commas, then adds curly braces.
+     * Returns a string that combines the {@code Person} set by commas, then adds curly braces.
      * If the set is empty, returns {@code messageIfNoneFound}.
      */
     protected static String parsePersonSetIntoString(Set<Person> set, String messageIfNoneFound) {

@@ -53,7 +53,7 @@ public class ViewTagCommand extends Command {
     }
 
     /**
-     * Returns true if the {@code tag} is valid, that is it has at least one sub-tag or at least one
+     * Returns true if the {@code tag} is valid - that is it has at least one sub-tag or at least one
      * {@code person} tagged with it.
      */
     private static boolean isValidTag(Model model, Tag tag) {
@@ -62,8 +62,7 @@ public class ViewTagCommand extends Command {
 
     /**
      * Returns a single String containing the full information of each tag within the {@code tagSet}.
-     * For tags that could not be found, it will be stated at the start of the string that these tags could not be
-     * found.
+     * For tags that cannot be found, the message will reflect that by prepending the appropriate message.
      */
     protected static String constructSetTagDetails(Model model, Set<Tag> tagSet) {
         String invalidTagString = tagSet.stream()
@@ -85,9 +84,9 @@ public class ViewTagCommand extends Command {
 
     /**
      * Returns a StringBuilder of the full details of the {@code tag}.
-     * First, it includes all {@code Person}s with the {@code tag}.
-     * Second, it includes all sub-tags below {@code tag} in the tag hierarchy.
-     * Third, it includes all {@code Person}s related to a sub-tag but not tagged with {@code tag}.
+     * Firstly, it includes all {@code Person}s with the {@code tag}.
+     * Secondly, it includes all sub-tags below {@code tag} in the tag hierarchy.
+     * Lastly, it includes all {@code Person}s related to a sub-tag but not tagged with {@code tag}.
      */
     private static StringBuilder constructTagDetailString(Model model, Tag tag) {
         StringBuilder sb = new StringBuilder();

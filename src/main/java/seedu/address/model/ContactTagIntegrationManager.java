@@ -19,7 +19,7 @@ public class ContactTagIntegrationManager {
     private TagTree tagTree;
 
     /**
-     * Creates a ContactTagIntegrationManager from the given {@code addressBook} and a new tagTree.
+     * Creates a {@code ContactTagIntegrationManager} from the given {@code addressBook} and a new {@code tagTree}.
      */
     public ContactTagIntegrationManager(AddressBook addressBook) {
         this.addressBook = addressBook;
@@ -43,7 +43,7 @@ public class ContactTagIntegrationManager {
     }
 
     /**
-     * Returns a {@code set} or {@code person}s that falls under the given {@code tag} and all its sub-tags.
+     * Returns a {@code set} of {@code person}s that falls under the given {@code tag} or any of its sub-tags.
      *
      * @param tag {@code tag} to begin search for matching {@code person}s.
      * @return Set of Persons falling under either the argument {@code tag} or its sub-tags.
@@ -102,7 +102,7 @@ public class ContactTagIntegrationManager {
 
     /**
      * Deletes {@code tag} and all its sub-{@code tag}s directly below {@code tag} in the tag hierarchy.
-     * For example, if {@code CS2030 -> COMPUTING -> NUS}, deleting NUS with this method
+     * For example, given {@code CS2030 -> COMPUTING -> NUS}, deleting NUS with this method
      * will delete {@code CS2030} and {@code COMPUTING}.
      * Affected {@code Person}s will be updated accordingly.
      *
@@ -146,7 +146,7 @@ public class ContactTagIntegrationManager {
     }
 
     /**
-     * returns a new {@code person} object which is nearly identical to {@code persontocopy} except with
+     * returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
      * {@code tagRemoved} removed.
      */
     private Person copyPersonWithoutTag(Person personToCopy, Tag tagRemoved) {
@@ -160,7 +160,7 @@ public class ContactTagIntegrationManager {
     }
 
     /**
-     * returns a new {@code person} object which is nearly identical to {@code persontocopy} except with
+     * returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
      * {@code tagAdded} added.
      */
     private Person copyPersonWithTag(Person personToCopy, Tag tagAdded) {

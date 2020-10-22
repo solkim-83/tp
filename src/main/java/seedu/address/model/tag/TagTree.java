@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Abstract class that keeps track of the structure of {@code Tag} relations.
  * This is in-place of {@code Tag}s keeping track of their own sub-{@code tag}s and super-{@code tag}s.
- * When relationship between {@code Tag}s are modified, the changes are updated here so that all parts of the program
+ * When relationships between {@code Tag}s are modified, the changes are updated here so that all parts of the program
  * have access to the most updated {@code Tag} relations.
  */
 public abstract class TagTree implements ReadOnlyTagTree {
@@ -22,7 +22,7 @@ public abstract class TagTree implements ReadOnlyTagTree {
     /**
      * Returns all sub-{@code tag}s of the {@code tag} argument.
      *
-     * @param tag {@code tag} whose sub-{@code tag}s being queried.
+     * @param tag {@code tag} which sub-{@code tag}s being queried.
      * @return {@code Set} of {@code tag}s containing sub-{@code tag}s of the {@code tag} argument.
      */
     public abstract Set<Tag> getSubTagsOf(Tag tag);
@@ -35,7 +35,7 @@ public abstract class TagTree implements ReadOnlyTagTree {
 
     /**
      * Adds the {@code subTag} as a sub-tag of the {@code superTag}.
-     * This method should check for cyclic dependency and prevent linking a lower-level tag as a
+     * This method should check for cyclic dependencies and prevent linking a lower-level tag as a
      * parent to a higher-level tag.
      *
      * @param superTag {@code tag} to be assigned a sub-tag.
@@ -61,8 +61,8 @@ public abstract class TagTree implements ReadOnlyTagTree {
     public abstract void deleteTag(Tag tag);
 
     /**
-     * Returns true if there is a direct path from the {@code superTag} to the {@code subTag} in the tag tree.
-     * False otherwise.
+     * Returns true if there is a direct path from the {@code superTag} to the {@code subTag} in the tag tree,
+     * returns false otherwise.
      */
     public abstract boolean isSubTagOf(Tag superTag, Tag subTag);
 

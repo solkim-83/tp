@@ -56,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the TagManager to contain only the new tagging in the given {@code persons} list.
+     * Resets the TagManager to contain only tag-person mappings from the given {@code persons} list.
      */
     private void setTagManager(List<Person> persons) {
         this.tagManager.clear();
