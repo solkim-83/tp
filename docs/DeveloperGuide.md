@@ -99,19 +99,32 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model` encapsulates all data required for Athena to run. In particular, it stores all contacts (as `person` objects), tags and events (to be implemented).
+It is meant to fulfill the Facade pattern as the Facade class by hiding the individual classes and forcing higher level components like the `Command`s and `Logic` to interact only with `Model`.
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
+* stores the `AddressBook` data of contacts represented by `Person`s.
+    * `AddressBook` controls the list of contacts, any changes has to go through this class.
+    * `TagManager` is a separate class used to keep track which `Person`s fall under a specific `Tag`. This was done to 
+    avoid cyclic dependency between `Tag` and `Person`. Whenever `AddressBook` makes an edit to the `Person` list, it should also update the `TagManager`.
+* stores the `TagTree` which keeps track of tag-to-tag relationships.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+This design choice is aimed at properly encapsulating three separate functionalities.
+1. `AddressBook` tracks the state of the `Person` objects only. 
+2. `TagTree` tracks the tag-to-tag relationships only. In particular, it keeps track of which set of `tag`s are sub-`tag`s 
+of other `tag`s. 
+3. `TagManager` tracks the `Person` objects directly under each `Tag`. A `Person` object has to have the `tag` for it to be recorded in the `TagManager`.
+`AddressBook` should associate with the `TagManager` such that whenever there is a change to the list of `Person`s, the tag-to-person changes are reflected immediately in `TagManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+In separating out these three components, it allows higher-level components to easily query for the necessary, accurate information and/or make the appropriate changes to `Person`s, `Tag`s, or both.
+For example, contact-only commands such as `addContactCommand`, `editContactCommand` would only need to interact with the `AddressBook` through the `Model` facade.
+For tag-only commands such as `editTagCommand`, when we assign sub-tags to a specific tag, it will only need to invoke `Model` methods that belong to `TagTree`.
 
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
+Lastly, we have the `ContactTagIntegrationManager` which aims to provide a fixed set of methods relating to both `Tag`s and `Person`s (e.g. deleting all contacts with a certain tag). 
+The `ContactTagIntegrationManager` abstracts out these methods and handles the implementation and necessary changes to the `TagTree` and `AddressBook` so that higher-level modules can make use of these methods.
+For more details on exactly which types of `Person`-`Tag` methods are supported, the documentation for this class will be available [here]().
 
 
 ### Storage component
