@@ -22,7 +22,7 @@ public class ListTagCommand extends Command {
 
     public static final String MESSAGE_TAGS_FOUND = "Listed all tags and contacts directly under these tags:";
 
-    public static final String INDICATOR_SUPERTAG = "(supertag)";
+    public static final String INDICATOR_SUPERTAG = " (supertag)";
 
     public static final String INDICATOR_NO_CONTACTS_TAGGED = "no contacts tagged";
 
@@ -40,7 +40,7 @@ public class ListTagCommand extends Command {
      * For a tag to be present, it has to have at least one {@code Person} with the tag OR has sub-tags.
      * Summary of each tag contains only the tag name and all contacts directly tagged with the tag.
      */
-    private static String constructTagSummaryMessage(Model model, Set<Tag> tagPersonSet, Set<Tag> superTagSet) {
+    protected static String constructTagSummaryMessage(Model model, Set<Tag> tagPersonSet, Set<Tag> superTagSet) {
         Set<Tag> fullTagSet = new HashSet<>(tagPersonSet);
         fullTagSet.addAll(superTagSet);
         return fullTagSet.stream()

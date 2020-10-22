@@ -30,11 +30,11 @@ public class ContactTagIntegrationManager {
         this.tagTree.copy(tagTree);
     }
 
-    AddressBook getAddressBook() {
+    public AddressBook getAddressBook() {
         return addressBook;
     }
 
-    TagTree getTagTree() {
+    public TagTree getTagTree() {
         return tagTree;
     }
 

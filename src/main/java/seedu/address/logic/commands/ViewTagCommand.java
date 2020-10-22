@@ -64,7 +64,7 @@ public class ViewTagCommand extends Command {
      * Returns a single String containing the full information of each tag within the {@code tagSet}.
      * For tags that could not be found, it will be stated at the start of the string that these tags could not be found.
      */
-    private static String constructSetTagDetails(Model model, Set<Tag> tagSet) {
+    protected static String constructSetTagDetails(Model model, Set<Tag> tagSet) {
         String invalidTagString = tagSet.stream()
                 .filter(tag -> !isValidTag(model, tag))
                 .map(tag -> String.format(MESSAGE_INVALID_TAG, tag))
@@ -74,8 +74,9 @@ public class ViewTagCommand extends Command {
         String output = tagSet.stream()
                 .filter(tag -> isValidTag(model, tag))
                 .map(tag -> constructTagDetailString(model, tag))
-                .reduce((sb1, sb2) -> {sb1.append("\n" + sb2); return sb1;})
-                .get().toString();
+                .reduce((sb1, sb2) -> {sb1.append("\n\n" + sb2); return sb1;})
+                .map(sb -> sb.toString())
+                .orElse("");
         return invalidTagString + output;
     }
 
