@@ -1,9 +1,5 @@
-package seedu.address.logic.commands.exceptions;
+package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.CommandWord;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -20,7 +16,7 @@ public class ListTagCommand extends Command {
 
     public static final String MESSAGE_NO_TAGS_FOUND = "No tag assignments were found!";
 
-    public static final String MESSAGE_TAGS_FOUND = "Listed all tags and their direct sub-tags";
+    public static final String MESSAGE_TAGS_FOUND = "Listed all tags and contacts directly under these tags:";
 
     @Override
     public CommandResult execute(Model model) {
@@ -40,9 +36,9 @@ public class ListTagCommand extends Command {
 
     private static String parsePersonSetIntoString(Set<Person> set) {
         return set.stream()
-                .map(t -> t.toString())
+                .map(t -> t.getName().toString())
                 .reduce((s1, s2) -> s1 + ", " + s2)
-                .map(string -> "[ " + string + " ]")
+                .map(string -> "{ " + string + " }")
                 .orElseThrow(() -> new IllegalStateException("Illegal state: tag with no assignment!"));
     }
 
