@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.ListTagCommand.INDICATOR_SUPERTAG;
 import static seedu.address.logic.commands.ListTagCommand.parsePersonSetIntoString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Shows the full details of the specified tags in the system-message field.
@@ -62,7 +62,8 @@ public class ViewTagCommand extends Command {
 
     /**
      * Returns a single String containing the full information of each tag within the {@code tagSet}.
-     * For tags that could not be found, it will be stated at the start of the string that these tags could not be found.
+     * For tags that could not be found, it will be stated at the start of the string that these tags could not be
+     * found.
      */
     protected static String constructSetTagDetails(Model model, Set<Tag> tagSet) {
         String invalidTagString = tagSet.stream()
@@ -74,7 +75,9 @@ public class ViewTagCommand extends Command {
         String output = tagSet.stream()
                 .filter(tag -> isValidTag(model, tag))
                 .map(tag -> constructTagDetailString(model, tag))
-                .reduce((sb1, sb2) -> {sb1.append("\n\n" + sb2); return sb1;})
+                .reduce((sb1, sb2) -> {
+                    sb1.append("\n\n" + sb2);
+                    return sb1; })
                 .map(sb -> sb.toString())
                 .orElse("");
         return invalidTagString + output;

@@ -1,16 +1,14 @@
 package seedu.address.model;
 
-import seedu.address.model.person.Address;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagTree;
 import seedu.address.model.tag.TagTreeImpl;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
  * Class that controls {@code Tag} relationships and interactions between {@code Tag}s and {@Code Person}s.
@@ -20,11 +18,17 @@ public class ContactTagIntegrationManager {
     private AddressBook addressBook;
     private TagTree tagTree;
 
+    /**
+     * Creates a ContactTagIntegrationManager from the given {@code addressBook} and a new tagTree.
+     */
     public ContactTagIntegrationManager(AddressBook addressBook) {
         this.addressBook = addressBook;
         tagTree = new TagTreeImpl();
     }
 
+    /**
+     * Creates a ContactTagIntegrationManager from the given {@code addressBook} and {@code tagTree}.
+     */
     public ContactTagIntegrationManager(AddressBook addressBook, ReadOnlyTagTree tagTree) {
         this(addressBook);
         this.tagTree.copy(tagTree);

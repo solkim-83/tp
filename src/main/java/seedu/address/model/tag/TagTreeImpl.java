@@ -3,8 +3,6 @@ package seedu.address.model.tag;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -21,14 +19,28 @@ public class TagTreeImpl extends TagTree {
     private Map<Tag, Set<Tag>> tagSubTagMap;
     private Map<Tag, Set<Tag>> tagSuperTagMap;
 
+    /**
+     * Creates a clean TagTreeImpl.
+     */
     public TagTreeImpl() {
         tagSubTagMap = new HashMap<>();
         tagSuperTagMap = new HashMap<>();
     }
 
+    /**
+     * Copys the argument {@code toCopy} tree into this tree.
+     */
     public TagTreeImpl(ReadOnlyTagTree toCopy) {
         super();
         copy(toCopy);
+    }
+
+    /**
+     * Creates a TagTreeImpl with the given {@code tagSubTagMap} and {@code tagSuperTagMap}.
+     */
+    public TagTreeImpl(Map<Tag, Set<Tag>> tagSubTagMap, Map<Tag, Set<Tag>> tagSuperTagMap) {
+        this.tagSubTagMap = tagSubTagMap;
+        this.tagSuperTagMap = tagSuperTagMap;
     }
 
     @Override
@@ -36,22 +48,15 @@ public class TagTreeImpl extends TagTree {
         tagSubTagMap = new HashMap<>();
         tagSuperTagMap = new HashMap<>();
 
-        toCopy.getTagSubTagMap().entrySet().stream().forEach(entry ->
-        {
+        toCopy.getTagSubTagMap().entrySet().stream().forEach(entry -> {
             // Adds a copy of the key-value mapping to the subtag map.
             tagSubTagMap.put(entry.getKey(), new HashSet<>(Set.copyOf(entry.getValue())));
 
             // For each sub-tag, adds an equivalent reverse mapping to the super tag map.
             entry.getValue().stream().forEach(subTag -> tagSuperTagMap.merge(
-                    subTag, new HashSet<>(Set.of(entry.getKey())),
-                    (set1, set2) -> {set1.addAll(set2); return set1;}
-            ));
-        });
-    }
-
-    public TagTreeImpl(Map<Tag, Set<Tag>> tagSubTagMap, Map<Tag, Set<Tag>> tagSuperTagMap) {
-        this.tagSubTagMap = tagSubTagMap;
-        this.tagSuperTagMap = tagSuperTagMap;
+                subTag, new HashSet<>(Set.of(entry.getKey())), (set1, set2) -> {
+                    set1.addAll(set2);
+                    return set1; })); });
     }
 
     @Override
@@ -109,8 +114,9 @@ public class TagTreeImpl extends TagTree {
      * Adds a new HashSet if the {@code key} did not have any sub-tags.
      */
     private void addToMapSet(Map<Tag, Set<Tag>> map, Tag key, Tag tagToAdd) {
-        map.merge(key, new HashSet<>(Set.of(tagToAdd)),
-                (set1, set2) -> {set1.addAll(set2); return set1;});
+        map.merge(key, new HashSet<>(Set.of(tagToAdd)), (set1, set2) -> {
+            set1.addAll(set2);
+            return set1; });
     }
 
     @Override
@@ -163,6 +169,9 @@ public class TagTreeImpl extends TagTree {
         superTagSet.forEach(superTag -> addSubTagsTo(superTag, subTagSet));
     }
 
+    /**
+     * Returns true if {@code subtag} is below {@code superTag} along the tag hierarchy.
+     */
     public boolean isSubTagOf(Tag superTag, Tag subTag) {
         boolean hasNoSubTags = tagSubTagMap.get(superTag) == null;
         if (hasNoSubTags) {
