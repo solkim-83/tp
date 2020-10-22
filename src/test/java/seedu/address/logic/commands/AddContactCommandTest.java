@@ -239,6 +239,15 @@ public class AddContactCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Set<Tag> getSubTagsRecursive(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Person> getPersonsRecursive(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
