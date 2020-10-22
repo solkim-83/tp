@@ -22,7 +22,8 @@ public class PermaSortContactCommandParser implements Parser<PermaSortContactCom
             Index index = ParserUtil.parseIndex(args);
             return new PermaSortContactCommand(index);
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PermaSortContactCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT
+                    , PermaSortContactCommand.MESSAGE_USAGE), ive);
         }
 
     }

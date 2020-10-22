@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import java.util.Comparator;
+
+
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
+
 
 /**
  * Sorts the contacts in Athena's address book permanently.
@@ -27,7 +30,8 @@ public class PermaSortContactCommand extends Command {
             + "Parameters: INDEX (must be between 1 and 3) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_INVALID_INDEX = "Invalid index entered, refer to below for the command's proper usage: "
+    public static final String MESSAGE_INVALID_INDEX = "Invalid index entered, "
+            + "refer to below for the command's proper usage: "
             + MESSAGE_USAGE;
 
     private static final Comparator<Person> NAME_COMPARATOR = new Comparator<Person>() {
@@ -91,12 +95,12 @@ public class PermaSortContactCommand extends Command {
     public Comparator<Person> chooseComparator(Index index) {
         int input = index.getOneBased();
         switch (input) {
-            case 2:
-                return ADDRESS_COMPARATOR;
-            case 3:
-                return TAG_COMPARATOR;
-            default:
-                return NAME_COMPARATOR;
+        case 2:
+            return ADDRESS_COMPARATOR;
+        case 3:
+            return TAG_COMPARATOR;
+        default:
+            return NAME_COMPARATOR;
         }
     }
 
@@ -106,14 +110,15 @@ public class PermaSortContactCommand extends Command {
     public String indexMessage(Index index) {
         int input = index.getOneBased();
         switch (input) {
-            case 1:
-                return "Sorted by name in alphabetical order";
-            case 2:
-                return "Sorted by address in alphabetical order";
-            case 3:
-                return "Sorted by primary tag in alphabetical order";
-            default:
-                return MESSAGE_INVALID_INDEX;
+
+        case 1:
+            return "Sorted by name in alphabetical order";
+        case 2:
+            return "Sorted by address in alphabetical order";
+        case 3:
+            return "Sorted by primary tag in alphabetical order";
+        default:
+            return MESSAGE_INVALID_INDEX;
         }
     }
 
