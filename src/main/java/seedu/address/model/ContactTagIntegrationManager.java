@@ -1,6 +1,8 @@
 package seedu.address.model;
 
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagTree;
 import seedu.address.model.tag.TagTreeImpl;
@@ -20,6 +22,11 @@ public class ContactTagIntegrationManager {
     public ContactTagIntegrationManager(AddressBook addressBook) {
         this.addressBook = addressBook;
         tagTree = new TagTreeImpl();
+    }
+
+    public ContactTagIntegrationManager(AddressBook addressBook, ReadOnlyTagTree tagTree) {
+        this(addressBook);
+        this.tagTree.copy(tagTree);
     }
 
     /**
