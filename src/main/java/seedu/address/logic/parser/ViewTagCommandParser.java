@@ -1,0 +1,33 @@
+package seedu.address.logic.parser;
+
+import seedu.address.logic.commands.ViewTagCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseTags;
+
+/**
+ * Parses input arguments and creates a new ViewTagCommand object
+ */
+public class ViewTagCommandParser implements Parser<ViewTagCommand> {
+
+    public ViewTagCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+
+        List<String> tagStringSet = argumentMultimap.getAllValues(PREFIX_TAG);
+        if (tagStringSet.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTagCommand.MESSAGE_USAGE));
+        }
+
+        return new ViewTagCommand(parseTags(argumentMultimap.getAllValues(PREFIX_TAG)));
+    }
+
+
+
+}
