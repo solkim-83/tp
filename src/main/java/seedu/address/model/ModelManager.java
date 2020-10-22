@@ -177,7 +177,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortAddressBook(Comparator<Person> comparator) { addressBook.sortPerson(comparator); }
+    public void sortAddressBook(Comparator<Person> comparator) {
+        addressBook.sortPerson(comparator);
+    }
 
     public void sortEvent(Comparator<Event> comparator) {
         sortedEvents.comparatorProperty().setValue(comparator);
