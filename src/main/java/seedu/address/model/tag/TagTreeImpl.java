@@ -82,6 +82,9 @@ public class TagTreeImpl extends TagTree {
         Consumer<Tag> consumer = new Consumer<Tag>() {
             @Override
             public void accept(Tag tag) {
+                if (tagSubTagMap.get(tag) == null) {
+                    return;
+                }
                 finalSet.addAll(tagSubTagMap.get(tag));
                 tagSubTagMap.get(tag).forEach(subtag -> accept(subtag));
             }
