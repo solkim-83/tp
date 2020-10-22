@@ -27,7 +27,7 @@ class JsonSerializableTagTree {
      * Constructs a {@code JsonSerializableTagTree} with the given map.
      */
     @JsonCreator
-    public JsonSerializableTagTree(@JsonProperty("tags") Map<JsonAdaptedTag, Set<JsonAdaptedTag>> tagSubTagMap) {
+    public JsonSerializableTagTree(@JsonProperty("tagSubTagMap") Map<JsonAdaptedTag, Set<JsonAdaptedTag>> tagSubTagMap) {
         this.tagSubTagMap.putAll(tagSubTagMap);
     }
 

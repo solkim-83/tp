@@ -1,13 +1,15 @@
 package seedu.address.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.tag.TagTree;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
 
 public class JsonSerializableTagTreeTest {
@@ -29,7 +31,7 @@ public class JsonSerializableTagTreeTest {
     public void toModelType_invalidTagTreeFile_throwsIllegalValueException() throws Exception {
         JsonSerializableTagTree dataFromFile = JsonUtil.readJsonFile(INVALID_TAG_TREE_FILE,
                 JsonSerializableTagTree.class).get();
-        assertThrows(IllegalArgumentException.class, () -> dataFromFile.toModelType());
+        assertThrows(IllegalValueException.class, () -> dataFromFile.toModelType());
     }
 
 
