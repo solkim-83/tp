@@ -1,16 +1,17 @@
 package seedu.address.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.tag.TagTree;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TagTreeUtil.buildTestTree;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TagTreeUtil.buildTestTree;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.tag.TagTree;
 
 public class JsonSerializableTagTreeTest {
 
@@ -23,8 +24,11 @@ public class JsonSerializableTagTreeTest {
         JsonSerializableTagTree dataFromFile = JsonUtil.readJsonFile(VALID_TAG_TREE_FILE,
                 JsonSerializableTagTree.class).get();
         TagTree tagTreeFromFile = dataFromFile.toModelType();
-        TagTree actualTagTree = buildTestTree();
-        assertEquals(tagTreeFromFile, actualTagTree);
+        TagTree expectedTagTree = buildTestTree();
+        System.out.println(buildTestTree().getTagSubTagMap().equals(tagTreeFromFile.getTagSubTagMap()));
+        System.out.println("expected: " + buildTestTree().getTagSubTagMap());
+        System.out.println("actual: " + tagTreeFromFile.getTagSubTagMap());
+        assertEquals(expectedTagTree, tagTreeFromFile);
     }
 
     @Test

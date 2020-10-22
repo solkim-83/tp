@@ -2,7 +2,7 @@
   "tagSubTagMap" : {
     "science" : [ "sciencecomp" ],
     "computing" : [ "sciencecomp" ],
-    "sciencecomp" : [ "ma1101r", "cs2131s" ],
+    "sciencecomp" : [ "ma1101r", "cs1231s" ],
     "nus" : [ "architecture", "science", "computing" ]
   }
 }

@@ -1,12 +1,5 @@
 package seedu.address.model.tag;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,6 +16,12 @@ import static seedu.address.testutil.TagTreeUtil.TAG_NUS;
 import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE;
 import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE_COMP;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
 
 public class TagTreeImplTest {
 

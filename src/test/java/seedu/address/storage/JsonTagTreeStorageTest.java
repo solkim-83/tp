@@ -1,17 +1,5 @@
 package seedu.address.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.tag.ReadOnlyTagTree;
-import seedu.address.model.tag.TagTree;
-import seedu.address.model.tag.TagTreeImpl;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,6 +7,20 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TagTreeUtil.TAG_COMPUTING;
 import static seedu.address.testutil.TagTreeUtil.TAG_CS2040S_NOT_TREE;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.tag.ReadOnlyTagTree;
+import seedu.address.model.tag.TagTree;
+import seedu.address.model.tag.TagTreeImpl;
+
 
 public class JsonTagTreeStorageTest {
 
@@ -48,7 +50,7 @@ public class JsonTagTreeStorageTest {
     }
 
     @Test
-    public void read_not_JsonFormat_exceptionThrown() {
+    public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataConversionException.class, () -> readTagTree("notJsonFormatTagTree.json"));
     }
 
