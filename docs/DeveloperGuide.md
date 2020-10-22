@@ -23,11 +23,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -62,11 +62,11 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -78,7 +78,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `Parser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -97,27 +97,41 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model`,
+The `Model` encapsulates all data required for Athena to run. In particular, it stores all contacts (as `person` objects), tags and events (to be implemented).
+It is meant to fulfill the Facade pattern as the Facade class by hiding the individual classes and forcing higher level components like the `Command`s and `Logic` to interact only with `Model`.
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
+* stores the `AddressBook` data of contacts represented by `Person`s.
+    * `AddressBook` controls the list of contacts, any changes has to go through this class.
+    * `TagManager` is a separate class used to keep track which `Person`s fall under a specific `Tag`. This was done to 
+    avoid cyclic dependency between `Tag` and `Person`. Whenever `AddressBook` makes an edit to the `Person` list, it should also update the `TagManager`.
+* stores the `TagTree` which keeps track of tag-to-tag relationships.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
+This design choice is aimed at properly encapsulating three separate functionalities.
+1. `AddressBook` tracks the state of the `Person` objects only. 
+2. `TagTree` tracks the tag-to-tag relationships only. In particular, it keeps track of which set of `tag`s are sub-`tag`s 
+of other `tag`s. 
+3. `TagManager` tracks the `Person` objects directly under each `Tag`. A `Person` object has to have the `tag` for it to be recorded in the `TagManager`.
+`AddressBook` should associate with the `TagManager` such that whenever there is a change to the list of `Person`s, the tag-to-person changes are reflected immediately in `TagManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+In separating out these three components, it allows higher-level components to easily query for the necessary, accurate information and/or make the appropriate changes to `Person`s, `Tag`s, or both.
+For example, contact-only commands such as `addContactCommand`, `editContactCommand` would only need to interact with the `AddressBook` through the `Model` facade.
+For tag-only commands such as `editTagCommand`, when we assign sub-tags to a specific tag, it will only need to invoke `Model` methods that belong to `TagTree`.
 
-</div>
+Lastly, we have the `ContactTagIntegrationManager` which aims to provide a fixed set of methods relating to both `Tag`s and `Person`s (e.g. deleting all contacts with a certain tag). 
+The `ContactTagIntegrationManager` abstracts out these methods and handles the implementation and necessary changes to the `TagTree` and `AddressBook` so that higher-level modules can make use of these methods.
+For more details on exactly which types of `Person`-`Tag` methods are supported, the documentation for this class will be available [here]().
 
 
 ### Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
@@ -271,6 +285,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `Athena` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: View introduction**
+
+1.  User opens Athena for the first time
+
+1.  Athena displays an introduction message, with a guide on how to use basic commands.
+
+    Use case ends.
+
 
 **Use case: Add a contact**
 

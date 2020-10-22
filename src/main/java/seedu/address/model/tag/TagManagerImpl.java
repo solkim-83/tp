@@ -38,6 +38,8 @@ public class TagManagerImpl implements TagManager {
      * Removes all references in {@code tagPersonSetMap} to this {@code person} based on the {@code tag}s it has.
      */
     private void removeAllTagReferencesOfPerson(Person person) {
+        assert person != null : "Invalid person object, person is a null.";
+
         for (Tag oldTag : person.getTags()) {
             Set<Person> tagSet = tagPersonSetMap.get(oldTag);
             Objects.requireNonNull(tagSet);
@@ -56,6 +58,8 @@ public class TagManagerImpl implements TagManager {
      * Adds all references to {@code tagPersonSetMap} from this {@code person} based on the {@code tag}s it has.
      */
     private void addAllTagReferencesOfPerson(Person person) {
+        assert person != null : "Invalid person object, person is a null.";
+
         for (Tag newTag : person.getTags()) {
             Optional.ofNullable(tagPersonSetMap.get(newTag))
                     .ifPresentOrElse(
