@@ -28,6 +28,12 @@ public abstract class TagTree implements ReadOnlyTagTree {
     public abstract Set<Tag> getSubTagsOf(Tag tag);
 
     /**
+     * Returns all sub-tags below {@code tag} in the tag-hierarchy.
+     * I.e. All sub-tags of {@code tag}, all sub-tags of those sub-tags, etc.
+     */
+    public abstract Set<Tag> getSubTagsRecursive(Tag tag);
+
+    /**
      * Adds the {@code subTag} as a sub-tag of the {@code superTag}.
      * This method should check for cyclic dependency and prevent linking a lower-level tag as a
      * parent to a higher-level tag.

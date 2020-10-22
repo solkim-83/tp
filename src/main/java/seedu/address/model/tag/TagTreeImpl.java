@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /**
  * A concrete implementation of the TagTree. It uses two HashMap to keep track of the two-way relationship of tags.
@@ -73,6 +74,20 @@ public class TagTreeImpl extends TagTree {
     @Override
     public Set<Tag> getSubTagsOf(Tag tag) {
         return tagSubTagMap.containsKey(tag) ? Set.copyOf(tagSubTagMap.get(tag)) : Set.of();
+    }
+
+    @Override
+    public Set<Tag> getSubTagsRecursive(Tag tag) {
+        Set<Tag> finalSet = new HashSet<>();
+        Consumer<Tag> consumer = new Consumer<Tag>() {
+            @Override
+            public void accept(Tag tag) {
+                finalSet.addAll(tagSubTagMap.get(tag));
+                tagSubTagMap.get(tag).forEach(subtag -> accept(subtag));
+            }
+        };
+        consumer.accept(tag);
+        return finalSet;
     }
 
     @Override
