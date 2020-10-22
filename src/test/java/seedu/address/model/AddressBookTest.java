@@ -5,8 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.tag.TagManagerImplTest.BENSON_EDITED;
+import static seedu.address.model.tag.TagManagerImplTest.TAG_FRIENDS;
+import static seedu.address.model.tag.TagManagerImplTest.TAG_MODULE;
+import static seedu.address.model.tag.TagManagerImplTest.TAG_OWES_MONEY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -52,6 +57,40 @@ public class AddressBookTest {
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void getPersonsWithTag_newPerson_success() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.getPersonsWithTag(TAG_FRIENDS).contains(ALICE));
+    }
+
+    @Test
+    public void getPersonWithTag_editPerson_success() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(BENSON);
+        addressBook.setPerson(BENSON, BENSON_EDITED);
+
+        assertTrue(addressBook.getPersonsWithTag(TAG_OWES_MONEY).isEmpty());
+        assertTrue(addressBook.getPersonsWithTag(TAG_MODULE).contains(BENSON_EDITED));
+
+        // Checks that the Person object under the friends tag is the new edited Person object instead of the old.
+        assertFalse(addressBook.getPersonsWithTag(TAG_FRIENDS).contains(BENSON));
+        assertTrue(addressBook.getPersonsWithTag(TAG_FRIENDS).contains(BENSON_EDITED));
+    }
+
+    @Test
+    public void getPersonWithTag_deletePerson_success() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(ALICE);
+        addressBook.removePerson(ALICE);
+        assertFalse(addressBook.getPersonsWithTag(TAG_FRIENDS).contains(ALICE));
+    }
+
+    @Test
+    public void getPersonWithTag_emptyTag_emptySetReturned() {
+        assertTrue(new AddressBook().getPersonsWithTag(TAG_FRIENDS).isEmpty());
     }
 
     @Test

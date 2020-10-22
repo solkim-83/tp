@@ -80,6 +80,11 @@ public class TagManagerImpl implements TagManager {
     }
 
     @Override
+    public void clear() {
+        tagPersonSetMap.clear();
+    }
+
+    @Override
     public void copy(TagManager otherTagManager) {
         HashMap<Tag, Set<Person>> newMap = new HashMap<>();
         for (Tag tag : otherTagManager.getTags()) {
