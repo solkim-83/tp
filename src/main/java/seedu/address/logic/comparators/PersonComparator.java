@@ -1,10 +1,11 @@
 package seedu.address.logic.comparators;
 
+import java.util.Comparator;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
 
 public class PersonComparator {
 
@@ -45,14 +46,14 @@ public class PersonComparator {
     public static Comparator<Person> chooseComparator(Index index) throws CommandException {
         int input = index.getOneBased();
         switch (input) {
-            case 1:
-                return NAME_COMPARATOR;
-            case 2:
-                return ADDRESS_COMPARATOR;
-            case 3:
-                return TAG_COMPARATOR;
-            default:
-                throw new CommandException("Index should be between 1 to 3");
+        case 1:
+            return NAME_COMPARATOR;
+        case 2:
+            return ADDRESS_COMPARATOR;
+        case 3:
+            return TAG_COMPARATOR;
+        default:
+            throw new CommandException("Index should be between 1 to 3");
         }
     }
 }
