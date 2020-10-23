@@ -23,20 +23,10 @@ public class PersonComparator {
         }
     };
 
-    private static final Comparator<Person> TAG_COMPARATOR = new Comparator<Person>() {
+    private static final Comparator<Person> EMAIL_COMPARATOR = new Comparator<Person>() {
         @Override
         public int compare(Person o1, Person o2) {
-            if (o1.getTags().size() == 0 && o2.getTags().size() != 0) {
-                return 1;
-            }
-            if (o1.getTags().size() != 0 && o2.getTags().size() == 0) {
-                return -1;
-            }
-            if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
-                return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
-            }
-            return o1.getTags().iterator().next().tagName
-                    .compareToIgnoreCase(o2.getTags().iterator().next().tagName);
+            return o1.getEmail().value.compareToIgnoreCase(o2.getEmail().value);
         }
     };
 
@@ -51,7 +41,7 @@ public class PersonComparator {
         case 2:
             return ADDRESS_COMPARATOR;
         case 3:
-            return TAG_COMPARATOR;
+            return EMAIL_COMPARATOR;
         default:
             throw new CommandException("Index should be between 1 to 3");
         }

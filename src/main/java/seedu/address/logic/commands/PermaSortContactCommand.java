@@ -22,7 +22,7 @@ public class PermaSortContactCommand extends Command {
             + "by the index command entered  "
             + "1 will be sort by alphabetical order of their names\n"
             + "2 will be sort by alphabetical order of their address\n"
-            + "3 will be sort by alphabetical order of their first tag\n"
+            + "3 will be sort by alphabetical order of their email\n"
             + "Parameters: INDEX (must be between 1 and 3) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -67,7 +67,7 @@ public class PermaSortContactCommand extends Command {
         case 2:
             return "Sorted by address in alphabetical order";
         case 3:
-            return "Sorted by primary tag in alphabetical order";
+            return "Sorted by email in alphabetical order";
         default:
             return MESSAGE_INVALID_INDEX;
         }

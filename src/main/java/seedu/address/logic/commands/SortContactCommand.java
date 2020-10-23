@@ -22,7 +22,7 @@ public class SortContactCommand extends Command {
             + "by the index command entered "
             + "1 will be sort by alphabetical order of their names\n"
             + "2 will be sort by alphabetical order of their address\n"
-            + "3 will be sort by alphabetical order of their first tag\n"
+            + "3 will be sort by alphabetical order of their email\n"
             + "Parameters: INDEX (must be between 1 and 4) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -57,7 +57,7 @@ public class SortContactCommand extends Command {
         case 2:
             return "Sorted by address in alphabetical order";
         case 3:
-            return "Sorted by primary tag in alphabetical order";
+            return "Sorted by email in alphabetical order";
         default:
             return "Invalid index entered, refer to below for the command's proper usage: "
                     + MESSAGE_USAGE;
