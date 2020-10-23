@@ -1,0 +1,8 @@
+{
+  "map-variable-name-has-been-changed" : {
+    "science" : [ "sciencecomp" ],
+    "computing" : [ "sciencecomp" ],
+    "sciencecomp" : [ "ma1101r", "cs2131s" ],
+    "nus" : [ "architecture", "science", "computing" ]
+  }
+}

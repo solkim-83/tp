@@ -52,9 +52,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+        setTagManager(persons);
     }
 
-    public void setTagManager(List<Person> persons) {
+    /**
+     * Resets the TagManager to contain only tag-person mappings from the given {@code persons} list.
+     */
+    private void setTagManager(List<Person> persons) {
+        this.tagManager.clear();
         this.tagManager.addNewPersonsTags(persons);
     }
 
@@ -120,6 +125,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Set<Person> getPersonsWithTag(Tag tag) {
         return tagManager.getPersonsUnderTag(tag);
+    }
+
+    public Set<Tag> getTags() {
+        return tagManager.getTags();
     }
 
     @Override

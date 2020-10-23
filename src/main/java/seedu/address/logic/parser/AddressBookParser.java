@@ -15,6 +15,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IntroCommand;
 import seedu.address.logic.commands.ListContactCommand;
 import seedu.address.logic.commands.ListEventCommand;
+import seedu.address.logic.commands.ListTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -105,6 +106,20 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
+        case TAG:
+
+            switch (commandWord) {
+
+            case LIST:
+                return new ListTagCommand();
+
+            case VIEW:
+                return new ViewTagCommandParser().parse(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            }
 
         default:
 
