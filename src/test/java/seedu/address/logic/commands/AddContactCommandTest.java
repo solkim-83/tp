@@ -219,7 +219,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void sortAddressBook(Comparator<Person> comparator) {
+        public void permaSortContacts(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }

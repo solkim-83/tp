@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.comparators.PersonComparator;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -33,37 +34,6 @@ public class PermaSortContactCommand extends Command {
             + "refer to below for the command's proper usage: "
             + MESSAGE_USAGE;
 
-    private static final Comparator<Person> NAME_COMPARATOR = new Comparator<Person>() {
-        @Override
-        public int compare(Person o1, Person o2) {
-            return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
-        }
-    };
-
-    private static final Comparator<Person> ADDRESS_COMPARATOR = new Comparator<Person>() {
-        @Override
-        public int compare(Person o1, Person o2) {
-            return o1.getAddress().value.compareToIgnoreCase(o2.getAddress().value);
-        }
-    };
-
-    private static final Comparator<Person> TAG_COMPARATOR = new Comparator<Person>() {
-        @Override
-        public int compare(Person o1, Person o2) {
-            if (o1.getTags().size() == 0 && o2.getTags().size() != 0) {
-                return 1;
-            }
-            if (o1.getTags().size() != 0 && o2.getTags().size() == 0) {
-                return -1;
-            }
-            if (o1.getTags().size() == 0 && o2.getTags().size() == 0) {
-                return o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName);
-            }
-            return o1.getTags().iterator().next().tagName
-                    .compareToIgnoreCase(o2.getTags().iterator().next().tagName);
-        }
-    };
-
     private final Index index;
 
     /**
@@ -80,7 +50,7 @@ public class PermaSortContactCommand extends Command {
         if (index.getOneBased() < 0 || index.getOneBased() > 3) {
             throw new CommandException(PermaSortContactCommand.MESSAGE_INVALID_INDEX);
         }
-        model.sortAddressBook(chooseComparator(index));
+        model.permaSortContacts(PersonComparator.chooseComparator(index));
 
         return new CommandResult(indexMessage(index));
     }
@@ -88,20 +58,6 @@ public class PermaSortContactCommand extends Command {
     private void requireNonNull(Model model) {
     }
 
-    /**
-     * Returns the appropriate comparator for the model manager to sort with
-     */
-    public Comparator<Person> chooseComparator(Index index) {
-        int input = index.getOneBased();
-        switch (input) {
-        case 2:
-            return ADDRESS_COMPARATOR;
-        case 3:
-            return TAG_COMPARATOR;
-        default:
-            return NAME_COMPARATOR;
-        }
-    }
 
     /**
      * Returns the appropriate console message for the index.

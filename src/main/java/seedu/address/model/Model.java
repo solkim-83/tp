@@ -151,7 +151,7 @@ public interface Model {
     /**
      * Permanently sorts the address book by a specific comparator
      */
-    void sortAddressBook(Comparator<Person> chooseComparator);
+    void permaSortContacts(Comparator<Person> chooseComparator);
 
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.

@@ -177,7 +177,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortAddressBook(Comparator<Person> comparator) {
+    public void permaSortContacts(Comparator<Person> comparator) {
         addressBook.sortPerson(comparator);
     }
 
