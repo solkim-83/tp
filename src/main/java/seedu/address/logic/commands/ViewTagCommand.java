@@ -30,7 +30,8 @@ public class ViewTagCommand extends Command {
     public static final String INDICATOR_NO_RELATED_CONTACTS_FOUND =
             "no related contacts found (contacts belonging to sub-tags)";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the details of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Views the details of "
             + "one or more tags specified by the input values."
             + "There must be at least one specified tag.\n"
             + "Parameters: "

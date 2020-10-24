@@ -17,11 +17,12 @@ public class AddEventCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Athena. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Adds an event to Athena. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATETIME + "DATE_TIME \n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
             + PREFIX_DATETIME + "12-12-1234 12:34";
 
