@@ -1,8 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.tags;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.ListTagCommandTest.createTestModel;
+import static seedu.address.logic.commands.tags.ListTagCommandTest.createTestModel;
 import static seedu.address.logic.commands.tags.ViewTagCommand.INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS;
 import static seedu.address.logic.commands.tags.ViewTagCommand.INDICATOR_NO_RELATED_CONTACTS_FOUND;
 import static seedu.address.logic.commands.tags.ViewTagCommand.MESSAGE_INVALID_TAG;
