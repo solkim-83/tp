@@ -1,42 +1,44 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.contacts;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.comparators.PersonComparator;
 import seedu.address.model.Model;
 
-
 /**
- * Sorts the contacts in Athena's address book permanently.
+ * Sorts the currently displayed persons in a specific order.
  * Index entered determines the specific order.
  */
-public class PermaSortContactCommand extends Command {
+public class SortContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "psort";
+    public static final String COMMAND_WORD = CommandWord.SORT.toString();
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Sort your contacts permanently "
-            + "by the index command entered  "
+            + ": Sorts the currently displayed list"
+            + "by the index command entered "
             + "1 will be sort by alphabetical order of their names\n"
             + "2 will be sort by alphabetical order of their address\n"
             + "3 will be sort by alphabetical order of their email\n"
-            + "Parameters: INDEX (must be between 1 and 3) "
+            + "Parameters: INDEX (must be between 1 and 4) "
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 ";
 
-    public static final String MESSAGE_INVALID_INDEX = "Invalid index entered, "
-            + "refer to below for the command's proper usage: "
-            + MESSAGE_USAGE;
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
 
     private final Index index;
 
     /**
      * @param index the order in which to sort the address book
      */
-    public PermaSortContactCommand(Index index) {
+    public SortContactCommand(Index index) {
         requireAllNonNull(index);
         this.index = index;
     }
@@ -44,17 +46,10 @@ public class PermaSortContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (index.getOneBased() < 0 || index.getOneBased() > 3) {
-            throw new CommandException(PermaSortContactCommand.MESSAGE_INVALID_INDEX);
-        }
-        model.permaSortContacts(PersonComparator.chooseComparator(index));
+        model.sortPerson(PersonComparator.chooseComparator(index));
 
         return new CommandResult(indexMessage(index));
     }
-
-    private void requireNonNull(Model model) {
-    }
-
 
     /**
      * Returns the appropriate console message for the index.
@@ -62,7 +57,6 @@ public class PermaSortContactCommand extends Command {
     public String indexMessage(Index index) {
         int input = index.getOneBased();
         switch (input) {
-
         case 1:
             return "Sorted by name in alphabetical order";
         case 2:
@@ -70,7 +64,8 @@ public class PermaSortContactCommand extends Command {
         case 3:
             return "Sorted by email in alphabetical order";
         default:
-            return MESSAGE_INVALID_INDEX;
+            return "Invalid index entered, refer to below for the command's proper usage: "
+                    + MESSAGE_USAGE;
         }
     }
 
@@ -82,12 +77,13 @@ public class PermaSortContactCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PermaSortContactCommand)) {
+        if (!(other instanceof SortContactCommand)) {
             return false;
         }
 
         // state check
-        PermaSortContactCommand e = (PermaSortContactCommand) other;
+        SortContactCommand e = (SortContactCommand) other;
         return index.equals(e.index);
     }
+
 }

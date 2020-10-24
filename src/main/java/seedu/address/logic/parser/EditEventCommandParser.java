@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditEventCommand;
-import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.address.logic.commands.events.EditEventCommand;
+import seedu.address.logic.commands.events.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

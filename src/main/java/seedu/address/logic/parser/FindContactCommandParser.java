@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.logic.commands.FindContactCommand;
+import seedu.address.logic.commands.contacts.FindContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.tag.Tag;
