@@ -232,7 +232,7 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 ### Sort events feature
-The sort events feature is facilitated by `Calendar` that stores event entries and their details. 
+The sort events feature is facilitated by `Calendar` that stores event entries and their details in Athena. 
 
 Additionally, it executes the sorting operation based on 2 sorting patterns:
 * `sort -e 1` - Sorts the events based on the description of the events in alphabetical order.
@@ -260,10 +260,18 @@ The following sequence diagram shows how the `sort -e` operation works:
   * Pros: Will be more convenient for the users. (As they do not need to manually sort) 
   * Cons: May restrict the usage and benefit of the app. (As only one sorting pattern is available)
   
-The following activity diagram summarizes what happens when a user executes 'sort -e'command:
+The following activity diagram summarizes what happens when a user executes `sort -e` command:
   
 ![CommitActivityDiagram](images/SortEventActivityDiagram.png)
 
+### Display feature
+The display feature for the events is facilitated by `Calendar` that stores event entries and their details in Athena,
+and has a specific command of `list -e` where the command makes use of `ListEventCommand`. 
+
+ListEventCommand#execute() : Does validity check of current list and displayed all event-related entries.
+
+The feature is designed to provide the users with the entire list of event-related entries, especially after 
+when user executes certain commands that display partial list of event list (e.g. SearchEvent Command).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
