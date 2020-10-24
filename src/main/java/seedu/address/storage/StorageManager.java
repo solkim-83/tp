@@ -71,7 +71,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read AddressBook data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -82,7 +82,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write AddressBook to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
@@ -101,7 +101,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyCalendar> readCalendar(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read Calendar data from file: " + filePath);
         return calendarStorage.readCalendar(filePath);
     }
 
@@ -112,7 +112,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveCalendar(ReadOnlyCalendar calendar, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write Calendar to data file: " + filePath);
         calendarStorage.saveCalendar(calendar, filePath);
     }
 
@@ -131,7 +131,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyTagTree> readTagTree(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read TagTree data from file: " + filePath);
         return tagTreeStorage.readTagTree(filePath);
     }
 
@@ -142,7 +142,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveTagTree(ReadOnlyTagTree tagTree, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write TagTree to data file: " + filePath);
         tagTreeStorage.saveTagTree(tagTree, filePath);
     }
 

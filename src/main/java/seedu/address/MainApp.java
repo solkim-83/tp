@@ -82,17 +82,17 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from
-     * {@code storage} (storage's addressbook, calendar and tagtree)
+     * {@code storage} (storage's AddressBook, Calendar and TagTree)
      * and {@code userPrefs}. <br>
      *
-     * If {@code storage}'s address book/calendar is not found;
-     * The data from the sample address book/calendar will be used instead.
+     * If {@code storage}'s AddressBook/Calendar is not found;
+     * The data from the sample AddressBook/Calendar will be used instead.
      *
-     * If {@code storage}'s tagtree is not found;
-     * An empty tagtree is used instead.
+     * If {@code storage}'s TagTree is not found;
+     * An empty TagTree is used instead.
      *
-     * If errors occur when reading {@code storage}'s address book/calendar/tagtree;
-     * An empty address book/calendar/tagtree will be used instead.
+     * If errors occur when reading {@code storage}'s AddressBook/Calendar/TagTree;
+     * An empty AddressBook/Calendar/TagTree will be used instead.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
 
