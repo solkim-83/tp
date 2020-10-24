@@ -38,15 +38,8 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final SortedList<Event> sortedEvents;
 
-    // This constructor was left in so as not to break test cases that do not affect the tagTree.
-    // Use the second constructor the the main program.
-    // TODO: Delete this and change the test cases
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        this(addressBook, new Calendar(), new TagTreeImpl(), userPrefs);
-    }
-
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, calendar, tagTree and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyCalendar calendar,
@@ -56,8 +49,10 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(addressBook, tagTree, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + ", tag tree: "
-                + tagTree + " and user prefs " + userPrefs);
+        logger.fine("Initializing with AddressBook: " + addressBook + "\n"
+                + ", Calendar: " + calendar + "\n"
+                + ", TagTree: " + tagTree + "\n"
+                + " and UserPrefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.calendar = new Calendar(calendar);
@@ -73,6 +68,9 @@ public class ModelManager implements Model {
         sortedEvents = new SortedList<>(filteredEvents);
     }
 
+    /**
+     * Initializes a ModelManager with no data
+     */
     public ModelManager() {
         this(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
     }

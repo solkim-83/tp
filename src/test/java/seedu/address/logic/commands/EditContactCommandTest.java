@@ -20,10 +20,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -33,7 +35,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditContactCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +46,8 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new Calendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.setPerson(model.getSortedFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -66,7 +69,8 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new Calendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
@@ -79,7 +83,8 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new Calendar(), new TagTreeImpl(), new UserPrefs());
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
     }
@@ -95,7 +100,8 @@ public class EditContactCommandTest {
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new Calendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.setPerson(model.getSortedFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editContactCommand, model, expectedMessage, expectedModel);
