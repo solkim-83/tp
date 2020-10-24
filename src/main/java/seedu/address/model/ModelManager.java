@@ -44,8 +44,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyCalendar calendar,
                         ReadOnlyTagTree tagTree,
-                        ReadOnlyUserPrefs userPrefs)
-    {
+                        ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, tagTree, userPrefs);
 

@@ -59,7 +59,9 @@ public class Time {
     // toString() controls the format of time displayed in the response box
     // as well as the format saved in calendar.json file
     @Override
-    public String toString() { return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")); }
+    public String toString() {
+        return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    }
 
     @Override
     public boolean equals(Object other) {
