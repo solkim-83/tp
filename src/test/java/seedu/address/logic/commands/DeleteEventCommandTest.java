@@ -26,7 +26,8 @@ import seedu.address.model.tag.TagTreeImpl;
  */
 public class DeleteEventCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+    private Model model = new ModelManager(
+            new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -58,7 +59,8 @@ public class DeleteEventCommandTest {
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
-        Model expectedModel = new ModelManager(new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
         showNoEvent(expectedModel);
 

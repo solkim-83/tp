@@ -31,7 +31,8 @@ public class AddEventCommandIntegrationTest {
     public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().withDescription("Meeting").build();
 
-        Model expectedModel = new ModelManager(new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.addEvent(validEvent);
 
         assertCommandSuccess(new AddEventCommand(validEvent), model,
