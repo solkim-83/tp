@@ -5,7 +5,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.event.Description;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -17,6 +22,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -46,6 +52,22 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static Event[] getSampleEvents() {
+        return new Event[] {
+                new Event(new Description("Night run"), new Time("25-10-2020 21:30")),
+                new Event(new Description("CS2103 Meeting"), new Time("30-10-2020 14:00")),
+                new Event(new Description("CCA outing"), new Time("03-11-2020 20:00"))
+        };
+    }
+
+    public static ReadOnlyCalendar getSampleCalendar() {
+        Calendar sampleCalendar = new Calendar();
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleCalendar.addEvent(sampleEvent);
+        }
+        return sampleCalendar;
     }
 
     /**
