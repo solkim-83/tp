@@ -177,7 +177,8 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean hasEvent(Event event) {
-        return false;
+        requireNonNull(event);
+        return calendar.hasEvent(event);
     }
 
     @Override

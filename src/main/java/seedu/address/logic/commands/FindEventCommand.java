@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
+import seedu.address.model.person.*;
 
 /**
  * Finds and lists all events in calendar that have their descriptions containing any of the argument keywords.
@@ -42,4 +43,9 @@ public class FindEventCommand extends Command {
                 || (other instanceof FindEventCommand // instanceof handles nulls
                 && predicate.equals(((FindEventCommand) other).predicate)); // state check
     }
+
+    public DescriptionContainsKeywordsPredicate getPredicate() {
+        return predicate;
+    }
+
 }
