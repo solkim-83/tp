@@ -116,17 +116,17 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (addressBookOptional.isEmpty()) {
-                logger.info("AddressBook file not found. " +
-                        "Will be starting with a sample AddressBook");
+                logger.info("AddressBook file not found. "
+                        + "Will be starting with a sample AddressBook");
             }
             initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("AddressBook file not in the correct format. " +
-                    "Will be starting with an empty AddressBook");
+            logger.warning("AddressBook file not in the correct format. "
+                    + "Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the AddressBook file. " +
-                    "Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the AddressBook file. "
+                    + "Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
         }
         return initialAddressBook;
@@ -143,17 +143,17 @@ public class MainApp extends Application {
         try {
             calendarOptional = storage.readCalendar();
             if (calendarOptional.isEmpty()) {
-                logger.info("Calendar file not found. " +
-                        "Will be starting with a sample Calendar");
+                logger.info("Calendar file not found. "
+                        + "Will be starting with a sample Calendar");
             }
             initialCalendar = calendarOptional.orElseGet(SampleDataUtil::getSampleCalendar);
         } catch (DataConversionException e) {
-            logger.warning("Calendar file not in the correct format. " +
-                    "Will be starting with an empty Calendar");
+            logger.warning("Calendar file not in the correct format. "
+                    + "Will be starting with an empty Calendar");
             initialCalendar = new Calendar();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the Calendar file. " +
-                    "Will be starting with an empty Calendar");
+            logger.warning("Problem while reading from the Calendar file. "
+                    + "Will be starting with an empty Calendar");
             initialCalendar = new Calendar();
         }
         return initialCalendar;
@@ -170,17 +170,17 @@ public class MainApp extends Application {
         try {
             tagTreeOptional = storage.readTagTree();
             if (tagTreeOptional.isEmpty()) {
-                logger.info("TagTree file not found. " +
-                        "Will be starting with an empty TagTree");
+                logger.info("TagTree file not found. "
+                        + "Will be starting with an empty TagTree");
             }
             initialTagTree = tagTreeOptional.orElse(new TagTreeImpl());
         } catch (DataConversionException e) {
-            logger.warning("TagTree file not in the correct format. " +
-                    "Will be starting with an empty TagTree");
+            logger.warning("TagTree file not in the correct format. "
+                    + "Will be starting with an empty TagTree");
             initialTagTree = new TagTreeImpl();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the TagTree file. " +
-                    "Will be starting with an empty TagTree");
+            logger.warning("Problem while reading from the TagTree file. "
+                    + "Will be starting with an empty TagTree");
             initialTagTree = new TagTreeImpl();
         }
         return initialTagTree;
