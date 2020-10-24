@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.general.HelpCommand.SHOWING_HELP_MESS
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 

@@ -16,7 +16,6 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.contacts.FindContactCommand;
 import seedu.address.logic.parser.contacts.FindContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Calendar;

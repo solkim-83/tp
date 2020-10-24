@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.contacts.FindContactCommand;
-import seedu.address.logic.parser.contacts.FindContactCommandParser;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.tag.Tag;
 
