@@ -11,6 +11,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.tag.ReadOnlyTagTree;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -21,18 +22,21 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private CalendarStorage calendarStorage;
     private UserPrefsStorage userPrefsStorage;
+    private TagTreeStorage tagTreeStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage,
                           CalendarStorage calendarStorage,
-                          UserPrefsStorage userPrefsStorage)
+                          UserPrefsStorage userPrefsStorage,
+                          TagTreeStorage tagTreeStorage)
     {
         super();
         this.addressBookStorage = addressBookStorage;
         this.calendarStorage = calendarStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.tagTreeStorage = tagTreeStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -82,6 +86,7 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+
     // ================ Calendar methods ==============================
 
     @Override
@@ -109,6 +114,36 @@ public class StorageManager implements Storage {
     public void saveCalendar(ReadOnlyCalendar calendar, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         calendarStorage.saveCalendar(calendar, filePath);
+    }
+
+
+    // ================ TagTree methods ==============================
+
+    @Override
+    public Path getTagTreeFilePath() {
+        return tagTreeStorage.getTagTreeFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyTagTree> readTagTree() throws DataConversionException, IOException {
+        return readTagTree(tagTreeStorage.getTagTreeFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyTagTree> readTagTree(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return tagTreeStorage.readTagTree(filePath);
+    }
+
+    @Override
+    public void saveTagTree(ReadOnlyTagTree tagTree) throws IOException {
+        saveTagTree(tagTree, tagTreeStorage.getTagTreeFilePath());
+    }
+
+    @Override
+    public void saveTagTree(ReadOnlyTagTree tagTree, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        tagTreeStorage.saveTagTree(tagTree, filePath);
     }
 
 }

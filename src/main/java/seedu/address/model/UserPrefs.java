@@ -16,6 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path calendarFilePath = Paths.get("data" , "calendar.json");
+    private Path tagTreeFilePath = Paths.get("data", "tagtree.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setCalendarFilePath(newUserPrefs.getCalendarFilePath());
+        setTagTreeFilePath(newUserPrefs.getTagTreeFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -67,6 +69,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.calendarFilePath = calendarFilePath;
     }
 
+    public Path getTagTreeFilePath() {
+        return tagTreeFilePath;
+    }
+
+    public void setTagTreeFilePath(Path tagTreeFilePath) {
+        requireNonNull(tagTreeFilePath);
+        this.tagTreeFilePath = tagTreeFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -80,12 +91,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         return guiSettings.equals(o.guiSettings)
                 && addressBookFilePath.equals(o.addressBookFilePath)
-                && calendarFilePath.equals(o.calendarFilePath);
+                && calendarFilePath.equals(o.calendarFilePath)
+                && tagTreeFilePath.equals(o.tagTreeFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, calendarFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, calendarFilePath, tagTreeFilePath);
     }
 
     @Override
@@ -94,6 +106,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location for addressbook: " + addressBookFilePath);
         sb.append("\nLocal data file location for calendar: " + calendarFilePath);
+        sb.append("\nLocal data file location for tagtree: " + tagTreeFilePath);
         return sb.toString();
     }
 

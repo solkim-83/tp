@@ -9,11 +9,13 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.tag.ReadOnlyTagTree;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, CalendarStorage, UserPrefsStorage {
+
+public interface Storage extends AddressBookStorage, CalendarStorage, UserPrefsStorage, TagTreeStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -38,5 +40,13 @@ public interface Storage extends AddressBookStorage, CalendarStorage, UserPrefsS
 
     @Override
     void saveCalendar(ReadOnlyCalendar calendar) throws IOException;
+
+    Path getTagTreeFilePath();
+
+    @Override
+    Optional<ReadOnlyTagTree> readTagTree() throws DataConversionException, IOException;
+
+    @Override
+    void saveTagTree(ReadOnlyTagTree tagTree) throws IOException;
 
 }
