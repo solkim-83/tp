@@ -29,8 +29,9 @@ public class Time {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid time.
      */
+    // TODO: change this checker whenever more formats are added in the method below
     public static boolean isValidTime(String timeInput) {
         try {
             LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
@@ -40,16 +41,25 @@ public class Time {
         }
     }
 
-    // TODO: add more formats to be parsed here
+    // TODO: add more formats to be parsed here, add them to the valid checking method above
     public static LocalDateTime parse(String timeInput) {
         return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
-    // format of time displayed in the response box is controlled by toString
-    @Override
-    public String toString() {
+    // toDisplayString controls the format of time displayed in the GUI panel
+    // TODO: make display prettier/more relevant to the user
+    public String toDisplayString() {
         return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
+
+    /**
+     * Returns a string that can be parsed to make another Time object of the same time value
+     * @return string representing part of a command
+     */
+    // toString() controls the format of time displayed in the response box
+    // as well as the format saved in calendar.json file
+    @Override
+    public String toString() { return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")); }
 
     @Override
     public boolean equals(Object other) {

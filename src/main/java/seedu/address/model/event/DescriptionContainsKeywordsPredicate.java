@@ -8,9 +8,11 @@ import seedu.address.commons.util.StringUtil;
  * Tests that a {@code Event}'s {@code Description} matches any of the keywords given.
  */
 public class DescriptionContainsKeywordsPredicate implements Predicate<Event> {
-    private final List<String> keywords;
+    private List<String> keywords;
 
-    public DescriptionContainsKeywordsPredicate(List<String> keywords) {
+    public DescriptionContainsKeywordsPredicate() {}
+
+    public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
     }
 

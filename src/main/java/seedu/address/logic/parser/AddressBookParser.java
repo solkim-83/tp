@@ -6,7 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearContactCommand;
+import seedu.address.logic.commands.ClearEventCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IntroCommand;
 import seedu.address.logic.commands.ListContactCommand;
 import seedu.address.logic.commands.ListEventCommand;
+import seedu.address.logic.commands.ListTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,6 +59,9 @@ public class AddressBookParser {
             case EDIT:
                 return new EditContactCommandParser().parse(arguments);
 
+            case CLEAR:
+                return new ClearContactCommand();
+
             case DELETE:
                 return new DeleteCommandParser().parse(arguments);
 
@@ -68,6 +73,9 @@ public class AddressBookParser {
 
             case SORT:
                 return new SortContactCommandParser().parse(arguments);
+
+            case PERMASORT:
+                return new PermaSortContactCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -82,6 +90,9 @@ public class AddressBookParser {
 
             case EDIT:
                 return new EditEventCommandParser().parse(arguments);
+
+            case CLEAR:
+                return new ClearEventCommand();
 
             case DELETE:
                 return new DeleteEventCommandParser().parse(arguments);
@@ -99,12 +110,24 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
-        default:
+        case TAG:
 
             switch (commandWord) {
 
-            case CLEAR:
-                return new ClearCommand();
+            case LIST:
+                return new ListTagCommand();
+
+            case VIEW:
+                return new ViewTagCommandParser().parse(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            }
+
+        default:
+
+            switch (commandWord) {
 
             case EXIT:
                 return new ExitCommand();

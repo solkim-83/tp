@@ -16,7 +16,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagTree;
+import seedu.address.model.tag.TagTreeImpl;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,31 +30,51 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final Calendar calendar;
     private final UserPrefs userPrefs;
+    private final TagTree tagTree;
+    private final ContactTagIntegrationManager contactTagIntegrationManager;
 
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
     private final SortedList<Event> sortedEvents;
+
+    // This constructor was left in so as not to break test cases that do not affect the tagTree.
+    // Use the second constructor the the main program.
+    // TODO: Delete this and change the test cases
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        this(addressBook, new Calendar(), new TagTreeImpl(), userPrefs);
+    }
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyCalendar calendar,
+                        ReadOnlyTagTree tagTree,
+                        ReadOnlyUserPrefs userPrefs)
+    {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, tagTree, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + ", tag tree: "
+                + tagTree + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.calendar = new Calendar();
+        this.calendar = new Calendar(calendar);
+        this.tagTree = new TagTreeImpl(tagTree);
         this.userPrefs = new UserPrefs(userPrefs);
+
+        contactTagIntegrationManager = new ContactTagIntegrationManager(this.addressBook, this.tagTree);
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
+
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
         sortedEvents = new SortedList<>(filteredEvents);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -100,6 +123,17 @@ public class ModelManager implements Model {
         userPrefs.setCalendarFilePath(calendarFilePath);
     }
 
+    @Override
+    public Path getTagTreeFilePath() {
+        return userPrefs.getTagTreeFilePath();
+    }
+
+    @Override
+    public void setTagTreeFilePath(Path tagTreeFilePath) {
+        requireNonNull(tagTreeFilePath);
+        userPrefs.setTagTreeFilePath(tagTreeFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -120,6 +154,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyCalendar getCalendar() {
         return calendar;
+    }
+
+    @Override
+    public void setTagTree(ReadOnlyTagTree tagTree) {
+        this.tagTree.copy(tagTree);
+    }
+
+    @Override
+    public ReadOnlyTagTree getTagTree() {
+        return tagTree;
     }
 
     @Override
@@ -171,8 +215,14 @@ public class ModelManager implements Model {
         calendar.setEvent(target, editedEvent);
     }
 
+    @Override
     public void sortPerson(Comparator<Person> comparator) {
         sortedPersons.comparatorProperty().setValue(comparator);
+    }
+
+    @Override
+    public void permaSortContacts(Comparator<Person> comparator) {
+        addressBook.sortPerson(comparator);
     }
 
     public void sortEvent(Comparator<Event> comparator) {
@@ -195,10 +245,34 @@ public class ModelManager implements Model {
         return sortedEvents;
     }
 
+    // Person-tag related methods
+
     @Override
     public Set<Person> getPersonsWithTag(Tag tag) {
         return addressBook.getPersonsWithTag(tag);
     }
+
+    @Override
+    public Set<Tag> getPersonTags() {
+        return addressBook.getTags();
+    }
+
+    @Override
+    public Set<Tag> getSuperTags() {
+        return tagTree.getSuperTags();
+    }
+
+    @Override
+    public Set<Tag> getSubTagsRecursive(Tag tag) {
+        return tagTree.getSubTagsRecursive(tag);
+    }
+
+    @Override
+    public Set<Person> getPersonsRecursive(Tag tag) {
+        return contactTagIntegrationManager.getAllPersonsUnderTag(tag);
+    }
+
+    // Filter/sort related methods
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
