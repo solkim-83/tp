@@ -17,6 +17,16 @@ import seedu.address.logic.commands.general.IntroCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
 import seedu.address.logic.commands.tags.ListTagCommand;
+import seedu.address.logic.parser.contacts.AddContactCommandParser;
+import seedu.address.logic.parser.contacts.EditContactCommandParser;
+import seedu.address.logic.parser.contacts.FindContactCommandParser;
+import seedu.address.logic.parser.contacts.PermaSortContactCommandParser;
+import seedu.address.logic.parser.contacts.SortContactCommandParser;
+import seedu.address.logic.parser.events.AddEventCommandParser;
+import seedu.address.logic.parser.events.DeleteEventCommandParser;
+import seedu.address.logic.parser.events.EditEventCommandParser;
+import seedu.address.logic.parser.events.FindEventCommandParser;
+import seedu.address.logic.parser.events.SortEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
