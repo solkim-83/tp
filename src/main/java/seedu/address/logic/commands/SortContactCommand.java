@@ -25,7 +25,7 @@ public class SortContactCommand extends Command {
             + "2 will be sort by alphabetical order of their address\n"
             + "3 will be sort by alphabetical order of their email\n"
             + "Parameters: INDEX (must be between 1 and 4) "
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 ";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
 

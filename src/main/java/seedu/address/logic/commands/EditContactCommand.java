@@ -48,7 +48,7 @@ public class EditContactCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_REMOVE_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_TAG + "CS2103";

@@ -33,7 +33,7 @@ public class EditEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DESCRIPTION + "NAME] "
             + "[" + PREFIX_DATETIME + "PHONE] "
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
             + PREFIX_DESCRIPTION + "New description "
             + PREFIX_DATETIME + "12-12-1234 12:34";
 
