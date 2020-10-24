@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.contacts;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -21,7 +21,7 @@ import seedu.address.model.tag.TagTreeImpl;
 /**
  * Contains unit tests for PermaSortCommand
  */
-public class PermaSortCommandTest {
+public class PermaSortContactCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
 
