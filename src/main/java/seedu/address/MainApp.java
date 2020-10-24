@@ -95,42 +95,90 @@ public class MainApp extends Application {
      * An empty address book/calendar/tagtree will be used instead.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        // TODO: split this method up into smaller private methods
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialAddressBook;
 
-        Optional<ReadOnlyCalendar> calendarOptional;
-        ReadOnlyCalendar initialCalendar;
-
-        Optional<ReadOnlyTagTree> tagTreeOptional;
-        ReadOnlyTagTree initialTagTree;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            calendarOptional = storage.readCalendar();
-            tagTreeOptional = storage.readTagTree();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("AddressBook file not found. Will be starting with a sample AddressBook");
-            }
-            if (!calendarOptional.isPresent()) {
-                logger.info("Calendar file not found. Will be starting with a sample Calendar");
-            }
-            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialCalendar = calendarOptional.orElseGet(SampleDataUtil::getSampleCalendar);
-            initialTagTree = tagTreeOptional.orElse(new TagTreeImpl());
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialAddressBook = new AddressBook();
-            initialCalendar = new Calendar();
-            initialTagTree = new TagTreeImpl();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialAddressBook = new AddressBook();
-            initialCalendar = new Calendar();
-            initialTagTree = new TagTreeImpl();
-        }
+        ReadOnlyAddressBook initialAddressBook = addressBookFromStorage(storage);
+        ReadOnlyCalendar initialCalendar = calendarFromStorage(storage);
+        ReadOnlyTagTree initialTagTree = tagTreeFromStorage(storage);
 
         return new ModelManager(initialAddressBook, initialCalendar, initialTagTree, userPrefs);
     }
+
+    // private methods below just to split up logic for initModelManager
+
+    /**
+     * Refer to {@link #initModelManager(Storage, ReadOnlyUserPrefs)} for specifications
+     * @param storage storage to be read from
+     * @return {@link ReadOnlyAddressBook}
+     */
+    private ReadOnlyAddressBook addressBookFromStorage(Storage storage) {
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook initialAddressBook;
+        try {
+            addressBookOptional = storage.readAddressBook();
+            if (addressBookOptional.isEmpty()) {
+                logger.info("AddressBook file not found. Will be starting with a sample AddressBook");
+            }
+            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataConversionException e) {
+            logger.warning("AddressBook file not in the correct format. Will be starting with an empty AddressBook");
+            initialAddressBook = new AddressBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the AddressBook file. Will be starting with an empty AddressBook");
+            initialAddressBook = new AddressBook();
+        }
+        return initialAddressBook;
+    }
+
+    /**
+     * Refer to {@link #initModelManager(Storage, ReadOnlyUserPrefs)} for specifications
+     * @param storage storage to be read from
+     * @return {@link ReadOnlyCalendar}
+     */
+    private ReadOnlyCalendar calendarFromStorage(Storage storage) {
+        Optional<ReadOnlyCalendar> calendarOptional;
+        ReadOnlyCalendar initialCalendar;
+        try {
+            calendarOptional = storage.readCalendar();
+            if (calendarOptional.isEmpty()) {
+                logger.info("Calendar file not found. Will be starting with a sample Calendar");
+            }
+            initialCalendar = calendarOptional.orElseGet(SampleDataUtil::getSampleCalendar);
+        } catch (DataConversionException e) {
+            logger.warning("Calendar file not in the correct format. Will be starting with an empty Calendar");
+            initialCalendar = new Calendar();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the Calendar file. Will be starting with an empty Calendar");
+            initialCalendar = new Calendar();
+        }
+        return initialCalendar;
+    }
+
+    /**
+     * Refer to {@link #initModelManager(Storage, ReadOnlyUserPrefs)} for specifications
+     * @param storage storage to be read from
+     * @return {@link ReadOnlyTagTree}
+     */
+    private ReadOnlyTagTree tagTreeFromStorage(Storage storage) {
+        Optional<ReadOnlyTagTree> tagTreeOptional;
+        ReadOnlyTagTree initialTagTree;
+        try {
+            tagTreeOptional = storage.readTagTree();
+            if (tagTreeOptional.isEmpty()) {
+                logger.info("TagTree file not found. Will be starting with an empty TagTree");
+            }
+            initialTagTree = tagTreeOptional.orElse(new TagTreeImpl());
+        } catch (DataConversionException e) {
+            logger.warning("TagTree file not in the correct format. Will be starting with an empty TagTree");
+            initialTagTree = new TagTreeImpl();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the TagTree file. Will be starting with an empty TagTree");
+            initialTagTree = new TagTreeImpl();
+        }
+        return initialTagTree;
+    }
+
+    // private methods for initModelManager ends
+
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
@@ -219,4 +267,5 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
     }
+
 }
