@@ -35,7 +35,8 @@ public class DeleteEventCommandTest {
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
-        ModelManager expectedModel = new ModelManager(new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(
+                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
@@ -57,7 +58,6 @@ public class DeleteEventCommandTest {
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
-
         Model expectedModel = new ModelManager(new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
         showNoEvent(expectedModel);

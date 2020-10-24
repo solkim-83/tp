@@ -20,7 +20,8 @@ import seedu.address.model.tag.TagTreeImpl;
  */
 public class FindEventCommandTest {
     private Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
-    private Model expectedModel = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+    private Model expectedModel = new ModelManager(
+            new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
 
     @Test
     public void equals() {

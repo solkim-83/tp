@@ -44,7 +44,8 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
         expectedModel.setEvent(model.getSortedFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -56,14 +57,18 @@ public class EditEventCommandTest {
         Event lastEvent = model.getSortedFilteredEventList().get(indexLastEvent.getZeroBased());
 
         EventBuilder eventInList = new EventBuilder(lastEvent);
-        Event editedEvent = eventInList.withDescription(VALID_DESCRIPTION_BREAKFAST).withTime(VALID_TIME_BREAKFAST).build();
+        Event editedEvent = eventInList.withDescription(
+                VALID_DESCRIPTION_BREAKFAST).withTime(VALID_TIME_BREAKFAST).build();
 
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST).withTime(VALID_TIME_BREAKFAST).build();
+        EditEventCommand.EditEventDescriptor descriptor =
+                new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST)
+                        .withTime(VALID_TIME_BREAKFAST).build();
         EditEventCommand editEventCommand = new EditEventCommand(indexLastEvent, descriptor);
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
         expectedModel.setEvent(lastEvent, editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -71,12 +76,14 @@ public class EditEventCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, new EditEventCommand.EditEventDescriptor());
+        EditEventCommand editEventCommand =
+                new EditEventCommand(INDEX_FIRST_EVENT, new EditEventCommand.EditEventDescriptor());
         Event editedEvent = model.getSortedFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }
@@ -88,11 +95,12 @@ public class EditEventCommandTest {
         Event eventInFilteredList = model.getSortedFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         Event editedEvent = new EventBuilder(eventInFilteredList).withDescription(VALID_DESCRIPTION_BREAKFAST).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT,
-                new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST).build());
+                        new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST).build());
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
         expectedModel.setEvent(model.getSortedFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -122,7 +130,8 @@ public class EditEventCommandTest {
     @Test
     public void execute_invalidEventIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredEventList().size() + 1);
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST).build();
+        EditEventCommand.EditEventDescriptor descriptor =
+                new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST).build();
         EditEventCommand editEventCommand = new EditEventCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailureEvent(editEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);

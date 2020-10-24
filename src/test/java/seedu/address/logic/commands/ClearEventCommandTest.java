@@ -25,7 +25,8 @@ public class ClearEventCommandTest {
     @Test
     public void execute_nonEmptyCalendar_success() {
         Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
-        Model expectedModel = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.setCalendar(new Calendar());
 
         assertCommandSuccess(new ClearContactCommand(), model, ClearContactCommand.MESSAGE_SUCCESS, expectedModel);

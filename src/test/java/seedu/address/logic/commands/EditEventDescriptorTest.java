@@ -16,7 +16,8 @@ public class EditEventDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditEventCommand.EditEventDescriptor descriptorWithSameValues = new EditEventCommand.EditEventDescriptor(DESC_LUNCH);
+        EditEventCommand.EditEventDescriptor descriptorWithSameValues =
+                new EditEventCommand.EditEventDescriptor(DESC_LUNCH);
         assertTrue(DESC_LUNCH.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -32,7 +33,8 @@ public class EditEventDescriptorTest {
         assertFalse(DESC_LUNCH.equals(DESC_BREAKFAST));
 
         // different name -> returns false
-        EditEventCommand.EditEventDescriptor editedLunch = new EditEventDescriptorBuilder(DESC_LUNCH).withDescription(VALID_DESCRIPTION_BREAKFAST).build();
+        EditEventCommand.EditEventDescriptor editedLunch =
+                new EditEventDescriptorBuilder(DESC_LUNCH).withDescription(VALID_DESCRIPTION_BREAKFAST).build();
         assertFalse(DESC_LUNCH.equals(editedLunch));
 
         // different phone -> returns false

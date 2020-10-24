@@ -1,15 +1,14 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_LUNCH;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Calendar;
 import seedu.address.model.event.Event;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_LUNCH;
-
 
 /**
  * A utility class containing a list of {@code Event} objects to be used in tests.

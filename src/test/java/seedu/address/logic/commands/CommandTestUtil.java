@@ -16,11 +16,15 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
-import seedu.address.model.event.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
+import seedu.address.model.Model;
+import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EditEventDescriptorBuilder;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
