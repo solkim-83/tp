@@ -18,13 +18,14 @@ public class PermaSortContactCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort your contacts permanently "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Sort your contacts permanently "
             + "by the index command entered  "
             + "1 will be sort by alphabetical order of their names\n"
             + "2 will be sort by alphabetical order of their address\n"
             + "3 will be sort by alphabetical order of their email\n"
             + "Parameters: INDEX (must be between 1 and 3) "
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 ";
 
     public static final String MESSAGE_INVALID_INDEX = "Invalid index entered, "
             + "refer to below for the command's proper usage: "

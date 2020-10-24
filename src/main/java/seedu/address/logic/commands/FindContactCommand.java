@@ -21,7 +21,8 @@ public class FindContactCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Finds all persons whose fields contain any of "
             + "the specified keywords (case-insensitive) and matches the tags specified. "
             + "For fields that are not specified, all contacts are matched by default.\n"
             + "Parameters: "
