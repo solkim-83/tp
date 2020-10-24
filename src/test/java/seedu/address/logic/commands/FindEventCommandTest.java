@@ -1,28 +1,22 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_EVENTS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalEvents.*;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
-import seedu.address.model.event.*;
-import seedu.address.model.tag.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
+import seedu.address.model.tag.TagTreeImpl;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindContactCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
  */
 public class FindEventCommandTest {
     private Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());

@@ -27,7 +27,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.*;
+import seedu.address.testutil.EventBuilder;
 
 public class AddEventCommandTest {
 

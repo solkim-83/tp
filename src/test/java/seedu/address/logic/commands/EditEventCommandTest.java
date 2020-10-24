@@ -2,21 +2,30 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_LUNCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureEvent;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
-import static seedu.address.testutil.TypicalIndexes.*;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditContactCommand.EditPersonDescriptor;
-import seedu.address.model.*;
-import seedu.address.model.event.*;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.*;
-import seedu.address.testutil.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
+import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.EditEventDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
