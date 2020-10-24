@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":SortEventCommandParser" as SortEventCommandParser LOGIC_COLOR
-participant "s:SortEventCommand" as SortEventCommand LOGIC_COLOR
+participant "sortEventCommand:SortEventCommand" as SortEventCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,19 +33,19 @@ create SortEventCommand
 SortEventCommandParser -> SortEventCommand
 activate SortEventCommand
 
-SortEventCommand --> SortEventCommandParser : s
+SortEventCommand --> SortEventCommandParser : sortEventCommand
 deactivate SortEventCommand
 
-SortEventCommandParser --> AddressBookParser : s
+SortEventCommandParser --> AddressBookParser : sortEventCommand
 deactivate SortEventCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 SortEventCommandParser -[hidden]-> AddressBookParser
 destroy SortEventCommandParser
 
-AddressBookParser --> LogicManager : s
+AddressBookParser --> LogicManager : sortEventCommand
 deactivate AddressBookParser
 
-LogicManager -> SortEventCommand : execute()
+LogicManager -> SortEventCommand : sortEventCommand.execute(model)
 activate SortEventCommand
 
 SortEventCommand -> Model : sortEvent(chooseComparator(1))
