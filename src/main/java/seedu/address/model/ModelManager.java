@@ -207,8 +207,14 @@ public class ModelManager implements Model {
         calendar.setEvent(target, editedEvent);
     }
 
+    @Override
     public void sortPerson(Comparator<Person> comparator) {
         sortedPersons.comparatorProperty().setValue(comparator);
+    }
+
+    @Override
+    public void permaSortContacts(Comparator<Person> comparator) {
+        addressBook.sortPerson(comparator);
     }
 
     public void sortEvent(Comparator<Event> comparator) {

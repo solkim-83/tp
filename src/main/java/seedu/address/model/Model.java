@@ -191,7 +191,16 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Wraps the filtered list of persons in a sortedList with a specific comparator
+     */
     void sortPerson(Comparator<Person> comparator);
+
+    /**
+     * Permanently sorts the address book by a specific comparator
+     */
+    void permaSortContacts(Comparator<Person> chooseComparator);
+
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -199,4 +208,5 @@ public interface Model {
     void updateFilteredEventList(Predicate<Event> predicate);
 
     void sortEvent(Comparator<Event> comparator);
+
 }
