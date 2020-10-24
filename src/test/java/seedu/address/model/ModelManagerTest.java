@@ -118,7 +118,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, new Calendar(), new TagTreeImpl(), userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook,
+                new Calendar(), new TagTreeImpl(), userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
