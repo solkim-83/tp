@@ -257,6 +257,12 @@ Shows a list of all events saved in the calendar for the users to keep track.
 
 Format: `listEvent`
 
+### Clearing all events : `clear -e`
+
+Clears all events from the calendar.
+
+Format: `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
