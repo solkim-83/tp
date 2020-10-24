@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.tags.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.tags.ViewTagCommandParser;
 import seedu.address.model.tag.Tag;
 
 public class ViewTagCommandParserTest {

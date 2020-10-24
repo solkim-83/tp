@@ -29,6 +29,7 @@ import seedu.address.logic.parser.events.EditEventCommandParser;
 import seedu.address.logic.parser.events.FindEventCommandParser;
 import seedu.address.logic.parser.events.SortEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.tags.ViewTagCommandParser;
 
 /**
  * Parses user input.
