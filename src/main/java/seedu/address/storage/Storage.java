@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.ReadOnlyTagTree;
@@ -13,7 +14,8 @@ import seedu.address.model.tag.ReadOnlyTagTree;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, TagTreeStorage {
+
+public interface Storage extends AddressBookStorage, CalendarStorage, UserPrefsStorage, TagTreeStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -31,6 +33,14 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, TagTreeSt
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
     @Override
+    Path getCalendarFilePath();
+
+    @Override
+    Optional<ReadOnlyCalendar> readCalendar() throws DataConversionException, IOException;
+
+    @Override
+    void saveCalendar(ReadOnlyCalendar calendar) throws IOException;
+
     Path getTagTreeFilePath();
 
     @Override

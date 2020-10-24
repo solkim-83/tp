@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.ReadOnlyTagTree;
@@ -19,6 +20,7 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private CalendarStorage calendarStorage;
     private UserPrefsStorage userPrefsStorage;
     private TagTreeStorage tagTreeStorage;
 
@@ -26,9 +28,13 @@ public class StorageManager implements Storage {
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage,
-              UserPrefsStorage userPrefsStorage, TagTreeStorage tagTreeStorage) {
+                          CalendarStorage calendarStorage,
+                          UserPrefsStorage userPrefsStorage,
+                          TagTreeStorage tagTreeStorage)
+    {
         super();
         this.addressBookStorage = addressBookStorage;
+        this.calendarStorage = calendarStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.tagTreeStorage = tagTreeStorage;
     }
@@ -65,7 +71,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read AddressBook data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -76,9 +82,42 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write AddressBook to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
+
+
+    // ================ Calendar methods ==============================
+
+    @Override
+    public Path getCalendarFilePath() {
+        return addressBookStorage.getAddressBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyCalendar> readCalendar() throws DataConversionException, IOException {
+        return readCalendar(calendarStorage.getCalendarFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyCalendar> readCalendar(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read Calendar data from file: " + filePath);
+        return calendarStorage.readCalendar(filePath);
+    }
+
+    @Override
+    public void saveCalendar(ReadOnlyCalendar calendar) throws IOException {
+        saveCalendar(calendar, calendarStorage.getCalendarFilePath());
+    }
+
+    @Override
+    public void saveCalendar(ReadOnlyCalendar calendar, Path filePath) throws IOException {
+        logger.fine("Attempting to write Calendar to data file: " + filePath);
+        calendarStorage.saveCalendar(calendar, filePath);
+    }
+
+
+    // ================ TagTree methods ==============================
 
     @Override
     public Path getTagTreeFilePath() {
@@ -92,7 +131,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyTagTree> readTagTree(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read TagTree data from file: " + filePath);
         return tagTreeStorage.readTagTree(filePath);
     }
 
@@ -103,7 +142,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveTagTree(ReadOnlyTagTree tagTree, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write TagTree to data file: " + filePath);
         tagTreeStorage.saveTagTree(tagTree, filePath);
     }
 
