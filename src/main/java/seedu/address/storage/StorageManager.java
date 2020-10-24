@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.tag.ReadOnlyTagTree;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,14 +20,17 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private TagTreeStorage tagTreeStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage,
+              UserPrefsStorage userPrefsStorage, TagTreeStorage tagTreeStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.tagTreeStorage = tagTreeStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -74,6 +78,33 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    @Override
+    public Path getTagTreeFilePath() {
+        return tagTreeStorage.getTagTreeFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyTagTree> readTagTree() throws DataConversionException, IOException {
+        return readTagTree(tagTreeStorage.getTagTreeFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyTagTree> readTagTree(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return tagTreeStorage.readTagTree(filePath);
+    }
+
+    @Override
+    public void saveTagTree(ReadOnlyTagTree tagTree) throws IOException {
+        saveTagTree(tagTree, tagTreeStorage.getTagTreeFilePath());
+    }
+
+    @Override
+    public void saveTagTree(ReadOnlyTagTree tagTree, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        tagTreeStorage.saveTagTree(tagTree, filePath);
     }
 
 }

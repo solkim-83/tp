@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -115,12 +116,22 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public Path getTagTreeFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setCalendarFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTagTreeFilePath(Path tagTreeFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,12 +156,22 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void setTagTree(ReadOnlyTagTree tagTree) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyCalendar getCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyTagTree getTagTree() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,12 +230,37 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public Set<Tag> getPersonTags() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Tag> getSuperTags() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Tag> getSubTagsRecursive(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Person> getPersonsRecursive(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void permaSortContacts(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
