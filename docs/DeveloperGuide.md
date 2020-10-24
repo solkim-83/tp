@@ -231,7 +231,47 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Sort events feature
+The sort events feature is facilitated by `Calendar` that stores event entries and their details in Athena. 
 
+Additionally, it executes the sorting operation based on 2 sorting patterns:
+* `sort -e 1` - Sorts the events based on the description of the events in alphabetical order.
+* `sort -e 2` - Sorts the events based on the time of the events in chronological order. 
+
+SortEventCommand#execute() : Does validity check of input and then sorts the event according to user input (index))
+
+The sorting function is designed with the aim of temporary modification of the event-related entries in the `Calendar`. 
+This is to create a default sorting pattern (based on the description of the events in alphabetical order) for easier reference. 
+
+The following sequence diagram shows how the `sort -e` operation works:
+
+![Interactions Inside the Logic Component for the `sort -e 1` Command](images/SortEventSequenceDiagram.png)
+
+
+#### Design consideration:
+
+##### Aspect: How sort executes
+
+* **Alternative 1 (current choice):** Temporarily sorts the event entries.
+  * Pros: Will use less memory.
+  * Cons: May cause inconvenience to the users.
+
+* **Alternative 2:** Automatically sorts the event entries based on one sorting order as they are being added/ deleted/ edited.
+  * Pros: Will be more convenient for the users. (As they do not need to manually sort) 
+  * Cons: May restrict the usage and benefit of the app. (As only one sorting pattern is available)
+  
+The following activity diagram summarizes what happens when a user executes `sort -e` command:
+  
+![CommitActivityDiagram](images/SortEventActivityDiagram.png)
+
+### Display feature
+The display feature for the events is facilitated by `Calendar` that stores event entries and their details in Athena,
+and has a specific command of `list -e` where the command makes use of `ListEventCommand`. 
+
+ListEventCommand#execute() : Does validity check of current list and displayed all event-related entries.
+
+The feature is designed to provide the users with the entire list of event-related entries, especially after 
+when user executes certain commands that display partial list of event list (e.g. SearchEvent Command).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
