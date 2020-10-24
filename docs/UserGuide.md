@@ -174,7 +174,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Athena.
 
 Format: `clear`
 
@@ -256,6 +256,12 @@ Examples:
 Shows a list of all events saved in the calendar for the users to keep track.
 
 Format: `listEvent`
+
+### Clearing all events : `clear -e`
+
+Clears all events from the calendar.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
