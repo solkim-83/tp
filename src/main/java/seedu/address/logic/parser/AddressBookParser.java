@@ -11,12 +11,12 @@ import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.IntroCommand;
+import seedu.address.logic.commands.general.ExitCommand;
+import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.general.IntroCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
-import seedu.address.logic.commands.ListTagCommand;
+import seedu.address.logic.commands.tags.ListTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

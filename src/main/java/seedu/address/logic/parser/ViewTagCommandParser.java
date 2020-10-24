@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.ParserUtil.parseTags;
 
 import java.util.List;
 
-import seedu.address.logic.commands.ViewTagCommand;
+import seedu.address.logic.commands.tags.ViewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

@@ -1,13 +1,17 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.tags;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.ListTagCommand.INDICATOR_SUPERTAG;
-import static seedu.address.logic.commands.ListTagCommand.parsePersonSetIntoString;
+import static seedu.address.logic.commands.tags.ListTagCommand.INDICATOR_SUPERTAG;
+import static seedu.address.logic.commands.tags.ListTagCommand.parsePersonSetIntoString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;

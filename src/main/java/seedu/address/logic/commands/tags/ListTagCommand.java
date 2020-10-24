@@ -1,10 +1,14 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.tags;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;

@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.ListTagCommand.INDICATOR_SUPERTAG;
-import static seedu.address.logic.commands.ListTagCommand.constructTagSummaryMessage;
-import static seedu.address.logic.commands.ListTagCommand.parsePersonSetIntoString;
+import static seedu.address.logic.commands.tags.ListTagCommand.INDICATOR_SUPERTAG;
+import static seedu.address.logic.commands.tags.ListTagCommand.constructTagSummaryMessage;
+import static seedu.address.logic.commands.tags.ListTagCommand.parsePersonSetIntoString;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_1;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_2;
 import static seedu.address.model.ContactTagIntegrationManagerTest.buildTestIntegrationAddressBook;

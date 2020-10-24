@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.ListTagCommandTest.createTestModel;
-import static seedu.address.logic.commands.ViewTagCommand.INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS;
-import static seedu.address.logic.commands.ViewTagCommand.INDICATOR_NO_RELATED_CONTACTS_FOUND;
-import static seedu.address.logic.commands.ViewTagCommand.MESSAGE_INVALID_TAG;
-import static seedu.address.logic.commands.ViewTagCommand.constructSetTagDetails;
+import static seedu.address.logic.commands.tags.ViewTagCommand.INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS;
+import static seedu.address.logic.commands.tags.ViewTagCommand.INDICATOR_NO_RELATED_CONTACTS_FOUND;
+import static seedu.address.logic.commands.tags.ViewTagCommand.MESSAGE_INVALID_TAG;
+import static seedu.address.logic.commands.tags.ViewTagCommand.constructSetTagDetails;
 import static seedu.address.testutil.TagTreeUtil.TAG_CS2040S_NOT_TREE;
 import static seedu.address.testutil.TagTreeUtil.TAG_NUS;
 
