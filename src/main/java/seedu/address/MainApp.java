@@ -16,16 +16,20 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CalendarStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCalendarStorage;
 import seedu.address.storage.JsonTagTreeStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -60,9 +64,12 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        CalendarStorage calendarStorage = new JsonCalendarStorage(userPrefs.getCalendarFilePath());
         TagTreeStorage tagTreeStorage = new JsonTagTreeStorage(userPrefs.getTagTreeFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, tagTreeStorage);
+
+        storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage, tagTreeStorage);
 
         initLogging(config);
 
@@ -74,34 +81,55 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from
+     * {@code storage} (storage's addressbook, calendar and tagtree)
+     * and {@code userPrefs}. <br>
+     *
+     * If {@code storage}'s address book/calendar is not found;
+     * The data from the sample address book/calendar will be used instead.
+     *
+     * If {@code storage}'s tagtree is not found;
+     * An empty tagtree is used instead.
+     *
+     * If errors occur when reading {@code storage}'s address book/calendar/tagtree;
+     * An empty address book/calendar/tagtree will be used instead.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+        // TODO: split this method up into smaller private methods
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressBook;
+
+        Optional<ReadOnlyCalendar> calendarOptional;
+        ReadOnlyCalendar initialCalendar;
+        
         Optional<ReadOnlyTagTree> tagTreeOptional;
         ReadOnlyTagTree initialTagTree;
         try {
             addressBookOptional = storage.readAddressBook();
+            calendarOptional = storage.readCalendar();
             tagTreeOptional = storage.readTagTree();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("AddressBook file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            if (!calendarOptional.isPresent()) {
+                logger.info("Calendar file not found. Will be starting with a sample Calendar");
+            }
+            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialCalendar = calendarOptional.orElseGet(SampleDataUtil::getSampleCalendar);
             initialTagTree = tagTreeOptional.orElse(new TagTreeImpl());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBook = new AddressBook();
+            initialCalendar = new Calendar();
             initialTagTree = new TagTreeImpl();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBook = new AddressBook();
+            initialCalendar = new Calendar();
             initialTagTree = new TagTreeImpl();
         }
 
-        return new ModelManager(initialData, initialTagTree, userPrefs);
+        return new ModelManager(initialAddressBook, initialCalendar, initialTagTree, userPrefs);
     }
 
     private void initLogging(Config config) {

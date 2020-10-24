@@ -40,14 +40,19 @@ public class ModelManager implements Model {
 
     // This constructor was left in so as not to break test cases that do not affect the tagTree.
     // Use the second constructor the the main program.
+    // TODO: Delete this and change the test cases
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        this(addressBook, new TagTreeImpl(), userPrefs);
+        this(addressBook, new Calendar(), new TagTreeImpl(), userPrefs);
     }
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTagTree tagTree, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyCalendar calendar,
+                        ReadOnlyTagTree tagTree,
+                        ReadOnlyUserPrefs userPrefs)
+    {
         super();
         requireAllNonNull(addressBook, tagTree, userPrefs);
 
@@ -55,18 +60,21 @@ public class ModelManager implements Model {
                 + tagTree + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.calendar = new Calendar();
+        this.calendar = new Calendar(calendar);
         this.tagTree = new TagTreeImpl(tagTree);
         this.userPrefs = new UserPrefs(userPrefs);
+
         contactTagIntegrationManager = new ContactTagIntegrationManager(this.addressBook, this.tagTree);
+
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
+
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
         sortedEvents = new SortedList<>(filteredEvents);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TagTreeImpl(), new UserPrefs());
+        this(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
