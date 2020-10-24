@@ -18,7 +18,8 @@ public class SortContactCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the currently displayed list"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Sorts the currently displayed list"
             + "by the index command entered "
             + "1 will be sort by alphabetical order of their names\n"
             + "2 will be sort by alphabetical order of their address\n"

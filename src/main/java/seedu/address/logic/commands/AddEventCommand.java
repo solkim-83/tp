@@ -17,7 +17,8 @@ public class AddEventCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE + ": Adds an event to Athena. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Adds an event to Athena. "
             + "Parameters: "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DATETIME + "DATE_TIME \n"

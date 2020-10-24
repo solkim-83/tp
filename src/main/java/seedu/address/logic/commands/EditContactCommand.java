@@ -36,7 +36,8 @@ public class EditContactCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing non-tag values will be overwritten by the input values."
             + "Tag values to be added can be specified with t/ and removed with rt/.\n"

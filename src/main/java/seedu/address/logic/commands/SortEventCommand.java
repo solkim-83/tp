@@ -19,7 +19,8 @@ public class SortEventCommand extends Command {
     public static final String COMMAND_WORD = CommandWord.SORT.toString();
     public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the currently displayed list of events "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Sorts the currently displayed list of events "
             + "by the index command entered\n"
             + "1 will be sort by alphabetical order of the events' descriptions\n"
             + "2 will be sort by alphabetical order of the events' time\n"

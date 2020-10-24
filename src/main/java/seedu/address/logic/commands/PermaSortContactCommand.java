@@ -18,7 +18,8 @@ public class PermaSortContactCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort your contacts permanently "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Sort your contacts permanently "
             + "by the index command entered  "
             + "1 will be sort by alphabetical order of their names\n"
             + "2 will be sort by alphabetical order of their address\n"
