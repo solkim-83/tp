@@ -101,7 +101,7 @@ public class MainApp extends Application {
 
         Optional<ReadOnlyCalendar> calendarOptional;
         ReadOnlyCalendar initialCalendar;
-        
+
         Optional<ReadOnlyTagTree> tagTreeOptional;
         ReadOnlyTagTree initialTagTree;
         try {
