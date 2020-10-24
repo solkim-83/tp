@@ -174,7 +174,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Athena.
 
 Format: `clear`
 
@@ -290,6 +290,7 @@ Action | Format, Examples
 **Add Event** | `addEvent d/DESCRIPTION at/DATE_TIME`<br> e.g., `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Event** | `deleteEvent INDEX`<br> e.g., `deleteEvent 2`
 **Delete Event** | `deleteEvent INDEX`<br> e.g., `deleteEvent 2`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Event** | `editEvent INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `editEvent 2 at/23-10-1234 12:30 p/Amanda`

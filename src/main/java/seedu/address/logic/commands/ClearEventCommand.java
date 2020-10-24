@@ -6,7 +6,7 @@ import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 
 /**
- * Clears the calendar.
+ * Clears all event-related entries in Athena.
  */
 public class ClearEventCommand extends Command {
 
