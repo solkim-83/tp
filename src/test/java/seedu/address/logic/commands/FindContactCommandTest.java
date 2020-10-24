@@ -18,17 +18,20 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.FindContactCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
+import seedu.address.model.tag.TagTreeImpl;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindContactCommand}.
  */
 public class FindContactCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(),
+            new Calendar(), new TagTreeImpl(), new UserPrefs());
 
     @Test
     public void equals() {

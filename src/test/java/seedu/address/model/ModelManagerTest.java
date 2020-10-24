@@ -16,8 +16,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
+import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.AddressBookBuilder;
 
+// TODO: include/edit tests to include calendar and tagtree
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -93,15 +95,17 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getSortedFilteredPersonList().remove(0));
     }
 
+    // TODO: edit this test case with calendar and tagTree
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
+        Calendar differentCalendar = new Calendar();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, new Calendar(), new TagTreeImpl(), userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new Calendar(), new TagTreeImpl(), userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,14 +118,14 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, new Calendar(), new TagTreeImpl(), userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         ContactContainsFieldsPredicate predicate = new ContactContainsFieldsPredicate();
         predicate.setNameKeywords(Arrays.asList(keywords));
         modelManager.updateFilteredPersonList(predicate);
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, new Calendar(), new TagTreeImpl(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -129,6 +133,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook,
+                new Calendar(), new TagTreeImpl(), differentUserPrefs)));
     }
 }
