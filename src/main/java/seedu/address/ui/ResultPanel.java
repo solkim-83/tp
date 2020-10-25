@@ -18,12 +18,6 @@ public class ResultPanel extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
-    @FXML
-    private TextArea inputFormat;
-
-    @FXML
-    private TextArea inputExample;
-
     public ResultPanel() {
         super(FXML);
     }
@@ -35,19 +29,6 @@ public class ResultPanel extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
-        inputFormat.setText("");
-        inputExample.setText("");
-    }
-
-    /**
-     * This method is invoked when the command is executed unsuccessfully.
-     * @param feedbackToUser the feedback to display to the user.
-     */
-    public void setFeedbackToUser(List<String> feedbackToUser) {
-        requireNonNull(feedbackToUser);
-        resultDisplay.setText("");
-        inputFormat.setText("");
-        inputExample.setText("");
     }
 
 }
