@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.events.AddEventCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

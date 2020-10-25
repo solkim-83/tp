@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Calendar;
 import seedu.address.model.Model;
@@ -29,7 +30,7 @@ public class ClearEventCommandTest {
                 new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.setCalendar(new Calendar());
 
-        assertCommandSuccess(new ClearContactCommand(), model, ClearContactCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearEventCommand(), model, ClearEventCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
