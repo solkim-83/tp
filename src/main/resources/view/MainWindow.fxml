@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Athena" minWidth="960" minHeight="450" onCloseRequest="#handleExit">
+         title="Athena" minWidth="990" minHeight="450" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -36,7 +36,7 @@
 
         <HBox VBox.vgrow="ALWAYS">
           <children>
-            <VBox HBox.hgrow="NEVER" minWidth="320" maxWidth="320">
+            <VBox HBox.hgrow="NEVER" minWidth="350" maxWidth="350">
               <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
                 <padding>
                   <Insets top="5" right="10" bottom="5" left="10" />

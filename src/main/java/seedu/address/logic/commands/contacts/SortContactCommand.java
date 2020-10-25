@@ -24,11 +24,11 @@ public class SortContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Sorts the currently displayed list"
-            + "by the index command entered "
-            + "1 will be sort by alphabetical order of their names\n"
-            + "2 will be sort by alphabetical order of their address\n"
-            + "3 will be sort by alphabetical order of their email\n"
-            + "Parameters: INDEX (must be between 1 and 4) "
+            + "by the index command entered:\n"
+            + "1 sorts by lexicographical order of their names,\n"
+            + "2 sorts by lexicographical order of their address,\n"
+            + "3 sorts by lexicographical order of their email.\n\n"
+            + "Parameters:\nINDEX (must be between 1 and 3)\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 ";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
