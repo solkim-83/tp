@@ -265,6 +265,12 @@ Examples:
 * `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
 * `add -e at/12-12-12 12:34 d/CS2103 Team meeting`
 
+#### Clearing all events : `clear`
+
+Clears all events from Athena's calendar.
+
+Format: `clear -e`
+
 #### Deleting an event : `delete`
 
 Deletes the specified event from the event list.
@@ -277,12 +283,6 @@ Format: `delete -e INDEX`
 
 Examples:
 * `list -e` followed by `delete -e 2` deletes the 2nd event in the event list
-
-### Clearing all events : `clear`
-
-Clears all events from Athena's calendar.
-
-Format: `clear -e`
 
 #### Editing an event : `edit`
 
@@ -318,7 +318,7 @@ Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
 * `find -e seminar` returns `CS Seminar` and `seminar 1`
 
-### Listing all events : `list`
+#### Listing all events : `list`
 
 Shows a list of all events saved in Athena's calendar.
 
