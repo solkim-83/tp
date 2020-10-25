@@ -179,6 +179,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTag(Tag tag) {
+        return contactTagIntegrationManager.hasTag(tag);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

@@ -107,6 +107,11 @@ public interface Model {
     boolean hasEvent(Event event);
 
     /**
+     * Returns true if the {@code tag} exists with at least one sub-tag and/or person assigned to it.
+     */
+    boolean hasTag(Tag tag);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

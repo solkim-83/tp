@@ -72,6 +72,13 @@ public abstract class TagTree implements ReadOnlyTagTree {
     public abstract void copy(ReadOnlyTagTree otherTree);
 
     /**
+     * Returns true if the TagTree contains {@code tag} which indicates that it has at least one sub-tag.
+     */
+    public boolean hasTag(Tag tag) {
+        return getTagSubTagMap().containsKey(tag);
+    }
+
+    /**
      * Deletes the {@code tag} and all its sub-tags from the tag tree.
      *
      * @param tag Tag to start the deletion.

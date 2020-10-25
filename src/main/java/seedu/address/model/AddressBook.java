@@ -84,6 +84,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if the {@code tag} can be found in the tagManager.
+     */
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return tagManager.hasTag(tag);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

@@ -43,6 +43,13 @@ public class ContactTagIntegrationManager {
     }
 
     /**
+     * Returns true if either the addressBook has {@code tag} or the tagTree has {@code tag}.
+     */
+    public boolean hasTag(Tag tag) {
+        return addressBook.hasTag(tag) || tagTree.hasTag(tag);
+    }
+
+    /**
      * Returns a {@code set} of {@code person}s that falls under the given {@code tag} or any of its sub-tags.
      *
      * @param tag {@code tag} to begin search for matching {@code person}s.
