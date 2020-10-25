@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.ContactTagIntegrationManager;
+import seedu.address.model.person.Person;
 
 public class TagTreeImplTest {
 
@@ -62,6 +64,14 @@ public class TagTreeImplTest {
     @Test
     public void getSubTagsRecursive_tagNotInTree_emptySetReturned() {
         assertTrue(buildTestTree().getSubTagsRecursive(TAG_CS2040S_NOT_TREE).isEmpty());
+    }
+
+    @Test
+    public void editSubTagsOf_validTags_success() {
+        TagTree tagTree = buildTestTree();
+        tagTree.editSubTagsOf(TAG_COMPUTING, Set.of(TAG_CS2040S_NOT_TREE), Set.of(TAG_SCIENCE_COMP));
+        assertTrue(tagTree.getSubTagsOf(TAG_COMPUTING).contains(TAG_CS2040S_NOT_TREE));
+        assertFalse(tagTree.getSubTagsOf(TAG_COMPUTING).contains(TAG_SCIENCE_COMP));
     }
 
     @Test

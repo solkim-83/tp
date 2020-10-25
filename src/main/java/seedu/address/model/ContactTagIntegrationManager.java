@@ -71,19 +71,6 @@ public class ContactTagIntegrationManager {
         return finalSet;
     }
 
-    /**
-     * Edits the sub-tags of a given {@code supertag}.
-     * If a sub-tag to add is already present, no change will be performed.
-     * If a sub-tag to be removed is not present, no change will be performed.
-     *
-     * @param superTag {@code tag} for which the sub-tags will be edited.
-     * @param subTagsToAdd Set of sub-{@code tag}s to be added.
-     * @param subTagsToRemove Set of sub-{@code tag}s to be removed.
-     */
-    public void editSubTagsOf(Tag superTag, Set<Tag> subTagsToAdd, Set<Tag> subTagsToRemove) {
-        tagTree.removeSubTagsFrom(superTag, subTagsToRemove);
-        tagTree.addSubTagsTo(superTag, subTagsToAdd);
-    }
 
     /**
      * Deletes a {@code tag} from the existing tag tree.
