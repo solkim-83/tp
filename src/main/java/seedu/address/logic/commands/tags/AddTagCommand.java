@@ -17,6 +17,7 @@ import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
@@ -31,8 +32,9 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Adds a new tag to Athena. "
             + "Parameters: "
+            + PREFIX_NAME + "TAG_NAME "
             + "[" + PREFIX_INDEX + "CONTACT_INDEX]... "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "SUB_TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_INDEX + "1 "
             + PREFIX_INDEX + "3 "
@@ -42,6 +44,8 @@ public class AddTagCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TAG = "This tag has already been created!";
     public static final String MESSAGE_INDEX_FAILURE = "Assigned indices do not exist in the currently shown list!";
     public static final String MESSAGE_TAG_FAILURE = "Assigned tags do not exist!";
+    public static final String MESSAGE_FAILURE = "Please enter a tag name and at least one index or sub-tag "
+            + "to be assigned to the newly created tag. You can refer to the command below.\n" + MESSAGE_USAGE;
 
     private final Tag tagToAdd;
     private final Set<Tag> subTagSet;
