@@ -39,7 +39,6 @@ public class EditEventCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Event editedEvent = new EventBuilder().build();
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
-        System.out.println(descriptor.getDescription());
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
