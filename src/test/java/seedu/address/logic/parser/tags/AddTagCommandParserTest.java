@@ -1,15 +1,16 @@
 package seedu.address.logic.parser.tags;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.tags.AddTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class AddTagCommandParserTest {
 

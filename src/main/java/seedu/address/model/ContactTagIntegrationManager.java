@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagTree;
 import seedu.address.model.tag.TagTreeImpl;

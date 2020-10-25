@@ -101,6 +101,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         tagManager.addNewPersonTags(p);
     }
 
+    /**
+     * Adds a {@code tag} to the designated {@code person}.
+     */
     public void addPersonToTag(Tag tag, Person person) {
         Set<Tag> newTagSet = new HashSet<>(person.getTags());
         newTagSet.add(tag);
