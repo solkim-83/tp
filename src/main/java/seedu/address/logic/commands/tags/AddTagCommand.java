@@ -87,8 +87,18 @@ public class AddTagCommand extends Command {
 
     }
 
-
-
-
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        } else if (!(object instanceof AddTagCommand)) {
+            return false;
+        } else {
+            AddTagCommand other = (AddTagCommand) object;
+            return other.tagToAdd.equals(tagToAdd)
+                    && other.indicesSet.equals(indicesSet)
+                    && other.subTagSet.equals(subTagSet);
+        }
+    }
 
 }
