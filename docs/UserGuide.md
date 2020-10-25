@@ -3,34 +3,56 @@ layout: page
 title: User Guide
 ---
 
-Athena is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Athena can get your contact management tasks done faster than traditional GUI apps.
+This document is a *User Guide* for Athena, a contact- and event- management desktop application. For more details on
+the suitability and functionalities of the application for your usage, please refer to the [Introduction](#Introduction)
+section below.
 
-* Table of Contents
-{:toc}
+#### Table of Contents
 
---------------------------------------------------------------------------------------------------------------------
+* [Introduction](#Introduction)
+* [Quick Start](#Quick start)
+* [Features](#Features)
+* [FAQ](#FAQ)
+* [Command Summary](#Command summary)
 
+---
+
+## Introduction
+
+Athena is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while
+still having the benefits of a Graphical User Interface (GUI).
+
+Athena is perfect for you if you:
+* need to categorise a huge number of contacts or events,
+* need to keep track of the people who attend specific events,
+* can type fast!
+
+
+---
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
 
-1. Download the latest `Athena.jar` (no releases yet).
+1. Download the latest `Athena.jar` from [here](https://github.com/AY2021S1-CS2103T-W10-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for Athena.
 
-1. Double-click the file or run it with `java -jar Athena.jar` to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file or run it with `java -jar Athena.jar` to start the app. The GUI similar to the below should
+   appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
+   
+   Some commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`**`-c` : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to Athena.
+   * **`add`**`-c n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to Athena.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`-e 3` : Deletes the 3rd event shown in the current list.
 
-   * **`addEvent`**`d/Meeting at/12-12-1234 12:34` : Adds an event named `Meeting` to Athena.
+   * **`add`**`-e d/Meeting at/12-12-1234 12:34` : Adds an event named `Meeting` to Athena.
 
    * **`exit`** : Exits the app.
 
@@ -39,6 +61,15 @@ Athena is a **desktop app for managing contacts, optimized for use via a Command
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+Athena supports two key functionalities - the management of contacts and events. Thus, commands are tailored to manage 
+each of these specific functionalities. In addition, to better categorise contacts, they may also be *tagged* with
+specific key-words. Thus, there are **four** types of commands:
+
+* general
+* contact
+* event
+* tag
 
 <div markdown="block" class="alert alert-info">
 
@@ -60,7 +91,7 @@ Athena is a **desktop app for managing contacts, optimized for use via a Command
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
