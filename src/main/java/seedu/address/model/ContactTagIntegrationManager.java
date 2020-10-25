@@ -29,9 +29,9 @@ public class ContactTagIntegrationManager {
     /**
      * Creates a ContactTagIntegrationManager from the given {@code addressBook} and {@code tagTree}.
      */
-    public ContactTagIntegrationManager(AddressBook addressBook, ReadOnlyTagTree tagTree) {
-        this(addressBook);
-        this.tagTree.copy(tagTree);
+    public ContactTagIntegrationManager(AddressBook addressBook, TagTree tagTree) {
+        this.addressBook = addressBook;
+        this.tagTree = tagTree;
     }
 
     public AddressBook getAddressBook() {

@@ -1,7 +1,5 @@
 package seedu.address.logic.commands.tags;
 
-
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
