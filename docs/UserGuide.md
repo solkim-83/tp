@@ -111,7 +111,7 @@ specific key-words. Thus, there are **four** types of commands:
 
 ### General
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
