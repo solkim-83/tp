@@ -1,21 +1,5 @@
 package seedu.address.logic.commands.tags;
 
-
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.ModelStub;
-import seedu.address.logic.commands.contacts.AddContactCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ContactTagIntegrationManager;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagTree;
-
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,6 +8,20 @@ import static seedu.address.testutil.TagTreeUtil.TAG_CS1231S;
 import static seedu.address.testutil.TagTreeUtil.TAG_CS2040S_NOT_TREE;
 import static seedu.address.testutil.TagTreeUtil.TAG_NOT_IN_TREE;
 import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE;
+
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ModelStub;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ContactTagIntegrationManager;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagTree;
 
 public class AddTagCommandTest {
 
@@ -65,9 +63,9 @@ public class AddTagCommandTest {
     }
 
     private class ModelStubWithTagAndPersons extends ModelStub {
-        ContactTagIntegrationManager manager = buildTestContactTagIntegrationManager();
-        AddressBook addressBook = manager.getAddressBook();
-        TagTree tagTree = manager.getTagTree();
+        private ContactTagIntegrationManager manager = buildTestContactTagIntegrationManager();
+        private AddressBook addressBook = manager.getAddressBook();
+        private TagTree tagTree = manager.getTagTree();
 
         @Override
         public void addSubTagTo(Tag superTag, Tag subTag) {

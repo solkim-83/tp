@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -10,11 +15,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
-
-import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * A default model stub that have all of the methods failing.
