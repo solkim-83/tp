@@ -43,7 +43,7 @@
                 </padding>
               </StackPane>
 
-              <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <StackPane fx:id="resultPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets top="5" right="10" bottom="5" left="10" />
                 </padding>
