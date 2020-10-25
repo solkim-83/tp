@@ -135,6 +135,17 @@ public interface Model {
     void addEvent(Event event);
 
     /**
+     * Adds {@code person} to {@code tag}.
+     * {@code person} will also reflect this change with a new {@code tag}.
+     */
+    void addPersonToTag(Tag tag, Person person);
+
+    /**
+     * Adds {@code subTag} as a sub-tag of {@code superTag}.
+     */
+    void addSubTagTo(Tag superTag, Tag subTag);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

@@ -147,6 +147,16 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void addPersonToTag(Tag tag, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSubTagTo(Tag superTag, Tag subTag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }

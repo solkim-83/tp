@@ -1,14 +1,18 @@
 package seedu.address.logic.commands.tags;
 
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+import java.util.List;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
@@ -36,28 +40,49 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New tag added: %s";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag has already been created!";
-    public static final String MESSAGE_INDEX_FAILURE = "Assigned indices do not exist!";
+    public static final String MESSAGE_INDEX_FAILURE = "Assigned indices do not exist in the currently shown list!";
     public static final String MESSAGE_TAG_FAILURE = "Assigned tags do not exist!";
 
     private final Tag tagToAdd;
     private final Set<Tag> subTagSet;
-    private final Set<Person> personSet;
+    private final Set<Index> indicesSet;
 
     /**
      * Creates an AddTagCommand to add the specified {@code tagToAdd} with {@code subTagSet} as its subtags and
      * {@code personSet} as persons directly under this tag.
      */
-    public AddTagCommand(Tag tagToAdd, Set<Tag> subTagSet, Set<Person> personSet) {
+    public AddTagCommand(Tag tagToAdd, Set<Tag> subTagSet, Set<Index> indicesSet) {
         this.tagToAdd = tagToAdd;
         this.subTagSet = Set.copyOf(subTagSet);
-        this.personSet = Set.copyOf(personSet);
+        this.indicesSet = Set.copyOf(indicesSet);
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-//TODO
-        return null;
+
+        if (model.hasTag(tagToAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
+
+        List<Person> list = model.getSortedFilteredPersonList();
+        boolean invalidIndices = indicesSet.stream()
+                .anyMatch(index -> index.getZeroBased() >= list.size());
+        if (invalidIndices) {
+            throw new CommandException(MESSAGE_INDEX_FAILURE);
+        }
+
+        boolean invalidTags = subTagSet.stream()
+                .anyMatch(tag -> !model.hasTag(tag));
+        if (invalidTags) {
+            throw new CommandException(MESSAGE_TAG_FAILURE);
+        }
+
+        subTagSet.stream().forEach(subTag -> model.addSubTagTo(tagToAdd, subTag));
+        indicesSet.stream().forEach(index -> model.addPersonToTag(tagToAdd, list.get(index.getZeroBased())));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, tagToAdd));
+
     }
 
 

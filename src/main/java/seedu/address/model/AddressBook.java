@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -98,6 +99,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
         tagManager.addNewPersonTags(p);
+    }
+
+    public void addPersonToTag(Tag tag, Person person) {
+        Set<Tag> newTagSet = new HashSet<>(person.getTags());
+        newTagSet.add(tag);
+        Person editedPerson = new Person(person.getName(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getAddress(),
+                newTagSet);
+        setPerson(person, editedPerson);
     }
 
     /**

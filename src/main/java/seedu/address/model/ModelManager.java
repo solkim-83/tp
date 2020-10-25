@@ -205,6 +205,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSubTagTo(Tag superTag, Tag subTag) {
+        tagTree.addSubTagTo(superTag, subTag);
+    }
+
+    @Override
+    public void addPersonToTag(Tag tag, Person person) {
+        addressBook.addPersonToTag(tag, person);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
