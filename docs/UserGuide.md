@@ -45,8 +45,8 @@ Athena is perfect for you if you:
 * need to keep track of the people who attend specific events,
 * can type fast!
 
-
 ---
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your computer.
@@ -190,7 +190,6 @@ and `johndoe@example.com` respectively.
 * `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `CS2030`.
 * `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `CS2103` to it.
 
-
 #### Finding a contact : `find`
 
 Finds persons whose names contain any of the given keywords. Also supports search with additional specifiers such as 
@@ -318,7 +317,7 @@ Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
 * `find -e seminar` returns `CS Seminar` and `seminar 1`
 
-#### Listing all events : `list`
+### Listing all events : `list`
 
 Shows a list of all events saved in Athena's calendar.
 
