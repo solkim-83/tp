@@ -36,10 +36,11 @@ public class AddTagCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_FAILURE));
         }
 
-        Tag tagToAdd = ParserUtil.parseTag(argumentMultimap.getValue(PREFIX_TAG).get());
+        Tag tagToAdd = ParserUtil.parseTag(argumentMultimap.getValue(PREFIX_NAME).get());
 
         Set<Index> indicesSet = new HashSet<>();
         List<String> listOfStringIndices = argumentMultimap.getAllValues(PREFIX_INDEX);
+        System.out.println(listOfStringIndices);
         for (String stringIndex : listOfStringIndices) {
             indicesSet.add(ParserUtil.parseIndex(stringIndex));
         }
