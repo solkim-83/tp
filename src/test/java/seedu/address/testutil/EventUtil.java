@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
-import seedu.address.logic.commands.AddEventCommand;
-import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.address.logic.commands.events.AddEventCommand;
+import seedu.address.logic.commands.events.EditEventCommand.EditEventDescriptor;
 import seedu.address.model.event.Event;
 
 

@@ -30,8 +30,7 @@ public class StorageManager implements Storage {
     public StorageManager(AddressBookStorage addressBookStorage,
                           CalendarStorage calendarStorage,
                           UserPrefsStorage userPrefsStorage,
-                          TagTreeStorage tagTreeStorage)
-    {
+                          TagTreeStorage tagTreeStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.calendarStorage = calendarStorage;

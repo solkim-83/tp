@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
+import seedu.address.logic.commands.events.EditEventCommand.EditEventDescriptor;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
