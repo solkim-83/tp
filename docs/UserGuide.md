@@ -10,10 +10,28 @@ section below.
 #### Table of Contents
 
 * [Introduction](#Introduction)
-* [Quick Start](#Quick start)
+* [Quick Start](#Quick-start)
 * [Features](#Features)
+    * [General](#General)
+        * [`help`](#viewing-help) - viewing help
+        * [`exit`](#exiting-the-program--exit) - exiting the program
+    * [Contact](#Contact)
+        * [`add`](#adding-a-contact-add) - adding a contact
+        * [`clear`](#clearing-all-contacts--clear) - clearing all contacts
+        * [`delete`](#deleting-a-contact--delete) - deleting a contact
+        * [`edit`](#editing-a-contact--edit) - editing a contact
+        * [`find`](#finding-a-contact--find) - finding a contact
+        * [`list`](#listing-all-contacts--list) - listing a contact
+        * [`sort`](#sorting-displayed-contacts--sort) - sorting displayed contacts
+    * [Event](#event)
+        * [`add`](#adding-an-event-add) - adding an event
+        * [`clear`](#clearing-all-events--clear) - clearing all events
+        * [`delete`](#deleting-an-event--delete) - deleting an event
+        * [`edit`](#editing-an-event--edit) - editing an event
+        * [`find`](#finding-an-event--find) - finding an event
+        * [`list`](#listing-all-events--list) - listing an event
 * [FAQ](#FAQ)
-* [Command Summary](#Command summary)
+* [Command Summary](#Command-summary)
 
 ---
 
@@ -93,7 +111,7 @@ specific key-words. Thus, there are **four** types of commands:
 
 ### General
 
-#### Viewing help : `help` <a name="help"></a>
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -205,7 +223,7 @@ Shows a list of all contacts in Athena.
 
 Format: `list -c`
 
-#### Sorting your contacts : `sort`
+#### Sorting displayed contacts : `sort`
 
 Sort all currently displayed contacts in Athena.
 
@@ -224,7 +242,7 @@ Examples:
 
 ### Event
 
-#### Adding an event : `add`
+#### Adding an event: `add`
 
 Adds an event to the event list.
 
@@ -298,7 +316,7 @@ Format: `find -e KEYWORD`
 
 Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `find -e seminar` returns `CS Seminar` and  `seminar 1`
+* `find -e seminar` returns `CS Seminar` and `seminar 1`
 
 ### Listing all events : `list`
 
@@ -338,4 +356,3 @@ Action | Format, Examples
 **List Contact** | `list -c`
 **List Events** | `list -e`
 **Sort Contacts** | `sort -c 1`
-**Sort Events** | `sort -e 1`
