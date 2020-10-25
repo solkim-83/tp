@@ -102,7 +102,6 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the address book's internal list according to the given comparator
      */
     public void sortPersons(Comparator<Person> c) {
-        assert internalList.size() > 0;
         internalList.sort(c);
     }
 
