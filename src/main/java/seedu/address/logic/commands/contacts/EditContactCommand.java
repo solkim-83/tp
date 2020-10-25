@@ -32,7 +32,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in Athena.
  */
 public class EditContactCommand extends Command {
 
@@ -44,14 +44,14 @@ public class EditContactCommand extends Command {
             + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing non-tag values will be overwritten by the input values."
-            + "Tag values to be added can be specified with t/ and removed with rt/.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_REMOVE_TAG + "TAG]...\n"
+            + "Tag values to be added can be specified with t/ and removed with rt/.\n\n"
+            + "Parameters:\nINDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME]\n"
+            + "[" + PREFIX_PHONE + "PHONE]\n"
+            + "[" + PREFIX_EMAIL + "EMAIL]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REMOVE_TAG + "TAG]...\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -59,7 +59,7 @@ public class EditContactCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Athena.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;

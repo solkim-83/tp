@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
-    private ResultDisplay resultDisplay;
+    private ResultPanel resultPanel;
     private HelpWindow helpWindow;
     private IntroWindow introWindow;
 
@@ -50,7 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane eventListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane resultPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -96,13 +96,13 @@ public class MainWindow extends UiPart<Stage> {
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
+         * ResultPanel contains a TextArea, thus some accelerators (e.g F1) will
          * not work when the focus is in them because the key event is consumed by
          * the TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
          * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * in CommandBox or ResultPanel.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -122,8 +122,8 @@ public class MainWindow extends UiPart<Stage> {
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultPanel = new ResultPanel();
+        resultPanelPlaceholder.getChildren().add(resultPanel.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
                 logic.getCalendarFilePath());
@@ -201,7 +201,7 @@ public class MainWindow extends UiPart<Stage> {
     CommandResult executeIntroCommand() throws CommandException, ParseException {
         CommandResult commandResult = logic.execute("intro");
         logger.info("Result: " + commandResult.getFeedbackToUser());
-        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
         handleIntro();
         return commandResult;
     }
@@ -215,7 +215,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -228,7 +228,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultPanel.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }

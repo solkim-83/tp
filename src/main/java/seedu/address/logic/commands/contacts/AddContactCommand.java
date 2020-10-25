@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to the Athena.
  */
 public class AddContactCommand extends Command {
 
@@ -25,13 +25,13 @@ public class AddContactCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + ": Adds a person to Athena.\n\n"
+            + "Parameters:\n"
+            + PREFIX_NAME + "NAME\n"
+            + PREFIX_PHONE + "PHONE\n"
+            + PREFIX_EMAIL + "EMAIL\n"
+            + PREFIX_ADDRESS + "ADDRESS\n"
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -41,9 +41,9 @@ public class AddContactCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_FAILURE = "Please enter a name for this contact./n"
-            + " If unsure, refer to how you can use this command below /n" + MESSAGE_USAGE;
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Athena.";
+    public static final String MESSAGE_FAILURE = "Please enter a name for this contact.\n"
+            + "Refer to the command format below.\n" + MESSAGE_USAGE;
 
     private final Person toAdd;
 

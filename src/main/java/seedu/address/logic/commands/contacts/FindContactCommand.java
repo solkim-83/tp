@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in Athena whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindContactCommand extends Command {
@@ -28,13 +28,13 @@ public class FindContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Finds all persons whose fields contain any of "
             + "the specified keywords (case-insensitive) and matches the tags specified. "
-            + "For fields that are not specified, all contacts are matched by default.\n"
-            + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME KEYWORDS] "
-            + "[" + PREFIX_PHONE + "PHONE KEYWORD] "
-            + "[" + PREFIX_EMAIL + "EMAIL KEYWORD] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS KEYWORD] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "For fields that are not specified, all contacts are matched by default.\n\n"
+            + "Parameters:\n"
+            + "[" + PREFIX_NAME + "NAME KEYWORDS]\n"
+            + "[" + PREFIX_PHONE + "PHONE KEYWORD]\n"
+            + "[" + PREFIX_EMAIL + "EMAIL KEYWORD]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS KEYWORD]\n"
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie e/hotmail t/CS2103";
 
     private final ContactContainsFieldsPredicate predicate;
