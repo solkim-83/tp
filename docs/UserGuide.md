@@ -317,11 +317,73 @@ Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
 * `find -e seminar` returns `CS Seminar` and `seminar 1`
 
-### Listing all events : `list`
+#### Listing all events : `list`
 
 Shows a list of all events saved in Athena's calendar.
 
 Format: `list -e`
+
+---
+
+### Tag
+
+Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
+allow you to perform tag-level actions such as adding all contacts under a tag into an event. 
+
+#### Adding a tag: `add`
+
+Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
+of tags under one super-tag.
+
+Format: `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/SUB_TAG]…`
+
+* `TAG_NAME` must be alphanumeric with no spaces.
+* `CONTACT_INDEX` refers to the index of a contact as is shown in the contact window.
+* At least one of `CONTACT_INDEX` or `SUB_TAG` must be provided.
+* `TAG_NAME` must not be a tag that already exists.
+* `SUB_TAG`s specified must already exist.
+
+Examples:
+* `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
+will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as sub-tags to `computing`.
+* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assign contact at index `1` the tag `cs2103`.
+
+#### Editing a tag: `edit`
+
+Edits an existing tag in Athena. Use this when you would like to add and/or remove sub-tags from a tag.
+
+Format: `edit -t n/TAG_NAME [t/TAG_ADD]… [rt/TAG_REMOVE]…` 
+
+* `TAG_NAME` specified must be of an existing tag.
+* `TAG_ADD`s labelled under `t/` are tags to be added as sub-tags to `TAG_NAME`.
+* `TAG_ADD`s must be existing tags not already sub-tags of `TAG_NAME`.
+* `TAG_REMOVE`s labelled under `rt/` are tags to be removed as sub-tags from `TAG_NAME`.
+* `TAG_REMOVE`s must be existing sub-tags of `TAG_NAME`.
+
+Examples:
+* `edit -t n/computing t/cs2030 rt/cs2040` Adds `cs2030` as a sub-tag to `computing` and removes `cs2040` as a sub-tag.
+
+#### Viewing a tag: `view`
+
+View specific details of a tag. Use this when you would like to view full details of a tag.
+Details include:
+- Direct child tags
+- Contacts tagged with a specific tag
+- All related sub-tags
+- All related contacts (contacts containing sub-tags)
+
+Format: `view -t t/TAG [t/TAG]…`
+
+* `TAG` must be a valid existing tag in Athena.
+
+#### Listing a tag: `list`
+
+Lists all tags in the remarks panel. It lists each tag and contacts tagged with the tag.
+
+Example:
+* `list -t` 
+
+---
 
 ### Saving the data
 
@@ -333,6 +395,8 @@ Athena's data is saved in the hard disk automatically after any command that cha
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Athena home folder.
+The save files that Athena uses are `addressbook.json`, `tagtree.json` and `calendar.json`. The default directory of these files are at 
+`{Athena home directory}/data`.
 
 --------------------------------------------------------------------------------------------------------------------
 
