@@ -10,7 +10,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears Athena.
  */
 public class ClearContactCommand extends Command {
 
@@ -18,7 +18,7 @@ public class ClearContactCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Athena has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {

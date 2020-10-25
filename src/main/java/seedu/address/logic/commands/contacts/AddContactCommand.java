@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to the Athena.
  */
 public class AddContactCommand extends Command {
 
@@ -25,7 +25,7 @@ public class AddContactCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Adds a person to the address book.\n\n"
+            + ": Adds a person to Athena.\n\n"
             + "Parameters:\n"
             + PREFIX_NAME + "NAME\n"
             + PREFIX_PHONE + "PHONE\n"
@@ -41,7 +41,7 @@ public class AddContactCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Athena.";
     public static final String MESSAGE_FAILURE = "Please enter a name for this contact.\n"
             + "Refer to the command format below.\n" + MESSAGE_USAGE;
 

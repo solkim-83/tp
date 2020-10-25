@@ -10,7 +10,7 @@ import seedu.address.logic.commands.CommandWord;
 import seedu.address.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons in Athena to the user.
  */
 public class ListContactCommand extends Command {
 
