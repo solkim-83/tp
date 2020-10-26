@@ -179,6 +179,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTag(Tag tag) {
+        return contactTagIntegrationManager.hasTag(tag);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -197,6 +202,16 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         calendar.addEvent(event);
+    }
+
+    @Override
+    public void addSubTagTo(Tag superTag, Tag subTag) {
+        tagTree.addSubTagTo(superTag, subTag);
+    }
+
+    @Override
+    public void addPersonToTag(Tag tag, Person person) {
+        addressBook.addPersonToTag(tag, person);
     }
 
     @Override
