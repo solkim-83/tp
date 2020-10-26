@@ -1,17 +1,20 @@
 package seedu.address.storage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Reminder;
 import seedu.address.model.event.Time;
 
-import java.io.*;
-import java.nio.file.Path;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 public class ReminderStorage {
-    Path filepath;
+    private Path filepath;
 
     /**
      * Constructor for a new driver system.
@@ -52,7 +55,7 @@ public class ReminderStorage {
     public ArrayList<Reminder> load() throws IOException {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
         File saveFile = filepath.toFile();
-        if(!saveFile.exists()) {
+        if (!saveFile.exists()) {
             return new ArrayList<Reminder>();
         }
         try {
@@ -64,7 +67,7 @@ public class ReminderStorage {
                 Reminder reminder = new Reminder(event, reminderArr[2]);
                 reminders.add(reminder);
             }
-        } catch (IOException e) {
+        }   catch (IOException e) {
            throw new IOException("File couldn't be read properly");
         }
 
@@ -85,5 +88,7 @@ public class ReminderStorage {
         todoWriter.close();
     }
 
-
+    public Path getFilepath() {
+        return filepath;
+    }
 }

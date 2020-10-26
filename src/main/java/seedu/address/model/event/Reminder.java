@@ -73,9 +73,9 @@ public class Reminder {
      */
     public static void deleteObsolete() throws CommandException {
         for (Reminder r: reminders) {
-         if(r.eventToRemind.getTime().time.isBefore(LocalDateTime.now())) {
+            if (r.eventToRemind.getTime().time.isBefore(LocalDateTime.now())) {
              reminders.remove(r);
-         }
+            }
         }
         try {
             reminderStorage.overwrite(reminders);
@@ -95,7 +95,8 @@ public class Reminder {
      */
     public String splitToString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        return eventToRemind.getDescription().fullDescription + "/" + eventToRemind.getTime().time.format(formatter) + "/" + reminderDate + "\n";
+        return eventToRemind.getDescription().fullDescription + "/" + eventToRemind.getTime().time.format(formatter)
+                + "/" + reminderDate + "\n";
     }
 
     /**
@@ -113,7 +114,7 @@ public class Reminder {
         int count = 1;
         for (Reminder r: reminders) {
             result += count + ". " + r.toString();
-            count ++;
+            count++;
         }
         return result;
     }
@@ -123,7 +124,8 @@ public class Reminder {
      */
     public static boolean hasRemindersDue() {
         for (Reminder r: reminders) {
-            if (r.reminderDate.toLocalDate().isEqual(LocalDate.now()) || r.reminderDate.toLocalDate().isBefore(LocalDate.now())) {
+            if (r.reminderDate.toLocalDate().isEqual(LocalDate.now())
+                    || r.reminderDate.toLocalDate().isBefore(LocalDate.now())) {
                 return true;
             }
         }
@@ -144,7 +146,8 @@ public class Reminder {
         String result = "";
         int count = 1;
         for (Reminder r: reminders) {
-            if (r.reminderDate.toLocalDate().isEqual(LocalDate.now()) || r.reminderDate.toLocalDate().isBefore(LocalDate.now())) {
+            if (r.reminderDate.toLocalDate().isEqual(LocalDate.now())
+                    || r.reminderDate.toLocalDate().isBefore(LocalDate.now())) {
                 result += count + ". " + r.toString();
                 count++;
             }

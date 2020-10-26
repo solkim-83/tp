@@ -1,12 +1,12 @@
 package seedu.address.ui;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import java.util.logging.Logger;
+
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Reminder;
 
-import java.util.logging.Logger;
 
 public class ReminderWindow extends UiPart<Stage> {
     public static final String REMINDER_MESSAGE = "Here are your upcoming reminders: \n" + Reminder.remindersToPopUp();
@@ -19,9 +19,9 @@ public class ReminderWindow extends UiPart<Stage> {
     private Label reminderMessage;
 
     /**
-     * Creates a new IntroWindow.
+     * Creates a new ReminderWindow.
      *
-     * @param root Stage to use as the root of the IntroWindow.
+     * @param root Stage to use as the root of the ReminderWindow.
      */
     public ReminderWindow(Stage root) {
         super(FXML, root);
@@ -30,7 +30,7 @@ public class ReminderWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new IntroWindow.
+     * Creates a new ReminderWindow.
      */
     public ReminderWindow() {
         this(new Stage());
@@ -55,20 +55,20 @@ public class ReminderWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing introduction page about the application.");
+        logger.fine("Showing upcoming reminders");
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
     /**
-     * Hides the intro window.
+     * Hides the reminder window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the intro window.
+     * Focuses on the reminder window.
      */
     public void focus() {
         getRoot().requestFocus();
