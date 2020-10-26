@@ -187,7 +187,7 @@ public class ParserUtil {
     public static BooleanInput parseBooleanInput(String input) throws ParseException {
         requireNonNull(input);
         String trimmedInput = input.trim();
-        if (BooleanInput.isValidBooleanInput(trimmedInput)) {
+        if (!BooleanInput.isValidBooleanInput(trimmedInput)) {
             throw new ParseException(BooleanInput.MESSAGE_CONSTRAINTS);
         }
         return BooleanInput.ofInput(trimmedInput);
