@@ -1,5 +1,9 @@
 package seedu.address.logic.parser.tags;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.logic.commands.tags.DeleteTagCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -8,10 +12,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 

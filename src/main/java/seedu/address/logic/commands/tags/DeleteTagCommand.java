@@ -1,5 +1,11 @@
 package seedu.address.logic.commands.tags;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -8,12 +14,6 @@ import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
-
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 public class DeleteTagCommand extends Command {
 
