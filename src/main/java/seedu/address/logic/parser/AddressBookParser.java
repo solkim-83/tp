@@ -6,9 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD
 import seedu.address.logic.commands.*;
-=======
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
@@ -16,6 +14,7 @@ import seedu.address.logic.commands.contacts.ClearContactCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
+import seedu.address.logic.commands.events.ShowReminderEventCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.commands.general.IntroCommand;
@@ -31,7 +30,6 @@ import seedu.address.logic.parser.events.DeleteEventCommandParser;
 import seedu.address.logic.parser.events.EditEventCommandParser;
 import seedu.address.logic.parser.events.FindEventCommandParser;
 import seedu.address.logic.parser.events.SortEventCommandParser;
->>>>>>> ee90bc0cf946cf5716d8452c0c40f45d34035166
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tags.ViewTagCommandParser;
 
@@ -162,6 +160,9 @@ public class AddressBookParser {
 
             case INTRO:
                 return new IntroCommand();
+
+            case REMINDER:
+                return new ShowReminderEventCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

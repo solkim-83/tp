@@ -7,6 +7,7 @@ import seedu.address.model.event.Time;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReminderStorage {
@@ -60,7 +61,7 @@ public class ReminderStorage {
             while ((line = reader.readLine()) != null) {
                 String[] reminderArr = line.split("/");
                 Event event = new Event(new Description(reminderArr[0]), new Time(reminderArr[1]));
-                Reminder reminder = new Reminder(event, Integer.valueOf(reminderArr[2]));
+                Reminder reminder = new Reminder(event, reminderArr[2]);
                 reminders.add(reminder);
             }
         } catch (IOException e) {

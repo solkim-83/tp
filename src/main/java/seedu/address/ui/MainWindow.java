@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultPanel resultPanel;
     private HelpWindow helpWindow;
     private IntroWindow introWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -72,6 +73,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         introWindow = new IntroWindow();
+        reminderWindow = new ReminderWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -166,6 +168,15 @@ public class MainWindow extends UiPart<Stage> {
         introWindow.show();
     }
 
+    /**
+     * Opens the reminder window. Note that focusing is not required as the window opens as
+     * the app opens.
+     */
+    @FXML
+    public void handleReminders() {
+        reminderWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -203,6 +214,22 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Result: " + commandResult.getFeedbackToUser());
         resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
         handleIntro();
+        return commandResult;
+    }
+
+    /**
+     * Executes the command to show the introduction. As the introduction command should not be
+     * accessible by the user, a commandText should not exist for it and the entire execution
+     * should be handled in the back-end. Note that as this method cannot throw a CommandException
+     * or a ParseException, handling can be ignored. The lack of an access modifier is intentional
+     * - method is supposed to be package private.
+     */
+
+    CommandResult executeShowReminderCommand() throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute("reminder");
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
+        handleReminders();
         return commandResult;
     }
 

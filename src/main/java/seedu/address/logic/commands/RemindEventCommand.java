@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -26,7 +27,7 @@ public class RemindEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REMIND_EVENT_SUCCESS = "Reminder in %d days set for event: ";
+    public static final String MESSAGE_REMIND_EVENT_SUCCESS = "Reminder set for event %d days prior: ";
 
     public static final String MESSAGE_FAILURE = "Please input a date with the prefix in/";
 
@@ -49,6 +50,10 @@ public class RemindEventCommand extends Command {
 
         Event eventForReminder = lastShownList.get(targetIndex.getZeroBased());
         Reminder toAdd = new Reminder(eventForReminder, daysInAdvance);
+        LocalDateTime now = LocalDateTime.now();
+        if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time)) {
+            throw new CommandException("You cannot set a reminder for after the event is over");
+        }
         try {
             Reminder.addReminder(toAdd);
         } catch (IOException e) {
