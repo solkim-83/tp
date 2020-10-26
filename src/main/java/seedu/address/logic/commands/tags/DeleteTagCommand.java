@@ -9,6 +9,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
+import java.util.Set;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURSIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,7 +22,8 @@ public class DeleteTagCommand extends Command {
 
     public static final String MESSAGE_INVALID_TAG = "Tag does not exist!";
     public static final String MESSAGE_DELETE_SUCCESS = "%s has been deleted!";
-    public static final String MESSAGE_DELETE_RECURSIVE_SUCCESS = "%s and sub-tags have been deleted!";
+    public static final String MESSAGE_DELETE_RECURSIVE_SUCCESS = "%s and sub-tags have been deleted!\n\n"
+            + "Deleted sub-tags are %s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE + " "
             + ": Deletes a tag. If the " + PREFIX_RECURSIVE + " field is 1, it also "
@@ -48,8 +51,10 @@ public class DeleteTagCommand extends Command {
         }
 
         if (isRecursive.getBooleanValue()) {
+            Set<Tag> tagSetRecursiveToBeDeleted = model.getSubTagsRecursive(tagToDelete);
             model.deleteTagRecursive(tagToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_RECURSIVE_SUCCESS, tagToDelete));
+            return new CommandResult(String.format(MESSAGE_DELETE_RECURSIVE_SUCCESS, tagToDelete,
+                    tagSetRecursiveToBeDeleted));
         } else {
             model.deleteTag(tagToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, tagToDelete));
