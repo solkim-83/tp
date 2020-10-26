@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import javafx.scene.control.Label;
 import java.util.logging.Logger;
 
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Reminder;

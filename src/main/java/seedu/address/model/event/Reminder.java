@@ -74,7 +74,7 @@ public class Reminder {
     public static void deleteObsolete() throws CommandException {
         for (Reminder r: reminders) {
             if (r.eventToRemind.getTime().time.isBefore(LocalDateTime.now())) {
-             reminders.remove(r);
+                reminders.remove(r);
             }
         }
         try {
