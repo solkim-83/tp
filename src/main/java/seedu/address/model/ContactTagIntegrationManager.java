@@ -43,6 +43,7 @@ public class ContactTagIntegrationManager {
 
     /**
      * Returns true if either the addressBook has {@code tag} or the tagTree has {@code tag}.
+     * For a tag to exist, it must have at least one contact with the tag OR at least one child-tag assigned to it.
      */
     public boolean hasTag(Tag tag) {
         return addressBook.hasTag(tag) || tagTree.hasTag(tag);

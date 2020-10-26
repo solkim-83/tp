@@ -28,11 +28,11 @@ public class AddTagCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.TAG.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Adds a new tag to Athena. "
-            + "Parameters: "
-            + PREFIX_NAME + "TAG_NAME "
-            + "[" + PREFIX_INDEX + "CONTACT_INDEX]... "
-            + "[" + PREFIX_TAG + "SUB_TAG]...\n"
+            + ": Adds a new tag to Athena.\n\n"
+            + "Parameters:\n"
+            + PREFIX_NAME + "TAG_NAME\n"
+            + "[" + PREFIX_INDEX + "CONTACT_INDEX]...\n"
+            + "[" + PREFIX_TAG + "SUB_TAG]...\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_INDEX + "1 "
             + PREFIX_INDEX + "3 "
@@ -50,7 +50,7 @@ public class AddTagCommand extends Command {
     private final Set<Index> indicesSet;
 
     /**
-     * Creates an AddTagCommand to add the specified {@code tagToAdd} with {@code subTagSet} as its subtags and
+     * Creates an AddTagCommand that creates the specified {@code tagToAdd} with {@code subTagSet} as its subtags and
      * {@code personSet} as persons directly under this tag.
      */
     public AddTagCommand(Tag tagToAdd, Set<Tag> subTagSet, Set<Index> indicesSet) {

@@ -24,10 +24,10 @@ import seedu.address.model.tag.Tag;
 public class AddTagCommandParser implements Parser<AddTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of an AddTagCommand.
+     * Parses the given {@code String} of arguments in the context of an AddTagCommand and returns it for execution.
      * Looks for the name of the added tag under PREFIX_NAME, and looks for indices and tag parameters.
      * There must be at least one index or sub-tag specified.
-     * @throws ParseException if the user input does not conform to the expected format.
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public AddTagCommand parse(String args) throws ParseException {
         assert args != null;
