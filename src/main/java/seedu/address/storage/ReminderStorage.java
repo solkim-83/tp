@@ -67,7 +67,7 @@ public class ReminderStorage {
                 Reminder reminder = new Reminder(event, reminderArr[2]);
                 reminders.add(reminder);
             }
-        }   catch (IOException e) {
+        } catch (IOException e) {
             throw new IOException("File couldn't be read properly");
         }
 
