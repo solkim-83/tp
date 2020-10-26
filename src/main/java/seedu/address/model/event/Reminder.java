@@ -74,7 +74,7 @@ public class Reminder {
     /**
      * Calculates the difference between the current date and the date of the event.
      */
-    public String countdown() {
+    public String countdownFromNow() {
         LocalDate now = LocalDate.now();
         long diff = ChronoUnit.DAYS.between(now, eventToRemind.getTime().time.toLocalDate());
         return String.valueOf(diff);
@@ -99,7 +99,7 @@ public class Reminder {
 
     @Override
     public String toString() {
-        return eventToRemind.toString() + " in " + countdown() + " days" + '\n';
+        return eventToRemind.toString() + " in " + countdownFromNow() + " days" + '\n';
     }
 
     /**
