@@ -162,7 +162,7 @@ public class AddressBookParser {
             case INTRO:
                 return new IntroCommand();
 
-            case REMINDER:
+            case SHOW_REMINDER:
                 return new ShowReminderEventCommand();
 
             default:

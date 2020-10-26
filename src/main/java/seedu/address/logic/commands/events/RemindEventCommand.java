@@ -61,6 +61,8 @@ public class RemindEventCommand extends Command {
         LocalDateTime now = LocalDateTime.now();
         if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time)) {
             throw new CommandException("You cannot set a reminder for after the event is over");
+        } else if (Reminder.checkDuplicateReminder(toAdd)) {
+            throw new CommandException("You already have an existing reminder for this event");
         }
         try {
             Reminder.addReminder(toAdd);
