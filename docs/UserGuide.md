@@ -376,6 +376,10 @@ Format: `view -t t/TAG [t/TAG]…`
 
 * `TAG` must be a valid existing tag in Athena.
 
+Example:
+* `view -t t/cs2030` Shows all of the above information for the tag `cs2030` only.
+* `view -t t/cs2030 t/cs2040` Shows all of the above information for the tags `cs2030` and `cs2040` in a sequential order.
+
 #### Listing a tag: `list`
 
 Lists all tags in the remarks panel. It lists each tag and contacts tagged with the tag.
