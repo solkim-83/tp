@@ -49,10 +49,10 @@ public class DeleteTagCommand extends Command {
 
         if (isRecursive.getBooleanValue()) {
             model.deleteTagRecursive(tagToDelete);
-            return new CommandResult(MESSAGE_DELETE_RECURSIVE_SUCCESS);
+            return new CommandResult(String.format(MESSAGE_DELETE_RECURSIVE_SUCCESS, tagToDelete));
         } else {
             model.deleteTag(tagToDelete);
-            return new CommandResult(MESSAGE_DELETE_SUCCESS);
+            return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, tagToDelete));
         }
 
     }
