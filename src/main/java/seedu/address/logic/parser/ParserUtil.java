@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -181,6 +182,15 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
+    }
+
+    public static BooleanInput parseBooleanInput(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        if (BooleanInput.isValidBooleanInput(trimmedInput)) {
+            throw new ParseException(BooleanInput.MESSAGE_CONSTRAINTS);
+        }
+        return BooleanInput.ofInput(trimmedInput);
     }
 
 }

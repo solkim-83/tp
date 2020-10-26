@@ -27,7 +27,7 @@ public class DeleteTagCommand extends Command {
             + "deletes all sub-tags.\n\n"
             + "Parameters:\n"
             + PREFIX_TAG + "TAG\n"
-            + PREFIX_RECURSIVE + "BOOLEAN\n\n"
+            + "[" + PREFIX_RECURSIVE + "BOOLEAN]\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " " + PREFIX_TAG + "CS2103 "
             + PREFIX_RECURSIVE + "true";
 
