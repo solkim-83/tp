@@ -19,7 +19,11 @@ public class BooleanInput {
     }
 
     public static BooleanInput ofInput(String input) {
-        return new BooleanInput(input);
+        return new BooleanInput(input.toLowerCase());
+    }
+
+    public boolean getBooleanValue() {
+        return boolValue;
     }
 
     @Override

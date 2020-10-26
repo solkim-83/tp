@@ -124,6 +124,19 @@ public interface Model {
     void deleteEvent(Event target);
 
     /**
+     * Deletes the given {@code tag}.
+     * All contacts with the assigned {@code tag} will have it removed as well.
+     * All parent-tags of {@code tag} will be reconnected with the child-tags of {@code tag}.
+     */
+    void deleteTag(Tag tag);
+
+    /**
+     * Deletes the given {@code tag} and all its sub-tags.
+     * Sub-tags include child-tags of {@code tag}, child-tags of child-tags, etc.
+     */
+    void deleteTagRecursive(Tag tag);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
