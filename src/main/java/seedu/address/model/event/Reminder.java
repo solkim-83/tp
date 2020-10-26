@@ -54,14 +54,17 @@ public class Reminder {
     /**
      * Adding and writing a reminder into the reminders arraylist and the storage concurrently.
      */
-    public static void addReminder(Reminder reminder) throws IOException{
+    public static void addReminder(Reminder reminder) throws IOException {
         reminders.add(reminder);
         reminderStorage.write(reminder);
     }
 
+    /**
+     * Checks if there is any existing reminder for the same event.
+     */
     public static boolean checkDuplicateReminder(Reminder reminder) {
         for (Reminder r: reminders) {
-            if (r.eventToRemind.equals(reminder.eventToRemind)){
+            if (r.eventToRemind.equals(reminder.eventToRemind)) {
                 return true;
             }
         }
