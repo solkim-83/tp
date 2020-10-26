@@ -19,9 +19,11 @@ public enum CommandWord {
     HELP("help"),
     INTRO("intro"),
     LIST("list"),
+    VIEW("view"),
     SORT("sort"),
     REMIND("remind"),
     REMINDER("reminder"),
+    PERMASORT("psort"),
     DEFAULT("");
 
     /**

@@ -67,5 +67,9 @@ public interface TagManager {
      */
     void copy(TagManager otherTagManager);
 
+    /**
+     * Clears the TagManager of all current tagging.
+     */
+    void clear();
 
 }

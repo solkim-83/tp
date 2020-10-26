@@ -98,6 +98,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Sorts the address book's internal list according to the given comparator
+     */
     public void sortPersons(Comparator<Person> c) {
         internalList.sort(c);
     }
