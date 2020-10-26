@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
@@ -14,6 +13,7 @@ import seedu.address.logic.commands.contacts.ClearContactCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
+import seedu.address.logic.commands.events.ListReminderEventCommand;
 import seedu.address.logic.commands.events.ShowReminderEventCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
@@ -25,11 +25,7 @@ import seedu.address.logic.parser.contacts.EditContactCommandParser;
 import seedu.address.logic.parser.contacts.FindContactCommandParser;
 import seedu.address.logic.parser.contacts.PermaSortContactCommandParser;
 import seedu.address.logic.parser.contacts.SortContactCommandParser;
-import seedu.address.logic.parser.events.AddEventCommandParser;
-import seedu.address.logic.parser.events.DeleteEventCommandParser;
-import seedu.address.logic.parser.events.EditEventCommandParser;
-import seedu.address.logic.parser.events.FindEventCommandParser;
-import seedu.address.logic.parser.events.SortEventCommandParser;
+import seedu.address.logic.parser.events.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tags.ViewTagCommandParser;
 

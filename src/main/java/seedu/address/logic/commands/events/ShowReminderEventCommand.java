@@ -3,7 +3,6 @@ package seedu.address.logic.commands.events;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.event.Reminder;
 
 public class ShowReminderEventCommand extends Command {
 
