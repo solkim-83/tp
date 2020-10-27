@@ -15,6 +15,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddEventCommand}.
@@ -25,15 +26,14 @@ public class AddEventCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+        model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
     }
 
     @Test
     public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().withDescription("Meeting").build();
 
-        Model expectedModel = new ModelManager(
-                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.addEvent(validEvent);
 
         assertCommandSuccess(new AddEventCommand(validEvent), model,
