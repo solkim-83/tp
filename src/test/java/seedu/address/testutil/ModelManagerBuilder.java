@@ -17,7 +17,7 @@ import seedu.address.model.tag.TagTreeImpl;
  */
 public class ModelManagerBuilder {
 
-    ModelManager model;
+    private ModelManager model;
 
     public ModelManagerBuilder() {
         model = new ModelManager(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());

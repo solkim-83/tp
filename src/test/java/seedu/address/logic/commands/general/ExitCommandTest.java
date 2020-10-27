@@ -11,7 +11,7 @@ import seedu.address.testutil.ModelManagerBuilder;
 
 public class ExitCommandTest {
     private Model model = new ModelManagerBuilder().build();
-    private Model expectedModel = new ModelManagerBuilder().build();;
+    private Model expectedModel = new ModelManagerBuilder().build();
 
     @Test
     public void execute_exit_success() {
