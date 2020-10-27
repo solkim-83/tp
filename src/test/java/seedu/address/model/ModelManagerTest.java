@@ -18,11 +18,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ModelManagerBuilder;
 
 // TODO: include/edit tests to include calendar and tagtree
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
+    private ModelManager modelManager = new ModelManagerBuilder().build();
 
     @Test
     public void constructor() {

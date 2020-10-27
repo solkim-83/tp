@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.testutil.ModelManagerBuilder;
 
 public class ExitCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private Model model = new ModelManagerBuilder().build();
+    private Model expectedModel = new ModelManagerBuilder().build();;
 
     @Test
     public void execute_exit_success() {
