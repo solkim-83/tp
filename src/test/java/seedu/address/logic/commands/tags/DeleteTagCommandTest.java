@@ -1,19 +1,5 @@
 package seedu.address.logic.commands.tags;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.booleaninput.BooleanInput;
-import seedu.address.logic.commands.ModelStub;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ContactTagIntegrationManager;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagTree;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,6 +10,20 @@ import static seedu.address.testutil.TagTreeUtil.TAG_CS2040S_NOT_TREE;
 import static seedu.address.testutil.TagTreeUtil.TAG_MA1101R;
 import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE;
 import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE_COMP;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.booleaninput.BooleanInput;
+import seedu.address.logic.commands.ModelStub;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ContactTagIntegrationManager;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagTree;
 
 public class DeleteTagCommandTest {
 

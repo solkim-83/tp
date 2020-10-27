@@ -1,14 +1,14 @@
 package seedu.address.logic.parser.tags;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.logic.commands.tags.DeleteTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeleteTagCommandParserTest {
 
@@ -31,7 +31,7 @@ public class DeleteTagCommandParserTest {
         assertEquals(expectedCommand, parser.parse(TAG_STRING_VALID + BOOLEAN_STRING_TRUE));
 
         expectedCommand = new DeleteTagCommand(TAG_VALID, BOOLEAN_FALSE);
-        assertEquals(expectedCommand, parser.parse(TAG_STRING_VALID +  BOOLEAN_STRING_FALSE));
+        assertEquals(expectedCommand, parser.parse(TAG_STRING_VALID + BOOLEAN_STRING_FALSE));
         // No recursive boolean input given
         assertEquals(expectedCommand, parser.parse(TAG_STRING_VALID));
     }
