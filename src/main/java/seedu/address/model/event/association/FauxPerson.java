@@ -1,4 +1,4 @@
-package seedu.address.model.event.ContactAssociation;
+package seedu.address.model.event.association;
 
 import static java.util.Objects.requireNonNull;
 

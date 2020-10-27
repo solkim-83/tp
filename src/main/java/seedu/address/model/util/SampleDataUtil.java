@@ -9,7 +9,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Calendar;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
-import seedu.address.model.event.ContactAssociation.FauxPerson;
+import seedu.address.model.event.association.FauxPerson;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;

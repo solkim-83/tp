@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.event.ContactAssociation.FauxPerson;
+import seedu.address.model.event.association.FauxPerson;
 
 /**
  * Represents an Events in Calendar.

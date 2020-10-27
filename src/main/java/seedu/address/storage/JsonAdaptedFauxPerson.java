@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.ContactAssociation.FauxPerson;
+import seedu.address.model.event.association.FauxPerson;
 
 public class JsonAdaptedFauxPerson {
 
