@@ -19,8 +19,9 @@ public class DeleteTagCommandParserTest {
     private static final BooleanInput BOOLEAN_TRUE = BooleanInput.isTrue();
     private static final BooleanInput BOOLEAN_FALSE = BooleanInput.isFalse();
 
-    private static final String TAG_STRING_VALID = " t/validtag";
-    private static final Tag TAG_VALID = new Tag(TAG_STRING_VALID);
+    private static final String TAG_NAME_VALID = "validtag";
+    private static final String TAG_STRING_VALID = " t/" + TAG_NAME_VALID;
+    private static final Tag TAG_VALID = new Tag(TAG_NAME_VALID);
     private static final String TAG_STRING_INVALID = " t/invalid tag";
 
     private DeleteTagCommandParser parser = new DeleteTagCommandParser();
