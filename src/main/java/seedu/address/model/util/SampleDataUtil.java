@@ -57,12 +57,21 @@ public class SampleDataUtil {
     }
     // TODO: add associated persons to the following
     public static Event[] getSampleEvents() {
-        // test code please delete if spotted
-        Set<FauxPerson> associatedPersonsTest = new HashSet<>();
-        associatedPersonsTest.add(new FauxPerson("testname | 12345", 12345));
+        Set<FauxPerson> associatedPersonsTest1 = new HashSet<>();
+        associatedPersonsTest1.add(new FauxPerson(getSamplePersons()[2]));
+        associatedPersonsTest1.add(new FauxPerson(getSamplePersons()[0]));
+        associatedPersonsTest1.add(new FauxPerson(getSamplePersons()[4]));
+        Set<FauxPerson> associatedPersonsTest2 = new HashSet<>();
+        associatedPersonsTest2.add(new FauxPerson(getSamplePersons()[5]));
+        associatedPersonsTest2.add(new FauxPerson(getSamplePersons()[3]));
+        associatedPersonsTest2.add(new FauxPerson(getSamplePersons()[1]));
+        Set<FauxPerson> associatedPersonsTest3 = new HashSet<>();
+        associatedPersonsTest3.add(new FauxPerson(getSamplePersons()[1]));
+        associatedPersonsTest3.add(new FauxPerson(getSamplePersons()[3]));
+        associatedPersonsTest3.add(new FauxPerson(getSamplePersons()[5]));
         return new Event[] {
-            new Event(new Description("Night run"), new Time("25-10-2020 21:30"), associatedPersonsTest),
-            new Event(new Description("CS2103 Meeting"), new Time("30-10-2020 14:00"), new HashSet<>()),
+            new Event(new Description("Night run"), new Time("25-10-2020 21:30"), associatedPersonsTest1),
+            new Event(new Description("CS2103 Meeting"), new Time("30-10-2020 14:00"), associatedPersonsTest2),
             new Event(new Description("CCA outing"), new Time("03-11-2020 20:00"), new HashSet<>())
         };
     }
