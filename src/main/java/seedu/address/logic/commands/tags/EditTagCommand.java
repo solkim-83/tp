@@ -193,7 +193,8 @@ public class EditTagCommand extends Command {
             return false;
         } else {
             EditTagCommand other = (EditTagCommand) o;
-            return other.indexSetToAdd.equals(indexSetToAdd)
+            return other.tagToEdit.equals(tagToEdit)
+                    && other.indexSetToAdd.equals(indexSetToAdd)
                     && other.indexSetToRemove.equals(indexSetToRemove)
                     && other.tagSetToAdd.equals(tagSetToAdd)
                     && other.tagSetToRemove.equals(tagSetToRemove);

@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.tags;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.tags.EditTagCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
