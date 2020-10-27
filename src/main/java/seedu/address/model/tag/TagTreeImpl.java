@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import seedu.address.model.tag.exceptions.TagCyclicDependencyException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -103,7 +105,7 @@ public class TagTreeImpl extends TagTree {
         assert !superTag.equals(Tag.ALL_TAGS_TAG) && !subTag.equals(Tag.ALL_TAGS_TAG);
 
         if (isSubTagOf(subTag, superTag)) {
-            throw new IllegalArgumentException(String.format(MESSAGE_CYCLIC_RELATIONSHIP, superTag, subTag));
+            throw new TagCyclicDependencyException(superTag, subTag);
         }
         addToMapSet(tagSubTagMap, superTag, subTag);
         addToMapSet(tagSuperTagMap, subTag, superTag);
