@@ -35,7 +35,7 @@ public class EventCard extends UiPart<Region> {
 
     // do not understand why, but when the following field is named anything else with the corresponding change
     // to EventListCard.fxml, the GUI breaks and the blue boxes are no longer shown around the display name
-    // TODO: fix problem above, or maybe not
+    // TODO: fix problem mentioned right above, or maybe not
     @FXML
     private FlowPane tags;
 
@@ -48,7 +48,7 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(event.getDescription().fullDescription);
         time.setText(event.getTime().toDisplayString());
-        // no sorting here, as show in order of user input
+        // no sorting here, as to show it in order of user input
         event.getAssociatedPersons().stream()
                 .forEach(fauxPerson -> tags.getChildren().add(new Label(fauxPerson.displayName)));
     }
