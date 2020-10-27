@@ -2,7 +2,14 @@ package seedu.address.logic.parser.events;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.EditEventCommand;
@@ -12,8 +19,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.*;
 
 /**
  * Parses input arguments and creates a new EditEventCommand object

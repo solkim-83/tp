@@ -1,8 +1,8 @@
 package seedu.address.model.event.ContactAssociation;
 
-import seedu.address.model.person.Person;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents a limited version of a Person
@@ -40,6 +40,11 @@ public class FauxPerson {
         this.hashCode = person.hashCode();
     }
 
+    /**
+     * Checks if a given string is a valid display name.
+     * @param displayName string
+     * @return boolean
+     */
     public static boolean isValidDisplayName(String displayName) {
         if (displayName.length() < 1) {
             return false;
@@ -47,6 +52,11 @@ public class FauxPerson {
         return true;
     }
 
+    /**
+     * Checks if a given string can be converted into an integer to represent hashcode
+     * @param hashCode string
+     * @return boolean
+     */
     public static boolean isValidHashCode(String hashCode) {
         try {
             Integer.parseInt(hashCode);
