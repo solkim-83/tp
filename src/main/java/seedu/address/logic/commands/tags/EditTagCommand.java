@@ -36,6 +36,9 @@ public class EditTagCommand extends Command {
             "One of the specified tags to add is already a child-tag of %s";
     private static final String MESSAGE_SUCCESS =
             "%s has successfully been edited!";
+    private static final String MESSAGE_CYCLIC_DEPENDENCY_DETECTED =
+            "Cyclic dependency detected between %s and %s! "
+            + "Do not assign a super-tag as a sub-tag to the tag you are editing.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Edits an existing tag in Athena. You can add and/or remove contacts from a tag, and/or "
@@ -108,6 +111,13 @@ public class EditTagCommand extends Command {
         if (hasChildTagToAddAlreadyPresent) {
             throw new CommandException(String.format(MESSAGE_ADD_TAG_PRESENT, tagToEdit));
         }
+
+        for (Tag childTagToAdd : tagSetToAdd) {
+            if (model.isSubTagOf(childTagToAdd, tagToEdit)) {
+                throw new CommandException(String.format(MESSAGE_CYCLIC_DEPENDENCY_DETECTED, tagToEdit, childTagToAdd));
+            }
+        }
+
     }
 
     private static Set<Person> getPersonsAtIndices(Model model, Set<Index> indices) {

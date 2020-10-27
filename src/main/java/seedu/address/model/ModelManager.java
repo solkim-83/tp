@@ -215,6 +215,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isSubTagOf(Tag superTag, Tag subTag) {
+        return tagTree.isSubTagOf(superTag, subTag);
+
+    }
+
+    @Override
     public void addPersonToTag(Tag tag, Person person) {
         addressBook.addPersonToTag(tag, person);
     }

@@ -216,6 +216,11 @@ public interface Model {
      */
     void removeChildTagFrom(Tag parentTag, Tag childTag);
 
+    /**
+     * Returns true if {@code subTag} is a sub-tag of {@code superTag}.
+     */
+    boolean isSubTagOf(Tag superTag, Tag subTag);
+
     // Filter/sort-list methods
 
     /**

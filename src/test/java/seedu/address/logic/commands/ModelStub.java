@@ -101,6 +101,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean isSubTagOf(Tag superTag, Tag subTag) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setAddressBook(ReadOnlyAddressBook newData) {
         throw new AssertionError("This method should not be called.");
     }
