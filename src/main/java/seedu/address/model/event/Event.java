@@ -87,7 +87,7 @@ public class Event {
         builder.append(getDescription())
                 .append("\nAt: ")
                 .append(getTime())
-                .append("\nAttending: ");
+                .append("\n\nPeople attending: ");
         int counter = 1;
         for (FauxPerson fauxPerson : associatedPersons) {
             builder.append("\n" + counter + ") ").append(fauxPerson.displayName);

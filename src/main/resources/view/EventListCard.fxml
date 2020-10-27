@@ -28,7 +28,7 @@
                 <Label fx:id="description" text="\$first" styleClass="cell_big_label" />
             </HBox>
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
-            <FlowPane fx:id="associatedPersons" />
+            <FlowPane fx:id="tags" />
         </VBox>
     </GridPane>
 </HBox>

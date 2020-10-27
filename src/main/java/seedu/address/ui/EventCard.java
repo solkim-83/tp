@@ -7,8 +7,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
 
-import java.util.Comparator;
-
 /**
  * An UI component that displays information of a {@code Event}.
  */
@@ -34,8 +32,12 @@ public class EventCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label time;
+
+    // do not understand why, but when the following field is named anything else with the corresponding change
+    // to EventListCard.fxml, the GUI breaks and the blue boxes are no longer shown around the display name
+    // TODO: fix problem above, or maybe not
     @FXML
-    private FlowPane associatedPersons;
+    private FlowPane tags;
 
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
@@ -46,8 +48,9 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(event.getDescription().fullDescription);
         time.setText(event.getTime().toDisplayString());
+        // no sorting here, as show in order of user input
         event.getAssociatedPersons().stream()
-                .forEach(fauxPerson -> associatedPersons.getChildren().add(new Label(fauxPerson.displayName)));
+                .forEach(fauxPerson -> tags.getChildren().add(new Label(fauxPerson.displayName)));
     }
 
     @Override
