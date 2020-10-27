@@ -13,8 +13,18 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a DeleteTagCommand object.
+ */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
 
+    /**
+     * Parses the given {@code args} in the context of a DeleteTagCommand and returns it for execution.
+     * Looks for a tag that matches given tag name under PREFIX_TAG and deletes it.
+     * If a boolean input is given and the boolean input is true, then a recursive delete is done for all sub-tags too.
+     * If no boolean input is provided, the default is taken to be false.
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     public DeleteTagCommand parse(String args) throws ParseException {
         assert args != null;
 

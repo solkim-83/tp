@@ -15,6 +15,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Deletes the specified tag from the system.
+ * If {@code isRecursive} is true, then all sub-tags of the tag is deleted as well.
+ * If {@code isRecursive} is false, then all parent-tags of {@code tagToDelete} will be reconnected with the set of
+ * child-tags of {@code tagToDelete}.
+ * Parent tags of the {@code tagToDelete} that do not have any contacts tagged and have {@code tagToDelete}
+ * as the only child-tag will also be deleted.
+ */
 public class DeleteTagCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWord.DELETE.toString();
@@ -37,6 +45,10 @@ public class DeleteTagCommand extends Command {
     private final Tag tagToDelete;
     private final BooleanInput isRecursive;
 
+    /**
+     * Creates a DeleteTagCommand object with the specified {@code tagToDelete} and
+     * {@code isRecursive} (for determining if the sub-tags should be deleted).
+     */
     public DeleteTagCommand(Tag tagToDelete, BooleanInput isRecursive) {
         this.tagToDelete = tagToDelete;
         this.isRecursive = isRecursive;
