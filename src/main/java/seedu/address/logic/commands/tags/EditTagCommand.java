@@ -1,6 +1,5 @@
-package seedu.address.logic.parser.tags;
+package seedu.address.logic.commands.tags;
 
-import com.sun.scenario.effect.Blend;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
