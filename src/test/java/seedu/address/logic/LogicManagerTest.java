@@ -41,7 +41,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model = new ModelManagerBuilder().build();
     private Logic logic;
 
     @BeforeEach
@@ -95,7 +95,7 @@ public class LogicManagerTest {
         String addCommand = AddContactCommand.COMMAND_WORD + " " + AddContactCommand.COMMAND_TYPE + NAME_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
+        ModelManager expectedModel = new ModelManagerBuilder().build();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

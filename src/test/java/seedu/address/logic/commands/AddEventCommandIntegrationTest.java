@@ -8,12 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.events.AddEventCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ModelManagerBuilder;
 
