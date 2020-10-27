@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.tags;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.tags.EditTagCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -19,9 +20,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+/**
+ * Parses input arugments and creates a new EditTagCommand object.
+ */
 public class EditTagCommandParser implements Parser<EditTagCommand> {
 
-    @Override
+    /**
+     * Parses the given string {@code args} in the context of an EditTagCommand and returns it for execution.
+     * A tag name must be specified under PREFIX_NAME to indicate the tag to be edited.
+     * Separate sets are generated for indices of contacts to be added, indices of contacts to be removed,
+     * tags to be added as child-tags, and child-tags to be removed.
+     * There must be at least one optional field to edit (i.e. all sets cannot be empty).
+     * @throws ParseException if any of the required conditions are not met
+     */
     public EditTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
@@ -40,6 +51,12 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
 
         Set<Tag> tagSetToAdd = ParserUtil.parseTags(argumentMultimap.getAllValues(PREFIX_TAG));
         Set<Tag> tagSetToRemove = ParserUtil.parseTags(argumentMultimap.getAllValues(PREFIX_REMOVE_TAG));
+
+        boolean isAllSetsEmpty = indexSetToAdd.isEmpty() && indexSetToRemove.isEmpty()
+                && tagSetToAdd.isEmpty() && tagSetToRemove.isEmpty();
+        if (isAllSetsEmpty) {
+            throw new ParseException(EditTagCommand.MESSAGE_NOT_EDITED);
+        }
 
         return new EditTagCommand(tagToEdit, indexSetToAdd, indexSetToRemove, tagSetToAdd, tagSetToRemove);
     }
