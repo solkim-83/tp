@@ -33,7 +33,7 @@ public class EditTagCommandParser implements Parser<EditTagCommand> {
         if (!hasTagSpecified) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTagCommand.MESSAGE_USAGE));
         }
-        Tag tagToEdit = ParserUtil.parseTag(argumentMultimap.getValue(PREFIX_NAME).get(), true);
+        Tag tagToEdit = ParserUtil.parseTag(argumentMultimap.getValue(PREFIX_NAME).get());
 
         Set<Index> indexSetToAdd = ParserUtil.parseIndices(argumentMultimap.getAllValues(PREFIX_INDEX));
         Set<Index> indexSetToRemove = ParserUtil.parseIndices(argumentMultimap.getAllValues(PREFIX_REMOVE_INDEX));
