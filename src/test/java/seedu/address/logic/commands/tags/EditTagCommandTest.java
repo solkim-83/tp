@@ -16,8 +16,9 @@ import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE_COMP;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;

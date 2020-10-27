@@ -1,12 +1,12 @@
 package seedu.address.model.tag;
 
-import seedu.address.model.tag.exceptions.TagCyclicDependencyException;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+
+import seedu.address.model.tag.exceptions.TagCyclicDependencyException;
 
 /**
  * A concrete implementation of the TagTree. It uses two HashMaps to keep track of the two-way relationship of tags.

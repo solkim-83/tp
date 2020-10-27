@@ -1,5 +1,16 @@
 package seedu.address.logic.commands.tags;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -10,16 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Edits an existing tag in Athena.

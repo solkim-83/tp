@@ -37,6 +37,9 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code Collection<String> inputs} into a {@code Set<Index>}.
+     */
     public static Set<Index> parseIndices(Collection<String> inputs) throws ParseException {
         assert inputs != null;
 
