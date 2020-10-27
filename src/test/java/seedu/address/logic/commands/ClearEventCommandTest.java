@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.ModelManagerBuilder;
 
 public class ClearEventCommandTest {
 
@@ -25,9 +26,8 @@ public class ClearEventCommandTest {
 
     @Test
     public void execute_nonEmptyCalendar_success() {
-        Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
-        Model expectedModel = new ModelManager(
-                new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
+        Model expectedModel = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
         expectedModel.setCalendar(new Calendar());
 
         assertCommandSuccess(new ClearEventCommand(), model, ClearEventCommand.MESSAGE_SUCCESS, expectedModel);
