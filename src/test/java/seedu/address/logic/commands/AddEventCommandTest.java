@@ -17,6 +17,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.ModelStub;
 
 public class AddEventCommandTest {
 

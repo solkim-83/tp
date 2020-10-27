@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.testutil;
 
 import java.nio.file.Path;
 import java.util.Comparator;

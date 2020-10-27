@@ -12,7 +12,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ModelStub;
+import seedu.address.testutil.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
