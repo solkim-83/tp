@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.events.AddEventCommand;
@@ -13,6 +14,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.ContactAssociation.FauxPerson;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
@@ -41,7 +43,8 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_DATETIME).get());
 
-        Event event = new Event(description, time);
+        // TODO: maybe allow this command to directly add new person associations, at the moment this is ok
+        Event event = new Event(description, time, new HashSet<FauxPerson>());
 
         return new AddEventCommand(event);
     }

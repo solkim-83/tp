@@ -1,23 +1,33 @@
 package seedu.address.model.event;
 
+import seedu.address.model.event.ContactAssociation.FauxPerson;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents an Events in Calendar.
  */
 public class Event {
+
+    // Identity fields
     private final Description description;
+
+    // Data fields
     private final Time time;
+    private final Set<FauxPerson> associatedPersons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Description description, Time time) {
+    public Event(Description description, Time time, Set<FauxPerson> associatedPersons) {
         requireAllNonNull(description, time);
         this.description = description;
         this.time = time;
+        this.associatedPersons.addAll(associatedPersons);
     }
 
     public Description getDescription() {
@@ -26,6 +36,10 @@ public class Event {
 
     public Time getTime() {
         return time;
+    }
+
+    public Set<FauxPerson> getAssociatedPersons() {
+        return associatedPersons;
     }
 
     /**
@@ -65,7 +79,9 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" At: ")
-                .append(getTime());
+                .append(getTime())
+                .append(" Attending: ");
+        getAssociatedPersons().forEach(builder::append);
         return builder.toString();
     }
 }
