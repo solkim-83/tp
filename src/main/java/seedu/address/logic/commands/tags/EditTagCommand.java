@@ -46,6 +46,8 @@ public class EditTagCommand extends Command {
             + "Do not assign a super-tag as a sub-tag to the tag you are editing.";
     public static final String MESSAGE_NOT_EDITED =
             "None of the edit fields have been properly specified! Please specify at least one";
+    public static final String MESSAGE_TAG_TO_EDIT_NOT_PRESENT =
+            "%s does not exist in Athena!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Edits an existing tag in Athena. You can add and/or remove contacts from a tag, and/or "
@@ -115,6 +117,11 @@ public class EditTagCommand extends Command {
     private void checkInputValidity(Model model) throws CommandException {
         boolean hasPersonToRemoveWithoutTag = getPersonsAtIndices(model, indexSetToRemove).stream()
                 .anyMatch(person -> !person.getTags().contains(tagToEdit));
+
+        if (!model.hasTag(tagToEdit)) {
+            throw new CommandException(String.format(MESSAGE_TAG_TO_EDIT_NOT_PRESENT, tagToEdit));
+        }
+
         if (hasPersonToRemoveWithoutTag) {
             throw new CommandException(String.format(MESSAGE_REMOVE_CONTACT_DOES_NOT_HAVE_TAG, tagToEdit));
         }

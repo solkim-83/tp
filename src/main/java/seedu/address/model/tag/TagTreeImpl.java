@@ -182,7 +182,6 @@ public class TagTreeImpl extends TagTree {
 
         boolean hasSubTagAsDirectChild = tagSubTagMap.get(superTag).contains(subTag);
         if (hasSubTagAsDirectChild) {
-            System.out.println(superTag + " " + subTag);
             return true;
         }
 
