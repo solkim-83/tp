@@ -22,19 +22,17 @@ import seedu.address.logic.commands.contacts.AddContactCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
 import seedu.address.storage.JsonTagTreeStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.ModelManagerBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
@@ -144,8 +142,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(),
-                new Calendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook()).build();
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
