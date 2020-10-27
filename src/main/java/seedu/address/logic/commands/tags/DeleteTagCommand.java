@@ -73,4 +73,17 @@ public class DeleteTagCommand extends Command {
         }
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof DeleteTagCommand)) {
+            return false;
+        } else {
+            DeleteTagCommand other = (DeleteTagCommand) o;
+            return other.tagToDelete.equals(tagToDelete)
+                    && other.isRecursive.equals(isRecursive);
+        }
+    }
 }
