@@ -1,9 +1,11 @@
 package seedu.address.model.event;
 
 import seedu.address.model.event.ContactAssociation.FauxPerson;
+import seedu.address.model.tag.Tag;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -38,8 +40,12 @@ public class Event {
         return time;
     }
 
+    /**
+     * Returns an immutable FauxPerson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<FauxPerson> getAssociatedPersons() {
-        return associatedPersons;
+        return Collections.unmodifiableSet(associatedPersons);
     }
 
     /**
@@ -71,7 +77,8 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return otherEvent.getDescription().equals(getDescription())
-                && otherEvent.getTime().equals(getTime());
+                && otherEvent.getTime().equals(getTime())
+                && otherEvent.getAssociatedPersons().equals(getAssociatedPersons());
     }
 
     @Override

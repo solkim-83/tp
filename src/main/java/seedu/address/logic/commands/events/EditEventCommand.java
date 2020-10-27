@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +93,7 @@ public class EditEventCommand extends Command {
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
 
-        return new Event(updatedDescription, updatedTime);
+        return new Event(updatedDescription, updatedTime, new HashSet<>());
     }
 
     @Override

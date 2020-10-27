@@ -1,6 +1,5 @@
 package seedu.address.model.event.ContactAssociation;
 
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
@@ -11,18 +10,50 @@ import static java.util.Objects.requireNonNull;
  */
 public class FauxPerson {
 
-    public final Name displayName;
+    public static final String MESSAGE_CONSTRAINTS_NAME = "Display name should not be empty";
+    public static final String MESSAGE_CONSTRAINTS_HASHCODE = "Hashcode is not a valid integer number";
+
+    public final String displayName;
     public final Integer hashCode;
 
     /**
      * Constructs a {@code FauxPerson}.
      *
-     * @param person A valid Person.
+     * @param displayName name of this faux person
+     * @param hashCode hashCode of actual person this is representing
      */
-    FauxPerson(Person person) {
+    public FauxPerson(String displayName, Integer hashCode) {
+        requireNonNull(displayName);
+        requireNonNull(hashCode);
+        this.displayName = displayName;
+        this.hashCode = hashCode;
+    }
+
+    /**
+     * Constructs a {@code FauxPerson}.
+     *
+     * @param person Person to be converted into a FauxPerson
+     */
+    public FauxPerson(Person person) {
         requireNonNull(person);
-        displayName = person.getName();
-        hashCode = person.hashCode();
+        this.displayName = person.getName().toString();
+        this.hashCode = person.hashCode();
+    }
+
+    public static boolean isValidDisplayName(String displayName) {
+        if (displayName.length() < 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isValidHashCode(String hashCode) {
+        try {
+            Integer.parseInt(hashCode);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override
@@ -35,6 +66,6 @@ public class FauxPerson {
 
     @Override
     public String toString() {
-        return displayName.toString();
+        return displayName;
     }
 }

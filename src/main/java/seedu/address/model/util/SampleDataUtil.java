@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Calendar;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.event.ContactAssociation.FauxPerson;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
@@ -53,12 +55,15 @@ public class SampleDataUtil {
         }
         return sampleAb;
     }
-
+    // TODO: add associated persons to the following
     public static Event[] getSampleEvents() {
+        // test code please delete if spotted
+        Set<FauxPerson> associatedPersonsTest = new HashSet<>();
+        associatedPersonsTest.add(new FauxPerson("testname | 12345", 12345));
         return new Event[] {
-            new Event(new Description("Night run"), new Time("25-10-2020 21:30")),
-            new Event(new Description("CS2103 Meeting"), new Time("30-10-2020 14:00")),
-            new Event(new Description("CCA outing"), new Time("03-11-2020 20:00"))
+            new Event(new Description("Night run"), new Time("25-10-2020 21:30"), associatedPersonsTest),
+            new Event(new Description("CS2103 Meeting"), new Time("30-10-2020 14:00"), new HashSet<>()),
+            new Event(new Description("CCA outing"), new Time("03-11-2020 20:00"), new HashSet<>())
         };
     }
 
