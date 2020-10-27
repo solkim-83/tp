@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
-
-import java.util.HashSet;
 
 /**
  * A utility class to help with building Event objects.
