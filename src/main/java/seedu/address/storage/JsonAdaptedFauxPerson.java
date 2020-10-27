@@ -7,7 +7,7 @@ import seedu.address.model.event.ContactAssociation.FauxPerson;
 
 public class JsonAdaptedFauxPerson {
 
-    private static final String regex = "/break/";
+    private static final String regex = " /break/ ";
 
     private final String displayName;
     private final String hashCode;

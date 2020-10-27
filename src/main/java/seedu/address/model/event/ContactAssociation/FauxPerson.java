@@ -5,7 +5,7 @@ import seedu.address.model.person.Person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person
+ * Represents a limited version of a Person
  * To be used only as part of associating contacts with events
  */
 public class FauxPerson {

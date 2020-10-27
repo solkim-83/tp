@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -121,6 +122,8 @@ public class EditEventCommand extends Command {
     public static class EditEventDescriptor {
         private Description description;
         private Time time;
+        private ArrayList<Index> personsToAdd;
+        private ArrayList<Index> personsToRemove;
 
         public EditEventDescriptor() {}
 
@@ -137,7 +140,7 @@ public class EditEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, time);
+            return CollectionUtil.isAnyNonNull(description, time, personsToAdd, personsToRemove);
         }
 
         public void setDescription(Description description) {
@@ -156,6 +159,22 @@ public class EditEventCommand extends Command {
             return Optional.ofNullable(time);
         }
 
+        public void setPersonsToAdd(ArrayList<Index> personsToAdd) {
+            this.personsToAdd = personsToAdd;
+        }
+
+        public Optional<ArrayList<Index>> getPersonsToAdd() {
+            return Optional.ofNullable(personsToAdd);
+        }
+
+        public void setPersonsToRemoveArrayList(ArrayList<Index> personsToRemove) {
+            this.personsToRemove = personsToRemove;
+        }
+
+        public Optional<ArrayList<Index>> getPersonsToRemove() {
+            return Optional.ofNullable(personsToRemove);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -172,7 +191,9 @@ public class EditEventCommand extends Command {
             EditEventDescriptor e = (EditEventDescriptor) other;
 
             return getDescription().equals(e.getDescription())
-                    && getTime().equals(e.getTime());
+                    && getTime().equals(e.getTime())
+                    && getPersonsToAdd().equals(e.getPersonsToAdd())
+                    && getPersonsToRemove().equals(e.getPersonsToRemove());
         }
     }
 }

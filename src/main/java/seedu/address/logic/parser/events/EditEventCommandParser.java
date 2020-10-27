@@ -2,8 +2,7 @@ package seedu.address.logic.parser.events;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.EditEventCommand;
@@ -13,6 +12,8 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.*;
 
 /**
  * Parses input arguments and creates a new EditEventCommand object
@@ -27,7 +28,8 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
     public EditEventCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_PERSON,
+                        PREFIX_REMOVE_PERSON);
 
         Index index;
 
@@ -46,10 +48,38 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             editEventDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
 
+        parsePersonsToEdit(argMultimap.getAllValues(PREFIX_PERSON))
+                .ifPresent(editEventDescriptor::setPersonsToAdd);
+        parsePersonsToEdit(argMultimap.getAllValues(PREFIX_REMOVE_PERSON))
+                .ifPresent(editEventDescriptor::setPersonsToAdd);
+
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditEventCommand(index, editEventDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> indexes} into a {@code ArrayList<Index>}
+     * if {@code indexes} is non-empty.
+     */
+    private Optional<ArrayList<Index>> parsePersonsToEdit(Collection<String> indexes) throws ParseException {
+        requireNonNull(indexes);
+
+        if (indexes.isEmpty()) {
+            return Optional.empty();
+        }
+
+        final ArrayList<Index> indexArrayList = new ArrayList<>();
+        for (String index : indexes) {
+            indexArrayList.add(ParserUtil.parseIndex(index));
+        }
+        indexArrayList.sort((current, other) -> current.getZeroBased() - other.getOneBased());
+
+        // TODO : test code pls delete
+        System.out.println("index array list" + indexArrayList.toString());
+
+        return Optional.of(indexArrayList);
     }
 }
