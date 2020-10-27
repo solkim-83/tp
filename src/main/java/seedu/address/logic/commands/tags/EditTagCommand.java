@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_INDEX;
@@ -59,6 +60,8 @@ public class EditTagCommand extends Command {
 
     public EditTagCommand(Tag tagToEdit, Set<Index> indexSetToAdd, Set<Index> indexSetToRemove,
             Set<Tag> tagSetToAdd, Set<Tag> tagSetToRemove) {
+        requireAllNonNull(tagToEdit, indexSetToAdd, indexSetToRemove, tagSetToAdd, tagSetToRemove);
+
         this.tagToEdit = tagToEdit;
         this.indexSetToAdd = indexSetToAdd;
         this.indexSetToRemove = indexSetToRemove;
