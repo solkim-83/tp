@@ -177,6 +177,11 @@ public interface Model {
     Set<Tag> getSuperTags();
 
     /**
+     * Returns a set of all child-tags of {@code tag}.
+     */
+    Set<Tag> getChildTags(Tag tag);
+
+    /**
      * Returns a set of all tags below the provided {@code tag} in the tag hierarchy.
      * I.e. all sub-tags, all sub-tags of those sub-tags, etc.
      */

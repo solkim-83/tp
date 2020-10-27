@@ -200,6 +200,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public Set<Tag> getChildTags(Tag tag) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public Set<Tag> getSubTagsRecursive(Tag tag) {
         throw new AssertionError("This method should not be called.");
     }

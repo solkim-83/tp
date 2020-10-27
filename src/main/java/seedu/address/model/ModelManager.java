@@ -286,6 +286,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Set<Tag> getChildTags(Tag tag) {
+        return tagTree.getSubTagsOf(tag);
+    }
+
+    @Override
     public Set<Tag> getSubTagsRecursive(Tag tag) {
         return tagTree.getSubTagsRecursive(tag);
     }
