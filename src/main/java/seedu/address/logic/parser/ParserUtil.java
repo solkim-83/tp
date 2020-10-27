@@ -184,6 +184,12 @@ public class ParserUtil {
         return new Time(trimmedTime);
     }
 
+    /**
+     * Parses a String {@code input} into a BooleanInput.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is invalid for a BooleanInput.
+     */
     public static BooleanInput parseBooleanInput(String input) throws ParseException {
         requireNonNull(input);
         String trimmedInput = input.trim();
