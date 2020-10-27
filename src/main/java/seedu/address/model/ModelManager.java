@@ -210,8 +210,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeChildTagFrom(Tag parentTag, Tag childTag) {
+        tagTree.removeSubTagFrom(parentTag, childTag);
+    }
+
+    @Override
     public void addPersonToTag(Tag tag, Person person) {
         addressBook.addPersonToTag(tag, person);
+    }
+
+    @Override
+    public void removePersonFromTag(Tag tag, Person person) {
+        addressBook.removePersonFromTag(tag, person);
     }
 
     @Override

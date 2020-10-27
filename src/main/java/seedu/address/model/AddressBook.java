@@ -116,6 +116,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Removes {@code tag} from the designated {@code person}.
+     */
+    public void removePersonFromTag(Tag tag, Person person) {
+        Set<Tag> newTagSet = new HashSet<>(person.getTags());
+        newTagSet.remove(tag);
+        Person editedPerson = new Person(person.getName(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getAddress(),
+                newTagSet);
+        setPerson(person, editedPerson);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
