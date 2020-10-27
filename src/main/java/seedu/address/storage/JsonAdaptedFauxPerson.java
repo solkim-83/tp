@@ -41,11 +41,11 @@ public class JsonAdaptedFauxPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted FauxPerson.
      */
     public FauxPerson toModelType() throws IllegalValueException {
-        if (FauxPerson.isValidDisplayName(displayName)) {
+        if (!FauxPerson.isValidDisplayName(displayName)) {
             throw new IllegalValueException(FauxPerson.MESSAGE_CONSTRAINTS_NAME);
         }
 
-        if (FauxPerson.isValidHashCode(hashCode)) {
+        if (!FauxPerson.isValidHashCode(hashCode)) {
             throw new IllegalValueException(FauxPerson.MESSAGE_CONSTRAINTS_HASHCODE);
         }
         return new FauxPerson(displayName, Integer.parseInt(hashCode));

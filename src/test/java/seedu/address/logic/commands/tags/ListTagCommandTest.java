@@ -33,6 +33,7 @@ public class ListTagCommandTest {
     public void parsePersonSetIntoString_validSet_success() {
         String message = parsePersonSetIntoString(Set.of(PERSON_CS1231S_1, PERSON_CS1231S_2),
                 STRING_IF_EMPTY);
+        // TODO: remove the following println? dont think it should be here -andy
         System.out.println(message);
         assertTrue(message.contains(PERSON_CS1231S_1.getName().toString())
                 && message.contains(PERSON_CS1231S_2.getName().toString()));

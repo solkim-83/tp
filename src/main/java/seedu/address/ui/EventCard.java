@@ -47,9 +47,7 @@ public class EventCard extends UiPart<Region> {
         description.setText(event.getDescription().fullDescription);
         time.setText(event.getTime().toDisplayString());
         event.getAssociatedPersons().stream()
-                .sorted(Comparator.comparing(fauxPerson -> fauxPerson.displayName.toString()))
-                .forEach(fauxPerson -> associatedPersons.getChildren()
-                        .add(new Label(fauxPerson.displayName.toString())));
+                .forEach(fauxPerson -> associatedPersons.getChildren().add(new Label(fauxPerson.displayName)));
     }
 
     @Override

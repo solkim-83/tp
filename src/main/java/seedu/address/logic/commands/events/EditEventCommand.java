@@ -5,10 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,9 +16,11 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.ContactAssociation.FauxPerson;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
+import seedu.address.model.person.Person;
 
 /**
  * Edits the details of an existing event in the Athena.
@@ -65,20 +64,26 @@ public class EditEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getSortedFilteredEventList();
+        List<Event> lastShownEventList = model.getSortedFilteredEventList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToEdit = lastShownList.get(index.getZeroBased());
-        Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
+        Event eventToEdit = lastShownEventList.get(index.getZeroBased());
+        List<Person> lastShownPersonList = model.getSortedFilteredPersonList();
+
+        Event editedEvent;
+        try {
+            editedEvent = createEditedEvent(eventToEdit, editEventDescriptor, lastShownPersonList);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        // TODO: add setEvent method to model and subsequent methods needed for testing
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
@@ -88,13 +93,36 @@ public class EditEventCommand extends Command {
      * Creates and returns a {@code Event} with the details of {@code eventToEdit}
      * edited with {@code editEventDescriptor}.
      */
-    private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
-        assert eventToEdit != null;
+    private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor,
+                                           List<Person> lastShownPersonList) throws IndexOutOfBoundsException {
 
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
 
-        return new Event(updatedDescription, updatedTime, new HashSet<>());
+        // updatedAssociatedPersons' part
+        ArrayList<FauxPerson> tempAssociatedPersons = new ArrayList<>(eventToEdit.getAssociatedPersons());
+
+        // remove FauxPersons from event
+        if (editEventDescriptor.getPersonsToRemove().isPresent()) {
+            ArrayList<Index> indexArrayList = editEventDescriptor.getPersonsToRemove().orElse(new ArrayList<>());
+            // sorting based on biggest index first
+            indexArrayList.sort((current, other) -> other.getZeroBased() - current.getOneBased());
+            for (Index index : indexArrayList) {
+                tempAssociatedPersons.remove(index.getZeroBased());
+            }
+        }
+
+        // add FauxPersons to event, in user order, no sorting
+        if (editEventDescriptor.getPersonsToAdd().isPresent()) {
+            for (Index index : editEventDescriptor.getPersonsToAdd().orElse(new ArrayList<>())) {
+                Person personToAdd = lastShownPersonList.get(index.getZeroBased());
+                tempAssociatedPersons.add(new FauxPerson(personToAdd));
+            }
+        }
+
+        Set<FauxPerson> updatedAssociatedPersons = new HashSet<>(tempAssociatedPersons);
+
+        return new Event(updatedDescription, updatedTime, updatedAssociatedPersons);
     }
 
     @Override
@@ -122,8 +150,8 @@ public class EditEventCommand extends Command {
     public static class EditEventDescriptor {
         private Description description;
         private Time time;
-        private ArrayList<Index> personsToAdd;
-        private ArrayList<Index> personsToRemove;
+        private ArrayList<Index> personsToAdd = new ArrayList<>();
+        private ArrayList<Index> personsToRemove = new ArrayList<>();
 
         public EditEventDescriptor() {}
 
@@ -134,6 +162,8 @@ public class EditEventCommand extends Command {
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setDescription(toCopy.description);
             setTime(toCopy.time);
+            toCopy.getPersonsToAdd().ifPresent(this::setPersonsToAdd);
+            toCopy.getPersonsToRemove().ifPresent(this::setPersonsToRemove);
         }
 
         /**
@@ -160,15 +190,15 @@ public class EditEventCommand extends Command {
         }
 
         public void setPersonsToAdd(ArrayList<Index> personsToAdd) {
-            this.personsToAdd = personsToAdd;
+            this.personsToAdd.addAll(personsToAdd);
         }
 
         public Optional<ArrayList<Index>> getPersonsToAdd() {
             return Optional.ofNullable(personsToAdd);
         }
 
-        public void setPersonsToRemoveArrayList(ArrayList<Index> personsToRemove) {
-            this.personsToRemove = personsToRemove;
+        public void setPersonsToRemove(ArrayList<Index> personsToRemove) {
+            this.personsToRemove.addAll(personsToRemove);
         }
 
         public Optional<ArrayList<Index>> getPersonsToRemove() {

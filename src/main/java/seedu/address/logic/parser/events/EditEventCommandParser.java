@@ -51,7 +51,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
         parsePersonsToEdit(argMultimap.getAllValues(PREFIX_PERSON))
                 .ifPresent(editEventDescriptor::setPersonsToAdd);
         parsePersonsToEdit(argMultimap.getAllValues(PREFIX_REMOVE_PERSON))
-                .ifPresent(editEventDescriptor::setPersonsToAdd);
+                .ifPresent(editEventDescriptor::setPersonsToRemove);
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);
@@ -75,10 +75,6 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
         for (String index : indexes) {
             indexArrayList.add(ParserUtil.parseIndex(index));
         }
-        indexArrayList.sort((current, other) -> current.getZeroBased() - other.getOneBased());
-
-        // TODO : test code pls delete
-        System.out.println("index array list" + indexArrayList.toString());
 
         return Optional.of(indexArrayList);
     }

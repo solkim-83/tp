@@ -85,10 +85,14 @@ public class Event {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" At: ")
+                .append("\nAt: ")
                 .append(getTime())
-                .append(" Attending: ");
-        getAssociatedPersons().forEach(builder::append);
+                .append("\nAttending: ");
+        int counter = 1;
+        for (FauxPerson fauxPerson : associatedPersons) {
+            builder.append("\n" + counter + ") ").append(fauxPerson.displayName);
+            counter++;
+        }
         return builder.toString();
     }
 }
