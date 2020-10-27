@@ -26,17 +26,17 @@ public class EditTagCommand extends Command {
     public static final String COMMAND_WORD = CommandWord.EDIT.toString();
     public static final String COMMAND_TYPE = CommandType.TAG.toString();
 
-    private static final String MESSAGE_REMOVE_CONTACT_DOES_NOT_HAVE_TAG =
+    public static final String MESSAGE_REMOVE_CONTACT_DOES_NOT_HAVE_TAG =
             "One of the specified indices to remove does not have %s as a tag";
-    private static final String MESSAGE_ADD_CONTACT_HAS_TAG =
+    public static final String MESSAGE_ADD_CONTACT_HAS_TAG =
             "One of the specified indices to add already has %s as a tag";
-    private static final String MESSAGE_REMOVE_TAG_NOT_PRESENT =
+    public static final String MESSAGE_REMOVE_TAG_NOT_PRESENT =
             "One of the specified tags to remove is already not a child-tag of %s";
-    private static final String MESSAGE_ADD_TAG_PRESENT =
+    public static final String MESSAGE_ADD_TAG_PRESENT =
             "One of the specified tags to add is already a child-tag of %s";
-    private static final String MESSAGE_SUCCESS =
+    public static final String MESSAGE_SUCCESS =
             "%s has successfully been edited!";
-    private static final String MESSAGE_CYCLIC_DEPENDENCY_DETECTED =
+    public static final String MESSAGE_CYCLIC_DEPENDENCY_DETECTED =
             "Cyclic dependency detected between %s and %s! "
             + "Do not assign a super-tag as a sub-tag to the tag you are editing.";
 
