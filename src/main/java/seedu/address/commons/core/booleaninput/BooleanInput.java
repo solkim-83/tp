@@ -14,12 +14,25 @@ public class BooleanInput {
     private static final Set<String> SET_TRUE_STRINGS = Set.of("t", "true", "1");
     private static final Set<String> SET_FALSE_STRINGS = Set.of("f", "false", "0");
 
+    private static final BooleanInput BOOLEAN_TRUE = new BooleanInput(true);
+    private static final BooleanInput BOOLEAN_FALSE = new BooleanInput(false);
+
     public static final String MESSAGE_CONSTRAINTS = "A boolean indicator must be one of the following: "
             + String.join(",", SET_TRUE_STRINGS) + " (true) "
             + String.join(",", SET_FALSE_STRINGS) + " (false)";
 
     private final boolean boolValue;
 
+    /**
+     * For internal usage only to create static true and false BooleanInput.
+     */
+    private BooleanInput(boolean boolValue) {
+        this.boolValue = boolValue;
+    }
+
+    /**
+     * Private constructor for accepting string inputs.
+     */
     private BooleanInput(String input) {
         if (!isValidBooleanInput(input)) {
             throw new IllegalArgumentException("Not a valid boolean input!");
@@ -46,14 +59,14 @@ public class BooleanInput {
      * Returns a default true {@code BooleanInput}.
      */
     public static BooleanInput isTrue() {
-        return new BooleanInput(SET_TRUE_STRINGS.stream().findAny().get());
+        return BOOLEAN_TRUE;
     }
 
     /**
      * Returns a default false {@code BooleanInput}.
      */
     public static BooleanInput isFalse() {
-        return new BooleanInput(SET_FALSE_STRINGS.stream().findAny().get());
+        return BOOLEAN_FALSE;
     }
 
     /**
