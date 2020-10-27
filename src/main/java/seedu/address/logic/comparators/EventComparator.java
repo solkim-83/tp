@@ -24,7 +24,7 @@ public class EventComparator {
 
 
     /**
-     * Returns the appropriate comparator for the model manager to sort with
+     * Returns the appropriate comparator for the model manager to sort the event entries.
      */
     public static Comparator<Event> chooseComparator(Index index) throws CommandException {
         int input = index.getOneBased();
