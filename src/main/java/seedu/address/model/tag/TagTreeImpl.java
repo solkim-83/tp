@@ -180,6 +180,7 @@ public class TagTreeImpl extends TagTree {
 
         boolean hasSubTagAsDirectChild = tagSubTagMap.get(superTag).contains(subTag);
         if (hasSubTagAsDirectChild) {
+            // TODO: remove the following println? dont think it should be here -andy
             System.out.println(superTag + " " + subTag);
             return true;
         }
