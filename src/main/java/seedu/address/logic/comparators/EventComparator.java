@@ -26,6 +26,13 @@ public class EventComparator {
         }
     };
 
+    /**
+     * The comparator method that deals with various sorting patterns.
+     * @param index
+     * @return the comparator corresponding to user's desired sorting pattern
+     * @exception CommandException When invalid index is given.
+     */
+
     public static Comparator<Event> chooseComparator(Index index) throws CommandException {
         int input = index.getOneBased();
         switch (input) {
