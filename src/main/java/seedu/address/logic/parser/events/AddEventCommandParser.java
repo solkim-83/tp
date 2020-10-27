@@ -14,10 +14,10 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.association.FauxPerson;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
+import seedu.address.model.event.association.FauxPerson;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object
