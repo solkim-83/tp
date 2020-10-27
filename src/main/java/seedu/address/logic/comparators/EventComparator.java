@@ -6,6 +6,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 
+/**
+ * A Comparator class that contains the event comparators to sort the event entries.
+ */
+
 public class EventComparator {
 
     private static final Comparator<Event> DESCRIPTION_COMPARATOR = new Comparator<Event>() {
@@ -22,10 +26,6 @@ public class EventComparator {
         }
     };
 
-
-    /**
-     * Returns the appropriate comparator for the model manager to sort the event entries.
-     */
     public static Comparator<Event> chooseComparator(Index index) throws CommandException {
         int input = index.getOneBased();
         switch (input) {
