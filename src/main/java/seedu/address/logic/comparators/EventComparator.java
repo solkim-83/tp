@@ -29,12 +29,12 @@ public class EventComparator {
     public static Comparator<Event> chooseComparator(Index index) throws CommandException {
         int input = index.getOneBased();
         switch (input) {
-            case 1:
-                return DESCRIPTION_COMPARATOR;
-            case 2:
-                return TIME_COMPARATOR;
-            default:
-                throw new CommandException("Index should be either 1 or 2!");
+        case 1:
+            return DESCRIPTION_COMPARATOR;
+        case 2:
+            return TIME_COMPARATOR;
+        default:
+            throw new CommandException("Index should be either 1 or 2!");
         }
     }
 }
