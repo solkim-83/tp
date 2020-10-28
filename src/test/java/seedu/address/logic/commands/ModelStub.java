@@ -86,7 +86,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void removePersonFromTag(Tag tag, Person person) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void addSubTagTo(Tag superTag, Tag subTag) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void removeChildTagFrom(Tag parentTag, Tag childTag) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean isSubTagOf(Tag superTag, Tag subTag) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -196,6 +211,11 @@ public class ModelStub implements Model {
 
     @Override
     public Set<Tag> getSuperTags() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Set<Tag> getChildTags(Tag tag) {
         throw new AssertionError("This method should not be called.");
     }
 

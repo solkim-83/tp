@@ -31,6 +31,7 @@ import seedu.address.logic.parser.events.SortEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tags.AddTagCommandParser;
 import seedu.address.logic.parser.tags.DeleteTagCommandParser;
+import seedu.address.logic.parser.tags.EditTagCommandParser;
 import seedu.address.logic.parser.tags.ViewTagCommandParser;
 
 /**
@@ -133,6 +134,9 @@ public class AddressBookParser {
 
             case ADD:
                 return new AddTagCommandParser().parse(arguments);
+
+            case EDIT:
+                return new EditTagCommandParser().parse(arguments);
 
             case LIST:
                 return new ListTagCommand();

@@ -23,6 +23,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.exceptions.TagCyclicDependencyException;
+
 public class TagTreeImplTest {
 
     @Test
@@ -82,7 +84,7 @@ public class TagTreeImplTest {
 
     @Test
     public void addSubTag_cyclicTag_errorThrown() {
-        assertThrows(IllegalArgumentException.class, () -> buildTestTree().addSubTagTo(TAG_COMPUTING, TAG_NUS));
+        assertThrows(TagCyclicDependencyException.class, () -> buildTestTree().addSubTagTo(TAG_COMPUTING, TAG_NUS));
     }
 
     @Test
