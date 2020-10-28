@@ -8,14 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.events.AddEventCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddEventCommand}.
@@ -26,15 +23,14 @@ public class AddEventCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+        model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
     }
 
     @Test
     public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().withDescription("Meeting").build();
 
-        Model expectedModel = new ModelManager(
-                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.addEvent(validEvent);
 
         AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
