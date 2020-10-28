@@ -52,11 +52,6 @@ public class Index {
                 && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(zeroBasedIndex);
-    }
-
     public int hashCode() {
         return zeroBasedIndex;
     }
