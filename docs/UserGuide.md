@@ -469,14 +469,14 @@ Action | Format, Examples
 
 ###### _Child-tag_ 
 - A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done.
-The other tag in the relation is known as a [_parent-tag_](#_parent-tag_).
+The other tag in the relation is known as a [_parent-tag_](#parent-tag).
 
 ###### _Parent-tag_ 
 - A _parent-tag_ of a tag signifies a directional relation from a _parent-tag_ to a tag. It allows for some commands that affect a _parent-tag_ to also affect the other tag in the relation. The reverse cannot be done.
-The other tag in the relation is known as a [_child-tag_](#_child-tag_).
+The other tag in the relation is known as a [_child-tag_](#child-tag).
 
 ###### _Sub-tag_
-- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#_child-tag_), or a child-tag of a child-tag, ...).
+- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, ...).
 A child-tag of a tag is also a _sub-tag_.
  
 
