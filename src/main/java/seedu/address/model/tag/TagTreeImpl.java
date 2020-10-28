@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import seedu.address.model.tag.exceptions.TagCyclicDependencyException;
+
 /**
  * A concrete implementation of the TagTree. It uses two HashMaps to keep track of the two-way relationship of tags.
  */
@@ -103,7 +105,7 @@ public class TagTreeImpl extends TagTree {
         assert !superTag.equals(Tag.ALL_TAGS_TAG) && !subTag.equals(Tag.ALL_TAGS_TAG);
 
         if (isSubTagOf(subTag, superTag)) {
-            throw new IllegalArgumentException(String.format(MESSAGE_CYCLIC_RELATIONSHIP, superTag, subTag));
+            throw new TagCyclicDependencyException(superTag, subTag);
         }
         addToMapSet(tagSubTagMap, superTag, subTag);
         addToMapSet(tagSuperTagMap, subTag, superTag);
@@ -180,8 +182,6 @@ public class TagTreeImpl extends TagTree {
 
         boolean hasSubTagAsDirectChild = tagSubTagMap.get(superTag).contains(subTag);
         if (hasSubTagAsDirectChild) {
-            // TODO: remove the following println? dont think it should be here -andy
-            System.out.println(superTag + " " + subTag);
             return true;
         }
 

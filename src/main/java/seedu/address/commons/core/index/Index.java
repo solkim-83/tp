@@ -56,4 +56,8 @@ public class Index {
     public String toString() {
         return String.valueOf(zeroBasedIndex);
     }
+
+    public int hashCode() {
+        return zeroBasedIndex;
+    }
 }
