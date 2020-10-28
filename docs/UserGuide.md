@@ -328,7 +328,11 @@ Format: `list -e`
 ### Tag
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
-allow you to perform tag-level actions such as adding all contacts under a tag into an event. 
+allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an events. 
+Below are some commands to facilitate tag management.
+
+**Note: For a tag to exist, it has to have at least one contact tagged OR contains one child-tag.**
+Tags that do not meet this criterion will be deleted. 
 
 #### Adding a tag: `add`
 
@@ -417,10 +421,14 @@ Athena's data is saved in the hard disk automatically after any command that cha
 
 ## FAQ
 
+**Q**: Where are the save files that Athena uses?<br>
+**A**: The default save directory is in `{Athena home directory}/data`.
+
+**Q**: What are the save files that Athena uses?<br>
+**A**: Athena uses three separate save files. They are `addressbook.json`, `tagtree.json` and `calendar.json`.
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Athena home folder.
-The save files that Athena uses are `addressbook.json`, `tagtree.json` and `calendar.json`. The default directory of these files are at 
-`{Athena home directory}/data`.
+**A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
 
 --------------------------------------------------------------------------------------------------------------------
 
