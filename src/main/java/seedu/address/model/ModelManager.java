@@ -210,8 +210,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeChildTagFrom(Tag parentTag, Tag childTag) {
+        tagTree.removeSubTagFrom(parentTag, childTag);
+    }
+
+    @Override
+    public boolean isSubTagOf(Tag superTag, Tag subTag) {
+        return tagTree.isSubTagOf(superTag, subTag);
+
+    }
+
+    @Override
     public void addPersonToTag(Tag tag, Person person) {
         addressBook.addPersonToTag(tag, person);
+    }
+
+    @Override
+    public void removePersonFromTag(Tag tag, Person person) {
+        addressBook.removePersonFromTag(tag, person);
     }
 
     @Override
@@ -273,6 +289,11 @@ public class ModelManager implements Model {
     @Override
     public Set<Tag> getSuperTags() {
         return tagTree.getSuperTags();
+    }
+
+    @Override
+    public Set<Tag> getChildTags(Tag tag) {
+        return tagTree.getSubTagsOf(tag);
     }
 
     @Override

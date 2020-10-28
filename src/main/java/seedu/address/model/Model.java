@@ -134,16 +134,6 @@ public interface Model {
      */
     void addEvent(Event event);
 
-    /**
-     * Adds {@code person} to {@code tag}.
-     * {@code person} will also reflect this change with a new {@code tag}.
-     */
-    void addPersonToTag(Tag tag, Person person);
-
-    /**
-     * Adds {@code subTag} as a sub-tag of {@code superTag}.
-     */
-    void addSubTagTo(Tag superTag, Tag subTag);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -187,6 +177,11 @@ public interface Model {
     Set<Tag> getSuperTags();
 
     /**
+     * Returns a set of all child-tags of {@code tag}.
+     */
+    Set<Tag> getChildTags(Tag tag);
+
+    /**
      * Returns a set of all tags below the provided {@code tag} in the tag hierarchy.
      * I.e. all sub-tags, all sub-tags of those sub-tags, etc.
      */
@@ -198,6 +193,33 @@ public interface Model {
      * I.e. all persons with either {@code tag}, and/or any of its sub-tags, sub-tag of sub-tags, etc.
      */
     Set<Person> getPersonsRecursive(Tag tag);
+
+    /**
+     * Adds {@code person} to {@code tag}.
+     * {@code person} will also reflect this change with a new {@code tag}.
+     */
+    void addPersonToTag(Tag tag, Person person);
+
+    /**
+     * Removes {@code person} from {@code tag}.
+     * {@code person} will also reflect this change with {@code tag} removed.
+     */
+    void removePersonFromTag(Tag tag, Person person);
+
+    /**
+     * Adds {@code subTag} as a sub-tag of {@code superTag}.
+     */
+    void addSubTagTo(Tag superTag, Tag subTag);
+
+    /**
+     * Removes {@code childTag} as a child-tag of {@code parentTag}.
+     */
+    void removeChildTagFrom(Tag parentTag, Tag childTag);
+
+    /**
+     * Returns true if {@code subTag} is a sub-tag of {@code superTag}.
+     */
+    boolean isSubTagOf(Tag superTag, Tag subTag);
 
     // Filter/sort-list methods
 
