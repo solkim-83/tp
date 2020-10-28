@@ -21,7 +21,7 @@ section below.
         * [`delete`](#deleting-a-contact--delete) - deleting a contact
         * [`edit`](#editing-a-contact--edit) - editing a contact
         * [`find`](#finding-a-contact--find) - finding a contact
-        * [`list`](#listing-all-contacts--list) - listing a contact
+        * [`list`](#listing-all-contacts--list) - listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - sorting displayed contacts
     * [Event](#event)
         * [`add`](#adding-an-event-add) - adding an event
@@ -29,9 +29,16 @@ section below.
         * [`delete`](#deleting-an-event--delete) - deleting an event
         * [`edit`](#editing-an-event--edit) - editing an event
         * [`find`](#finding-an-event--find) - finding an event
-        * [`list`](#listing-all-events--list) - listing an event
+        * [`list`](#listing-all-events--list) - listing all events
+    * [Tag](#tag)
+        * [`add`](#adding-a-tag-add) - adding a tag
+        * [`delete`](#deleting-a-tag-delete) - deleting a tag
+        * [`edit`](#editing-a-tag-edit) - editing a tag
+        * [`list`](#listing-all-tags-list) - listing all tags
+        * [`view`](#viewing-tags-view) - viewing tag details
 * [FAQ](#FAQ)
 * [Command Summary](#Command-summary)
+* [Glossary](#glossary)
 
 ---
 
@@ -391,7 +398,14 @@ Examples:
 * `edit -t n/computing i/1` Adds the contact at index `1` to `computing`.
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
-#### Viewing a tag: `view`
+#### Listing all tags: `list`
+
+Lists all tags in the remarks panel. It lists each tag together with the contacts tagged. Super-tags are also denoted with `(supertag)`.
+
+Example:
+* `list -t` 
+
+#### Viewing tags: `view`
 
 View specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
@@ -408,22 +422,12 @@ Example:
 * `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
-#### Listing a tag: `list`
-
-Lists all tags in the remarks panel. It lists each tag together with the contacts tagged. Super-tags are also denoted with `(supertag)`.
-
-Example:
-* `list -t` 
-
----
-
-### Saving the data
-
-Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+**Q**: How do I save changes?
+**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 **Q**: Where are the save files that Athena uses?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
@@ -460,3 +464,7 @@ Action | Format, Examples
 **List Tags** | `list -t`
 **Sort Contacts** | `sort -c INDEX`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
+
+## Glossary
+
+
