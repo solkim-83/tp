@@ -13,8 +13,9 @@ import seedu.address.logic.commands.contacts.ClearContactCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
-import seedu.address.logic.commands.events.ListReminderEventCommand;
-import seedu.address.logic.commands.events.ShowReminderEventCommand;
+import seedu.address.logic.commands.reminders.ListReminderEventCommand;
+import seedu.address.logic.commands.reminders.RemindEventCommand;
+import seedu.address.logic.commands.reminders.ShowReminderEventCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.commands.general.IntroCommand;
@@ -124,12 +125,6 @@ public class AddressBookParser {
             case SORT:
                 return new SortEventCommandParser().parse(arguments);
 
-            case REMIND:
-                return new RemindEventCommandParser().parse(arguments);
-
-            case REMINDER:
-                return new ListReminderEventCommand();
-
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -149,6 +144,23 @@ public class AddressBookParser {
 
             }
 
+            case REMINDER:
+
+                switch (commandWord) {
+
+                case LIST:
+                    return new ListReminderEventCommand();
+
+                case REMIND:
+                    return new RemindEventCommandParser().parse(arguments);
+
+                case SHOW_REMINDER:
+                    return new ShowReminderEventCommand();
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                }
+
         default:
 
             switch (commandWord) {
@@ -161,9 +173,6 @@ public class AddressBookParser {
 
             case INTRO:
                 return new IntroCommand();
-
-            case SHOW_REMINDER:
-                return new ShowReminderEventCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

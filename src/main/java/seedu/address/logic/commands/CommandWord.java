@@ -22,8 +22,7 @@ public enum CommandWord {
     VIEW("view"),
     SORT("sort"),
     REMIND("remind"),
-    REMINDER("listr"),
-    SHOW_REMINDER("showr"),
+    SHOW_REMINDER("show"),
     PERMASORT("psort"),
     DEFAULT("");
 

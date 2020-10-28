@@ -226,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
      */
 
     CommandResult executeShowReminderCommand() throws CommandException, ParseException {
-        CommandResult commandResult = logic.execute("showr");
+        CommandResult commandResult = logic.execute("show -r");
         logger.info("Result: " + commandResult.getFeedbackToUser());
         resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
         handleReminders();

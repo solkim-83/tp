@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.events;
+package seedu.address.logic.commands.reminders;
 
 import static java.util.Objects.requireNonNull;
 
@@ -24,7 +24,7 @@ public class RemindEventCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWord.REMIND.toString();
 
-    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
+    public static final String COMMAND_TYPE = CommandType.REMINDER.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reminds you of the event \n"

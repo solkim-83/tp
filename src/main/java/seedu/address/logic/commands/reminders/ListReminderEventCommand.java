@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.events;
+package seedu.address.logic.commands.reminders;
 
 import static java.util.Objects.requireNonNull;
 
@@ -15,9 +15,9 @@ import seedu.address.model.event.Reminder;
  */
 public class ListReminderEventCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.REMINDER.toString();
+    public static final String COMMAND_WORD = CommandWord.LIST.toString();
 
-    public static final String COMMAND_TYPE = CommandType.EVENT.toString();
+    public static final String COMMAND_TYPE = CommandType.REMINDER.toString();
 
     public static final String MESSAGE_SUCCESS = "Here are your reminders: \n";
 
