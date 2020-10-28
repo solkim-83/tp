@@ -20,4 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADD_PERSON = new Prefix("ap/");
     public static final Prefix PREFIX_REMOVE_PERSON = new Prefix("rp/");
 
+    /* Symbol definitions */
+    public static final String SYMBOL_WILDCARD = "*";
+
 }

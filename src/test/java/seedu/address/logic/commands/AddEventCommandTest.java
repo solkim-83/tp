@@ -16,6 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 
 public class AddEventCommandTest {
@@ -30,7 +31,11 @@ public class AddEventCommandTest {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+        AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(validEvent.getDescription())
+                .withTime(validEvent.getTime()).build();
+
+        CommandResult commandResult = new AddEventCommand(validEventDescriptor).execute(modelStub);
 
         assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
@@ -39,7 +44,11 @@ public class AddEventCommandTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event validEvent = new EventBuilder().build();
-        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+        AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(validEvent.getDescription())
+                .withTime(validEvent.getTime()).build();
+
+        AddEventCommand addEventCommand = new AddEventCommand(validEventDescriptor);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class, AddEventCommand.MESSAGE_DUPLICATE_EVENT, () ->
@@ -50,14 +59,22 @@ public class AddEventCommandTest {
     public void equals() {
         Event meeting = new EventBuilder().withDescription("Meeting").build();
         Event consultation = new EventBuilder().withDescription("Consultation").build();
-        AddEventCommand addMeetingCommand = new AddEventCommand(meeting);
-        AddEventCommand addConsultationCommand = new AddEventCommand(consultation);
+
+        AddEventCommand.AddEventDescriptor meetingDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(meeting.getDescription())
+                .withTime(meeting.getTime()).build();
+        AddEventCommand.AddEventDescriptor consultationDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(consultation.getDescription())
+                .withTime(consultation.getTime()).build();
+
+        AddEventCommand addMeetingCommand = new AddEventCommand(meetingDescriptor);
+        AddEventCommand addConsultationCommand = new AddEventCommand(consultationDescriptor);
 
         // same object -> returns true
         assertTrue(addMeetingCommand.equals(addMeetingCommand));
 
         // same values -> returns true
-        AddEventCommand addMeetingCommandCopy = new AddEventCommand(meeting);
+        AddEventCommand addMeetingCommandCopy = new AddEventCommand(meetingDescriptor);
         assertTrue(addMeetingCommand.equals(addMeetingCommandCopy));
 
         // different types -> returns false

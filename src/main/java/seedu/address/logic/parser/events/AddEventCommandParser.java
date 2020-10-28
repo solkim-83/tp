@@ -1,14 +1,12 @@
 package seedu.address.logic.parser.events;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.*;
 
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.events.AddEventCommand;
+import seedu.address.logic.commands.events.AddEventCommand.AddEventDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -16,9 +14,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
-import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
-import seedu.address.model.event.association.FauxPerson;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object
@@ -41,13 +37,24 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
+        AddEventDescriptor addEventDescriptor = new AddEventDescriptor();
+
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        addEventDescriptor.setDescription(description);
+
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        addEventDescriptor.setTime(time);
 
-        // TODO: maybe allow this command to directly add new person associations, at the moment this is ok
-        Event event = new Event(description, time, new HashSet<FauxPerson>());
+        if (argMultimap.getValue(PREFIX_ADD_PERSON).isPresent()) {
+            if (argMultimap.getValue(PREFIX_ADD_PERSON).get().equals(SYMBOL_WILDCARD)) {
+                addEventDescriptor.setWildCardAdd();
+            } else {
+                addEventDescriptor.setPersonsToAdd(
+                        ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_ADD_PERSON).get()));
+            }
+        }
 
-        return new AddEventCommand(event);
+        return new AddEventCommand(addEventDescriptor);
     }
 
     /**

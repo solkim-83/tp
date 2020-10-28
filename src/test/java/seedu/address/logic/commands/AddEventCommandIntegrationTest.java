@@ -14,6 +14,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 
 /**
@@ -36,14 +37,21 @@ public class AddEventCommandIntegrationTest {
                 new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
         expectedModel.addEvent(validEvent);
 
-        assertCommandSuccess(new AddEventCommand(validEvent), model,
+        AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(validEvent.getDescription())
+                .withTime(validEvent.getTime()).build();
+
+        assertCommandSuccess(new AddEventCommand(validEventDescriptor), model,
                 String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
     }
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event eventInList = model.getCalendar().getEventList().get(0);
-        assertCommandFailureEvent(new AddEventCommand(eventInList), model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
+        AddEventCommand.AddEventDescriptor eventInListDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(eventInList.getDescription())
+                .withTime(eventInList.getTime()).build();
+        assertCommandFailureEvent(new AddEventCommand(eventInListDescriptor), model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
 }

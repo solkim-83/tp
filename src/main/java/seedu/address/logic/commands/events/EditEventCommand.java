@@ -214,6 +214,8 @@ public class EditEventCommand extends Command {
             setTime(toCopy.time);
             toCopy.getPersonsToAdd().ifPresent(this::setPersonsToAdd);
             toCopy.getPersonsToRemove().ifPresent(this::setPersonsToRemove);
+            this.wildCardAdd = toCopy.wildCardAdd;
+            this.wildCardRemove = toCopy.wildCardRemove;
         }
 
         /**
@@ -295,7 +297,9 @@ public class EditEventCommand extends Command {
             return getDescription().equals(e.getDescription())
                     && getTime().equals(e.getTime())
                     && getPersonsToAdd().equals(e.getPersonsToAdd())
-                    && getPersonsToRemove().equals(e.getPersonsToRemove());
+                    && getPersonsToRemove().equals(e.getPersonsToRemove())
+                    && wildCardAdd == e.wildCardAdd
+                    && wildCardRemove == e.wildCardRemove;
         }
     }
 }

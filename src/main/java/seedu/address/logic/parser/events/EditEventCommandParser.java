@@ -2,10 +2,7 @@ package seedu.address.logic.parser.events;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.EditEventCommand;
@@ -55,7 +52,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
 
         // set index of persons to add/remove for editEventDescriptor
         if (argMultimap.getValue(PREFIX_ADD_PERSON).isPresent()) {
-            if (argMultimap.getValue(PREFIX_ADD_PERSON).get() == "*") {
+            if (argMultimap.getValue(PREFIX_ADD_PERSON).get().equals(SYMBOL_WILDCARD)) {
                 editEventDescriptor.setWildCardAdd();
             } else {
                 editEventDescriptor.setPersonsToAdd(
@@ -63,7 +60,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             }
         }
         if (argMultimap.getValue(PREFIX_REMOVE_PERSON).isPresent()) {
-            if (argMultimap.getValue(PREFIX_REMOVE_PERSON).get() == "*") {
+            if (argMultimap.getValue(PREFIX_REMOVE_PERSON).get().equals(SYMBOL_WILDCARD)) {
                 editEventDescriptor.setWildCardRemove();
             } else {
                 editEventDescriptor.setPersonsToRemove(

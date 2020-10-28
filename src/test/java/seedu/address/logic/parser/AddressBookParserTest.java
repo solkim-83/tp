@@ -25,6 +25,7 @@ import seedu.address.logic.commands.contacts.EditContactCommand.EditPersonDescri
 import seedu.address.logic.commands.contacts.FindContactCommand;
 import seedu.address.logic.commands.contacts.ListContactCommand;
 import seedu.address.logic.commands.events.AddEventCommand;
+import seedu.address.logic.commands.events.AddEventCommand.AddEventDescriptor;
 import seedu.address.logic.commands.events.DeleteEventCommand;
 import seedu.address.logic.commands.events.EditEventCommand;
 import seedu.address.logic.commands.events.EditEventCommand.EditEventDescriptor;
@@ -37,12 +38,7 @@ import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditEventDescriptorBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.EventBuilder;
-import seedu.address.testutil.EventUtil;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.*;
 
 public class AddressBookParserTest {
 
@@ -126,8 +122,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addEvent() throws Exception {
         Event event = new EventBuilder().build();
+        AddEventDescriptor addEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(event.getDescription())
+                .withTime(event.getTime()).build();
         AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddCommand(event));
-        assertEquals(new AddEventCommand(event), command);
+        assertEquals(new AddEventCommand(addEventDescriptor), command);
     }
 
     @Test
