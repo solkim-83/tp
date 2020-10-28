@@ -60,6 +60,8 @@ public class EditContactCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Athena.";
+    public static final String INDICATOR_TAG_TO_BE_REMOVED_NOT_PRESENT =
+            "The specified contact does not have at least one of the tags designated for removal.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -101,7 +103,8 @@ public class EditContactCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -119,8 +122,19 @@ public class EditContactCommand extends Command {
      *  {@code tagsToAdd} are added.
      */
     private static Set<Tag> processTagUpdates(Person personToEdit, Optional<Set<Tag>> tagsToAdd,
-            Optional<Set<Tag>> tagsToRemove) {
+            Optional<Set<Tag>> tagsToRemove) throws CommandException {
         Set<Tag> finalTagSet = new HashSet<>(personToEdit.getTags());
+
+        Set<Tag> tagSetToRemove = tagsToRemove.isPresent() ? tagsToRemove.get() : Set.of();
+        for (Tag tagToRemove: tagSetToRemove) {
+            if (tagToRemove.equals(Tag.ALL_TAGS_TAG)) {
+                continue;
+            }
+            if (!finalTagSet.contains(tagToRemove)) {
+                throw new CommandException(INDICATOR_TAG_TO_BE_REMOVED_NOT_PRESENT);
+            }
+        }
+
         tagsToRemove.ifPresent(set -> {
             if (set.contains(Tag.ALL_TAGS_TAG)) {
                 finalTagSet.clear();
