@@ -55,12 +55,20 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
 
         // set index of persons to add/remove for editEventDescriptor
         if (argMultimap.getValue(PREFIX_ADD_PERSON).isPresent()) {
-            editEventDescriptor.setPersonsToAdd(
-                    ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_ADD_PERSON).get()));
+            if (argMultimap.getValue(PREFIX_ADD_PERSON).get() == "*") {
+                editEventDescriptor.setWildCardAdd();
+            } else {
+                editEventDescriptor.setPersonsToAdd(
+                        ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_ADD_PERSON).get()));
+            }
         }
         if (argMultimap.getValue(PREFIX_REMOVE_PERSON).isPresent()) {
-            editEventDescriptor.setPersonsToRemove(
-                    ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_REMOVE_PERSON).get()));
+            if (argMultimap.getValue(PREFIX_REMOVE_PERSON).get() == "*") {
+                editEventDescriptor.setWildCardRemove();
+            } else {
+                editEventDescriptor.setPersonsToRemove(
+                        ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_REMOVE_PERSON).get()));
+            }
         }
 
         if (!editEventDescriptor.isAnyFieldEdited()) {

@@ -112,27 +112,65 @@ public class EditEventCommand extends Command {
         // updatedAssociatedPersons' part
         ArrayList<FauxPerson> tempAssociatedPersons = new ArrayList<>(eventToEdit.getAssociatedPersons());
 
+        tempAssociatedPersons = removeFauxPersons(tempAssociatedPersons, editEventDescriptor);
+        tempAssociatedPersons = addFauxPersons(tempAssociatedPersons, editEventDescriptor, lastShownPersonList);
+
+        Set<FauxPerson> updatedAssociatedPersons = new HashSet<>(tempAssociatedPersons);
+
+        return new Event(updatedDescription, updatedTime, updatedAssociatedPersons);
+    }
+
+    private static ArrayList<FauxPerson> removeFauxPersons(
+            ArrayList<FauxPerson> tempAssociatedPersons,
+            EditEventDescriptor editEventDescriptor) throws IndexOutOfBoundsException {
+
+        // wildCard check
+        if (editEventDescriptor.isWildCardRemove()) {
+            return new ArrayList<>();
+        }
+
         // remove FauxPersons from event
         if (editEventDescriptor.getPersonsToRemove().isPresent()) {
-            ArrayList<Index> indexArrayList = editEventDescriptor.getPersonsToRemove().orElse(new ArrayList<>());
-            // sorting based on biggest index first
+            ArrayList<Index> indexArrayList = editEventDescriptor.getPersonsToRemove().get();
+            // sorting based on biggest index first, so as to not remove the wrong persons
             indexArrayList.sort((current, other) -> other.getZeroBased() - current.getOneBased());
             for (Index index : indexArrayList) {
                 tempAssociatedPersons.remove(index.getZeroBased());
             }
         }
+        return tempAssociatedPersons;
+    }
 
-        // add FauxPersons to event, in user order, no sorting
-        if (editEventDescriptor.getPersonsToAdd().isPresent()) {
-            for (Index index : editEventDescriptor.getPersonsToAdd().orElse(new ArrayList<>())) {
-                Person personToAdd = lastShownPersonList.get(index.getZeroBased());
-                tempAssociatedPersons.add(new FauxPerson(personToAdd));
+    private static ArrayList<FauxPerson> addFauxPersons(
+            ArrayList<FauxPerson> tempAssociatedPersons,
+            EditEventDescriptor editEventDescriptor,
+            List<Person> lastShownPersonList) throws IndexOutOfBoundsException {
+
+        // wildCard check
+        if (editEventDescriptor.isWildCardAdd()) {
+            for (Person person : lastShownPersonList) {
+                FauxPerson newFauxPerson = new FauxPerson(person);
+                if (!tempAssociatedPersons.contains(newFauxPerson)) {
+                    tempAssociatedPersons.add(newFauxPerson);
+                }
             }
+            return tempAssociatedPersons;
         }
 
-        Set<FauxPerson> updatedAssociatedPersons = new HashSet<>(tempAssociatedPersons);
+        // add FauxPersons to event, in user order, no sorting, duplicates are not added
+        if (editEventDescriptor.getPersonsToAdd().isPresent()) {
+            for (Index index : editEventDescriptor.getPersonsToAdd().get()) {
 
-        return new Event(updatedDescription, updatedTime, updatedAssociatedPersons);
+                Person personToAdd = lastShownPersonList.get(index.getZeroBased());
+                FauxPerson newFauxPerson = new FauxPerson(personToAdd);
+
+                // only new FauxPersons are added
+                if (!tempAssociatedPersons.contains(newFauxPerson)) {
+                    tempAssociatedPersons.add(newFauxPerson);
+                }
+            }
+        }
+        return tempAssociatedPersons;
     }
 
     @Override
@@ -162,6 +200,8 @@ public class EditEventCommand extends Command {
         private Time time;
         private ArrayList<Index> personsToAdd = new ArrayList<>();
         private ArrayList<Index> personsToRemove = new ArrayList<>();
+        private boolean wildCardAdd = false;
+        private boolean wildCardRemove = false;
 
         public EditEventDescriptor() {}
 
@@ -213,6 +253,28 @@ public class EditEventCommand extends Command {
 
         public Optional<ArrayList<Index>> getPersonsToRemove() {
             return Optional.ofNullable(personsToRemove);
+        }
+
+        /**
+         * Sets wild card add to be true, meaning all displayed persons are to be added
+         */
+        public void setWildCardAdd() {
+            this.wildCardAdd = true;
+        }
+
+        public boolean isWildCardAdd() {
+            return wildCardAdd;
+        }
+
+        /**
+         * Sets wild card remove to be true, meaning all currently associated persons are to be removed
+         */
+        public void setWildCardRemove() {
+            this.wildCardRemove = true;
+        }
+
+        public boolean isWildCardRemove() {
+            return wildCardRemove;
         }
 
         @Override
