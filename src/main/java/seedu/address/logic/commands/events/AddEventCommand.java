@@ -4,6 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -16,8 +22,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.association.FauxPerson;
 import seedu.address.model.person.Person;
-
-import java.util.*;
 
 /**
  * Adds an event to Athena.
