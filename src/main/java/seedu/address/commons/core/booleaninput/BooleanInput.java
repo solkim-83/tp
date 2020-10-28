@@ -7,7 +7,7 @@ import java.util.Set;
  *
  * {@code BooleanInput} should be used to parse user input when determining a boolean input.
  * The format of the possible {@code BooleanInput}s for {@code true} and {@code false} are specified in this class.
- * Upon receiving a {@code BooleanInput}, the {@code getBooleanValue()} method to obtain the actual boolean literal.
+ * Upon receiving a {@code BooleanInput}, use the {@code getBooleanValue()} method to obtain the actual boolean literal.
  */
 public class BooleanInput {
 
@@ -24,7 +24,8 @@ public class BooleanInput {
     private final boolean boolValue;
 
     /**
-     * For internal usage only to create static true and false BooleanInput.
+     * Returns a BooleanInput with the given boolean value.
+     * For internal usage only to create static true and false BooleanInputs.
      */
     private BooleanInput(boolean boolValue) {
         this.boolValue = boolValue;
