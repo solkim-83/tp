@@ -41,8 +41,7 @@ public class EditContactCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        // TODO: remove the following println? dont think it should be here -andy
-        System.out.println(descriptor.getTagsToAdd());
+
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
