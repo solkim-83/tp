@@ -11,6 +11,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+
 import seedu.address.logic.commands.events.AddEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -20,10 +25,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 
 public class AddEventCommandTest {
 
