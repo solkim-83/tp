@@ -85,13 +85,17 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append("\nAt: ")
-                .append(getTime())
-                .append("\n\nPeople attending: ");
-        int counter = 1;
-        for (FauxPerson fauxPerson : associatedPersons) {
-            builder.append("\n" + counter + ") ").append(fauxPerson.displayName);
-            counter++;
+                .append(getTime());
+
+        if (associatedPersons.size() != 0) {
+            builder.append("\n\nPeople attending: ");
+            int counter = 1;
+            for (FauxPerson fauxPerson : associatedPersons) {
+                builder.append("\n" + counter + ") ").append(fauxPerson.displayName);
+                counter++;
+            }
         }
+
         return builder.toString();
     }
 }
