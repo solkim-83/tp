@@ -28,7 +28,7 @@ public class JsonAdaptedFauxPerson {
      */
     public JsonAdaptedFauxPerson(FauxPerson source) {
         displayName = source.displayName;
-        hashCode = source.hashCode.toString();
+        hashCode = source.personHashCode.toString();
     }
 
     @JsonValue

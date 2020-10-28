@@ -2,6 +2,8 @@ package seedu.address.model.event.association;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import seedu.address.model.person.Person;
 
 /**
@@ -14,19 +16,19 @@ public class FauxPerson {
     public static final String MESSAGE_CONSTRAINTS_HASHCODE = "Hashcode is not a valid integer number";
 
     public final String displayName;
-    public final Integer hashCode;
+    public final Integer personHashCode;
 
     /**
      * Constructs a {@code FauxPerson}.
      *
      * @param displayName name of this faux person
-     * @param hashCode hashCode of actual person this is representing
+     * @param personHashCode hashCode of actual Person object this is representing
      */
-    public FauxPerson(String displayName, Integer hashCode) {
+    public FauxPerson(String displayName, Integer personHashCode) {
         requireNonNull(displayName);
-        requireNonNull(hashCode);
+        requireNonNull(personHashCode);
         this.displayName = displayName;
-        this.hashCode = hashCode;
+        this.personHashCode = personHashCode;
     }
 
     /**
@@ -37,7 +39,7 @@ public class FauxPerson {
     public FauxPerson(Person person) {
         requireNonNull(person);
         this.displayName = person.getName().toString();
-        this.hashCode = person.hashCode();
+        this.personHashCode = person.hashCode();
     }
 
     /**
@@ -71,7 +73,12 @@ public class FauxPerson {
         return other == this // short circuit if same object
                 || (other instanceof FauxPerson) // instanceof handles nulls
                 && displayName.equals(((FauxPerson) other).displayName) // state check
-                && hashCode.equals(((FauxPerson) other).hashCode); // state check
+                && personHashCode.equals(((FauxPerson) other).personHashCode); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(displayName, personHashCode);
     }
 
     @Override
