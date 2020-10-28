@@ -9,10 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.events.AddEventCommand;
@@ -23,6 +19,11 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 public class AddEventCommandTest {
 
