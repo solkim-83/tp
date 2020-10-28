@@ -194,6 +194,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTag(Tag tag) {
+        assert tag != null;
+        contactTagIntegrationManager.deleteTag(tag);
+    }
+
+    @Override
+    public void deleteTagRecursive(Tag tag) {
+        assert tag != null;
+        contactTagIntegrationManager.deleteTagRecursive(tag);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
