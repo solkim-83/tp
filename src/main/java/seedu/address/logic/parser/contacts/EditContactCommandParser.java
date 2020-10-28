@@ -86,8 +86,7 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet, canBeWildcard));
+        return Optional.of(ParserUtil.parseTags(tags, canBeWildcard));
     }
 
 }
