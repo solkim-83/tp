@@ -333,56 +333,76 @@ allow you to perform tag-level actions such as adding all contacts under a tag i
 #### Adding a tag: `add`
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
-of tags under one super-tag.
+of tags under one parent-tag.
 
-Format: `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/SUB_TAG]…`
+Format: `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…`
 
 * `TAG_NAME` must be alphanumeric with no spaces.
-* `CONTACT_INDEX` refers to the index of a contact as is shown in the contact window.
-* At least one of `CONTACT_INDEX` or `SUB_TAG` must be provided.
+* At least one of `CONTACT_INDEX` or `CHILD_TAG` must be provided.
+* `CONTACT_INDEX` refers to the index of a contact as is shown in the contact panel.
+* `CONTACT_INDEX` must be a positive integer.
 * `TAG_NAME` must not be a tag that already exists.
-* `SUB_TAG`s specified must already exist.
+* `CHILD_TAG`s specified must already exist in Athena.
 
 Examples:
+* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assigns contact at index `1` the tag `cs2103`.
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
-will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as sub-tags to `computing`.
-* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assign contact at index `1` the tag `cs2103`.
+will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
+
+#### Deleting a tag: `delete`
+
+Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
+Additionally, if you would like to delete a tag and all its sub-tags, you can specify `true` under the `r/` input field.
+
+Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
+
+* `TAG_NAME` must be the name of an existing tag in Athena.
+* `BOOLEAN` must be of the form `1`, `t`, `true` for true or `0`, `f`, `false` for false.
+* `r/BOOLEAN` field is optional. The default value for this field is `false`.
+* On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
+
+![delete_single_tag_pic](images/DeleteSingleTagPic.png) 
 
 #### Editing a tag: `edit`
 
-Edits an existing tag in Athena. Use this when you would like to add and/or remove sub-tags from a tag.
+Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
+- add and/or remove contacts from a tag
+- add and/or remove child-tags from a tag
 
-Format: `edit -t n/TAG_NAME [t/TAG_ADD]… [rt/TAG_REMOVE]…` 
+Format: `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` 
 
 * `TAG_NAME` specified must be of an existing tag.
-* `TAG_ADD`s labelled under `t/` are tags to be added as sub-tags to `TAG_NAME`.
-* `TAG_ADD`s must be existing tags not already sub-tags of `TAG_NAME`.
-* `TAG_REMOVE`s labelled under `rt/` are tags to be removed as sub-tags from `TAG_NAME`.
-* `TAG_REMOVE`s must be existing sub-tags of `TAG_NAME`.
+* At least one of the optional fields must be provided.
+* `INDEX` refers to the contact currently being displayed at `INDEX` in the contact panel.
+* Contacts at `INDEX_ADD`s must not have `TAG_NAME` as a tag.
+* Contacts at `INDEX_REMOVE`s must have `TAG_NAME` as a tag.
+* `TAG_ADD`s must be existing tags that are not already child-tags of `TAG_NAME`.
+* `TAG_REMOVE`s must be existing child-tags of `TAG_NAME`.
 
 Examples:
-* `edit -t n/computing t/cs2030 rt/cs2040` Adds `cs2030` as a sub-tag to `computing` and removes `cs2040` as a sub-tag.
+* `edit -t n/computing i/1` Adds the contact at index `1` to `computing`.
+* `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
 #### Viewing a tag: `view`
 
 View specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
-- Direct child tags
-- Contacts tagged with a specific tag
-- All related sub-tags
-- All related contacts (contacts containing sub-tags)
+- Child-tags
+- Contacts tagged with the specified tag
+- All other sub-tags
+- All other contacts containing sub-tags
 
 Format: `view -t t/TAG [t/TAG]…`
 
 * `TAG` must be a valid existing tag in Athena.
 
 Example:
-* `view -t t/cs2030` Shows all of the above information for the tag `cs2030` only.
-* `view -t t/cs2030 t/cs2040` Shows all of the above information for the tags `cs2030` and `cs2040` in a sequential order.
+* `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
+* `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
 #### Listing a tag: `list`
 
-Lists all tags in the remarks panel. It lists each tag and contacts tagged with the tag.
+Lists all tags in the remarks panel. It lists each tag together with the contacts tagged. Super-tags are also denoted with `(supertag)`.
 
 Example:
 * `list -t` 
