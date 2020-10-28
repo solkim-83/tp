@@ -17,13 +17,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.booleaninput.BooleanInput;
-import seedu.address.logic.commands.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ContactTagIntegrationManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagTree;
+import seedu.address.testutil.ModelStub;
 
 public class DeleteTagCommandTest {
 
