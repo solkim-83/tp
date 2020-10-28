@@ -51,7 +51,8 @@ public class AddEventCommandIntegrationTest {
         AddEventCommand.AddEventDescriptor eventInListDescriptor = new AddEventDescriptorBuilder()
                 .withDescription(eventInList.getDescription())
                 .withTime(eventInList.getTime()).build();
-        assertCommandFailureEvent(new AddEventCommand(eventInListDescriptor), model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
+        assertCommandFailureEvent(new AddEventCommand(eventInListDescriptor),
+                model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
 }

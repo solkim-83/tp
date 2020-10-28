@@ -38,7 +38,13 @@ import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.ContactContainsFieldsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.*;
+import seedu.address.testutil.AddEventDescriptorBuilder;
+import seedu.address.testutil.EditEventDescriptorBuilder;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.EventUtil;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 

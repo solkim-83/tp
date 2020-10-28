@@ -6,13 +6,19 @@ import seedu.address.model.event.Time;
 
 public class AddEventDescriptorBuilder {
 
-    AddEventDescriptor addEventDescriptor = new AddEventDescriptor();
+    private AddEventDescriptor addEventDescriptor = new AddEventDescriptor();
 
+    /**
+     * Sets the {@code Description} of the {@code AddEventDescriptor} that we are building.
+     */
     public AddEventDescriptorBuilder withDescription(Description description) {
         addEventDescriptor.setDescription(description);
         return this;
     }
 
+    /**
+     * Sets the {@code Time} of the {@code AddEventDescriptor} that we are building.
+     */
     public AddEventDescriptorBuilder withTime(Time time) {
         addEventDescriptor.setTime(time);
         return this;
