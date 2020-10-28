@@ -4,12 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.EditEventCommand;
@@ -33,7 +29,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
     public EditEventCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_PERSON,
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_ADD_PERSON,
                         PREFIX_REMOVE_PERSON);
 
         Index index;
@@ -45,42 +41,32 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
         }
 
         EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
+
+        // set description for editEventDescriptor
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editEventDescriptor.setDescription(
                     ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
+
+        // set time for editEventDescriptor
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editEventDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
 
-        parsePersonsToEdit(argMultimap.getAllValues(PREFIX_PERSON))
-                .ifPresent(editEventDescriptor::setPersonsToAdd);
-        parsePersonsToEdit(argMultimap.getAllValues(PREFIX_REMOVE_PERSON))
-                .ifPresent(editEventDescriptor::setPersonsToRemove);
+        // set index of persons to add/remove for editEventDescriptor
+        if (argMultimap.getValue(PREFIX_ADD_PERSON).isPresent()) {
+            editEventDescriptor.setPersonsToAdd(
+                    ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_ADD_PERSON).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REMOVE_PERSON).isPresent()) {
+            editEventDescriptor.setPersonsToRemove(
+                    ParserUtil.parseIndexes(argMultimap.getValue(PREFIX_REMOVE_PERSON).get()));
+        }
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditEventCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditEventCommand(index, editEventDescriptor);
-    }
-
-    /**
-     * Parses {@code Collection<String> indexes} into a {@code ArrayList<Index>}
-     * if {@code indexes} is non-empty.
-     */
-    private Optional<ArrayList<Index>> parsePersonsToEdit(Collection<String> indexes) throws ParseException {
-        requireNonNull(indexes);
-
-        if (indexes.isEmpty()) {
-            return Optional.empty();
-        }
-
-        final ArrayList<Index> indexArrayList = new ArrayList<>();
-        for (String index : indexes) {
-            indexArrayList.add(ParserUtil.parseIndex(index));
-        }
-
-        return Optional.of(indexArrayList);
     }
 }

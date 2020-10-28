@@ -3,6 +3,7 @@ package seedu.address.logic.parser.events;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
 
 import java.util.HashSet;
 import java.util.stream.Stream;
@@ -33,7 +34,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         assert args != null;
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_ADD_PERSON);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {

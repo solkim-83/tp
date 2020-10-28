@@ -3,6 +3,8 @@ package seedu.address.logic.commands.events;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.ArrayList;
@@ -38,13 +40,17 @@ public class EditEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "
-            + "Existing values will be overwritten by the input values.\n\n"
+            + "Description and time will be overwritten by the input values.\n\n"
             + "Parameters:\nINDEX (must be a positive integer)\n"
-            + "[" + PREFIX_DESCRIPTION + "NAME]\n"
-            + "[" + PREFIX_DATETIME + "PHONE]\n\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
+            + "[" + PREFIX_DATETIME + "TIME]\n"
+            + "[" + PREFIX_ADD_PERSON + "*indexes of persons in contact list to be added*]\n"
+            + "[" + PREFIX_REMOVE_PERSON + "*indexes of persons in event to be removed*]\n\n"
+            + "Example: \n" + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
             + PREFIX_DESCRIPTION + "New description "
-            + PREFIX_DATETIME + "12-12-1234 12:34";
+            + PREFIX_DATETIME + "12-12-1234 12:34"
+            + PREFIX_ADD_PERSON + "1,2,3"
+            + PREFIX_REMOVE_PERSON + "1,2";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

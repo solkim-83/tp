@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_DATETIME = new Prefix("at/");
-    public static final Prefix PREFIX_PERSON = new Prefix("p/");
+    public static final Prefix PREFIX_ADD_PERSON = new Prefix("ap/");
     public static final Prefix PREFIX_REMOVE_PERSON = new Prefix("rp/");
 
 }
