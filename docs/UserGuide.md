@@ -367,6 +367,10 @@ Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 
 ![delete_single_tag_pic](images/DeleteSingleTagPic.png) 
 
+Examples:
+* `delete -t t/cs2030` Deletes the tag `cs2030`.
+* `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
+
 #### Editing a tag: `edit`
 
 Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
@@ -436,18 +440,23 @@ Athena's data is saved in the hard disk automatically after any command that cha
 
 Action | Format, Examples
 --------|------------------
-**Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
+**Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add -c n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
+**Add Tag** | `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…` <br> e.g., `add -t n/computing i/1 i/2 t/cs2030 t/cs2040`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
-**Delete Contact** | `delete -c INDEX`<br> e.g., `delete 3`
-**Delete Event** | `delete -e INDEX`<br> e.g., `deleteEvent 2`
-**Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `editEvent 2 at/23-10-1234 12:30 p/Amanda`
+**Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
+**Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
+**Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
+**Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
+**Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `edit -e 2 at/23-10-1234 12:30 p/Amanda`
+**Edit Tag** | `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` <br> e.g., `edit -t n/computing ri/1 t/cs2030 rt/cs2040`
 **Exit** | `exit`
-**Find Contact** | `find -c KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Event** | `find -e KEYWORD`<br> e.g., `findEvent Seminar`
+**Find Contact** | `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g., `find -c n/alex david e/gmail`
+**Find Event** | `find -e KEYWORD`<br> e.g., `find -e Seminar`
 **Help** | `help`
 **List Contact** | `list -c`
 **List Events** | `list -e`
-**Sort Contacts** | `sort -c 1`
+**List Tags** | `list -t`
+**Sort Contacts** | `sort -c INDEX`
+**View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
