@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.contacts;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.contacts.EditContactCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Calendar;
 import seedu.address.model.Model;
@@ -152,6 +154,26 @@ public class EditContactCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_removeTagNotPresent_throwCommandException() {
+        // Only one invalid tag
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withTagsToRemove("doesnotexist").build());
+        assertThrows(CommandException.class, () -> editContactCommand.execute(model));
+
+        // An invalid tag amongst other valid tag inputs
+        EditContactCommand editContactCommand2 = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                        .withTagsToRemove("doesnotexist", "*")
+                        .withName("someName").build());
+        EditContactCommand editContactCommand3 = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                        .withTagsToRemove("doesnotexist", "friends")
+                        .withName("someName").build());
+        assertThrows(CommandException.class, () -> editContactCommand2.execute(model));
+        assertThrows(CommandException.class, () -> editContactCommand3.execute(model));
     }
 
     @Test

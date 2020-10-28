@@ -173,8 +173,8 @@ public class EditContactCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tagsToAdd;
-        private Set<Tag> tagsToRemove;
+        private Set<Tag> tagsToAdd = Set.of();
+        private Set<Tag> tagsToRemove = Set.of();
 
         public EditPersonDescriptor() {}
 
@@ -195,7 +195,9 @@ public class EditContactCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tagsToAdd, tagsToRemove);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address)
+                    || !tagsToAdd.isEmpty()
+                    || !tagsToRemove.isEmpty();
         }
 
         public void setName(Name name) {
