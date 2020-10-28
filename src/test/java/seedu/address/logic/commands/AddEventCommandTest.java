@@ -9,6 +9,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.events.AddEventCommand;
@@ -16,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 
@@ -89,13 +94,21 @@ public class AddEventCommandTest {
 
     /**
      * A Model stub that contains a single event.
+     * Contains a empty sortedPersons list to enable {@code getSortedFilteredPersonList()} as add event will use it.
      */
     private class ModelStubWithEvent extends ModelStub {
         private final Event event;
+        private final SortedList<Person> sortedPersons = new SortedList<>(
+                new FilteredList<>(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList())));
 
         ModelStubWithEvent(Event event) {
             requireNonNull(event);
             this.event = event;
+        }
+
+        @Override
+        public ObservableList<Person> getSortedFilteredPersonList() {
+            return sortedPersons;
         }
 
         @Override
@@ -107,9 +120,17 @@ public class AddEventCommandTest {
 
     /**
      * A Model stub that always accept the event being added.
+     * Contains a empty sortedPersons list to enable {@code getSortedFilteredPersonList()} as add event will use it.
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
-        final ArrayList<Event> eventsAdded = new ArrayList<>();
+        private final ArrayList<Event> eventsAdded = new ArrayList<>();
+        private final SortedList<Person> sortedPersons = new SortedList<>(
+                new FilteredList<>(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList())));
+
+        @Override
+        public ObservableList<Person> getSortedFilteredPersonList() {
+            return sortedPersons;
+        }
 
         @Override
         public boolean hasEvent(Event event) {
