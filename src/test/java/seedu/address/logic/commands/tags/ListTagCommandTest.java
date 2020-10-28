@@ -16,24 +16,23 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Calendar;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+import seedu.address.testutil.ModelManagerBuilder;
 
 public class ListTagCommandTest {
 
     private static final String STRING_IF_EMPTY = "empty string rep";
 
     public static Model createTestModel() {
-        return new ModelManager(buildTestIntegrationAddressBook(), new Calendar(), buildTestTree(), new UserPrefs());
+        return new ModelManagerBuilder()
+                .withAddressBook(buildTestIntegrationAddressBook())
+                .withTagTree(buildTestTree()).build();
     }
 
     @Test
     public void parsePersonSetIntoString_validSet_success() {
         String message = parsePersonSetIntoString(Set.of(PERSON_CS1231S_1, PERSON_CS1231S_2),
                 STRING_IF_EMPTY);
-        System.out.println(message);
         assertTrue(message.contains(PERSON_CS1231S_1.getName().toString())
                 && message.contains(PERSON_CS1231S_2.getName().toString()));
     }

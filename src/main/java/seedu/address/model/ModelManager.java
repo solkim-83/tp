@@ -67,13 +67,6 @@ public class ModelManager implements Model {
         sortedEvents = new SortedList<>(filteredEvents);
     }
 
-    /**
-     * Initializes a ModelManager with no data
-     */
-    public ModelManager() {
-        this(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
-    }
-
     //=========== UserPrefs ==================================================================================
 
     @Override
@@ -174,7 +167,13 @@ public class ModelManager implements Model {
      */
     @Override
     public boolean hasEvent(Event event) {
-        return false;
+        requireNonNull(event);
+        return calendar.hasEvent(event);
+    }
+
+    @Override
+    public boolean hasTag(Tag tag) {
+        return contactTagIntegrationManager.hasTag(tag);
     }
 
     @Override
@@ -188,6 +187,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteTag(Tag tag) {
+        assert tag != null;
+        contactTagIntegrationManager.deleteTag(tag);
+    }
+
+    @Override
+    public void deleteTagRecursive(Tag tag) {
+        assert tag != null;
+        contactTagIntegrationManager.deleteTagRecursive(tag);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -196,6 +207,32 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         calendar.addEvent(event);
+    }
+
+    @Override
+    public void addSubTagTo(Tag superTag, Tag subTag) {
+        tagTree.addSubTagTo(superTag, subTag);
+    }
+
+    @Override
+    public void removeChildTagFrom(Tag parentTag, Tag childTag) {
+        tagTree.removeSubTagFrom(parentTag, childTag);
+    }
+
+    @Override
+    public boolean isSubTagOf(Tag superTag, Tag subTag) {
+        return tagTree.isSubTagOf(superTag, subTag);
+
+    }
+
+    @Override
+    public void addPersonToTag(Tag tag, Person person) {
+        addressBook.addPersonToTag(tag, person);
+    }
+
+    @Override
+    public void removePersonFromTag(Tag tag, Person person) {
+        addressBook.removePersonFromTag(tag, person);
     }
 
     @Override
@@ -257,6 +294,11 @@ public class ModelManager implements Model {
     @Override
     public Set<Tag> getSuperTags() {
         return tagTree.getSuperTags();
+    }
+
+    @Override
+    public Set<Tag> getChildTags(Tag tag) {
+        return tagTree.getSubTagsOf(tag);
     }
 
     @Override

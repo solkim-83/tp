@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,6 +36,19 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code Collection<String> inputs} into a {@code Set<Index>}.
+     */
+    public static Set<Index> parseIndices(Collection<String> inputs) throws ParseException {
+        assert inputs != null;
+
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : inputs) {
+            indexSet.add(parseIndex(index));
+        }
+        return indexSet;
     }
 
     /**
@@ -183,6 +197,19 @@ public class ParserUtil {
         return new Time(trimmedTime);
     }
 
-
+    /**
+     * Parses a String {@code input} into a BooleanInput.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is invalid for a BooleanInput.
+     */
+    public static BooleanInput parseBooleanInput(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        if (!BooleanInput.isValidBooleanInput(trimmedInput)) {
+            throw new ParseException(BooleanInput.MESSAGE_CONSTRAINTS);
+        }
+        return BooleanInput.ofInput(trimmedInput);
+    }
 
 }

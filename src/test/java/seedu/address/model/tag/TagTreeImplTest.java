@@ -23,6 +23,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.exceptions.TagCyclicDependencyException;
+
 public class TagTreeImplTest {
 
     @Test
@@ -65,6 +67,14 @@ public class TagTreeImplTest {
     }
 
     @Test
+    public void editSubTagsOf_validTags_success() {
+        TagTree tagTree = buildTestTree();
+        tagTree.editSubTagsOf(TAG_COMPUTING, Set.of(TAG_CS2040S_NOT_TREE), Set.of(TAG_SCIENCE_COMP));
+        assertTrue(tagTree.getSubTagsOf(TAG_COMPUTING).contains(TAG_CS2040S_NOT_TREE));
+        assertFalse(tagTree.getSubTagsOf(TAG_COMPUTING).contains(TAG_SCIENCE_COMP));
+    }
+
+    @Test
     public void addSubTag_nonCyclicTag_success() {
         TagTreeImpl testTree = buildTestTree();
         testTree.addSubTagTo(TAG_COMPUTING, TAG_CS2040S_NOT_TREE);
@@ -74,7 +84,7 @@ public class TagTreeImplTest {
 
     @Test
     public void addSubTag_cyclicTag_errorThrown() {
-        assertThrows(IllegalArgumentException.class, () -> buildTestTree().addSubTagTo(TAG_COMPUTING, TAG_NUS));
+        assertThrows(TagCyclicDependencyException.class, () -> buildTestTree().addSubTagTo(TAG_COMPUTING, TAG_NUS));
     }
 
     @Test

@@ -8,11 +8,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Calendar;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListContactCommand.
@@ -24,8 +21,8 @@ public class ListContactCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
+        model = new ModelManagerBuilder().withAddressBook(getTypicalAddressBook()).build();
+        expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook()).build();
     }
 
     @Test

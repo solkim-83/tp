@@ -107,6 +107,11 @@ public interface Model {
     boolean hasEvent(Event event);
 
     /**
+     * Returns true if the {@code tag} exists with at least one sub-tag and/or person assigned to it.
+     */
+    boolean hasTag(Tag tag);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -119,6 +124,19 @@ public interface Model {
     void deleteEvent(Event target);
 
     /**
+     * Deletes the given {@code tag}.
+     * All contacts with the assigned {@code tag} will have it removed as well.
+     * All parent-tags of {@code tag} will be reconnected with the child-tags of {@code tag}.
+     */
+    void deleteTag(Tag tag);
+
+    /**
+     * Deletes the given {@code tag} and all its sub-tags.
+     * Sub-tags include child-tags of {@code tag}, child-tags of child-tags, etc.
+     */
+    void deleteTagRecursive(Tag tag);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -128,6 +146,7 @@ public interface Model {
      * Adds the given person.
      */
     void addEvent(Event event);
+
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -171,6 +190,11 @@ public interface Model {
     Set<Tag> getSuperTags();
 
     /**
+     * Returns a set of all child-tags of {@code tag}.
+     */
+    Set<Tag> getChildTags(Tag tag);
+
+    /**
      * Returns a set of all tags below the provided {@code tag} in the tag hierarchy.
      * I.e. all sub-tags, all sub-tags of those sub-tags, etc.
      */
@@ -182,6 +206,33 @@ public interface Model {
      * I.e. all persons with either {@code tag}, and/or any of its sub-tags, sub-tag of sub-tags, etc.
      */
     Set<Person> getPersonsRecursive(Tag tag);
+
+    /**
+     * Adds {@code person} to {@code tag}.
+     * {@code person} will also reflect this change with a new {@code tag}.
+     */
+    void addPersonToTag(Tag tag, Person person);
+
+    /**
+     * Removes {@code person} from {@code tag}.
+     * {@code person} will also reflect this change with {@code tag} removed.
+     */
+    void removePersonFromTag(Tag tag, Person person);
+
+    /**
+     * Adds {@code subTag} as a sub-tag of {@code superTag}.
+     */
+    void addSubTagTo(Tag superTag, Tag subTag);
+
+    /**
+     * Removes {@code childTag} as a child-tag of {@code parentTag}.
+     */
+    void removeChildTagFrom(Tag parentTag, Tag childTag);
+
+    /**
+     * Returns true if {@code subTag} is a sub-tag of {@code superTag}.
+     */
+    boolean isSubTagOf(Tag superTag, Tag subTag);
 
     // Filter/sort-list methods
 
