@@ -14,9 +14,11 @@ import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 
 /**
  * A list of reminders that enforces uniqueness between its elements and does not allow nulls.
- * An reminder is considered unique by comparing using {@code Reminder#isSameReminder(Reminder)}. As such, adding and updating of
- * reminders uses Reminder#isSameReminder(Reminder) for equality so as to ensure that the reminder being added or updated is
- * unique in terms of identity in the UniqueRemindersList. However, the removal of a reminder uses reminders#equals(Reminder) so
+ * An reminder is considered unique by comparing using {@code Reminder#isSameReminder(Reminder)}.
+ * As such, adding and updating of reminders uses Reminder#isSameReminder(Reminder)
+ * for equality so as to ensure that the reminder being added or updated is
+ * unique in terms of identity in the UniqueRemindersList.
+ * However, the removal of a reminder uses reminders#equals(Reminder) so
  * as to ensure that the reminder with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
