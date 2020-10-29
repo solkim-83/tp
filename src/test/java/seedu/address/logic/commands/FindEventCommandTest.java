@@ -9,20 +9,16 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.events.FindEventCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.event.DescriptionContainsKeywordsPredicate;
-import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEventCommand}.
  */
 public class FindEventCommandTest {
-    private Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
-    private Model expectedModel = new ModelManager(
-            new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+    private Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
+    private Model expectedModel = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
 
     @Test
     public void equals() {

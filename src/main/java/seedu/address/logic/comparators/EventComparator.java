@@ -27,9 +27,8 @@ public class EventComparator {
     };
 
     /**
-     * The comparator method that deals with various sorting patterns.
+     * This method returns different comparator methods that deals with various sorting patterns of the Event class.
      */
-
     public static Comparator<Event> chooseComparator(Index index) throws CommandException {
         int input = index.getOneBased();
         switch (input) {

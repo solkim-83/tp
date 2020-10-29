@@ -26,13 +26,15 @@ public class ViewTagCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.TAG.toString();
 
     public static final String MESSAGE_INVALID_TAG = "No information can be found for the tag %s!";
+    public static final String HEADER_CHILD_TAGS = "Child-tags: ";
     public static final String HEADER_CONTACTS_DIRECTLY_TAGGED = "Contacts directly tagged: ";
-    public static final String HEADER_SUB_TAGS = "All sub-tags: ";
+    public static final String HEADER_SUB_TAGS = "All other sub-tags: ";
     public static final String HEADER_RELATED_CONTACTS = "Related contacts: ";
+    public static final String INDICATOR_NO_CHILD_TAGS = "no child-tags found";
     public static final String INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS = "no directly tagged contacts";
-    public static final String INDICATOR_NO_SUB_TAGS = "no sub-tags found";
+    public static final String INDICATOR_NO_SUB_TAGS = "no other sub-tags found";
     public static final String INDICATOR_NO_RELATED_CONTACTS_FOUND =
-            "no related contacts found (contacts belonging to sub-tags)";
+            "no other related contacts found (contacts belonging to sub-tags)";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Views the details of "
@@ -98,9 +100,14 @@ public class ViewTagCommand extends Command {
 
         boolean isSuperTag = model.getSuperTags().contains(tag);
         sb.append(tag + (isSuperTag ? INDICATOR_SUPERTAG : "") + ':');
+        sb.append("\n" + HEADER_CHILD_TAGS
+                + parseTagSetIntoString(model.getChildTags(tag), INDICATOR_NO_CHILD_TAGS));
         sb.append("\n" + HEADER_CONTACTS_DIRECTLY_TAGGED
                 + parsePersonSetIntoString(model.getPersonsWithTag(tag), INDICATOR_NO_DIRECTLY_TAGGED_CONTACTS));
-        sb.append("\n" + HEADER_SUB_TAGS + parseTagSetIntoString(model.getSubTagsRecursive(tag)));
+
+        Set<Tag> otherSubTags = new HashSet<>(model.getSubTagsRecursive(tag));
+        otherSubTags.removeAll(model.getChildTags(tag));
+        sb.append("\n" + HEADER_SUB_TAGS + parseTagSetIntoString(otherSubTags, INDICATOR_NO_SUB_TAGS));
 
         Set<Person> relatedContacts = new HashSet<>(model.getPersonsRecursive(tag));
         relatedContacts.removeAll(model.getPersonsWithTag(tag));
@@ -113,12 +120,12 @@ public class ViewTagCommand extends Command {
     /**
      * Returns a String of comma separated sub-tags within curly braces.
      */
-    private static String parseTagSetIntoString(Set<Tag> tagSet) {
+    private static String parseTagSetIntoString(Set<Tag> tagSet, String messageIfEmpty) {
         return tagSet.stream()
                 .map(tag -> tag.toString())
                 .reduce((s1, s2) -> s1 + ", " + s2)
                 .map(string -> "{ " + string + " }")
-                .orElse(INDICATOR_NO_SUB_TAGS);
+                .orElse(messageIfEmpty);
     }
 
     @Override

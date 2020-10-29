@@ -19,15 +19,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.events.EditEventCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Calendar;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -35,7 +32,7 @@ import seedu.address.testutil.EventBuilder;
  */
 public class EditEventCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+    private Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,8 +42,7 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(
-                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
         expectedModel.setEvent(model.getSortedFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -68,8 +64,7 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(
-                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
         expectedModel.setEvent(lastEvent, editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -83,8 +78,7 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(
-                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }
@@ -100,8 +94,7 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(
-                new AddressBook(), new Calendar(model.getCalendar()), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
         expectedModel.setEvent(model.getSortedFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
