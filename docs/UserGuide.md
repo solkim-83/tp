@@ -254,13 +254,13 @@ Examples:
 
 Adds an event to the event list.
 
-Format: `add -e d/DESCRIPTION at/DATE_TIME ap/CONTACT_INDEX_LIST`
+Format: `add -e [d/DESCRIPTION] [at/DATE_TIME] [ap/CONTACT_INDEX_LIST]`
 
 1) `DESCRIPTION` = What you want the description of the event to be.
 1) `DATE_TIME` = Date and time of the event.
 1) `CONTACT_INDEX_LIST` = Indexes of contacts in the middle panel you want to add to the event.
 `*` is accepted as a way to add all the contacts from the panel. (See examples below)
-1) `ap/CONTACT_INDEX_LIST` is optional and can be omitted.
+1) `[ap/CONTACT_INDEX_LIST]` is optional and can be omitted.
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
@@ -309,7 +309,7 @@ Examples:
 
 #### Editing an event : `edit`
 
-Edits an existing event in the event list. DATE_TIME format follows the `add -e` command.
+Edits an existing event in the event list. `[d/DESCRIPTION]` and `[at/DATE_TIME]` have the same specifications as the `add -e` command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
@@ -318,8 +318,8 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `ap/CONTACT_INDEX_LIST` adds contacts with the specified indexes to the event.
-* `rp/ATTENDEE_INDEX_LIST` removes contacts with the specified indexes from the event.
+* `[ap/CONTACT_INDEX_LIST]` adds contacts with the specified indexes to the event.
+* `[rp/ATTENDEE_INDEX_LIST]` removes contacts with the specified indexes from the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 * You can remove all the attendees for the event by using `rp/*`.
 
