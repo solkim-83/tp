@@ -36,8 +36,8 @@ public class AddEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Adds an event to Athena.\n\n"
             + "Parameters:\n"
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
-            + "[" + PREFIX_DATETIME + "TIME]\n"
+            + PREFIX_DESCRIPTION + "DESCRIPTION\n"
+            + PREFIX_DATETIME + "TIME\n"
             + "[" + PREFIX_ADD_PERSON + "CONTACT_INDEX_LIST]\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
