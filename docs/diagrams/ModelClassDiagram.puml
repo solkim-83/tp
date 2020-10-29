@@ -13,6 +13,7 @@ Class ModelManager
 Class UserPrefs
 Interface TagManager <<Interface>>
 Class TagManager
+Class SortedList
 
 Class TagManagerImpl
 
@@ -50,6 +51,10 @@ ModelManager --> "1" AddressBook
 ModelManager -left-> "1" UserPrefs
 ModelManager -left-> "1" ContactTagIntegrationManager
 ModelManager -left-> "1" TagTree
+ModelManager -->"1" SortedList
+
+SortedList --> "*" Person
+SortedList ..> UniquePersonList : Uses data from >
 
 ContactTagIntegrationManager --> "1" TagTree
 ContactTagIntegrationManager --> "1" AddressBook
@@ -58,7 +63,7 @@ TagTreeImpl -up-|> TagTree
 TagTreeImpl -down-> "*" Tag
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList o--> "*" Person
+UniquePersonList --> "*" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -69,5 +74,4 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager -->"1" Person : filtered list
 @enduml
