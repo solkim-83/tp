@@ -692,4 +692,3 @@ As such, multiple solutions and designs were considered, outlining exact behavio
 Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons.
  
 
-    
