@@ -256,9 +256,7 @@ Adds an event to the event list.
 
 Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
-* `DESCRIPTION` = What you want the description of the event to be.
-* `DATE_TIME` = Date and time of the event.
-* `CONTACT_INDEX_LIST` = Indexes of contacts in the middle panel you want to add to the event.
+* `CONTACT_INDEX_LIST` are the indexes of contacts in the middle panel you want to add to the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 
 DATE_TIME formats currently accepted
