@@ -10,6 +10,7 @@ import seedu.address.model.event.Time;
 import seedu.address.model.reminder.Reminder;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 /**
  * Jackson-friendly version of {@link Reminder}.
@@ -68,7 +69,7 @@ class JsonAdaptedReminder {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
         final Time modelTime = new Time(eventTime);
-        final Event modelEvent = new Event(modelDescription, modelTime);
+        final Event modelEvent = new Event(modelDescription, modelTime, new HashSet<>());
 
         if (startDateOfReminders == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
