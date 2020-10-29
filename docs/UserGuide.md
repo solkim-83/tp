@@ -409,7 +409,7 @@ Athena opens 4 days prior to that event
 
 #### Listing all reminders: `list`
 
-Lists all reminders in the remarks panel. It lists each reminder and a countdown to their events.
+Lists all reminders in the remarks panel. It lists each reminder and a countdown to its event.
 
 Example:
 * `list -r` 
