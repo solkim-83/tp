@@ -328,6 +328,13 @@ Examples:
 * `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30
 * `edit -e 1 ap/1,2 rp/1,2`  Adds the contacts at index 1 and 2 from the contact list to the event attendees. Removes the first 2 contacts from the event attendees list.
 
+Picture example:
+
+Before
+![Edit Event Behaviour before](images/ug-images/edit-event-behaviour-before.png)
+After
+![Edit Event Behaviour after](images/ug-images/edit-event-behaviour-after.png)
+
 #### Finding an event : `find`
 
 Finds events which names contain any of the given keywords.
