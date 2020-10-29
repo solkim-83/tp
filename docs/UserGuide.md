@@ -499,6 +499,7 @@ Action | Format, Examples
 **Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add -c n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
 **Add Tag** | `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…` <br> e.g., `add -t n/computing i/1 i/2 t/cs2030 t/cs2040`
+**Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
 **Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
@@ -514,11 +515,8 @@ Action | Format, Examples
 **List Contact** | `list -c`
 **List Events** | `list -e`
 **Sort Contacts** | `sort -c 1`
-**Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
-**List Reminders** | `list -r`
-**Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
-**List Reminders** | `list -r`
 **List Tags** | `list -t`
+**List Reminders** | `list -r`
 **Sort Contacts** | `sort -c INDEX`
 **Sort Events** | `sort -e INDEX`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
