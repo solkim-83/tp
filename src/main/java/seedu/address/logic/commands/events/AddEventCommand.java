@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.events;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
 
 import java.util.ArrayList;
 import java.util.HashSet;
