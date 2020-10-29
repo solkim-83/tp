@@ -254,7 +254,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public  ObservableList<Reminder> getSortedFilteredReminderList() {
+    public ObservableList<Reminder> getSortedFilteredReminderList() {
         throw new AssertionError("This method should not be called.");
     }
 
