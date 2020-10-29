@@ -289,7 +289,7 @@ Clears all events from Athena's calendar.
 Format: `clear -e`
 
 <div markdown="block" class="alert alert-primary">
-:exclamation: **WARNING:** :exclamation: **All events will be deleted following the use of this command! (show below)**
+:exclamation: **WARNING:** :exclamation: **All events will be deleted following the use of this command! (shown below)**
 </div>
 
 ![Clear Event Behaviour](images/ug-images/clear-event-behaviour.png)
