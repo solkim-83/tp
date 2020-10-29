@@ -250,7 +250,7 @@ Examples:
 
 ### Event
 
-#### Adding an event: `add -e`
+#### Adding an event: `add`
 
 Adds an event to the event list.
 
