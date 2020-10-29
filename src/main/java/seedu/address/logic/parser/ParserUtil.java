@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -192,9 +193,27 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedTime = time.trim();
         if (!Time.isValidTime(trimmedTime)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String indexes} into an ArrayList of {@code Index}.
+     * e.g. "3,5,1"
+     * Leading and trailing whitespaces will be trimmed before parsing
+     *
+     * @throws ParseException if the given indexes are invalid.
+     */
+    public static ArrayList<Index> parseIndexes(String indexes) throws ParseException {
+        requireNonNull(indexes);
+        String trimmedIndexes = indexes.trim();
+        String[] indexStrArr = trimmedIndexes.split(",");
+        final ArrayList<Index> indexArrayList = new ArrayList<>();
+        for (String index : indexStrArr) {
+            indexArrayList.add(ParserUtil.parseIndex(index));
+        }
+        return indexArrayList;
     }
 
     /**

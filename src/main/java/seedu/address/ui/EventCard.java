@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
@@ -32,6 +33,12 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label time;
 
+    // do not understand why, but when the following field is named anything else with the corresponding change
+    // to EventListCard.fxml, the GUI breaks and the blue boxes are no longer shown around the display name
+    // TODO: fix problem mentioned right above, or maybe not
+    @FXML
+    private FlowPane tags;
+
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
      */
@@ -41,6 +48,9 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(event.getDescription().fullDescription);
         time.setText(event.getTime().toDisplayString());
+        // no sorting here, as to show it in order of user input
+        event.getAssociatedPersons().stream()
+                .forEach(fauxPerson -> tags.getChildren().add(new Label(fauxPerson.displayName)));
     }
 
     @Override

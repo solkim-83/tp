@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
@@ -8,7 +10,7 @@ import seedu.address.model.event.Time;
  * A utility class to help with building Event objects.
  */
 public class EventBuilder {
-
+    // TODO: incorporate person associations into this builder
     public static final String DEFAULT_DESCRIPTION = "Group Meeting";
     public static final String DEFAULT_TIME = "01-01-2001 01:01";
 
@@ -48,7 +50,7 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(description, time);
+        return new Event(description, time, new HashSet<>());
     }
 
 }
