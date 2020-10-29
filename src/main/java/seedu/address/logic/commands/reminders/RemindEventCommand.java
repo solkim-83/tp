@@ -15,14 +15,14 @@ import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Reminder;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Sets a custom reminder for an event identified using its displayed index from the Athena.
  */
 public class RemindEventCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.REMIND.toString();
+    public static final String COMMAND_WORD = CommandWord.ADD.toString();
 
     public static final String COMMAND_TYPE = CommandType.REMINDER.toString();
 
@@ -61,14 +61,11 @@ public class RemindEventCommand extends Command {
         LocalDateTime now = LocalDateTime.now();
         if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time)) {
             throw new CommandException("You cannot set a reminder for after the event is over");
-        } else if (Reminder.checkDuplicateReminder(toAdd)) {
+        } else if (model.hasReminder(toAdd)) {
             throw new CommandException("You already have an existing reminder for this event");
         }
-        try {
-            Reminder.addReminder(toAdd);
-        } catch (IOException e) {
-            throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
-        }
+
+        model.addReminder(toAdd);
 
         return new CommandResult(String.format(MESSAGE_REMIND_EVENT_SUCCESS, daysInAdvance)
                 + eventForReminder.toString());

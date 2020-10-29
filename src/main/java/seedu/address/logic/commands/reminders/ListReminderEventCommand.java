@@ -8,7 +8,8 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.Reminder;
+import seedu.address.model.reminder.ReadOnlyReminders;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Lists all upcoming reminders to the user.
@@ -25,7 +26,19 @@ public class ListReminderEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Reminder.deleteObsolete();
-        return new CommandResult(MESSAGE_SUCCESS + Reminder.remindersToShow());
+        model.deleteObsoleteReminders();
+        ReadOnlyReminders remindersToShow = model.getReminders();
+        String remindersList = buildRemindersList(remindersToShow);
+        return new CommandResult(MESSAGE_SUCCESS + remindersList );
+    }
+
+    public String buildRemindersList(ReadOnlyReminders reminders) {
+        String result = "";
+        int count = 1;
+        for (Reminder reminder: reminders.getRemindersList()) {
+            result += count + ". " + reminder.toString() + "\n";
+            count++;
+        }
+        return result;
     }
 }

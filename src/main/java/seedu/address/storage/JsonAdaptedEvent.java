@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -34,6 +35,7 @@ class JsonAdaptedEvent {
         description = source.getDescription().fullDescription;
         time = source.getTime().toString();
     }
+
 
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code Event} object.

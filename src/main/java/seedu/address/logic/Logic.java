@@ -11,6 +11,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReadOnlyReminders;
+import seedu.address.model.reminder.Reminder;
 
 /**
  * API of the Logic component
@@ -39,11 +41,21 @@ public interface Logic {
      */
     ReadOnlyCalendar getCalendar();
 
+    /**
+     * Returns the Reminders
+     *
+     * @see seedu.address.model.Model#getReminders()
+     */
+    ReadOnlyReminders getReminders();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of events */
     ObservableList<Event> getFilteredEventList();
+
+    /** Returns an unmodifiable view of the filtered list of events */
+    ObservableList<Reminder> getFilteredReminderList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -54,6 +66,11 @@ public interface Logic {
      * Returns the user prefs' calendar file path.
      */
     Path getCalendarFilePath();
+
+    /**
+     * Returns the user prefs' reminders file path.
+     */
+    Path getRemindersFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

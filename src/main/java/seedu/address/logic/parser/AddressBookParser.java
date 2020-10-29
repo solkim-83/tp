@@ -161,7 +161,7 @@ public class AddressBookParser {
             case LIST:
                 return new ListReminderEventCommand();
 
-            case REMIND:
+            case ADD:
                 return new RemindEventCommandParser().parse(arguments);
 
             case SHOW_REMINDER:

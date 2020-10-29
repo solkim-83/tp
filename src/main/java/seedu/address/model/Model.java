@@ -6,9 +6,12 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReadOnlyReminders;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 
@@ -56,6 +59,11 @@ public interface Model {
     Path getTagTreeFilePath();
 
     /**
+     * Returns the user prefs' reminder file path.
+     */
+    Path getRemindersFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -69,6 +77,11 @@ public interface Model {
      * Sets the user prefs' calender file path.
      */
     void setTagTreeFilePath(Path tagTreeFilePath);
+
+    /**
+     * Sets the user prefs' reminder file path.
+     */
+    void setRemindersFilePath(Path remindersFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -97,6 +110,16 @@ public interface Model {
     ReadOnlyTagTree getTagTree();
 
     /**
+     * Replaces the reminders data with the data in {@code reminders}.
+     */
+    void setReminders(ReadOnlyReminders reminders);
+
+    /**
+     * Returns the Reminders.
+     */
+    ReadOnlyReminders getReminders();
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
@@ -110,6 +133,11 @@ public interface Model {
      * Returns true if the {@code tag} exists with at least one sub-tag and/or person assigned to it.
      */
     boolean hasTag(Tag tag);
+
+    /**
+     * Returns true if the {@code reminder} exists.
+     */
+    boolean hasReminder(Reminder reminder);
 
     /**
      * Deletes the given person.
@@ -137,6 +165,11 @@ public interface Model {
     void deleteTagRecursive(Tag tag);
 
     /**
+     * Deletes the given {@code reminder}.
+     */
+    void deleteReminder(Reminder reminder);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -146,6 +179,11 @@ public interface Model {
      * Adds the given person.
      */
     void addEvent(Event event);
+
+    /**
+     * Adds the reminder.
+     */
+    void addReminder(Reminder reminder);
 
 
     /**
@@ -171,6 +209,12 @@ public interface Model {
      * Returns an unmodifiable view of the filtered event list
      */
     ObservableList<Event> getSortedFilteredEventList();
+
+    /**
+     * Returns an unmodifiable view of the filtered reminders list
+     * @return
+     */
+    ObservableList<Reminder> getSortedFilteredReminderList();
 
     // Tag-related operations
 
@@ -259,5 +303,7 @@ public interface Model {
     void updateFilteredEventList(Predicate<Event> predicate);
 
     void sortEvent(Comparator<Event> comparator);
+
+    void deleteObsoleteReminders();
 
 }

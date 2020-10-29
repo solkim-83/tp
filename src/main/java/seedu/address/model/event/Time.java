@@ -29,6 +29,20 @@ public class Time {
     }
 
     /**
+     * Constructs a {@code Time}.
+     *
+     * @param timeInput A valid time.
+     */
+    public Time(LocalDateTime timeInput) {
+        requireNonNull(timeInput);
+        this.time = timeInput;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    /**
      * Returns if a given string is a valid time.
      */
     // TODO: change this checker whenever more formats are added in the method below

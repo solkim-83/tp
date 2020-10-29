@@ -61,11 +61,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
-
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -73,7 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         introWindow = new IntroWindow();
-        reminderWindow = new ReminderWindow();
+        reminderWindow = new ReminderWindow(logic);
     }
 
     public Stage getPrimaryStage() {
