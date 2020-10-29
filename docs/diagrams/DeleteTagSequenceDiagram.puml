@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":ContactTagIntegrationManager" as ContactTagIntegrationManager MODEL_CONTACT_TAG_COLOR
+participant ":AddressBook" as AddressBook MODEL_CONTACT_TAG_COLOR
+participant ":TagTree" as TagTree MODEL_CONTACT_TAG_COLOR
+end box
+
+[-> LogicManager : execute("delete -t t/cs2103")
+activate LogicManager
+
+LogicManager -> ModelManager : deleteTag(tagCS2103)
+activate ModelManager
+
+ModelManager -> ContactTagIntegrationManager : deleteTag(tagCS2103)
+activate ContactTagIntegrationManager
+
+ContactTagIntegrationManager -> TagTree : deleteTag(tagCS2103)
+activate TagTree
+
+TagTree --> ContactTagIntegrationManager
+deactivate TagTree
+
+ContactTagIntegrationManager -> AddressBook : getPersonsWithTag(tagCS2103)
+activate AddressBook
+
+AddressBook --> ContactTagIntegrationManager : set_tagCS2103
+
+loop for each person in set_tagCS2103
+
+ContactTagIntegrationManager -> ContactTagIntegrationManager : copyPersonWithoutTag(person)
+activate ContactTagIntegrationManager
+ContactTagIntegrationManager --> ContactTagIntegrationManager : personWithoutTag
+deactivate ContactTagIntegrationManager
+
+ContactTagIntegrationManager -> AddressBook : setPerson(person, personWithoutTag)
+deactivate AddressBook
+end loop
+
+ContactTagIntegrationManager --> ModelManager
+deactivate ContactTagIntegrationManager
+
+ModelManager --> LogicManager
+deactivate ModelManager
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

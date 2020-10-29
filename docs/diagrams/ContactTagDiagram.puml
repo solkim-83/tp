@@ -8,6 +8,7 @@ Package Person {
 Class AddressBook
 Class UniquePersonList
 Interface TagManager <<Interface>>
+Class TagManager
 Class TagManagerImpl
 Class Person
 }
