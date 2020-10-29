@@ -43,7 +43,7 @@ public class EditEventCommand extends Command {
             + "Description and time will be overwritten by the input values.\n\n"
             + "Parameters:\nINDEX (must be a positive integer)\n"
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]\n"
-            + "[" + PREFIX_DATETIME + "TIME]\n"
+            + "[" + PREFIX_DATETIME + "DATE_TIME]\n"
             + "[" + PREFIX_ADD_PERSON + "CONTACT_INDEX_LIST]\n"
             + "[" + PREFIX_REMOVE_PERSON + "ATTENDEE_INDEX_LIST]\n\n"
             + "Example: \n" + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
