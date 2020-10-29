@@ -60,15 +60,15 @@ Athena is perfect for you if you:
 
 1. Ensure you have Java `11` or above installed in your computer.
 
-2. Download the latest `Athena.jar` from [here](https://github.com/AY2021S1-CS2103T-W10-4/tp/releases).
+1. Download the latest `Athena.jar` from [here](https://github.com/AY2021S1-CS2103T-W10-4/tp/releases).
 
-3. Copy the JAR file to the folder you want to use as the _home folder_ for Athena.
+1. Copy the JAR file to the folder you want to use as the _home folder_ for Athena.
 
-4. Double-click the file or run it with `java -jar Athena.jar` on Terminal to start the app. A window similar to the one below
+1. Double-click the file or run it with `java -jar Athena.jar` on Command Line Interface to start the app. A window similar to the one below
    should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    
    Some commands you can try:
@@ -83,7 +83,7 @@ Athena is perfect for you if you:
 
    * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ specific key-words. Thus, there are **four** types of commands:
 
 <div markdown="block" class="alert alert-info">
 
-**:Information_source: Notes about the command format:**<br>
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -112,7 +112,7 @@ specific key-words. Thus, there are **four** types of commands:
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also an acceptable input.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 </div>
 
@@ -290,7 +290,7 @@ Format: `delete -e INDEX`
 * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-* `list -e` followed by `delete -e 2` deletes the 2nd event in the event list
+* `list -e` followed by `delete -e 2` deletes the 2nd event in the event list.
 
 #### Editing an event : `edit`
 
@@ -319,13 +319,13 @@ Finds events which names contain any of the given keywords.
 
 Format: `find -e KEYWORD`
 
-* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* The search is case-insensitive. e.g `meeting` will match `Meeting`.
 * If the event contains the particular keyword in the command, the name of the event will appear.
-* Only full words will be matched e.g. `meetin` will not match `meeting`
+* Only full words will be matched e.g. `meetin` will not match `meeting`.
 
 Examples:
-* `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `find -e seminar` returns `CS Seminar` and `seminar 1`
+* `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
+* `find -e seminar` returns `CS Seminar` and `seminar 1`.
 
 #### Listing all events : `list`
 
@@ -339,13 +339,14 @@ Sorts all currently displayed events in Athena.
 
 Format: `sort -e INDEX`
 
-* Sorts through all events currently on screen and lists them according to the user-requested order
+* Sorts through all events currently on screen and lists them according to the user-requested order.
 * Index definitions:
-1. By lexicographical order of the events' descriptions
-2. By lexicographical order of the events' timing
+
+    1. By lexicographical order of the events' descriptions.
+    2. By lexicographical order of the events' timing.
 
 Examples:
-* `sort -e 2` would sort all currently displayed events by their descriptions in alphabetical order.
+* `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
 
 
 ---
@@ -446,13 +447,13 @@ Example:
 ## FAQ
 
 **Q**: How do I save changes?
-**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to manually save the data.
-
-**Q**: What are the save files that Athena uses?<br>
-**A**: Athena uses three separate save files. They are `addressbook.json`, `calendar.json` and `tagtree.json`.
+**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 **Q**: Where are the save files that Athena uses stored?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
+
+**Q**: What are the save files that Athena uses?<br>
+**A**: Athena uses three separate save files. They are `addressbook.json`, `calendar.json` and `tagtree.json`.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
