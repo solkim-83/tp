@@ -11,6 +11,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.reminder.ReadOnlyReminders;
 import seedu.address.model.tag.ReadOnlyTagTree;
 
 /**
@@ -23,6 +24,7 @@ public class StorageManager implements Storage {
     private CalendarStorage calendarStorage;
     private UserPrefsStorage userPrefsStorage;
     private TagTreeStorage tagTreeStorage;
+    private RemindersStorage remindersStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -30,12 +32,14 @@ public class StorageManager implements Storage {
     public StorageManager(AddressBookStorage addressBookStorage,
                           CalendarStorage calendarStorage,
                           UserPrefsStorage userPrefsStorage,
-                          TagTreeStorage tagTreeStorage) {
+                          TagTreeStorage tagTreeStorage,
+                          RemindersStorage remindersStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.calendarStorage = calendarStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.tagTreeStorage = tagTreeStorage;
+        this.remindersStorage = remindersStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -143,6 +147,35 @@ public class StorageManager implements Storage {
     public void saveTagTree(ReadOnlyTagTree tagTree, Path filePath) throws IOException {
         logger.fine("Attempting to write TagTree to data file: " + filePath);
         tagTreeStorage.saveTagTree(tagTree, filePath);
+    }
+
+    // ================ TagTree methods ==============================
+
+    @Override
+    public Path getRemindersFilePath() {
+        return remindersStorage.getRemindersFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyReminders> readReminders() throws DataConversionException, IOException {
+        return readReminders(remindersStorage.getRemindersFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyReminders> readReminders(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read Reminders data from file: " + filePath);
+        return remindersStorage.readReminders(filePath);
+    }
+
+    @Override
+    public void saveReminders(ReadOnlyReminders reminders) throws IOException {
+        saveReminders(reminders, remindersStorage.getRemindersFilePath());
+    }
+
+    @Override
+    public void saveReminders(ReadOnlyReminders reminders, Path filePath) throws IOException {
+        logger.fine("Attempting to write reminders to data file: " + filePath);
+        remindersStorage.saveReminders(reminders, filePath);
     }
 
 }

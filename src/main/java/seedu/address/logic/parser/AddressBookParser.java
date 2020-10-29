@@ -15,6 +15,8 @@ import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
+import seedu.address.logic.commands.reminders.ListReminderEventCommand;
+import seedu.address.logic.commands.reminders.ShowReminderEventCommand;
 import seedu.address.logic.commands.tags.ListTagCommand;
 import seedu.address.logic.parser.contacts.AddContactCommandParser;
 import seedu.address.logic.parser.contacts.DeleteContactCommandParser;
@@ -26,6 +28,7 @@ import seedu.address.logic.parser.events.AddEventCommandParser;
 import seedu.address.logic.parser.events.DeleteEventCommandParser;
 import seedu.address.logic.parser.events.EditEventCommandParser;
 import seedu.address.logic.parser.events.FindEventCommandParser;
+import seedu.address.logic.parser.events.RemindEventCommandParser;
 import seedu.address.logic.parser.events.SortEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tags.AddTagCommandParser;
@@ -145,6 +148,23 @@ public class AddressBookParser {
 
             case DELETE:
                 return new DeleteTagCommandParser().parse(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case REMINDER:
+
+            switch (commandWord) {
+
+            case SHOW:
+                return new ShowReminderEventCommand();
+
+            case LIST:
+                return new ListReminderEventCommand();
+
+            case ADD:
+                return new RemindEventCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

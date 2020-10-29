@@ -16,6 +16,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReadOnlyReminders;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagTree;
@@ -31,31 +33,37 @@ public class ModelManager implements Model {
     private final Calendar calendar;
     private final UserPrefs userPrefs;
     private final TagTree tagTree;
+    private final RemindersImpl reminders;
     private final ContactTagIntegrationManager contactTagIntegrationManager;
 
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
     private final SortedList<Event> sortedEvents;
+    private final FilteredList<Reminder> filteredReminders;
+    private final SortedList<Reminder> sortedReminders;
 
     /**
-     * Initializes a ModelManager with the given addressBook, calendar, tagTree and userPrefs.
+     * Initializes a ModelManager with the given addressBook, calendar, tagTree, reminders and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook,
                         ReadOnlyCalendar calendar,
                         ReadOnlyTagTree tagTree,
-                        ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyReminders reminders) {
         super();
         requireAllNonNull(addressBook, tagTree, userPrefs);
 
         logger.fine("Initializing with AddressBook: " + addressBook + "\n"
                 + ", Calendar: " + calendar + "\n"
                 + ", TagTree: " + tagTree + "\n"
+                + ", Reminders: " + reminders + "\n"
                 + " and UserPrefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.calendar = new Calendar(calendar);
         this.tagTree = new TagTreeImpl(tagTree);
+        this.reminders = new RemindersImpl(reminders);
         this.userPrefs = new UserPrefs(userPrefs);
 
         contactTagIntegrationManager = new ContactTagIntegrationManager(this.addressBook, this.tagTree);
@@ -65,6 +73,9 @@ public class ModelManager implements Model {
 
         filteredEvents = new FilteredList<>(this.calendar.getEventList());
         sortedEvents = new SortedList<>(filteredEvents);
+
+        filteredReminders = new FilteredList<>(this.reminders.getRemindersList());
+        sortedReminders = new SortedList<>(filteredReminders);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -124,6 +135,17 @@ public class ModelManager implements Model {
         userPrefs.setTagTreeFilePath(tagTreeFilePath);
     }
 
+    @Override
+    public Path getRemindersFilePath() {
+        return userPrefs.getRemindersFilePath();
+    }
+
+    @Override
+    public void setRemindersFilePath(Path remindersFilePath) {
+        requireNonNull(remindersFilePath);
+        userPrefs.setTagTreeFilePath(remindersFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -157,6 +179,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setReminders(ReadOnlyReminders reminders) {
+        this.reminders.resetData(reminders);
+    }
+
+    @Override
+    public ReadOnlyReminders getReminders() {
+        return reminders;
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -171,6 +203,11 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTag(Tag tag) {
         return contactTagIntegrationManager.hasTag(tag);
+    }
+
+    @Override
+    public boolean hasReminder(Reminder reminder) {
+        return reminders.hasReminder(reminder);
     }
 
     @Override
@@ -196,6 +233,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteReminder(Reminder reminder) {
+        assert reminder != null;
+        reminders.removeReminder(reminder);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -204,6 +247,11 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         calendar.addEvent(event);
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        reminders.addReminder(reminder);
     }
 
     @Override
@@ -276,6 +324,12 @@ public class ModelManager implements Model {
         return sortedEvents;
     }
 
+    @Override
+    public ObservableList<Reminder> getSortedFilteredReminderList() {
+        return sortedReminders;
+    }
+
+
     // Person-tag related methods
 
     @Override
@@ -321,6 +375,12 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
     }
+
+    @Override
+    public void deleteObsoleteReminders() {
+        reminders.deleteObsoleteReminders();
+    };
+
 
     @Override
     public boolean equals(Object obj) {

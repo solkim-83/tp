@@ -51,7 +51,9 @@ public class UiManager implements Ui {
             if (!contactsSave.isFile() && !eventsSave.isFile()) {
                 mainWindow.executeIntroCommand();
             }
-
+            if (logic.getReminders().hasRemindersDue()) {
+                mainWindow.executeShowReminderCommand();
+            }
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);

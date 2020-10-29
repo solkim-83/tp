@@ -17,6 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_RECURSIVE = new Prefix("r/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_DATETIME = new Prefix("at/");
+    public static final Prefix PREFIX_REMIND_IN = new Prefix("in/");
     public static final Prefix PREFIX_ADD_PERSON = new Prefix("ap/");
     public static final Prefix PREFIX_REMOVE_PERSON = new Prefix("rp/");
 

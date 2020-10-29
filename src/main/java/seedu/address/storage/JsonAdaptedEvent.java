@@ -51,6 +51,7 @@ class JsonAdaptedEvent {
                 .collect(Collectors.toList()));
     }
 
+
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code Event} object.
      *

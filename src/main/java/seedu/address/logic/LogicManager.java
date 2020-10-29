@@ -18,6 +18,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReadOnlyReminders;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.storage.Storage;
 
 /**
@@ -61,6 +63,7 @@ public class LogicManager implements Logic {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveCalendar(model.getCalendar());
             storage.saveTagTree(model.getTagTree());
+            storage.saveReminders(model.getReminders());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -89,13 +92,28 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyReminders getReminders() {
+        return model.getReminders();
+    }
+
+    @Override
     public ObservableList<Event> getFilteredEventList() {
         return model.getSortedFilteredEventList();
     }
 
     @Override
+    public ObservableList<Reminder> getFilteredReminderList() {
+        return model.getSortedFilteredReminderList();
+    }
+
+    @Override
     public Path getCalendarFilePath() {
         return model.getCalendarFilePath();
+    }
+
+    @Override
+    public Path getRemindersFilePath() {
+        return model.getRemindersFilePath();
     }
 
     @Override

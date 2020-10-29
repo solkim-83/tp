@@ -22,7 +22,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RemindersImpl;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.reminder.ReadOnlyReminders;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.TagTreeImpl;
 import seedu.address.model.util.SampleDataUtil;
@@ -30,8 +32,10 @@ import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.CalendarStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
+import seedu.address.storage.JsonRemindersStorage;
 import seedu.address.storage.JsonTagTreeStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RemindersStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.TagTreeStorage;
@@ -68,8 +72,10 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         CalendarStorage calendarStorage = new JsonCalendarStorage(userPrefs.getCalendarFilePath());
         TagTreeStorage tagTreeStorage = new JsonTagTreeStorage(userPrefs.getTagTreeFilePath());
+        RemindersStorage remindersStorage = new JsonRemindersStorage(userPrefs.getRemindersFilePath());
 
-        storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage, tagTreeStorage);
+        storage = new StorageManager(addressBookStorage, calendarStorage,
+                userPrefsStorage, tagTreeStorage, remindersStorage);
 
         initLogging(config);
 
@@ -99,8 +105,9 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialAddressBook = addressBookFromStorage(storage);
         ReadOnlyCalendar initialCalendar = calendarFromStorage(storage);
         ReadOnlyTagTree initialTagTree = tagTreeFromStorage(storage);
+        ReadOnlyReminders initialReminders = remindersFromStorage(storage);
 
-        return new ModelManager(initialAddressBook, initialCalendar, initialTagTree, userPrefs);
+        return new ModelManager(initialAddressBook, initialCalendar, initialTagTree, userPrefs, initialReminders);
     }
 
     // private methods below just to split up logic for initModelManager
@@ -184,6 +191,33 @@ public class MainApp extends Application {
             initialTagTree = new TagTreeImpl();
         }
         return initialTagTree;
+    }
+
+    /**
+     * Refer to {@link #initModelManager(Storage, ReadOnlyUserPrefs)} for specifications
+     * @param storage storage to be read from
+     * @return {@link ReadOnlyTagTree}
+     */
+    private ReadOnlyReminders remindersFromStorage(Storage storage) {
+        Optional<ReadOnlyReminders> remindersOptional;
+        ReadOnlyReminders initialReminders;
+        try {
+            remindersOptional = storage.readReminders();
+            if (remindersOptional.isEmpty()) {
+                logger.info("Reminders file not found. "
+                        + "Will be starting with an empty Reminders storage");
+            }
+            initialReminders = remindersOptional.orElse(new RemindersImpl());
+        } catch (DataConversionException e) {
+            logger.warning("Reminders file not in the correct format. "
+                    + "Will be starting with an empty Reminders storage");
+            initialReminders = new RemindersImpl();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the TagTree file. "
+                    + "Will be starting with an empty TagTree");
+            initialReminders = new RemindersImpl();
+        }
+        return initialReminders;
     }
 
     // private methods for initModelManager ends

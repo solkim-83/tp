@@ -6,6 +6,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RemindersImpl;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.TagTreeImpl;
@@ -19,8 +20,12 @@ public class ModelManagerBuilder {
 
     private ModelManager model;
 
+    /**
+     * Constructs a model manager builder.
+     */
     public ModelManagerBuilder() {
-        model = new ModelManager(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), new Calendar(),
+                new TagTreeImpl(), new UserPrefs(), new RemindersImpl());
     }
 
     public ModelManagerBuilder(ModelManager model) {

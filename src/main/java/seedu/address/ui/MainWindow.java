@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultPanel resultPanel;
     private HelpWindow helpWindow;
     private IntroWindow introWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -60,11 +61,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
-
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -72,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         introWindow = new IntroWindow();
+        reminderWindow = new ReminderWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -166,6 +166,15 @@ public class MainWindow extends UiPart<Stage> {
         introWindow.show();
     }
 
+    /**
+     * Opens the reminder window. Note that focusing is not required as the window opens as
+     * the app opens.
+     */
+    @FXML
+    public void handleReminders() {
+        reminderWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -203,6 +212,22 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Result: " + commandResult.getFeedbackToUser());
         resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
         handleIntro();
+        return commandResult;
+    }
+
+    /**
+     * Executes the command to show the reminders alert. As the ShowReminderEvent command should not be
+     * accessible by the user, a commandText should not exist for it and the entire execution
+     * should be handled in the back-end. Note that as this method cannot throw a CommandException
+     * or a ParseException, handling can be ignored. The lack of an access modifier is intentional
+     * - method is supposed to be package private.
+     */
+
+    CommandResult executeShowReminderCommand() throws CommandException, ParseException {
+        CommandResult commandResult = logic.execute("show -r");
+        logger.info("Result: " + commandResult.getFeedbackToUser());
+        resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
+        handleReminders();
         return commandResult;
     }
 
