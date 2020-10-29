@@ -21,7 +21,7 @@ section below.
         * [`delete`](#deleting-a-contact--delete) - deleting a contact
         * [`edit`](#editing-a-contact--edit) - editing a contact
         * [`find`](#finding-a-contact--find) - finding a contact
-        * [`list`](#listing-all-contacts--list) - listing a contact
+        * [`list`](#listing-all-contacts--list) - listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - sorting displayed contacts
     * [Event](#event)
         * [`add`](#adding-an-event-add) - adding an event
@@ -29,9 +29,16 @@ section below.
         * [`delete`](#deleting-an-event--delete) - deleting an event
         * [`edit`](#editing-an-event--edit) - editing an event
         * [`find`](#finding-an-event--find) - finding an event
-        * [`list`](#listing-all-events--list) - listing an event
+        * [`list`](#listing-all-events--list) - listing all events
+    * [Tag](#tag)
+        * [`add`](#adding-a-tag-add) - adding a tag
+        * [`delete`](#deleting-a-tag-delete) - deleting a tag
+        * [`edit`](#editing-a-tag-edit) - editing a tag
+        * [`list`](#listing-all-tags-list) - listing all tags
+        * [`view`](#viewing-tags-view) - viewing tag details
 * [FAQ](#FAQ)
 * [Command Summary](#Command-summary)
+* [Glossary](#glossary)
 
 ---
 
@@ -328,79 +335,108 @@ Format: `list -e`
 ### Tag
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
-allow you to perform tag-level actions such as adding all contacts under a tag into an event. 
+allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an events. 
+Below are some commands to facilitate tag management.
+
+**Note: For a tag to exist, it has to have at least one contact tagged OR contains one child-tag.**
+Tags that do not meet this criterion will be deleted. 
 
 #### Adding a tag: `add`
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
-of tags under one super-tag.
+of tags under one parent-tag.
 
-Format: `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/SUB_TAG]…`
+Format: `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…`
 
 * `TAG_NAME` must be alphanumeric with no spaces.
-* `CONTACT_INDEX` refers to the index of a contact as is shown in the contact window.
-* At least one of `CONTACT_INDEX` or `SUB_TAG` must be provided.
+* At least one of `CONTACT_INDEX` or `CHILD_TAG` must be provided.
+* `CONTACT_INDEX` refers to the index of a contact as is shown in the contact panel.
+* `CONTACT_INDEX` must be a positive integer.
 * `TAG_NAME` must not be a tag that already exists.
-* `SUB_TAG`s specified must already exist.
+* `CHILD_TAG`s specified must already exist in Athena.
 
 Examples:
+* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assigns contact at index `1` the tag `cs2103`.
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
-will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as sub-tags to `computing`.
-* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assign contact at index `1` the tag `cs2103`.
+will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
+
+#### Deleting a tag: `delete`
+
+Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
+Additionally, if you would like to delete a tag and all its sub-tags, you can specify `true` under the `r/` input field.
+
+Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
+
+* `TAG_NAME` must be the name of an existing tag in Athena.
+* `BOOLEAN` must be of the form `1`, `t`, `true` for true or `0`, `f`, `false` for false.
+* `r/BOOLEAN` field is optional. The default value for this field is `false`.
+* On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
+
+![delete_single_tag_pic](images/DeleteSingleTagPic.png) 
+
+Examples:
+* `delete -t t/cs2030` Deletes the tag `cs2030`.
+* `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
 #### Editing a tag: `edit`
 
-Edits an existing tag in Athena. Use this when you would like to add and/or remove sub-tags from a tag.
+Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
+- add and/or remove contacts from a tag
+- add and/or remove child-tags from a tag
 
-Format: `edit -t n/TAG_NAME [t/TAG_ADD]… [rt/TAG_REMOVE]…` 
+Format: `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` 
 
 * `TAG_NAME` specified must be of an existing tag.
-* `TAG_ADD`s labelled under `t/` are tags to be added as sub-tags to `TAG_NAME`.
-* `TAG_ADD`s must be existing tags not already sub-tags of `TAG_NAME`.
-* `TAG_REMOVE`s labelled under `rt/` are tags to be removed as sub-tags from `TAG_NAME`.
-* `TAG_REMOVE`s must be existing sub-tags of `TAG_NAME`.
+* At least one of the optional fields must be provided.
+* `INDEX` refers to the contact currently being displayed at `INDEX` in the contact panel.
+* Contacts at `INDEX_ADD`s must not have `TAG_NAME` as a tag.
+* Contacts at `INDEX_REMOVE`s must have `TAG_NAME` as a tag.
+* `TAG_ADD`s must be existing tags that are not already child-tags of `TAG_NAME`.
+* `TAG_REMOVE`s must be existing child-tags of `TAG_NAME`.
 
 Examples:
-* `edit -t n/computing t/cs2030 rt/cs2040` Adds `cs2030` as a sub-tag to `computing` and removes `cs2040` as a sub-tag.
+* `edit -t n/computing i/1` Adds the contact at index `1` to `computing`.
+* `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
-#### Viewing a tag: `view`
+#### Listing all tags: `list`
+
+Lists all tags in the remarks panel. It lists each tag together with the contacts tagged. Super-tags are also denoted with `(supertag)`.
+
+Example:
+* `list -t` 
+
+#### Viewing tags: `view`
 
 View specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
-- Direct child tags
-- Contacts tagged with a specific tag
-- All related sub-tags
-- All related contacts (contacts containing sub-tags)
+- Child-tags
+- Contacts tagged with the specified tag
+- All other sub-tags
+- All other contacts containing sub-tags
 
 Format: `view -t t/TAG [t/TAG]…`
 
 * `TAG` must be a valid existing tag in Athena.
 
 Example:
-* `view -t t/cs2030` Shows all of the above information for the tag `cs2030` only.
-* `view -t t/cs2030 t/cs2040` Shows all of the above information for the tags `cs2030` and `cs2040` in a sequential order.
-
-#### Listing a tag: `list`
-
-Lists all tags in the remarks panel. It lists each tag and contacts tagged with the tag.
-
-Example:
-* `list -t` 
-
----
-
-### Saving the data
-
-Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+* `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
+* `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
+**Q**: How do I save changes?
+**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+**Q**: Where are the save files that Athena uses?<br>
+**A**: The default save directory is in `{Athena home directory}/data`.
+
+**Q**: What are the save files that Athena uses?<br>
+**A**: Athena uses three separate save files. They are `addressbook.json`, `tagtree.json` and `calendar.json`.
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Athena home folder.
-The save files that Athena uses are `addressbook.json`, `tagtree.json` and `calendar.json`. The default directory of these files are at 
-`{Athena home directory}/data`.
+**A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -408,18 +444,41 @@ The save files that Athena uses are `addressbook.json`, `tagtree.json` and `cale
 
 Action | Format, Examples
 --------|------------------
-**Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `addEvent d/CS2103 Team meeting at/12-12-1234 12:34`
+**Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add -c n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
+**Add Tag** | `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…` <br> e.g., `add -t n/computing i/1 i/2 t/cs2030 t/cs2040`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
-**Delete Contact** | `delete -c INDEX`<br> e.g., `delete 3`
-**Delete Event** | `delete -e INDEX`<br> e.g., `deleteEvent 2`
-**Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `editEvent 2 at/23-10-1234 12:30 p/Amanda`
+**Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
+**Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
+**Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
+**Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
+**Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `edit -e 2 at/23-10-1234 12:30 p/Amanda`
+**Edit Tag** | `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` <br> e.g., `edit -t n/computing ri/1 t/cs2030 rt/cs2040`
 **Exit** | `exit`
-**Find Contact** | `find -c KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Event** | `find -e KEYWORD`<br> e.g., `findEvent Seminar`
+**Find Contact** | `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g., `find -c n/alex david e/gmail`
+**Find Event** | `find -e KEYWORD`<br> e.g., `find -e Seminar`
 **Help** | `help`
 **List Contact** | `list -c`
 **List Events** | `list -e`
-**Sort Contacts** | `sort -c 1`
+**List Tags** | `list -t`
+**Sort Contacts** | `sort -c INDEX`
+**View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
+
+## Glossary
+
+###### _Child-tag_ 
+- A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done.
+The other tag in the relation is known as a [_parent-tag_](#parent-tag).
+
+###### _Parent-tag_ 
+- A _parent-tag_ of a tag signifies a directional relation from a _parent-tag_ to a tag. It allows for some commands that affect a _parent-tag_ to also affect the other tag in the relation. The reverse cannot be done.
+The other tag in the relation is known as a [_child-tag_](#child-tag).
+
+###### _Sub-tag_
+- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, ...).
+A child-tag of a tag is also a _sub-tag_.
+ 
+
+
+
