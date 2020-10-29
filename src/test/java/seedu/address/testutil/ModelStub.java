@@ -13,8 +13,12 @@ import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReadOnlyReminders;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.Tag;
+
+
 
 /**
  * A default model stub that have all of the methods failing.
@@ -243,4 +247,50 @@ public class ModelStub implements Model {
     public void permaSortContacts(Comparator<Person> comparator) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void deleteObsoleteReminders() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public  ObservableList<Reminder> getSortedFilteredReminderList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addReminder(Reminder reminder) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteReminder(Reminder reminder) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasReminder(Reminder reminder) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyReminders getReminders() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setReminders(ReadOnlyReminders reminders) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setRemindersFilePath(Path remindersFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getRemindersFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
 }

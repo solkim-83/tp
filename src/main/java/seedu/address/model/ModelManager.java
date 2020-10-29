@@ -325,7 +325,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Reminder> getSortedFilteredReminderList() { return sortedReminders; }
+    public ObservableList<Reminder> getSortedFilteredReminderList() {
+        return sortedReminders;
+    }
+
 
     // Person-tag related methods
 

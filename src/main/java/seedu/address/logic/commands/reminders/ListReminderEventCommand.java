@@ -29,7 +29,7 @@ public class ListReminderEventCommand extends Command {
         model.deleteObsoleteReminders();
         ReadOnlyReminders remindersToShow = model.getReminders();
         String remindersList = buildRemindersList(remindersToShow);
-        return new CommandResult(MESSAGE_SUCCESS + remindersList );
+        return new CommandResult(MESSAGE_SUCCESS + remindersList);
     }
 
     /**

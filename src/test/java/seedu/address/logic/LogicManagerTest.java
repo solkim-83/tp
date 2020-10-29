@@ -29,6 +29,7 @@ import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonCalendarStorage;
+import seedu.address.storage.JsonRemindersStorage;
 import seedu.address.storage.JsonTagTreeStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -52,8 +53,9 @@ public class LogicManagerTest {
                 new JsonCalendarStorage(temporaryFolder.resolve("calendar.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonTagTreeStorage tagTreeStorage = new JsonTagTreeStorage(temporaryFolder.resolve("tagtree.json"));
+        JsonRemindersStorage reminderStorage = new JsonRemindersStorage(temporaryFolder.resolve("reminders.json"));
         StorageManager storage = new StorageManager(addressBookStorage,
-                calendarStorage, userPrefsStorage, tagTreeStorage);
+                calendarStorage, userPrefsStorage, tagTreeStorage, reminderStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -87,8 +89,10 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         JsonTagTreeStorage tagTreeStorage =
                 new JsonTagTreeStorage(temporaryFolder.resolve("ioExceptionTagTree.json"));
+        JsonRemindersStorage remindersStorage =
+                new JsonRemindersStorage(temporaryFolder.resolve("ioExceptionReminders.json"));
         StorageManager storage = new StorageManager(addressBookStorage,
-                calendarStorage, userPrefsStorage, tagTreeStorage);
+                calendarStorage, userPrefsStorage, tagTreeStorage, remindersStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
