@@ -12,7 +12,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
-import seedu.address.model.reminder.Reminder;
 
 /**
  * The manager of the UI component.

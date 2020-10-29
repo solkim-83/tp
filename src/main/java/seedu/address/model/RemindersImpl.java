@@ -5,10 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
 import seedu.address.model.reminder.ReadOnlyReminders;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.UniqueRemindersList;
@@ -82,7 +80,6 @@ public class RemindersImpl implements ReadOnlyReminders {
     /**
      * Replaces the given reminder {@code target} in the list with {@code editedReminder}.
      * {@code target} must exist in the calendar.
-     * The reminder identity of {@code editedReminder} must not be the same as another existing reminder in the calendar.
      */
     public void setReminder(Reminder target, Reminder editedReminder) {
         requireNonNull(editedReminder);

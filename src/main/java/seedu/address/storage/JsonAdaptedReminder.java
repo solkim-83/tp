@@ -3,14 +3,13 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashSet;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
 import seedu.address.model.reminder.Reminder;
-
-import java.time.LocalDateTime;
-import java.util.HashSet;
 
 /**
  * Jackson-friendly version of {@link Reminder}.

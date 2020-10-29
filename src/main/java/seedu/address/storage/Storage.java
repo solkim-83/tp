@@ -17,7 +17,8 @@ import seedu.address.model.tag.ReadOnlyTagTree;
  * API of the Storage component
  */
 
-public interface Storage extends AddressBookStorage, CalendarStorage, UserPrefsStorage, TagTreeStorage, RemindersStorage {
+public interface Storage extends AddressBookStorage, CalendarStorage,
+        UserPrefsStorage, TagTreeStorage, RemindersStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;

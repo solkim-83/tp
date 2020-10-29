@@ -12,10 +12,11 @@ import seedu.address.model.reminder.Reminder;
 
 
 public class ReminderWindow extends UiPart<Stage> {
-    private Logic logic;
 
     private static final Logger logger = LogsCenter.getLogger(IntroWindow.class);
     private static final String FXML = "ReminderWindow.fxml";
+
+    private Logic logic;
 
     @javafx.fxml.FXML
     private Label reminderMessage;
@@ -71,11 +72,14 @@ public class ReminderWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /**
+     * Builds the string for the pop up reminder window.
+     */
     public String buildAlertMessage() {
         String alertMessage = "Here are your active reminders: \n";
         System.out.println(logic == null);
         ObservableList<Reminder> reminders = logic.getFilteredReminderList();
-        if(reminders.size() == 0) {
+        if (reminders.size() == 0) {
             return "You currently do not have any reminders";
         } else {
             for (Reminder r: reminders) {

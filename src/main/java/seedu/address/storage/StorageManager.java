@@ -12,7 +12,6 @@ import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.reminder.ReadOnlyReminders;
-import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.ReadOnlyTagTree;
 
 /**
@@ -174,9 +173,9 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveReminders(ReadOnlyReminders Reminders, Path filePath) throws IOException {
-        logger.fine("Attempting to write Reminders to data file: " + filePath);
-        remindersStorage.saveReminders(Reminders, filePath);
+    public void saveReminders(ReadOnlyReminders reminders, Path filePath) throws IOException {
+        logger.fine("Attempting to write reminders to data file: " + filePath);
+        remindersStorage.saveReminders(reminders, filePath);
     }
 
 }

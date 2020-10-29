@@ -32,6 +32,9 @@ public class ListReminderEventCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS + remindersList );
     }
 
+    /**
+     * Builds a string for the listing of reminders.
+     */
     public String buildRemindersList(ReadOnlyReminders reminders) {
         String result = "";
         int count = 1;

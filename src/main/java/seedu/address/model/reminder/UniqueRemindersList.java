@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.exceptions.DuplicateReminderException;
 import seedu.address.model.reminder.exceptions.ReminderNotFoundException;
 
@@ -137,6 +136,9 @@ public class UniqueRemindersList implements Iterable<Reminder> {
         return true;
     }
 
+    /**
+     * Returns true if there are active reminders.
+     */
     public boolean hasRemindersDue() {
         for (int i = 0; i < internalList.size() - 1; i++) {
             if (internalList.get(i).getReminderDate().getTime().toLocalDate().isEqual(LocalDate.now())

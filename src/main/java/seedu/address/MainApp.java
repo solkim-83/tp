@@ -15,7 +15,16 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+
+import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCalendar;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.RemindersImpl;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.reminder.ReadOnlyReminders;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.TagTreeImpl;
@@ -55,7 +64,8 @@ public class MainApp extends Application {
         TagTreeStorage tagTreeStorage = new JsonTagTreeStorage(userPrefs.getTagTreeFilePath());
         RemindersStorage remindersStorage = new JsonRemindersStorage(userPrefs.getRemindersFilePath());
 
-        storage = new StorageManager(addressBookStorage, calendarStorage, userPrefsStorage, tagTreeStorage, remindersStorage);
+        storage = new StorageManager(addressBookStorage, calendarStorage,
+                userPrefsStorage, tagTreeStorage, remindersStorage);
 
         initLogging(config);
 

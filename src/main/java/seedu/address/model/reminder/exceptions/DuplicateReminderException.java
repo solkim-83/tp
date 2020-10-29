@@ -1,8 +1,8 @@
 package seedu.address.model.reminder.exceptions;
 
 /**
- * Signals that the operation will result in duplicate Reminders (reminders are considered duplicates if they have the same
- * identity).
+ * Signals that the operation will result in duplicate Reminders (reminders
+ * are considered duplicates if they have the same identity).
  */
 public class DuplicateReminderException extends RuntimeException {
 

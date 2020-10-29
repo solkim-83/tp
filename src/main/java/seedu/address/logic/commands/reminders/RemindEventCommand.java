@@ -2,7 +2,6 @@ package seedu.address.logic.commands.reminders;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
