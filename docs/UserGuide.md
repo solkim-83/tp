@@ -514,7 +514,6 @@ Action | Format, Examples
 **Help** | `help`
 **List Contact** | `list -c`
 **List Events** | `list -e`
-**Sort Contacts** | `sort -c 1`
 **List Tags** | `list -t`
 **List Reminders** | `list -r`
 **Sort Contacts** | `sort -c INDEX`
