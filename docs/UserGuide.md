@@ -389,6 +389,33 @@ Example:
 
 ---
 
+### Reminders
+
+Reminders allows you to set custom reminders for your events. You can call up your reminders in application or
+have them pop up whenever Athena starts. 
+
+#### Adding a reminder: `add`
+
+Adds a new reminder for an event.
+
+Format: `add -r [EVENT_INDEX]… [in/DAYS]…`
+
+* `EVENT_INDEX` refers to the index of an event as is shown in the event window.
+* `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
+
+Examples:
+* `add -r 3 in/4` Creates a new reminder for the 3rd event, the reminder will start to pop up every time
+Athena opens 4 days prior to that event 
+
+#### Listing all reminders: `list`
+
+Lists all reminders in the remarks panel. It lists each reminder and a countdown to their events.
+
+Example:
+* `list -r` 
+
+---
+
 ### Saving the data
 
 Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -423,3 +450,5 @@ Action | Format, Examples
 **List Contact** | `list -c`
 **List Events** | `list -e`
 **Sort Contacts** | `sort -c 1`
+**Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
+**List Reminders** | `list -r`
