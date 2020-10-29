@@ -14,12 +14,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.DeleteEventCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,8 +25,7 @@ import seedu.address.model.tag.TagTreeImpl;
  */
 public class DeleteEventCommandTest {
 
-    private Model model = new ModelManager(
-            new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
+    private Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,8 +34,7 @@ public class DeleteEventCommandTest {
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
-        ModelManager expectedModel = new ModelManager(
-                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        ModelManager expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.deleteEvent(eventToDelete);
 
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
@@ -60,8 +56,7 @@ public class DeleteEventCommandTest {
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
-        Model expectedModel = new ModelManager(
-                new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        Model expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.deleteEvent(eventToDelete);
         showNoEvent(expectedModel);
 

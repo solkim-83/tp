@@ -53,9 +53,9 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
 
-        descriptor.getTagsToAdd().ifPresent(tagsToAdd ->
+        descriptor.getTagsToAdd().filter(set -> !set.isEmpty()).ifPresent(tagsToAdd ->
                 convertTagsToStringDetails(sb, PREFIX_TAG, tagsToAdd));
-        descriptor.getTagsToRemove().ifPresent(tagsToRemove ->
+        descriptor.getTagsToRemove().filter(set -> !set.isEmpty()).ifPresent(tagsToRemove ->
                 convertTagsToStringDetails(sb, PREFIX_REMOVE_TAG, tagsToRemove));
 
         return sb.toString();

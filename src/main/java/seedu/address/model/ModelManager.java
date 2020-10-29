@@ -67,13 +67,6 @@ public class ModelManager implements Model {
         sortedEvents = new SortedList<>(filteredEvents);
     }
 
-    /**
-     * Initializes a ModelManager with no data
-     */
-    public ModelManager() {
-        this(new AddressBook(), new Calendar(), new TagTreeImpl(), new UserPrefs());
-    }
-
     //=========== UserPrefs ==================================================================================
 
     @Override
@@ -169,9 +162,6 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
-    /*
-    TODO: hasEvent temporary place holder to be implemented in future
-     */
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);

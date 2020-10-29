@@ -9,11 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.events.ListEventCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListEventCommand.
@@ -25,8 +22,8 @@ public class ListEventCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new AddressBook(), getTypicalCalendar(), new TagTreeImpl(), new UserPrefs());
-        expectedModel = new ModelManager(new AddressBook(), model.getCalendar(), new TagTreeImpl(), new UserPrefs());
+        model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
+        expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
     }
 
     @Test
