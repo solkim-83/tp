@@ -5,6 +5,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.model.Model;
 
+/**
+ * Displays an introduction window for the user. Note that this command should not exist in the parser.
+ */
 public class IntroCommand extends Command {
 
     public static final String COMMAND_WORD = CommandWord.INTRO.toString();

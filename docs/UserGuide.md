@@ -13,29 +13,31 @@ section below.
 * [Quick Start](#Quick-start)
 * [Features](#Features)
     * [General](#General)
-        * [`help`](#viewing-help) - viewing help
-        * [`exit`](#exiting-the-program--exit) - exiting the program
+        * [`help`](#viewing-help) - Viewing help
+        * [`exit`](#exiting-the-program--exit) - Exiting the program
     * [Contact](#Contact)
-        * [`add`](#adding-a-contact-add) - adding a contact
-        * [`clear`](#clearing-all-contacts--clear) - clearing all contacts
-        * [`delete`](#deleting-a-contact--delete) - deleting a contact
-        * [`edit`](#editing-a-contact--edit) - editing a contact
-        * [`find`](#finding-a-contact--find) - finding a contact
-        * [`list`](#listing-all-contacts--list) - listing all contacts
-        * [`sort`](#sorting-displayed-contacts--sort) - sorting displayed contacts
+        * [`add`](#adding-a-contact-add) - Adding a contact
+        * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
+        * [`delete`](#deleting-a-contact--delete) - Deleting a contact
+        * [`edit`](#editing-a-contact--edit) - Editing a contact
+        * [`find`](#finding-a-contact--find) - Finding a contact
+        * [`list`](#listing-all-contacts--list) - Listing all contacts
+        * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
     * [Event](#event)
-        * [`add`](#adding-an-event-add) - adding an event
-        * [`clear`](#clearing-all-events--clear) - clearing all events
-        * [`delete`](#deleting-an-event--delete) - deleting an event
-        * [`edit`](#editing-an-event--edit) - editing an event
-        * [`find`](#finding-an-event--find) - finding an event
-        * [`list`](#listing-all-events--list) - listing all events
+        * [`add`](#adding-an-event-add) - Adding an event
+        * [`clear`](#clearing-all-events--clear) - Clearing all events
+        * [`delete`](#deleting-an-event--delete) - Deleting an event
+        * [`edit`](#editing-an-event--edit) - Editing an event
+        * [`find`](#finding-an-event--find) - Finding an event
+        * [`list`](#listing-all-events--list) - Listing all events
+        * [`sort`](#sorting-displayed-events--sort) - Sorting displayed events
+
     * [Tag](#tag)
-        * [`add`](#adding-a-tag-add) - adding a tag
-        * [`delete`](#deleting-a-tag-delete) - deleting a tag
-        * [`edit`](#editing-a-tag-edit) - editing a tag
-        * [`list`](#listing-all-tags-list) - listing all tags
-        * [`view`](#viewing-tags-view) - viewing tag details
+        * [`add`](#adding-a-tag-add) - Adding a tag
+        * [`delete`](#deleting-a-tag-delete) - Deleting a tag
+        * [`edit`](#editing-a-tag-edit) - Editing a tag
+        * [`list`](#listing-all-tags-list) - Listing all tags
+        * [`view`](#viewing-tags-view) - Viewing tag details
 * [FAQ](#FAQ)
 * [Command Summary](#Command-summary)
 * [Glossary](#glossary)
@@ -60,7 +62,7 @@ Athena is perfect for you if you:
 
 1. Download the latest `Athena.jar` from [here](https://github.com/AY2021S1-CS2103T-W10-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Athena.
+1. Copy the JAR file to the folder you want to use as the _home folder_ for Athena.
 
 1. Double-click the file or run it with `java -jar Athena.jar` to start the app. A window similar to the one below
    should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -106,7 +108,7 @@ specific key-words. Thus, there are **four** types of commands:
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used any number of times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -231,7 +233,7 @@ Format: `list -c`
 
 #### Sorting displayed contacts : `sort`
 
-Sort all currently displayed contacts in Athena.
+Sorts all currently displayed contacts in Athena.
 
 Format: `sort -c INDEX`
 
@@ -242,7 +244,7 @@ Format: `sort -c INDEX`
 1. By lexicographical order of their email
 
 Examples:
-* `sort -c 2` would sort all currently displayed contacts by their names in alphabetical order
+* `sort -c 2` would sort all currently displayed contacts by their names in alphabetical order.
 
 ---
 
@@ -264,7 +266,7 @@ Short form | What it represents
 dd | Digits for date
 MM | Digits for month
 yyyy | Digits for year
-HH | Digits for hour of the day in 24hr time
+HH | Digits for hour of the day in 24-hr time
 mm | Digits for minutes of an hour
 
 Examples:
@@ -288,27 +290,28 @@ Format: `delete -e INDEX`
 * The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-* `list -e` followed by `delete -e 2` deletes the 2nd event in the event list
+* `list -e` followed by `delete -e 2` deletes the 2nd event in the event list.
 
 #### Editing an event : `edit`
 
-Edits an existing event in the event list. DATE_TIME format follows the addEvent command.
+Edits an existing event in the event list. DATE_TIME format follows the `add -e` command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`
 
-* Edits the event at the specified INDEX. The index must be a positive integer 1, 2, 3, ...
+* Edits the event at the specified INDEX. 
+* The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * `p/ATTENDEE_NAME` adds a contact with `ATTENDEE_NAME` to the event.
 * `rp/ATTENDEE_NAME` removes a contact with `ATTENDEE_NAME` from the event.
-* ATTENDEE_NAME must be exactly the same as the name stored in contacts. Case-sensitive.
+* `ATTENDEE_NAME` must be exactly the same as the name stored in contacts as the field is case-sensitive.
 * You can remove all the attendees for the event by using `rp/*`.
 
 Examples:
-* `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
-* `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
-* `edit -e 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
+* `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be `CS2101 Tutorial` and `23-10-1234 12:30` respectively.
+* `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be `23-10-1234 12:30`.
+* `edit -e 1 p/Amanda p/Ethan rp/John rp/Jesse` Adds the contacts with the names: `Amanda`, `Ethan` to the event attendees. Removes the contacts with the names: `John`, `Jesse` from the event attendees.
 
 #### Finding an event : `find`
 
@@ -316,13 +319,13 @@ Finds events which names contain any of the given keywords.
 
 Format: `find -e KEYWORD`
 
-* The search is case-insensitive. e.g `meeting` will match `Meeting`
+* The search is case-insensitive. e.g `meeting` will match `Meeting`.
 * If the event contains the particular keyword in the command, the name of the event will appear.
-* Only full words will be matched e.g. `meetin` will not match `meeting`
+* Only full words will be matched e.g. `meetin` will not match `meeting`.
 
 Examples:
-* `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`
-* `find -e seminar` returns `CS Seminar` and `seminar 1`
+* `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
+* `find -e seminar` returns `CS Seminar` and `seminar 1`.
 
 #### Listing all events : `list`
 
@@ -330,15 +333,31 @@ Shows a list of all events saved in Athena's calendar.
 
 Format: `list -e`
 
+#### Sorting displayed events : `sort`
+
+Sorts all currently displayed events in Athena.
+
+Format: `sort -e INDEX`
+
+* Sorts through all events currently on screen and lists them according to the user-requested order.
+* Index definitions:
+
+    1. By lexicographical order of the events' descriptions.
+    2. By lexicographical order of the events' timing.
+
+Examples:
+* `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
+
+
 ---
 
 ### Tag
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
-allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an events. 
+allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an event. 
 Below are some commands to facilitate tag management.
 
-**Note: For a tag to exist, it has to have at least one contact tagged OR contains one child-tag.**
+**Note: For a tag to exist, it has to have at least one contact tagged OR contains at least one child-tag.**
 Tags that do not meet this criterion will be deleted. 
 
 #### Adding a tag: `add`
@@ -368,7 +387,7 @@ Additionally, if you would like to delete a tag and all its sub-tags, you can sp
 Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 
 * `TAG_NAME` must be the name of an existing tag in Athena.
-* `BOOLEAN` must be of the form `1`, `t`, `true` for true or `0`, `f`, `false` for false.
+* `BOOLEAN` must be of the form `1`, `t`, `true` for a true case or `0`, `f`, `false` for a false case.
 * `r/BOOLEAN` field is optional. The default value for this field is `false`.
 * On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
 
@@ -400,14 +419,14 @@ Examples:
 
 #### Listing all tags: `list`
 
-Lists all tags in the remarks panel. It lists each tag together with the contacts tagged. Super-tags are also denoted with `(supertag)`.
+Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
 Example:
 * `list -t` 
 
 #### Viewing tags: `view`
 
-View specific details of a tag. Use this when you would like to view full details of a tag.
+Shows specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
 - Child-tags
 - Contacts tagged with the specified tag
@@ -429,11 +448,11 @@ Example:
 **Q**: How do I save changes?
 **A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-**Q**: Where are the save files that Athena uses?<br>
+**Q**: Where are the save files that Athena uses stored?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
 
 **Q**: What are the save files that Athena uses?<br>
-**A**: Athena uses three separate save files. They are `addressbook.json`, `tagtree.json` and `calendar.json`.
+**A**: Athena uses three separate save files. They are `addressbook.json`, `calendar.json` and `tagtree.json`.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
@@ -463,6 +482,7 @@ Action | Format, Examples
 **List Events** | `list -e`
 **List Tags** | `list -t`
 **Sort Contacts** | `sort -c INDEX`
+**Sort Events** | `sort -e INDEX`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
 
 ## Glossary

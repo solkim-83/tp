@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.general.IntroCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -39,6 +40,15 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+    }
+
+    @Override
+    public CommandResult executeIntro() throws CommandException {
+        logger.info("----------------[SYSTEM COMMAND][introduction]");
+
+        Command command = new IntroCommand();
+
+        return command.execute(model);
     }
 
     @Override
