@@ -17,14 +17,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new AddContactCommand object
+ * Parses input arguments and creates a new RemindEventCommand object
  */
 public class RemindEventCommandParser implements Parser<RemindEventCommand> {
 
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddContactCommand
-     * and returns an AddContactCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RemindEventCommand
+     * and returns an RemindEventCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public RemindEventCommand parse(String args) throws ParseException {

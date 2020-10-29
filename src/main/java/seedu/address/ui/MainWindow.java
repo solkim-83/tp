@@ -216,7 +216,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Executes the command to show the introduction. As the introduction command should not be
+     * Executes the command to show the reminders alert. As the ShowReminderEvent command should not be
      * accessible by the user, a commandText should not exist for it and the entire execution
      * should be handled in the back-end. Note that as this method cannot throw a CommandException
      * or a ParseException, handling can be ignored. The lack of an access modifier is intentional

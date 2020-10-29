@@ -26,7 +26,7 @@ public class RemindEventCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.REMINDER.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Reminds you of the event \n"
+            + ": Reminds you of an event \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1" + "in/10";
 
@@ -59,9 +59,9 @@ public class RemindEventCommand extends Command {
         Reminder toAdd = new Reminder(eventForReminder, daysInAdvance);
         LocalDateTime now = LocalDateTime.now();
         if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time)) {
-            throw new CommandException("You cannot set a reminder for after the event is over");
+            throw new CommandException("You cannot set a reminder for after the event is over.");
         } else if (model.hasReminder(toAdd)) {
-            throw new CommandException("You already have an existing reminder for this event");
+            throw new CommandException("You already have an existing reminder for this event.");
         }
 
         model.addReminder(toAdd);

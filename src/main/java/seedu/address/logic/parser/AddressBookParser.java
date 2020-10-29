@@ -157,7 +157,7 @@ public class AddressBookParser {
 
             switch (commandWord) {
 
-            case SHOW_REMINDER:
+            case SHOW:
                 return new ShowReminderEventCommand();
 
             case LIST:

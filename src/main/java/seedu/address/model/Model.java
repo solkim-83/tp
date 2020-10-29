@@ -200,17 +200,17 @@ public interface Model {
     void setEvent(Event target, Event editedEvent);
 
     /**
-     * Returns an unmodifiable view of the filtered person list
+     * Returns an unmodifiable view of the filtered person list.
      */
     ObservableList<Person> getSortedFilteredPersonList();
 
     /**
-     * Returns an unmodifiable view of the filtered event list
+     * Returns an unmodifiable view of the filtered event list.
      */
     ObservableList<Event> getSortedFilteredEventList();
 
     /**
-     * Returns an unmodifiable view of the filtered reminders list
+     * Returns an unmodifiable view of the filtered reminders list.
      * @return
      */
     ObservableList<Reminder> getSortedFilteredReminderList();

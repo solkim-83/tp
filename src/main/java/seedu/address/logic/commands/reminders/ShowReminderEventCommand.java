@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 
 public class ShowReminderEventCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandWord.SHOW_REMINDER.toString();
+    public static final String COMMAND_WORD = CommandWord.SHOW.toString();
 
     public static final String COMMAND_TYPE = CommandType.REMINDER.toString();
 
