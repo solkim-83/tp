@@ -156,47 +156,47 @@ All manipulation of `Person` objects have to be done through `AddressBook`. `Add
 - `void removePerson(Person)`
 - `void addPerson(Person)`
 - `boolean hasPerson(Person)`
-- and more...
+- and more
 
 **`Tag`** component:
 
-`Tag`s are represented by a single alphanumeric string with no spaces. In v1.3, support for child-tagging was implemented. This allows directional relations to be established between `Tag`s. Certain commands also affect a `Tag` and its child-tags.
-- `TagTree` handles tag-to-tag relations 
-- `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. The implementation of the tree is done with 
-a hash map, with `Tag`s used as keys, and its value being a set of all its child-tags.
+`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its child-tags to perform an action.
+- `TagTree` handles tag-to-tag relations. 
+- `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. 
+The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. 
 
 Any new links established between tags have to go through the `TagTree`. `TagTree` provides several simple methods such as 
 - `void addSubTagTo(Tag tag)`  
 - `boolean hasTag(Tag tag)`  
-- and more...
+- and more
 
 **`Integration`** component:
 
-The `ContactTagIntegrationManager` class provides a few defined methods that affect both `Person`s and `Tag`s together. Methods include:
+The `ContactTagIntegrationManager` class provides a few predefined methods that affect both `Person`s and `Tag`s together. Methods include:
 - `void deleteTag(Tag)`
 - `void deleteTagRecursive(Tag)` - deletes a `Tag` and all its sub-tags
-- and more...
+- and more
 
-The above methods listed methods are shown as examples to illustrate the difficulty of preserving consistency within the system.
-In particular, a method called `deleteTag` is implemented in both `TagTree` and `ContactTagIntegrationManager`.
+This class is meant to address the difficulty in preserving consistency within the system.
+For example, two different `deleteTag` methods are implemented in both `TagTree` and `ContactTagIntegrationManager`.
 However, the method in `TagTree` only deletes the specific `Tag` in `TagTree`.
-The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method and also removes the `Tag` from all `Person` objects that has the `Tag`.
-Below illustrates the sequence diagram for interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
+The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method, then removes the `Tag` from all `Person` objects that has the `Tag`.
+The sequence diagram below illustrates the interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
 
 ![delete-tag-demonstration](images/DeleteTagSequenceDiagram.png)
 
 As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made to `Tag`s that will affect `Person`s stored.
-Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if possible.
+Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if available.
 
 ##### Design choice
 In the context of tag management, this design choice is aimed at properly encapsulating two separate functionalities.
 1. `AddressBook` - uses `TagManager` to track which `Person` objects falls under which `Tag`s. 
     - `TagManager` is necessary to avoid cyclic dependency between `Person` and `Tag`. 
-    - `TagManager` is embedded in `AddressBook` so whenever there is a change to the list of `Person`s, the tag-to-person map can be updated immediately.
+    - `TagManager` is embedded in `AddressBook`, so whenever there is a change to the list of `Person`s, the tag-to-person map can be updated immediately.
 2. `TagTree` tracks the tag-to-tag relationships only. In particular, it keeps track of which set of `Tag`s are child-tags of which `Tag`. 
 
 Using these two mutable constructs, it allows for accurate realtime queries by higher-level components even though the internal mapping changes frequently between commands.
-In order to ensure that the right commands are called at the right time, `Model` implements only a limited set of methods to be used that can change the internal mapping.
+To ensure that the right commands are called at the right time, `Model` only implements a limited set of methods that can change the internal mapping.
 To support a greater variety of `Command`s, ensure that the correct methods from either `AddressBook`, `TagTree` or `ContactTagIntegrationManager` are chosen. 
 A rule of thumb is to search for the method in `ContactTagIntegrationManager` first before looking for a similar method in the other two classes. 
  
