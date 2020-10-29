@@ -274,19 +274,25 @@ HH | Digits for hour of the day in 24hr time
 mm | Digits for minutes of an hour
 
 Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
-![Ui](images/ug-images/add event behaviour.png)
+![Add Event Behaviour](images/ug-images/add-event-behaviour.png)
 
 Examples:
 * `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
 * `add -e at/12-12-12 12:34 d/CS2103 Team meeting`
 
-#### Clearing all events : `clear -e`
+#### Clearing all events : `clear`
 
 Clears all events from Athena's calendar.
 
 Format: `clear -e`
 
-#### Deleting an event : `delete -e`
+<div markdown="block" class="alert alert-primary">
+:exclamation: **WARNING:** :exclamation: **All events will be deleted following the use of this command! (show below)**
+</div>
+
+![Clear Event Behaviour](images/ug-images/clear-event-behaviour.png)
+
+#### Deleting an event : `delete`
 
 Deletes the specified event from the event list.
 
@@ -299,27 +305,27 @@ Format: `delete -e INDEX`
 Examples:
 * `list -e` followed by `delete -e 2` deletes the 2nd event in the event list
 
-#### Editing an event : `edit -e`
+#### Editing an event : `edit`
 
 Edits an existing event in the event list. DATE_TIME format follows the addEvent command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
-[p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`
+[ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
 
 * Edits the event at the specified INDEX. The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `p/ATTENDEE_NAME` adds a contact with `ATTENDEE_NAME` to the event.
-* `rp/ATTENDEE_NAME` removes a contact with `ATTENDEE_NAME` from the event.
+* `ap/CONTACT_INDEX_LIST` adds contacts with the specified indexes to the event.
+* `rp/ATTENDEE_INDEX_LIST` removes contacts with the specified indexes from the event.
 * ATTENDEE_NAME must be exactly the same as the name stored in contacts. Case-sensitive.
 * You can remove all the attendees for the event by using `rp/*`.
 
 Examples:
 * `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
-* `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
-* `edit -e 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
+* `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30
+* `edit -e 1 ap/1,2 rp/1,2`  Adds the contacts at index 1 and 2 from the contact list to the event attendees. Removes the first 2 contacts from the event attendees list.
 
-#### Finding an event : `find -e`
+#### Finding an event : `find`
 
 Finds events which names contain any of the given keywords.
 
