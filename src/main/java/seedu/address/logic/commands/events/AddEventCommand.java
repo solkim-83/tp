@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.events;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
@@ -36,10 +37,12 @@ public class AddEventCommand extends Command {
             + ": Adds an event to Athena.\n\n"
             + "Parameters:\n"
             + PREFIX_DESCRIPTION + "DESCRIPTION\n"
-            + PREFIX_DATETIME + "DATE_TIME\n\n"
+            + PREFIX_DATETIME + "DATE_TIME\n"
+            + "[" + PREFIX_ADD_PERSON + "CONTACT_INDEX_LIST]\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
-            + PREFIX_DATETIME + "12-12-1234 12:34";
+            + PREFIX_DATETIME + "12-12-1234 12:34"
+            + PREFIX_ADD_PERSON + "1,2,3";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Athena";

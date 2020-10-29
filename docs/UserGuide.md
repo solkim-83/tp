@@ -258,7 +258,10 @@ Examples:
 
 Adds an event to the event list.
 
-Format: `add -e d/DESCRIPTION at/DATE_TIME`
+Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
+
+* `CONTACT_INDEX_LIST` are the indexes of contacts in the middle panel you want to add to the event.
+* You can add all the attendees from the contact list to the event by using `ap/*`.
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
@@ -273,15 +276,24 @@ yyyy | Digits for year
 HH | Digits for hour of the day in 24-hr time
 mm | Digits for minutes of an hour
 
+Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
+![Add Event Behaviour](images/ug-images/add-event-behaviour.png)
+
 Examples:
-* `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
-* `add -e at/12-12-12 12:34 d/CS2103 Team meeting`
+* `add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 1, 2 and 3 from the contact list.
+* `add -e at/20-10-2020 14:00 d/CS2103 Team meeting ap/5,1,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 5, 1 and 3 from the contact list.
 
 #### Clearing all events : `clear`
 
 Clears all events from Athena's calendar.
 
 Format: `clear -e`
+
+<div markdown="block" class="alert alert-primary">
+:exclamation: **WARNING:** :exclamation: **All events will be deleted following the use of this command! (shown below)**
+</div>
+
+![Clear Event Behaviour](images/ug-images/clear-event-behaviour.png)
 
 #### Deleting an event : `delete`
 
@@ -298,24 +310,31 @@ Examples:
 
 #### Editing an event : `edit`
 
-Edits an existing event in the event list. DATE_TIME format follows the `add -e` command.
+Edits an existing event in the event list. `d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
-[p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`
+[ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
 
 * Edits the event at the specified INDEX. 
 * The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `p/ATTENDEE_NAME` adds a contact with `ATTENDEE_NAME` to the event.
-* `rp/ATTENDEE_NAME` removes a contact with `ATTENDEE_NAME` from the event.
-* `ATTENDEE_NAME` must be exactly the same as the name stored in contacts as the field is case-sensitive.
+* `[ap/CONTACT_INDEX_LIST]` adds contacts with the specified indexes to the event.
+* `[rp/ATTENDEE_INDEX_LIST]` removes contacts with the specified indexes from the event.
+* You can add all the attendees from the contact list to the event by using `ap/*`.
 * You can remove all the attendees for the event by using `rp/*`.
 
 Examples:
-* `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be `CS2101 Tutorial` and `23-10-1234 12:30` respectively.
-* `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be `23-10-1234 12:30`.
-* `edit -e 1 p/Amanda p/Ethan rp/John rp/Jesse` Adds the contacts with the names: `Amanda`, `Ethan` to the event attendees. Removes the contacts with the names: `John`, `Jesse` from the event attendees.
+* `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
+* `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30
+* `edit -e 1 ap/1,2 rp/1,2`  Adds the contacts at index 1 and 2 from the contact list to event 1 attendees list. Removes the first 2 contacts from event 1 attendees list.
+
+Picture example:
+
+Before
+![Edit Event Behaviour before](images/ug-images/edit-event-behaviour-before.png)
+After
+![Edit Event Behaviour after](images/ug-images/edit-event-behaviour-after.png)
 
 #### Finding an event : `find`
 
@@ -497,7 +516,7 @@ Example:
 Action | Format, Examples
 --------|------------------
 **Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add -c n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
+**Add Event** | `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`<br> e.g., `add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/5,1,3`
 **Add Tag** | `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…` <br> e.g., `add -t n/computing i/1 i/2 t/cs2030 t/cs2040`
 **Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **Clear Contacts** | `clear -c`
@@ -506,7 +525,7 @@ Action | Format, Examples
 **Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
-**Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`<br> e.g., `edit -e 2 at/23-10-1234 12:30 p/Amanda`
+**Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`<br> e.g., `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30 ap/1,2,3 rp/1,2`
 **Edit Tag** | `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` <br> e.g., `edit -t n/computing ri/1 t/cs2030 rt/cs2040`
 **Exit** | `exit`
 **Find Contact** | `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g., `find -c n/alex david e/gmail`
