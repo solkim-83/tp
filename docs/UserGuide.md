@@ -168,7 +168,7 @@ Deletes the specified contact from Athena.
 
 Format: `delete -c INDEX`
 
-* Deletes the contact of the specified `INDEX`.
+* Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -182,7 +182,7 @@ Edits an existing person in the address book.
 
 Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`
 
-* Edits the contact of the specified `INDEX`.
+* Edits the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -285,7 +285,7 @@ Deletes the specified event from the event list.
 
 Format: `delete -e INDEX`
 
-* Deletes the event of the specified `INDEX`.
+* Deletes the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index must be a positive integer 1, 2, 3, ...
 
@@ -299,7 +299,7 @@ Edits an existing event in the event list. DATE_TIME format follows the `add -e`
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [p/ATTENDEE_NAME]… [rp/ATTENDEE_NAME]…`
 
-* Edits the event of the specified INDEX. 
+* Edits the event at the specified INDEX. 
 * The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
