@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.events.AddEventCommand;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ModelManagerBuilder;
 
@@ -32,14 +33,22 @@ public class AddEventCommandIntegrationTest {
         Model expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.addEvent(validEvent);
 
-        assertCommandSuccess(new AddEventCommand(validEvent), model,
+        AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(validEvent.getDescription())
+                .withTime(validEvent.getTime()).build();
+
+        assertCommandSuccess(new AddEventCommand(validEventDescriptor), model,
                 String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
     }
 
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event eventInList = model.getCalendar().getEventList().get(0);
-        assertCommandFailureEvent(new AddEventCommand(eventInList), model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
+        AddEventCommand.AddEventDescriptor eventInListDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(eventInList.getDescription())
+                .withTime(eventInList.getTime()).build();
+        assertCommandFailureEvent(new AddEventCommand(eventInListDescriptor),
+                model, AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
 }
