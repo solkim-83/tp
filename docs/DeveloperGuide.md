@@ -5,6 +5,16 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+---
+
+## **Introduction**
+
+This document shows program architecture and implementation decisions for the contact-and-event management app, Athena.
+
+##### **Purpose**
+The purpose of this document is to provide technical details and explanations for the high-level design of Athena and each subcomponent that Athena uses. 
+The intended audience for this document is software engineers maintaining or expanding on Athena, and software testers.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
