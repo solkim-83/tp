@@ -161,9 +161,6 @@ public class AddressBookParser {
             case HELP:
                 return new HelpCommand();
 
-            case INTRO:
-                return new IntroCommand();
-
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
