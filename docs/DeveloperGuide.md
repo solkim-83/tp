@@ -610,13 +610,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete -c 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete -c 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete -c`, `delete -c x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 
@@ -670,8 +670,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. In the directory with Athena, open the folder `data` and edit the json save files.
+   
+   1. Open Athena. 
+      Expected: The individual lists should be blank as a corrupted save file has been detected.
+   
+   1. Add some contacts and events to ensure that Athena has a proper save file.
+   
+   1. Delete one of either `Calendar.json` or `AddressBook.json`.
+      Expected: When opening Athena again, a default set of entries will fill up the component that was deleted.
 
---
+---
 
 ## **Appendix: Effort**
