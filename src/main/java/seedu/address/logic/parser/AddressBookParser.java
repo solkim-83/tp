@@ -158,14 +158,14 @@ public class AddressBookParser {
 
             switch (commandWord) {
 
+            case SHOW_REMINDER:
+                return new ShowReminderEventCommand();
+
             case LIST:
                 return new ListReminderEventCommand();
 
             case ADD:
                 return new RemindEventCommandParser().parse(arguments);
-
-            case SHOW_REMINDER:
-                return new ShowReminderEventCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
