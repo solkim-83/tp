@@ -40,6 +40,7 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    @Override
     public CommandResult executeIntro() throws CommandException {
         logger.info("----------------[SYSTEM COMMAND][introduction]");
 
