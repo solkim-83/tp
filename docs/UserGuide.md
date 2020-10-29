@@ -248,11 +248,17 @@ Examples:
 
 ### Event
 
-#### Adding an event: `add`
+#### Adding an event: `add -e`
 
 Adds an event to the event list.
 
-Format: `add -e d/DESCRIPTION at/DATE_TIME`
+Format: `add -e d/DESCRIPTION at/DATE_TIME ap/CONTACT_INDEX_LIST`
+
+1) `DESCRIPTION` = What you want the description of the event to be.
+1) `DATE_TIME` = Date and time of the event.
+1) `CONTACT_INDEX_LIST` = Indexes of contacts in the middle panel you want to add to the event.
+`*` is accepted as a way to add all the contacts from the panel. (See examples below)
+1) `ap/CONTACT_INDEX_LIST` is optional and can be omitted.
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
@@ -267,17 +273,20 @@ yyyy | Digits for year
 HH | Digits for hour of the day in 24hr time
 mm | Digits for minutes of an hour
 
+Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
+![Ui](images/ug-images/add event behaviour.png)
+
 Examples:
 * `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
 * `add -e at/12-12-12 12:34 d/CS2103 Team meeting`
 
-#### Clearing all events : `clear`
+#### Clearing all events : `clear -e`
 
 Clears all events from Athena's calendar.
 
 Format: `clear -e`
 
-#### Deleting an event : `delete`
+#### Deleting an event : `delete -e`
 
 Deletes the specified event from the event list.
 
@@ -290,7 +299,7 @@ Format: `delete -e INDEX`
 Examples:
 * `list -e` followed by `delete -e 2` deletes the 2nd event in the event list
 
-#### Editing an event : `edit`
+#### Editing an event : `edit -e`
 
 Edits an existing event in the event list. DATE_TIME format follows the addEvent command.
 
@@ -310,7 +319,7 @@ Examples:
 * `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30  E
 * `edit -e 1 p/Amanda p/Ethan rp/John rp/Jesse`  Adds the contacts with the names: Amanda, Ethan to the event attendees. Removes the contacts with the names: John, Jesse from the event attendees.
 
-#### Finding an event : `find`
+#### Finding an event : `find -e`
 
 Finds events which names contain any of the given keywords.
 
