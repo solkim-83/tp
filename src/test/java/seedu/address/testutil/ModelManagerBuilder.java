@@ -6,8 +6,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyCalendar;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.RemindersImpl;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.tag.ReadOnlyTagTree;
 import seedu.address.model.tag.TagTreeImpl;
 
