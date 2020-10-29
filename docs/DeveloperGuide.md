@@ -115,9 +115,9 @@ It is made up of three major components:
 
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
 1. `TagTree` which manages `tag` to `tag` relations.
-1. `Calendar` whcih manages `Event` objects.
+1. `Calendar` which manages `Event` objects.
 
-Besides this, `Model` also has the following characteristics: 
+Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
@@ -147,10 +147,10 @@ This section describes some noteworthy details on how certain features are imple
 ##### General Design
 **`Person`** component: 
 
-In Athena, contacts are represented by `Person` objects. `Person` objects have several properties such as email, address, etc. However, a `Person` can also be tagged with multiple `Tag`s.
+In Athena, contacts are represented by `Person` objects. `Person` objects have several properties such as email, address, etc. A `Person` can also be tagged with multiple `Tag`s.
 - `AddressBook` handles all direct matters concerning `Person` objects. It has a `TagManager` and `UniquePersonList`.  
-- `UniquePersonList` keeps track of all `Person` objects. Using `Person` class' `isSamePerson(Person)` method, it ensures that there are no duplicate contacts in Athena.
-- `TagManager` keeps track of which contacts contain which tags. It uses a hash map, with `Tag`s as keys and stores a set of `Person`s as its value.
+- `UniquePersonList` keeps track of all `Person` objects. It uses `Person` class' `isSamePerson(Person)` method to ensure that there are no duplicate contacts in Athena.
+- `TagManager` keeps track of which contacts contain which tags. It uses a hash map, mapping each `Tag` to the set of `Person`s that contain the `Tag`. 
 
 All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides simple methods that can be used by higher-level components such as 
 - `void removePerson(Person)`
@@ -197,7 +197,7 @@ In the context of tag management, this design choice is aimed at properly encaps
 
 Using these two mutable constructs, it allows for accurate realtime queries by higher-level components even though the internal mapping changes frequently between commands.
 In order to ensure that the right commands are called at the right time, `Model` implements only a limited set of methods to be used that can change the internal mapping.
-To support a greater varity of `Command`s, ensure that the correct methods from either of `AddressBook`, `TagTree` or `ContactTagIntegrationManager` is chosen. 
+To support a greater variety of `Command`s, ensure that the correct methods from either `AddressBook`, `TagTree` or `ContactTagIntegrationManager` are chosen. 
 A rule of thumb is to search for the method in `ContactTagIntegrationManager` first before looking for a similar method in the other two classes. 
  
 To view the full list of methods and documentation for the three major classes, you can view them at [`AddressBook`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/AddressBook.java), 
@@ -213,11 +213,11 @@ _Definitions_:
 - For a `Tag` to _exist_ in Athena, the `Tag` must have either at least one `Person` with the `Tag` **or** at least one child-tag.
 - A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done. The other tag in the relationship is the _parent-tag_.
 - _Parent-tag_: see _child-tag_.
-- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a child-tag, or a child-tag of a child-tag, ...).
+- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a child-tag, or a child-tag of a child-tag, etc.).
 A child-tag of a tag is also a _sub-tag_.
  
 _Delete single tag behavior_: <br>
-For single tag deletes, suppose we delete `Tag`, the parent-tags of `Tag` will be reconnected to the child-tags of `Tag` as illustrated by the image below.
+Suppose we delete a single `Tag`, the parent-tags of `Tag` will be reconnected to the child-tags of `Tag` as illustrated by the image below.
 <br>
 ![single-tag-delete](images/DeleteSingleTagPic.png) <br>
 We have intentionally chosen this design in order to preserve the effectiveness of top-down queries of all sub-tags.
@@ -604,7 +604,36 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
+### Editing a person
 
+1. Editing a person while all persons are being shown
+
+    1. Test case: `edit -c 1 n/test name p/912345 t/edittest` <br>
+       Expected: Contact at index `1` in the list has its name changed to `test name`, phone number to `912345` and the tag `edittest` added.
+       
+    1. Test case: `edit -c 1 t/cs2103 t/cs2101 rt/edittest` (done after step 1) <br>
+       Expected: Contact at index `1` has tag `edittest` removed and tags `cs2103` and `cs2101` added.
+       
+    1. Test case: `edit -c 1 rt/*` <br>
+       Expected: Contact at index `1` has all its tags removed.
+       
+    1. Test case: `edit -c 1 n/$%^&a` <br>
+       Expected: Error message shown as the name input fails the field constraints.
+       
+### Finding a person
+
+1. Finding a person.
+
+    1. Test case: `find -c n/alex betsy`
+       Expected: For default contact list, shows `Alex Yeoh` and `Betsy Crower` (and possibly other contacts containing either `alex` or `betsy`).
+       
+    1. Test case: `find -c e/@example`
+       Expected: Lists all persons with `@example` in their emails.
+       
+    1. Test case: `find -c t/friends`
+       Expected: Lists all persons with the tag `cs2030`.
+       
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
