@@ -419,8 +419,7 @@ Examples:
 
 #### Listing all tags: `list`
 
-Lists all tags in the remarks panel including the corresponding contacts of each tag. 
-Super-tags are also denoted with `(supertag)`.
+Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
 Example:
 * `list -t` 
