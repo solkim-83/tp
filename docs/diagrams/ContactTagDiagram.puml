@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_CONTACT_TAG_COLOR
+skinparam classBackgroundColor MODEL_CONTACT_TAG_COLOR
+
+Package Person {
+Class AddressBook
+Class UniquePersonList
+Interface TagManager <<Interface>>
+Class TagManagerImpl
+Class Person
+}
+
+Package Tag {
+Abstract Class TagTree
+Class TagTreeImpl
+Class Tag
+}
+
+ContactTagIntegrationManager -down-> AddressBook
+ContactTagIntegrationManager -down-> TagTree
+ContactTagIntegrationManager ..> Tag
+ContactTagIntegrationManager ..> Person
+
+AddressBook -down-> "1" UniquePersonList
+AddressBook -down-> "1" TagManager
+
+TagManager ..> Person
+TagManager ..> Tag
+
+TagManagerImpl .up.|> TagManager
+TagManagerImpl -right-> "*" Person
+TagManagerImpl -right-> "*" Tag
+
+UniquePersonList -down-> "*" Person
+
+TagTreeImpl -up-|> TagTree
+TagTreeImpl --> "*" Tag
+
+Person --> Tag
+
+Class ModelManager MODEL_COLOR
+ModelManager -down-> ContactTagIntegrationManager MODEL_COLOR
+ModelManager -down-> TagTree MODEL_COLOR
+ModelManager -down-> AddressBook MODEL_COLOR
+
+@enduml
