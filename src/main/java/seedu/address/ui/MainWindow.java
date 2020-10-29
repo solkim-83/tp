@@ -198,8 +198,8 @@ public class MainWindow extends UiPart<Stage> {
      * - method is supposed to be package private.
      */
 
-    CommandResult executeIntroCommand() throws CommandException, ParseException {
-        CommandResult commandResult = logic.execute("intro");
+    CommandResult executeIntroCommand() throws CommandException {
+        CommandResult commandResult = logic.executeIntro();
         logger.info("Result: " + commandResult.getFeedbackToUser());
         resultPanel.setFeedbackToUser(commandResult.getFeedbackToUser());
         handleIntro();
