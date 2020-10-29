@@ -141,10 +141,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
 
+### Displaying introduction window
+
+##### General design
+An introduction window is displayed by Athena for users unfamiliar with how the application works. This is done by
+checking if either `AddressBook.json` or `Calendar.json` exist in the designated save-path. If neither are found, Athena
+assumes that the user has not opened the application before, and will display the introduction window. The introduction
+comprises a tutorial on basic command use that prompts users to make changes to the default save, and thus will create
+a new save file.
+
+The sequence diagram below illustrates the interaction between `UiManager`, `MainWindow`, `LogicManager` and
+`IntroCommand` when the application is launched.
+
+![intro_sequence_diagram](images/IntroSequenceDiagram.png)
+
+This implementation deviates from the sequence regular commands obey (see below) by implementing `executeIntro()`,
+whereas regular commands use `execute(String)`. This is to prevent users from being able to display the introduction
+window through the invocation of a command.
+
+##### Design choice
+
+As the introduction window should be displayed when the application is opened, any method calls has to be done while
+the system is aware that the application is in the phase of being set up. As a result, determining whether the
+introduction window should be shown is done when the Ui is being created and filled in.
+
+An important factor to consider when implementing this command is to prevent users from being to invoke it. This means
+that, unlike regular commands, no keyword parsed should call the method, and thus it can be entirely absent from
+`AddressBookParser`. Since it should not be parseable, regular methods that are used to handle command inputs are
+inapplicable, thus necessitating creation of custom methods such as `handleIntro()` and `executeIntroCommand()`.
+
+##### Design improvements
+
+As the presence of save files are used to check if the introduction window should be shown, Athena will falsely flag
+users who have no save file as first time users and show the introduction window nonetheless.
+
 ### Contact and tag management
 ![contact_tag_diagram](images/ContactTagDiagram.png)
 
-##### General Design
+##### General design
 **`Person`** component: 
 
 In Athena, contacts are represented by `Person` objects. `Person` objects have several properties such as email, address, etc. A `Person` can also be tagged with multiple `Tag`s.
@@ -208,7 +242,7 @@ A possible way to improve the current design is to remove dependency from `Model
 As such, only the relevant methods required for specific `Command`s to work will be exposed to `Model`. For example, right now, both `ContactTagIntegrationManager`'s `deleteTag(Tag)` method and `TagTree`'s `deleteTag(Tag)` method are exposed to `ModelManager` when only one of them is actually used.
 This makes it easier for others working at a similar level of abstraction to avoid using the wrong methods.  
 
-##### Additional Notes:
+##### Additional notes:
 _Definitions_:
 - For a `Tag` to _exist_ in Athena, the `Tag` must have either at least one `Person` with the `Tag` **or** at least one child-tag.
 - A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done. The other tag in the relationship is the _parent-tag_.
