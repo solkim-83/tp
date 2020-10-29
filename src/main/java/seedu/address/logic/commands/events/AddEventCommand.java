@@ -37,7 +37,7 @@ public class AddEventCommand extends Command {
             + ": Adds an event to Athena.\n\n"
             + "Parameters:\n"
             + PREFIX_DESCRIPTION + "DESCRIPTION\n"
-            + PREFIX_DATETIME + "TIME\n"
+            + PREFIX_DATETIME + "DATE_TIME\n"
             + "[" + PREFIX_ADD_PERSON + "CONTACT_INDEX_LIST]\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
