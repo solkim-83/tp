@@ -38,6 +38,10 @@ section below.
         * [`edit`](#editing-a-tag-edit) - Editing a tag
         * [`list`](#listing-all-tags-list) - Listing all tags
         * [`view`](#viewing-tags-view) - Viewing tag details
+        
+    * [Reminder](#reminder)
+        * [`add`](#adding-a-reminder-add) - Adding a reminder
+        * [`list`](#listing-all-reminders-list) - Listing all reminders
 * [FAQ](#FAQ)
 * [Command Summary](#Command-summary)
 * [Glossary](#glossary)
@@ -441,6 +445,35 @@ Example:
 * `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
+### Reminders
+
+Reminders allows you to set custom reminders for your events. You can call up your reminders in application or
+have them pop up whenever Athena starts. 
+
+#### Adding a reminder: `add`
+
+Adds a new reminder for an event.
+
+Format: `add -r [EVENT_INDEX] [in/DAYS]`
+
+* `EVENT_INDEX` refers to the index of an event as is shown in the event window.
+* `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
+
+Examples:
+* `add -r 3 in/4` Creates a new reminder for the 3rd event, the reminder will start to pop up every time
+Athena opens 4 days prior to that event 
+
+#### Listing all reminders: `list`
+
+Lists all reminders in the remarks panel. It lists each reminder and a countdown to its event.
+
+Example:
+* `list -r` 
+
+---
+
+### Saving the data
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -466,6 +499,7 @@ Action | Format, Examples
 **Add Contact** | `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add -c n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Event** | `add -e d/DESCRIPTION at/DATE_TIME`<br> e.g., `add -e d/CS2103 Team meeting at/12-12-1234 12:34`
 **Add Tag** | `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…` <br> e.g., `add -t n/computing i/1 i/2 t/cs2030 t/cs2040`
+**Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
 **Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
@@ -481,6 +515,7 @@ Action | Format, Examples
 **List Contact** | `list -c`
 **List Events** | `list -e`
 **List Tags** | `list -t`
+**List Reminders** | `list -r`
 **Sort Contacts** | `sort -c INDEX`
 **Sort Events** | `sort -e INDEX`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
@@ -499,6 +534,4 @@ The other tag in the relation is known as a [_child-tag_](#child-tag).
 - A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, ...).
 A child-tag of a tag is also a _sub-tag_.
  
-
-
 
