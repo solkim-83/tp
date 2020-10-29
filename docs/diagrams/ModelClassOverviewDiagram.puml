@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Interface Model <<Interface>>
+Interface ObservableList <<Interface>>
+Class Model
+Class ModelManager
+Class UserPrefs
+Class ContactTagIntegrationManager MODEL_CONTACT_TAG_COLOR
+Class SortedList
+Package Person {
+Class AddressBook MODEL_CONTACT_TAG_COLOR
+Class Person MODEL_CONTACT_TAG_COLOR
+}
+Package Tag {
+Abstract Class TagTree MODEL_CONTACT_TAG_COLOR
+Class Tag MODEL_CONTACT_TAG_COLOR
+}
+Package Event {
+Class Calendar MODEL_EVENT_COLOR
+Class Event MODEL_EVENT_COLOR
+}
+}
+
+Class HiddenOutside #FFFFFF
+Class HiddenOutside2 #FFFFFF
+HiddenOutside ..> Model
+HiddenOutside2 --> ObservableList
+
+Model .right.> ObservableList
+
+ModelManager .up.|> Model
+ModelManager -left-> UserPrefs
+
+ModelManager -right-> SortedList
+SortedList .up.|> ObservableList
+
+ModelManager -down-> "1" ContactTagIntegrationManager
+ModelManager -down-> "1 " AddressBook
+ModelManager -down-> "1  " Calendar
+ModelManager -down-> "1" TagTree
+ModelManager .down.-> Person
+ModelManager .down.-> Tag
+ModelManager .down.-> Event
+
+ContactTagIntegrationManager -down-> AddressBook MODEL_CONTACT_TAG_COLOR
+ContactTagIntegrationManager -down-> TagTree MODEL_CONTACT_TAG_COLOR
+
+AddressBook -down-> "*" Person MODEL_CONTACT_TAG_COLOR
+TagTree -down-> "*" Tag MODEL_CONTACT_TAG_COLOR
+Calendar -down-> "*" Event MODEL_EVENT_COLOR
+
+AddressBook ..> Tag MODEL_CONTACT_TAG_COLOR
+Person -right-> Tag MODEL_CONTACT_TAG_COLOR
+
+@enduml

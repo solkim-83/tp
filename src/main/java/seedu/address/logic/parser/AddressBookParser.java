@@ -15,7 +15,6 @@ import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
-import seedu.address.logic.commands.general.IntroCommand;
 import seedu.address.logic.commands.reminders.ListReminderEventCommand;
 import seedu.address.logic.commands.reminders.ShowReminderEventCommand;
 import seedu.address.logic.commands.tags.ListTagCommand;
@@ -180,9 +179,6 @@ public class AddressBookParser {
 
             case HELP:
                 return new HelpCommand();
-
-            case INTRO:
-                return new IntroCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

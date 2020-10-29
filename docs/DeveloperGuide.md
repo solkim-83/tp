@@ -5,6 +5,16 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+---
+
+## **Introduction**
+
+This document shows program architecture and implementation decisions for the contact-and-event management app, Athena.
+
+##### **Purpose**
+The purpose of this document is to provide technical details and explanations for the high-level design of Athena and each subcomponent that Athena uses. 
+The intended audience for this document is software engineers maintaining or expanding on Athena, and software testers.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -51,7 +61,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete -c 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -95,37 +105,22 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+![Structure of the Model Component](images/ModelClassOverviewDiagram.png)
 
 **API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-The `Model` encapsulates all data required for Athena to run. In particular, it stores all contacts (as `person` objects), tags and events (to be implemented).
-It is meant to fulfill the Facade pattern as the Facade class by hiding the individual classes and forcing higher level components like the `Command`s and `Logic` to interact only with `Model`.
+The `Model` encapsulates all data required for Athena to run. In particular, it stores all contacts (as `person` objects), `tag`s and `event`s.
+It is meant to fulfill the Facade pattern as the Facade class by hiding the individual classes that store the individual entities and forcing higher level components like the `Command`s and `Logic` to interact only with `Model`.
+It is made up of three major components:
 
+1. `AddressBook` which manages the contacts in the form of `Person` objects.
+1. `TagTree` which manages `tag` to `tag` relations.
+1. `Calendar` which manages `Event` objects.
+
+Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the `AddressBook` data of contacts represented by `Person`s.
-    * `AddressBook` controls the list of contacts, any changes has to go through this class.
-    * `TagManager` is a separate class used to keep track which `Person`s fall under a specific `Tag`. This was done to 
-    avoid cyclic dependency between `Tag` and `Person`. Whenever `AddressBook` makes an edit to the `Person` list, it should also update the `TagManager`.
-* stores the `TagTree` which keeps track of tag-to-tag relationships.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-This design choice is aimed at properly encapsulating three separate functionalities.
-1. `AddressBook` tracks the state of the `Person` objects only. 
-2. `TagTree` tracks the tag-to-tag relationships only. In particular, it keeps track of which set of `tag`s are sub-`tag`s 
-of other `tag`s. 
-3. `TagManager` tracks the `Person` objects directly under each `Tag`. A `Person` object has to have the `tag` for it to be recorded in the `TagManager`.
-`AddressBook` should associate with the `TagManager` such that whenever there is a change to the list of `Person`s, the tag-to-person changes are reflected immediately in `TagManager`.
-
-In separating out these three components, it allows higher-level components to easily query for the necessary, accurate information and/or make the appropriate changes to `Person`s, `Tag`s, or both.
-For example, contact-only commands such as `addContactCommand`, `editContactCommand` would only need to interact with the `AddressBook` through the `Model` facade.
-For tag-only commands such as `editTagCommand`, when we assign sub-tags to a specific tag, it will only need to invoke `Model` methods that belong to `TagTree`.
-
-Lastly, we have the `ContactTagIntegrationManager` which aims to provide a fixed set of methods relating to both `Tag`s and `Person`s (e.g. deleting all contacts with a certain tag). 
-The `ContactTagIntegrationManager` abstracts out these methods and handles the implementation and necessary changes to the `TagTree` and `AddressBook` so that higher-level modules can make use of these methods.
-For more details on exactly which types of `Person`-`Tag` methods are supported, the documentation for this class will be available [here]().
-
 
 ### Storage component
 
@@ -144,92 +139,88 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
-
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Contact and tag management
+![contact_tag_diagram](images/ContactTagDiagram.png)
 
-#### Proposed Implementation
+##### General Design
+**`Person`** component: 
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+In Athena, contacts are represented by `Person` objects. `Person` objects have several properties such as email, address, etc. A `Person` can also be tagged with multiple `Tag`s.
+- `AddressBook` handles all direct matters concerning `Person` objects. It has a `TagManager` and `UniquePersonList`.  
+- `UniquePersonList` keeps track of all `Person` objects. It uses `Person` class' `isSamePerson(Person)` method to ensure that there are no duplicate contacts in Athena.
+- `TagManager` keeps track of which contacts contain which tags. It uses a hash map, mapping each `Tag` to the set of `Person`s that contain the `Tag`. 
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides simple methods that can be used by higher-level components such as 
+- `void removePerson(Person)`
+- `void addPerson(Person)`
+- `boolean hasPerson(Person)`
+- and more
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+**`Tag`** component:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its child-tags to perform an action.
+- `TagTree` handles tag-to-tag relations. 
+- `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. 
+The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. 
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Any new links established between tags have to go through the `TagTree`. `TagTree` provides several simple methods such as 
+- `void addSubTagTo(Tag tag)`  
+- `boolean hasTag(Tag tag)`  
+- and more
 
-![UndoRedoState0](images/UndoRedoState0.png)
+**`Integration`** component:
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The `ContactTagIntegrationManager` class provides a few predefined methods that affect both `Person`s and `Tag`s together. Methods include:
+- `void deleteTag(Tag)`
+- `void deleteTagRecursive(Tag)` - deletes a `Tag` and all its sub-tags
+- and more
 
-![UndoRedoState1](images/UndoRedoState1.png)
+This class is meant to address the difficulty in preserving consistency within the system.
+For example, two different `deleteTag` methods are implemented in both `TagTree` and `ContactTagIntegrationManager`.
+However, the method in `TagTree` only deletes the specific `Tag` in `TagTree`.
+The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method, then removes the `Tag` from all `Person` objects that has the `Tag`.
+The sequence diagram below illustrates the interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+![delete-tag-demonstration](images/DeleteTagSequenceDiagram.png)
 
-![UndoRedoState2](images/UndoRedoState2.png)
+As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made to `Tag`s that will affect `Person`s stored.
+Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if available.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+##### Design choice
+In the context of tag management, this design choice is aimed at properly encapsulating two separate functionalities.
+1. `AddressBook` - uses `TagManager` to track which `Person` objects falls under which `Tag`s. 
+    - `TagManager` is necessary to avoid cyclic dependency between `Person` and `Tag`. 
+    - `TagManager` is embedded in `AddressBook`, so whenever there is a change to the list of `Person`s, the tag-to-person map can be updated immediately.
+2. `TagTree` tracks the tag-to-tag relationships only. In particular, it keeps track of which set of `Tag`s are child-tags of which `Tag`. 
 
-</div>
+Using these two mutable constructs, it allows for accurate realtime queries by higher-level components even though the internal mapping changes frequently between commands.
+To ensure that the right commands are called at the right time, `Model` only implements a limited set of methods that can change the internal mapping.
+To support a greater variety of `Command`s, ensure that the correct methods from either `AddressBook`, `TagTree` or `ContactTagIntegrationManager` are chosen. 
+A rule of thumb is to search for the method in `ContactTagIntegrationManager` first before looking for a similar method in the other two classes. 
+ 
+To view the full list of methods and documentation for the three major classes, you can view them at [`AddressBook`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/AddressBook.java), 
+[`TagTree`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/tag/TagTree.java) and [`ContactTagIntegrationManager`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/ContactTagIntegrationManager.java).
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+##### Design improvement
+A possible way to improve the current design is to remove dependency from `ModelManager` to `TagTree`, `AddressBook` and `ContactTagIntegrationManager` by creating another Facade class containing these three classes.
+As such, only the relevant methods required for specific `Command`s to work will be exposed to `Model`. For example, right now, both `ContactTagIntegrationManager`'s `deleteTag(Tag)` method and `TagTree`'s `deleteTag(Tag)` method are exposed to `ModelManager` when only one of them is actually used.
+This makes it easier for others working at a similar level of abstraction to avoid using the wrong methods.  
 
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design consideration:
-
-##### Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+##### Additional Notes:
+_Definitions_:
+- For a `Tag` to _exist_ in Athena, the `Tag` must have either at least one `Person` with the `Tag` **or** at least one child-tag.
+- A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done. The other tag in the relationship is the _parent-tag_.
+- _Parent-tag_: see _child-tag_.
+- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a child-tag, or a child-tag of a child-tag, etc.).
+A child-tag of a tag is also a _sub-tag_.
+ 
+_Delete single tag behavior_: <br>
+Suppose we delete a single `Tag`, the parent-tags of `Tag` will be reconnected to the child-tags of `Tag` as illustrated by the image below.
+<br>
+![single-tag-delete](images/DeleteSingleTagPic.png) <br>
+We have intentionally chosen this design in order to preserve the effectiveness of top-down queries of all sub-tags.
 
 ### Sort events feature
 The sort events feature is facilitated by `Calendar` that stores event entries and their details in Athena. 
@@ -540,6 +531,37 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 * 2a. The list is empty.
 
   Use case ends.
+  
+#### **Use case: list all tags**
+
+**MSS**
+
+1. User requests to view all tags in Athena
+2. Athena shows a list of tags.
+
+    Use case ends.
+    
+#### **Use case: Add a tag**
+
+**MSS**
+
+1. User requests to add a tag 
+2. User specifies contacts to be added to this tag
+3. User specifies other tags to be added as child-tags
+4. Athena adds the new tag and its relations to specified contacts and child-tags
+    Use case ends.
+
+**Extensions**
+* 1a. The tag already exists in Athena.
+    * 1a1. Athena shows an error message.
+    Use case ends.
+* 2a. Contact specified is invalid.
+    * 2a1. Athena shows an error message.
+    Use case ends.
+* 3a. Child-tag specified does not exist.
+    * 3a1. Athena shows an error message.
+    Use case ends.
+ 
 
 ### Non-Functional Requirements
 
@@ -582,30 +604,120 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
+### Editing a person
 
-1. _{ more test cases …​ }_
+1. Editing a person while all persons are being shown
 
+    1. Test case: `edit -c 1 n/test name p/912345 t/edittest` <br>
+       Expected: Contact at index `1` in the list has its name changed to `test name`, phone number to `912345` and the tag `edittest` added.
+       
+    1. Test case: `edit -c 1 t/cs2103 t/cs2101 rt/edittest` (done after step 1) <br>
+       Expected: Contact at index `1` has tag `edittest` removed and tags `cs2103` and `cs2101` added.
+       
+    1. Test case: `edit -c 1 rt/*` <br>
+       Expected: Contact at index `1` has all its tags removed.
+       
+    1. Test case: `edit -c 1 n/$%^&a` <br>
+       Expected: Error message shown as the name input fails the field constraints.
+       
+### Finding a person
+
+1. Finding a person.
+
+    1. Test case: `find -c n/alex betsy`
+       Expected: For default contact list, shows `Alex Yeoh` and `Betsy Crower` (and possibly other contacts containing either `alex` or `betsy`).
+       
+    1. Test case: `find -c e/@example`
+       Expected: Lists all persons with `@example` in their emails.
+       
+    1. Test case: `find -c t/friends`
+       Expected: Lists all persons with the tag `cs2030`.
+       
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete -c 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete -c 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete -c`, `delete -c x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+### Adding a tag
+
+1. Add a new tag to various contacts.
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   1. Test case: `add -t n/testtag1 i/1 i/2`<br>
+      Expected: Contacts at indices `1` and `2` now have the tag `testtag1`.
+      
+   1. Test case: `add -t n/testtag2 i/3 t/testtag1`<br>
+      Expected: Contact at index `3` has the tag `testtag2`. When `list -t` command is used, `testtag2` will be labelled as a `supertag`.
+       
+   1. Test case: `add -t n/testtag1 i/4` (has to be done after step 2) <br> 
+      Expected: Error message shown, saying that `testtag1` already exists.
+      
+### Deleting a tag
+
+1. Deleting a tag.
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
+   
+   1. Test case: `delete -t t/testtag2` <br>
+      Expected: Contact at index 3 no longer has the tag `testtag2`. When `list -t` is used, `testtag2` can no longer be found. When using `view -t t/testtag3`, `testtag1` is listed as a child-tag of `testtag3`.
+       
+   1. Test case: `delete -t t/testtag3 r/1` <br>
+      Expected: Contacts at indices 1 and 2 no longer have the tag `testtag1`. `list -t` now has neither `testtag1` nor `testtag3`.
+   
+### Editing a tag
+
+1. Editing a tag.
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. 
+   
+   1. Test case: `edit -t n/testtag2 i/2 ri/3` <br>
+      Expected: Contact at index 3 no longer has the tag `testtag2`. Contact at index 1 has the tag `testtag1`.
+      
+   1. Test case: `edit -t n/testtag2 rt/testtag1` <br>
+      Expected: When `view -t t/testtag2`, `testtag1` is no longer listed as a child-tag of `testtag2`.
+      
+   1. Test case: `edit -t n/testtag2 t/testtag1` followed by `edit -t n/testtag1 t/testtag2`
+      Expected: Error message shown, indicating an attempt in making a cyclic relationship.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. In the directory with Athena, open the folder `data` and edit the json save files.
+   
+   1. Open Athena. 
+      Expected: The individual lists should be blank as a corrupted save file has been detected.
+   
+   1. Add some contacts and events to ensure that Athena has a proper save file.
+   
+   1. Delete one of either `Calendar.json` or `AddressBook.json`.
+      Expected: When opening Athena again, a default set of entries will fill up the component that was deleted.
 
-1. _{ more test cases …​ }_
+---
+
+## **Appendix: Effort**
+
+* **Contact and Tag management**: It was difficult to come up with a good OOP solution in order to keep track of tag-contact and tag-tag relations while avoiding cyclic dependency. Such functionality was not present within AB3 prior so it had to be implemented from scratch.
+Additionally, a major challenge was that we intended to implement commands that could affect tags and persons in a way where other persons and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
+There were also issues that were more difficult to spot, such as the ability to create cyclic relations between tags.
+As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
+Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons.
+ 
+
