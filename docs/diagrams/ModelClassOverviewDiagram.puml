@@ -34,7 +34,7 @@ HiddenOutside2 --> ObservableList
 Model .right.> ObservableList
 
 ModelManager .up.|> Model
-ModelManager -up-> UserPrefs
+ModelManager -left-> UserPrefs
 
 ModelManager -right-> SortedList
 SortedList .up.|> ObservableList

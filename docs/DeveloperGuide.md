@@ -61,7 +61,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete -c 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -216,8 +216,9 @@ _Definitions_:
 - A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a child-tag, or a child-tag of a child-tag, ...).
 A child-tag of a tag is also a _sub-tag_.
  
-**Delete single tag behavior**:
+_Delete single tag behavior_: <br>
 For single tag deletes, suppose we delete `Tag`, the parent-tags of `Tag` will be reconnected to the child-tags of `Tag` as illustrated by the image below.
+<br>
 ![single-tag-delete](images/DeleteSingleTagPic.png) <br>
 We have intentionally chosen this design in order to preserve the effectiveness of top-down queries of all sub-tags.
 
