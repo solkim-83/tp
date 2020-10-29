@@ -11,13 +11,20 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.logic.commands.events.AddEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.AddEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ModelStub;
+
 
 public class AddEventCommandTest {
 
@@ -31,7 +38,11 @@ public class AddEventCommandTest {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().build();
 
-        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+        AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(validEvent.getDescription())
+                .withTime(validEvent.getTime()).build();
+
+        CommandResult commandResult = new AddEventCommand(validEventDescriptor).execute(modelStub);
 
         assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
@@ -40,7 +51,11 @@ public class AddEventCommandTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event validEvent = new EventBuilder().build();
-        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+        AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(validEvent.getDescription())
+                .withTime(validEvent.getTime()).build();
+
+        AddEventCommand addEventCommand = new AddEventCommand(validEventDescriptor);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         assertThrows(CommandException.class, AddEventCommand.MESSAGE_DUPLICATE_EVENT, () ->
@@ -51,14 +66,22 @@ public class AddEventCommandTest {
     public void equals() {
         Event meeting = new EventBuilder().withDescription("Meeting").build();
         Event consultation = new EventBuilder().withDescription("Consultation").build();
-        AddEventCommand addMeetingCommand = new AddEventCommand(meeting);
-        AddEventCommand addConsultationCommand = new AddEventCommand(consultation);
+
+        AddEventCommand.AddEventDescriptor meetingDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(meeting.getDescription())
+                .withTime(meeting.getTime()).build();
+        AddEventCommand.AddEventDescriptor consultationDescriptor = new AddEventDescriptorBuilder()
+                .withDescription(consultation.getDescription())
+                .withTime(consultation.getTime()).build();
+
+        AddEventCommand addMeetingCommand = new AddEventCommand(meetingDescriptor);
+        AddEventCommand addConsultationCommand = new AddEventCommand(consultationDescriptor);
 
         // same object -> returns true
         assertTrue(addMeetingCommand.equals(addMeetingCommand));
 
         // same values -> returns true
-        AddEventCommand addMeetingCommandCopy = new AddEventCommand(meeting);
+        AddEventCommand addMeetingCommandCopy = new AddEventCommand(meetingDescriptor);
         assertTrue(addMeetingCommand.equals(addMeetingCommandCopy));
 
         // different types -> returns false
@@ -73,13 +96,21 @@ public class AddEventCommandTest {
 
     /**
      * A Model stub that contains a single event.
+     * Contains a empty sortedPersons list to enable {@code getSortedFilteredPersonList()} as add event will use it.
      */
     private class ModelStubWithEvent extends ModelStub {
         private final Event event;
+        private final SortedList<Person> sortedPersons = new SortedList<>(
+                new FilteredList<>(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList())));
 
         ModelStubWithEvent(Event event) {
             requireNonNull(event);
             this.event = event;
+        }
+
+        @Override
+        public ObservableList<Person> getSortedFilteredPersonList() {
+            return sortedPersons;
         }
 
         @Override
@@ -91,9 +122,17 @@ public class AddEventCommandTest {
 
     /**
      * A Model stub that always accept the event being added.
+     * Contains a empty sortedPersons list to enable {@code getSortedFilteredPersonList()} as add event will use it.
      */
     private class ModelStubAcceptingEventAdded extends ModelStub {
-        final ArrayList<Event> eventsAdded = new ArrayList<>();
+        private final ArrayList<Event> eventsAdded = new ArrayList<>();
+        private final SortedList<Person> sortedPersons = new SortedList<>(
+                new FilteredList<>(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList())));
+
+        @Override
+        public ObservableList<Person> getSortedFilteredPersonList() {
+            return sortedPersons;
+        }
 
         @Override
         public boolean hasEvent(Event event) {
