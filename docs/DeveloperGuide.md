@@ -683,3 +683,12 @@ testers are expected to do more *exploratory* testing.
 ---
 
 ## **Appendix: Effort**
+
+* **Contact and Tag management**: It was difficult to come up with a good OOP solution in order to keep track of tag-contact and tag-tag relations while avoiding cyclic dependency. Such functionality was not present within AB3 prior so it had to be implemented from scratch.
+Additionally, a major challenge was that we intended to implement commands that could affect tags and persons in a way where other persons and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
+There were also issues that were more difficult to spot, such as the ability to create cyclic relations between tags.
+As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
+Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons.
+ 
+
+    
