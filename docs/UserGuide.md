@@ -38,6 +38,10 @@ section below.
         * [`edit`](#editing-a-tag-edit) - Editing a tag
         * [`list`](#listing-all-tags-list) - Listing all tags
         * [`view`](#viewing-tags-view) - Viewing tag details
+        
+    * [Reminder](#reminder)
+        * [`add`](#adding-a-reminder-add) - Adding a reminder
+        * [`list`](#listing-all-reminders-list) - Listing all reminders
 * [FAQ](#FAQ)
 * [Command Summary](#Command-summary)
 * [Glossary](#glossary)
@@ -433,7 +437,14 @@ Details include:
 - All other sub-tags
 - All other contacts containing sub-tags
 
-<<<<<<< HEAD
+Format: `view -t t/TAG [t/TAG]…`
+
+* `TAG` must be a valid existing tag in Athena.
+
+Example:
+* `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
+* `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
+
 ### Reminders
 
 Reminders allows you to set custom reminders for your events. You can call up your reminders in application or
@@ -443,7 +454,7 @@ have them pop up whenever Athena starts.
 
 Adds a new reminder for an event.
 
-Format: `add -r [EVENT_INDEX]… [in/DAYS]…`
+Format: `add -r [EVENT_INDEX] [in/DAYS]`
 
 * `EVENT_INDEX` refers to the index of an event as is shown in the event window.
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
@@ -462,15 +473,6 @@ Example:
 ---
 
 ### Saving the data
-=======
-Format: `view -t t/TAG [t/TAG]…`
->>>>>>> fa4a2f519446970fe60210e532f6bdcca0429cd3
-
-* `TAG` must be a valid existing tag in Athena.
-
-Example:
-* `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
-* `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -511,11 +513,11 @@ Action | Format, Examples
 **Help** | `help`
 **List Contact** | `list -c`
 **List Events** | `list -e`
-<<<<<<< HEAD
 **Sort Contacts** | `sort -c 1`
 **Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **List Reminders** | `list -r`
-=======
+**Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
+**List Reminders** | `list -r`
 **List Tags** | `list -t`
 **Sort Contacts** | `sort -c INDEX`
 **Sort Events** | `sort -e INDEX`
@@ -536,6 +538,3 @@ The other tag in the relation is known as a [_child-tag_](#child-tag).
 A child-tag of a tag is also a _sub-tag_.
  
 
-
-
->>>>>>> fa4a2f519446970fe60210e532f6bdcca0429cd3
