@@ -108,7 +108,7 @@ specific key-words. Thus, there are **four** types of commands:
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times or zero times.<br>
+* Items with `…`​ after them can be used any number of times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -201,7 +201,7 @@ and `johndoe@example.com` respectively.
 
 #### Finding a contact : `find`
 
-Finds persons whose names contain any of the given keywords. Athena also supports search with additional specifiers such as 
+Finds persons whose names contain any of the given keywords. Also supports search with additional specifiers such as 
 phone number or email.
 
 Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
