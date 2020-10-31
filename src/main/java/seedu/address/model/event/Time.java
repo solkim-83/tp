@@ -99,14 +99,14 @@ public class Time {
     // private method for use in getDisplayName above
     private String getDayOfMonthAsString() {
         switch (time.getDayOfMonth()) {
-            case 1:
-                return "1st";
-            case 2:
-                return "2nd";
-            case 3:
-                return "3rd";
-            default:
-                return time.getDayOfMonth() + "th";
+        case 1:
+            return "1st";
+        case 2:
+            return "2nd";
+        case 3:
+            return "3rd";
+        default:
+            return time.getDayOfMonth() + "th";
         }
     }
 
