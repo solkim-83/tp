@@ -85,7 +85,7 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append("\nAt: ")
-                .append(getTime());
+                .append(getTime().getDisplayName());
 
         if (associatedPersons.size() != 0) {
             builder.append("\n\nPeople attending: ");
