@@ -25,7 +25,7 @@ public class Event {
      * Every field must be present and not null.
      */
     public Event(Description description, Time time, Set<FauxPerson> associatedPersons) {
-        requireAllNonNull(description, time);
+        requireAllNonNull(description, time, associatedPersons);
         this.description = description;
         this.time = time;
         this.associatedPersons.addAll(associatedPersons);
@@ -48,7 +48,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same description
+     * Returns true if both events have the same description and time.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -56,7 +56,8 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getDescription().equals(getDescription());
+                && otherEvent.getDescription().equals(getDescription())
+                && otherEvent.getTime().equals(getTime());
     }
 
     @Override
