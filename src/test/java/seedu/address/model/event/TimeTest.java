@@ -15,7 +15,7 @@ public class TimeTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
+    public void constructor_invalidTime_throwsIllegalArgumentException() {
         String invalidTime = "";
         assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime));
     }
@@ -38,6 +38,6 @@ public class TimeTest {
     @Test
     public void getDisplayNameTest() {
         Time time = new Time("11-12-1234 12:34");
-        assertEquals(time.getDisplayName().substring(0,17), "Mon 11th Dec 1234");
+        assertEquals(time.getDisplayName().substring(0, 17), "Mon 11th Dec 1234");
     }
 }
