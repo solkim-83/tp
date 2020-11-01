@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -32,5 +33,11 @@ public class TimeTest {
         // valid time
         assertTrue(Time.isValidTime("12-12-1234 12:34")); // valid standard format
         assertTrue(Time.isValidTime("20-10-2020 14:00"));
+    }
+
+    @Test
+    public void getDisplayNameTest() {
+        Time time = new Time("11-12-1234 12:34");
+        assertEquals(time.getDisplayName().substring(0,17), "Mon 11th Dec 1234");
     }
 }
