@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.association.FauxPerson;
 
 /**
  * An UI component that displays information of a {@code Event}.
@@ -13,6 +17,10 @@ import seedu.address.model.event.Event;
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
+
+    private static final String MESSAGE_PERSON_LIMIT_REACHED = "...";
+
+    private static final int associatedPersonsLimit = 3;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -48,9 +56,29 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(event.getDescription().fullDescription);
         time.setText(event.getTime().toDisplayString());
-        // no sorting here, as to show it in order of user input
-        event.getAssociatedPersons().stream()
-                .forEach(fauxPerson -> tags.getChildren().add(new Label(fauxPerson.displayName)));
+        setAssociatedPersons(event);
+    }
+
+    /**
+     * Sets the associated persons in this card to be from a event.
+     * Associated persons are sorted by alphabetic order.
+     * @param event Associated persons is taken from this event.
+     */
+    private void setAssociatedPersons(Event event) {
+        ArrayList<FauxPerson> associatedPersons = new ArrayList<>();
+        associatedPersons.addAll(event.getAssociatedPersons());
+        associatedPersons.sort(Comparator.comparing(current -> current.displayName));
+
+        int numOfDisplayedNames = 0;
+        for (FauxPerson fauxPerson : associatedPersons) {
+            if (numOfDisplayedNames <= associatedPersonsLimit) {
+                tags.getChildren().add(new Label(fauxPerson.displayName));
+                numOfDisplayedNames++;
+            } else {
+                tags.getChildren().add(new Label(MESSAGE_PERSON_LIMIT_REACHED));
+                break;
+            }
+        }
     }
 
     @Override
