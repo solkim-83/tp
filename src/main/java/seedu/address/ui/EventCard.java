@@ -20,7 +20,7 @@ public class EventCard extends UiPart<Region> {
 
     private static final String MESSAGE_PERSON_LIMIT_REACHED = "...";
 
-    private static final int associatedPersonsLimit = 3;
+    private static final int associatedPersonsLimit = 5;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -71,7 +71,7 @@ public class EventCard extends UiPart<Region> {
 
         int numOfDisplayedNames = 0;
         for (FauxPerson fauxPerson : associatedPersons) {
-            if (numOfDisplayedNames <= associatedPersonsLimit) {
+            if (numOfDisplayedNames < associatedPersonsLimit) {
                 tags.getChildren().add(new Label(fauxPerson.displayName));
                 numOfDisplayedNames++;
             } else {
