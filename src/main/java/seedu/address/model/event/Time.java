@@ -4,6 +4,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -75,7 +76,7 @@ public class Time {
                 .append(time.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " ")
                 .append(time.getYear());
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDate now = LocalDate.now();
         long dayDifference = DAYS.between(now, time);
         if (dayDifference < 0) {
             if (dayDifference < -1) {
