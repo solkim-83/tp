@@ -11,12 +11,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.contacts.AddContactCommand;
 import seedu.address.logic.commands.contacts.ClearContactCommand;
 import seedu.address.logic.commands.contacts.DeleteContactCommand;
@@ -71,7 +73,9 @@ public class AddressBookParserTest {
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
                 DeleteContactCommand.COMMAND_WORD + " " + DeleteContactCommand.COMMAND_TYPE + " "
                         + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_PERSON);
+        assertEquals(new DeleteContactCommand(indexes), command);
     }
 
     @Test
