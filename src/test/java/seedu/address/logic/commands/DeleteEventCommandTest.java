@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
