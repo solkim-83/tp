@@ -55,7 +55,6 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         description.setText(event.getDescription().fullDescription);
-        time.setText(event.getTime().toDisplayString());
         setAssociatedPersons(event);
     }
 
