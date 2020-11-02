@@ -19,6 +19,7 @@ import seedu.address.logic.commands.reminders.ListReminderEventCommand;
 import seedu.address.logic.commands.reminders.ShowReminderEventCommand;
 import seedu.address.logic.commands.tags.ListTagCommand;
 import seedu.address.logic.parser.contacts.AddContactCommandParser;
+import seedu.address.logic.parser.contacts.DeleteContactByTagCommandParser;
 import seedu.address.logic.parser.contacts.DeleteContactCommandParser;
 import seedu.address.logic.parser.contacts.EditContactCommandParser;
 import seedu.address.logic.parser.contacts.FindContactCommandParser;
@@ -96,6 +97,9 @@ public class AddressBookParser {
 
             case PERMASORT:
                 return new PermaSortContactCommandParser().parse(arguments);
+
+            case DELETE_BY_TAG:
+                return new DeleteContactByTagCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

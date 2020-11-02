@@ -263,6 +263,11 @@ public interface Model {
     void removePersonFromTag(Tag tag, Person person);
 
     /**
+     * Removes all contacts with the specific tag.
+     */
+    void deletePersonsByTag(Tag tag);
+
+    /**
      * Adds {@code subTag} as a sub-tag of {@code superTag}.
      */
     void addSubTagTo(Tag superTag, Tag subTag);
