@@ -56,6 +56,7 @@ public class RemindEventCommand extends Command {
         }
 
         Event eventForReminder = lastShownList.get(targetIndex.getZeroBased());
+        assert model.hasEvent(eventForReminder);
         Reminder toAdd = new Reminder(eventForReminder, daysInAdvance);
         LocalDateTime now = LocalDateTime.now();
         if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time)) {
