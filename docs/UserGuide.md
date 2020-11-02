@@ -153,12 +153,13 @@ A person can have any number of tags (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you are missing some of the information, like ADDRESS, you can just end the field with a "." (e.g. "a/.")
+If you are missing some of the information, like ADDRESS, you can just remove the prefix and leave the fields empty, 
+just like the second example below
 </div>
 
 Examples:
 * `add -c n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add -c n/Betsy Crowe t/friend e/betsycrowe@example.com a/. p/1234567 t/criminal`
+* `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
 
 #### Clearing all contacts : `clear`
 
@@ -473,7 +474,7 @@ have them pop up whenever Athena starts.
 
 Adds a new reminder for an event.
 
-Format: `add -r [EVENT_INDEX] [in/DAYS]`
+Format: `add -r EVENT_INDEX in/DAYS`
 
 * `EVENT_INDEX` refers to the index of an event as is shown in the event window.
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.

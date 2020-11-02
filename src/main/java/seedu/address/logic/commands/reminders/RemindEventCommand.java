@@ -28,7 +28,7 @@ public class RemindEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reminds you of an event \n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1" + "in/10";
+            + "Example: " + COMMAND_WORD + " 1" + " in/10";
 
     public static final String MESSAGE_REMIND_EVENT_SUCCESS = "Reminder set for event %d days prior: ";
 
