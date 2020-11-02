@@ -35,7 +35,8 @@ public class DeleteContactCommandTest {
         indexes.add(INDEX_FIRST_PERSON);
         DeleteContactCommand deleteContactCommand = new DeleteContactCommand(indexes);
 
-        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                "\n\n" + personToDelete);
 
         ModelManager expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook()).build();
         expectedModel.deletePerson(personToDelete);
@@ -64,7 +65,8 @@ public class DeleteContactCommandTest {
         indexes.add(INDEX_FIRST_PERSON);
         DeleteContactCommand deleteContactCommand = new DeleteContactCommand(indexes);
 
-        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                "\n\n" + personToDelete);
 
         Model expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook()).build();
         expectedModel.deletePerson(personToDelete);

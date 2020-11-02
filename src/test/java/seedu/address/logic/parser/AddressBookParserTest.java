@@ -145,7 +145,10 @@ public class AddressBookParserTest {
         DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
                 DeleteEventCommand.COMMAND_WORD + " " + DeleteEventCommand.COMMAND_TYPE + " "
                         + INDEX_FIRST_EVENT.getOneBased());
-        assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), command);
+
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_EVENT);
+        assertEquals(new DeleteEventCommand(indexes), command);
     }
 
     @Test

@@ -26,8 +26,10 @@ public class DeleteContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Deletes the person identified by the index number used in the displayed person list.\n\n"
-            + "Parameters: CONTACT_INDEX_LIST (must be positive integers)\n\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1";
+            + "Parameters: CONTACT_INDEX_LIST (must be positive integer(s))\n\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " " + COMMAND_TYPE + " 1" + "\n"
+            + COMMAND_WORD + " " + COMMAND_TYPE + " 1,2";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s";
 
@@ -42,7 +44,7 @@ public class DeleteContactCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getSortedFilteredPersonList();
 
-        StringBuilder personsStringBuilder = new StringBuilder().append("The following contacts is/are deleted:");
+        StringBuilder personsStringBuilder = new StringBuilder();
 
         for (Index targetIndexes : targetIndexes) {
             if (targetIndexes.getZeroBased() >= lastShownList.size()) {
