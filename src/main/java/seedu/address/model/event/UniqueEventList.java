@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.association.FauxPerson;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
@@ -95,6 +96,38 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+    }
+
+    /**
+     * Deletes instances of {@code fauxPerson} from events in this list.
+     */
+    public void deleteFauxPerson(FauxPerson fauxPerson) {
+        for (Event event : internalList) {
+            int index = internalList.indexOf(event);
+            // this is in a for loop, the following should not happen
+            if (index == -1) {
+                throw new EventNotFoundException();
+            }
+            Event editedEvent = new Event(event);
+            editedEvent.deleteFauxPerson(fauxPerson);
+            internalList.set(index, editedEvent);
+        }
+    }
+
+    /**
+     * Sets associated {@code target} to {@code editedPerson} for events in this list.
+     */
+    public void setFauxPerson(FauxPerson target, FauxPerson editedFauxPerson) {
+        for (Event event : internalList) {
+            int index = internalList.indexOf(event);
+            // this is in a for loop, the following should not happen
+            if (index == -1) {
+                throw new EventNotFoundException();
+            }
+            Event editedEvent = new Event(event);
+            editedEvent.setFauxPerson(target, editedFauxPerson);
+            internalList.set(index, editedEvent);
+        }
     }
 
     /**
