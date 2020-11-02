@@ -362,6 +362,11 @@ public class ModelManager implements Model {
         return contactTagIntegrationManager.getAllPersonsUnderTag(tag);
     }
 
+    @Override
+    public void deletePersonsByTag(Tag tag) {
+        contactTagIntegrationManager.deleteTagAndDirectContacts(tag);
+    }
+
     // Filter/sort related methods
 
     @Override

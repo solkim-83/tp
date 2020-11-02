@@ -180,6 +180,18 @@ Examples:
 * `list -c` followed by `delete -c 2` deletes the 2nd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
+#### Deleting contacts by Tag : `deletetag`
+
+Deletes all contacts under a specific tag.
+
+Format: `deletetag -c TAG`
+
+* Deletes all contacts with a specific tag.
+* The tag must be a valid tag.
+
+Examples:
+* `deletetag -c computing` deletes all contacts tagged under computing
+
 #### Editing a contact : `edit`
 
 Edits an existing person in the address book.
@@ -522,6 +534,7 @@ Action | Format, Examples
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
 **Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
+**Delete ContactBy Tag** | `deletetag -c TAG`<br> e.g., `delete -c computing`
 **Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
