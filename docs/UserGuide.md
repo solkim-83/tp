@@ -168,16 +168,16 @@ Format: `clear -c`
 
 #### Deleting a contact : `delete`
 
-Deletes the specified contact from Athena.
+Deletes the specified contact(s) from Athena.
 
-Format: `delete -c INDEX`
+Format: `delete -c CONTACT_INDEX_LIST`
 
-* Deletes the contact at the specified `INDEX`.
+* Deletes the contact(s) at the specified index(es) in `CONTACT_INDEX_LIST`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list -c` followed by `delete -c 2` deletes the 2nd contact in Athena.
+* `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
 #### Editing a contact : `edit`
@@ -299,14 +299,14 @@ Format: `clear -e`
 
 Deletes the specified event from the event list.
 
-Format: `delete -e INDEX`
+Format: `delete -e EVENT_INDEX_LIST`
 
-* Deletes the event at the specified `INDEX`.
+* Deletes the event(s) at the specified index(es) in `EVENT_INDEX_LIST`.
 * The index refers to the index number shown in the displayed event list.
-* The index must be a positive integer 1, 2, 3, ...
+* The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `list -e` followed by `delete -e 2` deletes the 2nd event in the event list.
+* `list -e` followed by `delete -e 2,3` deletes the 2nd and 3rd event in Athena.
 
 #### Editing an event : `edit`
 
@@ -521,8 +521,8 @@ Action | Format, Examples
 **Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
-**Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
-**Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
+**Delete Contact** | `delete -c CONTACT_INDEX_LIST`<br> e.g., `delete -c 3,1,2`
+**Delete Event** | `delete -e EVENT_INDEX_LIST`<br> e.g., `delete -e 3,1,2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
 **Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`<br> e.g., `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30 ap/1,2,3 rp/1,2`
