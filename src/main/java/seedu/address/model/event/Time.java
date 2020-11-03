@@ -16,12 +16,18 @@ import java.util.Locale;
  */
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
-            + "d-M-yyyy HH:mm\n"
-            + "yyyy-d-M HH:mm\n"
-            + "[.][/][-] can be used interchangeably to indicate date, time, year of the event.";
+            + "d-M-yy H:m\n"
+            + "yy-d-M H:m\n"
+            + "[.][/][-][:] can be used interchangeably to indicate date, time, year of the event.";
+
+    private static final String[] dateTimeSeparators = {"/","-",".",":"};
+
 
     private static final String STANDARD_TIME_PATTERN =
-            "[d['/']['-']['.']M['/']['-']['.']yyyy HH:mm][yyyy['/']['-']['.']M['/']['-']['.']d HH:mm]";
+            "[d[.][/][-][:]M[.][/][-][:]yy H[.][/][-]" +
+                    "[:]m][M[.][/][-][:]d[.][/][-][:]yy H[.][/][-][:]m]" +
+                    "[yy[.][/][-][:]M[.][/][-][:]d H[.][/][-][:]m]" +
+                    "[yy[.][/][-][:]d[.][/][-][:]M H[.][/][-][:]m]";
 
     public final LocalDateTime time;
 
@@ -61,8 +67,7 @@ public class Time {
             return false;
         }
     }
-
-    public static LocalDateTime parse(String timeInput) {
+        public static LocalDateTime parse(String timeInput) {
         return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
