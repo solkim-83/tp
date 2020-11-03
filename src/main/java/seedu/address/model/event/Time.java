@@ -20,7 +20,7 @@ public class Time {
             + "yyyy-d-M HH:mm\n"
             + "[.][/][-] can be used interchangeably to indicate date, time, year of the event.";
 
-    private static final String STANDARD_TIME_PATTERN_DAY =
+    private static final String STANDARD_TIME_PATTERN =
             "[d['/']['-']['.']M['/']['-']['.']yyyy HH:mm][yyyy['/']['-']['.']M['/']['-']['.']d HH:mm]";
 
     public final LocalDateTime time;
@@ -55,7 +55,7 @@ public class Time {
      */
     public static boolean isValidTime(String timeInput) {
         try {
-            LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN_DAY));
+            LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -63,7 +63,7 @@ public class Time {
     }
 
     public static LocalDateTime parse(String timeInput) {
-        return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN_DAY));
+        return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
     // getDisplayName controls the format of time displayed in the GUI panel and in the response.
@@ -125,7 +125,7 @@ public class Time {
     // toString() controls the format of time saved in calendar.json file
     @Override
     public String toString() {
-        return time.format(DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN_DAY));
+        return time.format(DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
     @Override
