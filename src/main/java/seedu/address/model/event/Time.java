@@ -22,10 +22,10 @@ public class Time {
 
     private static final String symbol = "[.][/][-][:]";
     private static final String STANDARD_TIME_PATTERN =
-            "[d" +symbol + "M" + symbol + "yy H" + symbol + "m]" +
-                    "[M" +symbol + "d" + symbol + "yy H" + symbol + "m]" +
-                    "[yy" +symbol + "M" + symbol + "d H" + symbol + "m]" +
-                    "[yy" +symbol + "d" + symbol + "M H" + symbol + "m]";
+            "[d" + symbol + "M" + symbol + "yy H" + symbol + "m]"
+                    + "[M" + symbol + "d" + symbol + "yy H" + symbol + "m]"
+                    + "[yy" + symbol + "M" + symbol + "d H" + symbol + "m]"
+                    + "[yy" + symbol + "d" + symbol + "M H" + symbol + "m]";
 
     public final LocalDateTime time;
 
@@ -65,7 +65,8 @@ public class Time {
             return false;
         }
     }
-        public static LocalDateTime parse(String timeInput) {
+
+    public static LocalDateTime parse(String timeInput) {
         return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
