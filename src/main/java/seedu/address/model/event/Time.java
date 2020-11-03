@@ -78,7 +78,7 @@ public class Time {
                 .append(time.format(DateTimeFormatter.ofPattern("K:mma")).toLowerCase());
 
         LocalDate now = LocalDate.now();
-        long dayDifference = DAYS.between(now, time);
+        long dayDifference = DAYS.between(now, time.toLocalDate());
         if (dayDifference < 0) {
             if (dayDifference < -1) {
                 builder.append(" (" + (dayDifference * -1) + " days ago)");
