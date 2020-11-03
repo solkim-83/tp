@@ -71,6 +71,18 @@ public class Event {
     }
 
     /**
+     * Returns true if both events have the same time.
+     */
+    public boolean clash(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getTime().equals(getTime());
+    }
+
+    /**
      * Deletes instances of {@code fauxPerson} associated to this event.
      */
     public void deleteFauxPerson(FauxPerson toBeDeleted) {

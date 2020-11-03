@@ -38,6 +38,14 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list contains any event that clashes in time with the given argument.
+     */
+    public boolean anyClash(Event toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::clash);
+    }
+
+    /**
      * Adds an event to the list.
      * The event must not already exist in the list.
      */
