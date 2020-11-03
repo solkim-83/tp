@@ -23,7 +23,6 @@ public class DeleteContactCommandParser implements Parser<DeleteContactCommand> 
     public DeleteContactCommand parse(String args) throws ParseException {
         try {
             ArrayList<Index> indexes = ParserUtil.parseIndexes(args);
-            indexes.sort((current, other) -> other.getZeroBased() - current.getZeroBased());
             return new DeleteContactCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
