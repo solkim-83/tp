@@ -16,7 +16,7 @@ import seedu.address.model.event.Event;
 public class TypicalEvents {
 
     public static final Event MEETING = new EventBuilder().withDescription("CS2103 Meeting")
-            .withTime("12-10-20 12:00").build();
+            .withTime("12-10-20 12:0").build();
     public static final Event CONSULTATION = new EventBuilder().withDescription("IS1103 Consultation")
             .withTime("15-11-20 01:15").build();
     public static final Event GATHERING = new EventBuilder().withDescription("Family Gathering")

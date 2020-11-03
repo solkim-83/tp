@@ -71,8 +71,8 @@ public class SampleDataUtil {
         associatedPersonsTest3.add(new FauxPerson(getSamplePersons()[5]));
         return new Event[] {
             new Event(new Description("Night run"), new Time("25-10-20 21:30"), associatedPersonsTest1),
-            new Event(new Description("CS2103 Meeting"), new Time("30-10-20 14:00"), associatedPersonsTest2),
-            new Event(new Description("CCA outing"), new Time("03-11-20 20:00"), associatedPersonsTest3)
+            new Event(new Description("CS2103 Meeting"), new Time("30-10-20 14:0"), associatedPersonsTest2),
+            new Event(new Description("CCA outing"), new Time("03-11-20 20:0"), associatedPersonsTest3)
         };
     }
 

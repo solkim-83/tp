@@ -131,7 +131,7 @@ public class Time {
     // toString() controls the format of time saved in calendar.json file
     @Override
     public String toString() {
-        return time.format(DateTimeFormatter.ofPattern("d-M-yy H:m"));
+        return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     @Override
