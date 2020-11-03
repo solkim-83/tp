@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -83,8 +83,8 @@ public class ReminderWindow extends UiPart<Stage> {
             return "You currently do not have any reminders";
         } else {
             for (Reminder r: reminders) {
-                if (r.getReminderDate().getTime().isAfter(LocalDateTime.now())
-                        || r.getReminderDate().getTime().isEqual(LocalDateTime.now())) {
+                if (r.getReminderDate().getTime().toLocalDate().isBefore(LocalDate.now())
+                        || r.getReminderDate().getTime().toLocalDate().isEqual(LocalDate.now())) {
                     alertMessage += r.toString() + "\n";
                 }
             }
