@@ -1,11 +1,14 @@
 package seedu.address.model.event;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents an Event's Time in the Calendar.
@@ -14,6 +17,8 @@ import java.time.format.DateTimeParseException;
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
             + "dd-MM-yyyy HH:mm";
+
+    private static final String STANDARD_TIME_PATTERN = "dd-MM-yyyy HH:mm";
 
     public final LocalDateTime time;
 
@@ -45,36 +50,82 @@ public class Time {
     /**
      * Returns if a given string is a valid time.
      */
-    // TODO: change this checker whenever more formats are added in the method below
+    // TODO: change this checker whenever more formats are added in the parse method below
     public static boolean isValidTime(String timeInput) {
         try {
-            LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
-    // TODO: add more formats to be parsed here, add them to the valid checking method above
+    // TODO: add more formats to be parsed here, add them to the isValidTime checking method above
     public static LocalDateTime parse(String timeInput) {
-        return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
-    // toDisplayString controls the format of time displayed in the GUI panel
+    // getDisplayName controls the format of time displayed in the GUI panel and in the response.
     // TODO: make display prettier/more relevant to the user
-    public String toDisplayString() {
-        return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    public String getDisplayName() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(time.getDayOfWeek().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " ")
+                .append(getDayOfMonthAsString() + " ")
+                .append(time.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " ")
+                .append(time.getYear());
+
+        LocalDateTime now = LocalDateTime.now();
+        long dayDifference = DAYS.between(now, time);
+        if (dayDifference < 0) {
+            if (dayDifference < -1) {
+                builder.append(" (" + (dayDifference * -1) + " days ago)");
+            } else {
+                builder.append(" (" + (dayDifference * -1) + " day ago)");
+            }
+        } else if (dayDifference == 0) {
+            builder.append(" (Today)");
+        } else if (dayDifference > 0) {
+            if (dayDifference > 1) {
+                builder.append(" (In " + dayDifference + " days)");
+            } else {
+                builder.append(" (In " + dayDifference + " day)");
+            }
+        }
+
+        return builder.toString();
+    }
+
+    // private method for use in getDisplayName above
+    private String getDayOfMonthAsString() {
+        switch (time.getDayOfMonth()) {
+        case 1:
+            return "1st";
+        case 2:
+            return "2nd";
+        case 3:
+            return "3rd";
+        case 21:
+            return "21st";
+        case 22:
+            return "22nd";
+        case 23:
+            return "23rd";
+        case 31:
+            return "31st";
+        default:
+            return time.getDayOfMonth() + "th";
+        }
     }
 
     /**
      * Returns a string that can be parsed to make another Time object of the same time value
      * @return string representing part of a command
      */
-    // toString() controls the format of time displayed in the response box
-    // as well as the format saved in calendar.json file
+    // toString() controls the format of time saved in calendar.json file
     @Override
     public String toString() {
-        return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        return time.format(DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
     @Override

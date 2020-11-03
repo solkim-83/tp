@@ -47,7 +47,7 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         description.setText(event.getDescription().fullDescription);
-        time.setText(event.getTime().toDisplayString());
+        time.setText(event.getTime().getDisplayName());
         // no sorting here, as to show it in order of user input
         event.getAssociatedPersons().stream()
                 .forEach(fauxPerson -> tags.getChildren().add(new Label(fauxPerson.displayName)));
