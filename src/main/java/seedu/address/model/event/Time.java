@@ -21,7 +21,6 @@ public class Time {
             + "[.][/][-][:] can be used interchangeably to indicate date, time, year of the event.";
 
     private static final String symbol = "[.][/][-][:]";
-    
     private static final String STANDARD_TIME_PATTERN =
             "[d" +symbol + "M" + symbol + "yy H" + symbol + "m]" +
                     "[M" +symbol + "d" + symbol + "yy H" + symbol + "m]" +
