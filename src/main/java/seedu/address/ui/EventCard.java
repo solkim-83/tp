@@ -20,6 +20,7 @@ public class EventCard extends UiPart<Region> {
 
     private static final String MESSAGE_PERSON_LIMIT_REACHED = "... %d more attendee(s)";
 
+    // TODO: perhaps shift this out to UserPrefs so it can be modified from there instead
     private static final int associatedPersonsLimit = 6;
 
     /**
