@@ -47,8 +47,8 @@ public class CommandTestUtil {
 
     public static final String VALID_DESCRIPTION_LUNCH = "Lunch with Friends";
     public static final String VALID_DESCRIPTION_BREAKFAST = "Breakfast with Mum";
-    public static final String VALID_TIME_LUNCH = "10-10-20 13:0";
-    public static final String VALID_TIME_BREAKFAST = "15-12-20 09:0";
+    public static final String VALID_TIME_LUNCH = "10-10-2020 13:00";
+    public static final String VALID_TIME_BREAKFAST = "15-12-2020 09:00";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;

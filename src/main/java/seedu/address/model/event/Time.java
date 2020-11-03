@@ -23,10 +23,10 @@ public class Time {
 
     private static final String symbol = "[.][/][-][:]";
     private static final String STANDARD_TIME_PATTERN =
-            "[d" + symbol + "M" + symbol + "yy H" + symbol + "m]"
-                    + "[M" + symbol + "d" + symbol + "yy H" + symbol + "m]"
-                    + "[yy" + symbol + "M" + symbol + "d H" + symbol + "m]"
-                    + "[yy" + symbol + "d" + symbol + "M H" + symbol + "m]";
+            "[dd" + symbol + "MM" + symbol + "yyyy HH" + symbol + "mm]"
+                    + "[MM" + symbol + "dd" + symbol + "yyyy HH" + symbol + "mm]"
+                    + "[yyyy" + symbol + "MM" + symbol + "dd HH" + symbol + "mm]"
+                    + "[yyyy" + symbol + "dd" + symbol + "MM HH" + symbol + "mm]";
 
     public final LocalDateTime time;
 
