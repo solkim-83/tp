@@ -133,7 +133,7 @@ public class EditEventCommand extends Command {
         if (editEventDescriptor.getPersonsToRemove().isPresent()) {
             ArrayList<Index> indexArrayList = editEventDescriptor.getPersonsToRemove().get();
             // sorting based on biggest index first, so as to not remove the wrong persons
-            indexArrayList.sort((current, other) -> other.getZeroBased() - current.getOneBased());
+            indexArrayList.sort((current, other) -> other.getZeroBased() - current.getZeroBased());
             for (Index index : indexArrayList) {
                 tempAssociatedPersons.remove(index.getZeroBased());
             }

@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -30,9 +32,12 @@ public class DeleteEventCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Event eventToDelete = model.getSortedFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
-        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(indexes);
+
+        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, "\n\n" + eventToDelete);
 
         ModelManager expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.deleteEvent(eventToDelete);
@@ -43,7 +48,10 @@ public class DeleteEventCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredEventList().size() + 1);
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(outOfBoundIndex);
+
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(outOfBoundIndex);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(indexes);
 
         assertCommandFailureEvent(deleteEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
@@ -53,9 +61,12 @@ public class DeleteEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Event eventToDelete = model.getSortedFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
-        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(indexes);
+
+        String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, "\n\n" + eventToDelete);
         Model expectedModel = new ModelManagerBuilder().withCalendar(model.getCalendar()).build();
         expectedModel.deleteEvent(eventToDelete);
         showNoEvent(expectedModel);
@@ -71,21 +82,27 @@ public class DeleteEventCommandTest {
         // ensures that outOfBoundIndex is still in bounds of calendar list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getCalendar().getEventList().size());
 
-        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(outOfBoundIndex);
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(outOfBoundIndex);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(indexes);
 
         assertCommandFailureEvent(deleteEventCommand, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteEventCommand deleteFirstCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
-        DeleteEventCommand deleteSecondCommand = new DeleteEventCommand(INDEX_SECOND_EVENT);
+        ArrayList<Index> indexes1 = new ArrayList<>();
+        indexes1.add(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteFirstCommand = new DeleteEventCommand(indexes1);
+        ArrayList<Index> indexes2 = new ArrayList<>();
+        indexes2.add(INDEX_SECOND_EVENT);
+        DeleteEventCommand deleteSecondCommand = new DeleteEventCommand(indexes2);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteEventCommand deleteFirstCommandCopy = new DeleteEventCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteFirstCommandCopy = new DeleteEventCommand(indexes1);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -2,6 +2,8 @@ package seedu.address.logic.parser.events;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.events.DeleteEventCommand;
 import seedu.address.logic.parser.Parser;
@@ -20,8 +22,9 @@ public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
      */
     public DeleteEventCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteEventCommand(index);
+            ArrayList<Index> indexes = ParserUtil.parseIndexes(args);
+            indexes.sort((current, other) -> other.getZeroBased() - current.getZeroBased());
+            return new DeleteEventCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE), pe);

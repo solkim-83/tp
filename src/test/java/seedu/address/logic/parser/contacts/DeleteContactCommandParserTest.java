@@ -5,8 +5,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.contacts.DeleteContactCommand;
 
 /**
@@ -22,7 +25,9 @@ public class DeleteContactCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteContactCommand(INDEX_FIRST_PERSON));
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_PERSON);
+        assertParseSuccess(parser, "1", new DeleteContactCommand(indexes));
     }
 
     @Test
