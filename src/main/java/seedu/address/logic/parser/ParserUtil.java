@@ -53,6 +53,28 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String indexes} into an ArrayList of {@code Index} e.g. "3,5,1".
+     * Leading and trailing whitespaces will be trimmed before parsing
+     *
+     * @return a ArrayList of Index parsed from the indexes string, sorted by biggest first. Duplicates are removed.
+     * @throws ParseException if the given indexes are invalid.
+     */
+    public static ArrayList<Index> parseIndexes(String indexes) throws ParseException {
+        requireNonNull(indexes);
+        String trimmedIndexes = indexes.trim();
+        String[] indexStrArr = trimmedIndexes.split(",");
+        // HashSet prevents duplicates by definition
+        final HashSet<Index> indexHashSet = new HashSet<>();
+        for (String index : indexStrArr) {
+            indexHashSet.add(ParserUtil.parseIndex(index));
+        }
+        final ArrayList<Index> indexArrayList = new ArrayList<>(indexHashSet);
+        // Sort by biggest first
+        indexArrayList.sort((current, other) -> other.getZeroBased() - current.getZeroBased());
+        return indexArrayList;
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -196,24 +218,6 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
-    }
-
-    /**
-     * Parses a {@code String indexes} into an ArrayList of {@code Index}.
-     * e.g. "3,5,1"
-     * Leading and trailing whitespaces will be trimmed before parsing
-     *
-     * @throws ParseException if the given indexes are invalid.
-     */
-    public static ArrayList<Index> parseIndexes(String indexes) throws ParseException {
-        requireNonNull(indexes);
-        String trimmedIndexes = indexes.trim();
-        String[] indexStrArr = trimmedIndexes.split(",");
-        final ArrayList<Index> indexArrayList = new ArrayList<>();
-        for (String index : indexStrArr) {
-            indexArrayList.add(ParserUtil.parseIndex(index));
-        }
-        return indexArrayList;
     }
 
     /**

@@ -111,7 +111,7 @@ public class AddEventCommand extends Command {
             return tempAssociatedPersons;
         }
 
-        // add FauxPersons to event, in user order, no sorting, duplicates are not added
+        // add FauxPersons to event
         if (addEventDescriptor.getPersonsToAdd().isPresent()) {
             for (Index index : addEventDescriptor.getPersonsToAdd().get()) {
 

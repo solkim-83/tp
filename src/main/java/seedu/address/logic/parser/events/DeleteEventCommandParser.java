@@ -23,7 +23,6 @@ public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
     public DeleteEventCommand parse(String args) throws ParseException {
         try {
             ArrayList<Index> indexes = ParserUtil.parseIndexes(args);
-            indexes.sort((current, other) -> other.getZeroBased() - current.getZeroBased());
             return new DeleteEventCommand(indexes);
         } catch (ParseException pe) {
             throw new ParseException(
