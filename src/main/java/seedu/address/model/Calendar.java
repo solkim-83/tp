@@ -69,6 +69,14 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
+     * Returns true if an event that clashes in time with {@code event} exists in the calendar.
+     */
+    public boolean hasClashingEvent(Event event) {
+        requireNonNull(event);
+        return events.anyClash(event);
+    }
+
+    /**
      * Adds a event to the calendar.
      * The event must not already exist in the calendar.
      */
