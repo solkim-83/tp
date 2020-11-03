@@ -201,6 +201,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasClashingEvent(Event event) {
+        requireNonNull(event);
+        return calendar.hasClashingEvent(event);
+    }
+
+    @Override
     public boolean hasTag(Tag tag) {
         return contactTagIntegrationManager.hasTag(tag);
     }
@@ -213,6 +219,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        calendar.deletePersonAssociation(target);
     }
 
     @Override
@@ -285,6 +292,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        calendar.setPersonAssociation(target, editedPerson);
     }
 
     @Override

@@ -124,9 +124,14 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the calendar.
+     * Returns true if an event with the same identity as {@code event} exists in the calendar.
      */
     boolean hasEvent(Event event);
+
+    /**
+     * Returns true if an event that clashes in time with {@code event} exists in the calendar.
+     */
+    boolean hasClashingEvent(Event event);
 
     /**
      * Returns true if the {@code tag} exists with at least one sub-tag and/or person assigned to it.

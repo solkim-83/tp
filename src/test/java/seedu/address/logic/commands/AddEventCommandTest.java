@@ -141,6 +141,12 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public boolean hasClashingEvent(Event event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event::clash);
+        }
+
+        @Override
         public void addEvent(Event event) {
             requireNonNull(event);
             eventsAdded.add(event);

@@ -20,16 +20,14 @@ public class ListReminderEventCommand extends Command {
 
     public static final String COMMAND_TYPE = CommandType.REMINDER.toString();
 
-    public static final String MESSAGE_SUCCESS = "Here are your reminders: \n";
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.deleteObsoleteReminders();
         ReadOnlyReminders remindersToShow = model.getReminders();
-        String remindersList = buildRemindersList(remindersToShow);
-        return new CommandResult(MESSAGE_SUCCESS + remindersList);
+        String remindersResult = buildRemindersList(remindersToShow);
+        return new CommandResult(remindersResult);
     }
 
     /**
@@ -38,9 +36,14 @@ public class ListReminderEventCommand extends Command {
     public String buildRemindersList(ReadOnlyReminders reminders) {
         String result = "";
         int count = 1;
-        for (Reminder reminder: reminders.getRemindersList()) {
-            result += count + ". " + reminder.toString() + "\n";
-            count++;
+        if (reminders.getRemindersList().size() == 0) {
+            result = "You currently have no reminders set. \nSet one by using add -r!";
+        } else {
+            result += "Here are your reminders: \n";
+            for (Reminder reminder : reminders.getRemindersList()) {
+                result += count + ". " + reminder.toString() + "\n";
+                count++;
+            }
         }
         return result;
     }

@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.event.association.FauxPerson;
+import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the calendar level
@@ -67,6 +69,14 @@ public class Calendar implements ReadOnlyCalendar {
     }
 
     /**
+     * Returns true if an event that clashes in time with {@code event} exists in the calendar.
+     */
+    public boolean hasClashingEvent(Event event) {
+        requireNonNull(event);
+        return events.anyClash(event);
+    }
+
+    /**
      * Adds a event to the calendar.
      * The event must not already exist in the calendar.
      */
@@ -92,6 +102,24 @@ public class Calendar implements ReadOnlyCalendar {
     public void removeEvent(Event key) {
         events.remove(key);
     }
+
+
+    // associated persons methods
+
+    /**
+     * Removes {@code Person} from being associated with any event in this {@code Calendar}.
+     */
+    public void deletePersonAssociation(Person person) {
+        events.deleteFauxPerson(new FauxPerson(person));
+    }
+
+    /**
+     * Sets associated {@code target} to {@code editedPerson} in {@code Calendar}.
+     */
+    public void setPersonAssociation(Person target, Person editedPerson) {
+        events.setFauxPerson(new FauxPerson(target), new FauxPerson(editedPerson));
+    }
+
 
     //// util methods
 

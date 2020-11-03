@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +56,7 @@ public class EditEventCommand extends Command {
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Athena.";
+    public static final String MESSAGE_CLASHING_EVENT = "An event exists at this time in Athena";
 
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
@@ -93,6 +95,11 @@ public class EditEventCommand extends Command {
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
+        if (!eventToEdit.isSameEvent(editedEvent)
+                && !eventToEdit.getTime().equals(editedEvent.getTime())
+                && model.hasClashingEvent(editedEvent)) {
+            throw new CommandException(MESSAGE_CLASHING_EVENT);
+        }
 
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
@@ -109,8 +116,10 @@ public class EditEventCommand extends Command {
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
 
-        // updatedAssociatedPersons' part
+        // updatedAssociatedPersons' part, sorting is necessary to sync with the order of displayed names in the GUI
+        // Sorting for display in the GUI component can be found in EventCard class
         ArrayList<FauxPerson> tempAssociatedPersons = new ArrayList<>(eventToEdit.getAssociatedPersons());
+        tempAssociatedPersons.sort(Comparator.comparing(current -> current.displayName));
 
         tempAssociatedPersons = removeFauxPersons(tempAssociatedPersons, editEventDescriptor);
         tempAssociatedPersons = addFauxPersons(tempAssociatedPersons, editEventDescriptor, lastShownPersonList);
@@ -133,7 +142,7 @@ public class EditEventCommand extends Command {
         if (editEventDescriptor.getPersonsToRemove().isPresent()) {
             ArrayList<Index> indexArrayList = editEventDescriptor.getPersonsToRemove().get();
             // sorting based on biggest index first, so as to not remove the wrong persons
-            indexArrayList.sort((current, other) -> other.getZeroBased() - current.getOneBased());
+            indexArrayList.sort((current, other) -> other.getZeroBased() - current.getZeroBased());
             for (Index index : indexArrayList) {
                 tempAssociatedPersons.remove(index.getZeroBased());
             }
