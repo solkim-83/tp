@@ -4,6 +4,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -73,10 +74,11 @@ public class Time {
         builder.append(time.getDayOfWeek().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " ")
                 .append(getDayOfMonthAsString() + " ")
                 .append(time.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " ")
-                .append(time.getYear());
+                .append(time.getYear() + " ")
+                .append(time.format(DateTimeFormatter.ofPattern("K:mma")).toLowerCase());
 
-        LocalDateTime now = LocalDateTime.now();
-        long dayDifference = DAYS.between(now, time);
+        LocalDate now = LocalDate.now();
+        long dayDifference = DAYS.between(now, time.toLocalDate());
         if (dayDifference < 0) {
             if (dayDifference < -1) {
                 builder.append(" (" + (dayDifference * -1) + " days ago)");
