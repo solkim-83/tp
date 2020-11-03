@@ -2,7 +2,7 @@ package seedu.address.logic.commands.reminders;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -28,7 +28,7 @@ public class RemindEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reminds you of an event \n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1" + "in/10";
+            + "Example: " + COMMAND_WORD + " 1" + " in/10";
 
     public static final String MESSAGE_REMIND_EVENT_SUCCESS = "Reminder set for event %d days prior: ";
 
@@ -57,8 +57,8 @@ public class RemindEventCommand extends Command {
 
         Event eventForReminder = lastShownList.get(targetIndex.getZeroBased());
         Reminder toAdd = new Reminder(eventForReminder, daysInAdvance);
-        LocalDateTime now = LocalDateTime.now();
-        if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time)) {
+        LocalDate now = LocalDate.now();
+        if (now.plusDays(daysInAdvance).isAfter(eventForReminder.getTime().time.toLocalDate())) {
             throw new CommandException("You cannot set a reminder for after the event is over.");
         } else if (model.hasReminder(toAdd)) {
             throw new CommandException("You already have an existing reminder for this event.");

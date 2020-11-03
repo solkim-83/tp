@@ -153,12 +153,13 @@ A person can have any number of tags (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you are missing some of the information, like ADDRESS, you can just end the field with a "." (e.g. "a/.")
+If you are missing some of the information, like ADDRESS, you can just remove the prefix and leave the fields empty, 
+just like the second example below
 </div>
 
 Examples:
 * `add -c n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add -c n/Betsy Crowe t/friend e/betsycrowe@example.com a/. p/1234567 t/criminal`
+* `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
 
 #### Clearing all contacts : `clear`
 
@@ -473,7 +474,7 @@ have them pop up whenever Athena starts.
 
 Adds a new reminder for an event.
 
-Format: `add -r [EVENT_INDEX] [in/DAYS]`
+Format: `add -r EVENT_INDEX in/DAYS`
 
 * `EVENT_INDEX` refers to the index of an event as is shown in the event window.
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
@@ -481,6 +482,20 @@ Format: `add -r [EVENT_INDEX] [in/DAYS]`
 Examples:
 * `add -r 3 in/4` Creates a new reminder for the 3rd event, the reminder will start to pop up every time
 Athena opens 4 days prior to that event 
+
+#### Deleting a reminder : `delete`
+
+Deletes the specified reminder from the reminders list.
+
+Format: `delete -r INDEX`
+
+* Deletes the remind at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reminder list.
+* You can get the displayed reminder list by using `list -r`
+* The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `list -r` followed by `delete -r 2` deletes the 2nd reminder in the reminders list.
 
 #### Listing all reminders: `list`
 
@@ -524,6 +539,7 @@ Action | Format, Examples
 **Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
 **Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
+**Delete Reminder** | `delete -r INDEX` <br> e.g., `delete -r 1`
 **Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
 **Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`<br> e.g., `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30 ap/1,2,3 rp/1,2`
 **Edit Tag** | `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` <br> e.g., `edit -t n/computing ri/1 t/cs2030 rt/cs2040`
