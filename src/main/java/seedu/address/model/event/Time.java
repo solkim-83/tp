@@ -16,9 +16,12 @@ import java.util.Locale;
  */
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
-            + "dd-MM-yyyy HH:mm";
+            + "d-M-yyyy HH:mm\n"
+            + "yyyy-d-M HH:mm\n"
+            + "[.][/][-] can be used interchangeably to indicate date, time, year of the event.";
 
-    private static final String STANDARD_TIME_PATTERN = "dd-MM-yyyy HH:mm";
+    private static final String STANDARD_TIME_PATTERN_DAY =
+            "[d['/']['-']['.']M['/']['-']['.']yyyy HH:mm][yyyy['/']['-']['.']M['/']['-']['.']d HH:mm]";
 
     public final LocalDateTime time;
 
@@ -50,19 +53,17 @@ public class Time {
     /**
      * Returns if a given string is a valid time.
      */
-    // TODO: change this checker whenever more formats are added in the parse method below
     public static boolean isValidTime(String timeInput) {
         try {
-            LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
+            LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN_DAY));
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
-    // TODO: add more formats to be parsed here, add them to the isValidTime checking method above
     public static LocalDateTime parse(String timeInput) {
-        return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
+        return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN_DAY));
     }
 
     // getDisplayName controls the format of time displayed in the GUI panel and in the response.
@@ -124,7 +125,7 @@ public class Time {
     // toString() controls the format of time saved in calendar.json file
     @Override
     public String toString() {
-        return time.format(DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
+        return time.format(DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN_DAY));
     }
 
     @Override

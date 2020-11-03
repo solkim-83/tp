@@ -41,7 +41,7 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_ADD_PERSON + "CONTACT_INDEX_LIST]\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
-            + PREFIX_DATETIME + "12-12-1234 12:34 "
+            + PREFIX_DATETIME + "12-10-2020 12:00 "
             + PREFIX_ADD_PERSON + "1,2,3";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
