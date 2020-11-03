@@ -66,7 +66,6 @@ public class Time {
     }
 
     // getDisplayName controls the format of time displayed in the GUI panel and in the response.
-    // TODO: make display prettier/more relevant to the user
     public String getDisplayName() {
         StringBuilder builder = new StringBuilder();
 
