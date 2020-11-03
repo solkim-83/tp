@@ -18,12 +18,17 @@ public class TypicalEvents {
     public static final Event MEETING = new EventBuilder().withDescription("CS2103 Meeting")
             .withTime("12-10-2020 12:00").build();
     public static final Event CONSULTATION = new EventBuilder().withDescription("IS1103 Consultation")
-            .withTime("15-11-2020 13:15").build();
-    public static final Event GATHERING = new EventBuilder().withDescription("Family Gathering").build();
-    public static final Event DINNER = new EventBuilder().withDescription("Welcome Dinner").build();
-    public static final Event SHOPPING = new EventBuilder().withDescription("Shopping").build();
-    public static final Event WEBINAR = new EventBuilder().withDescription("Webinar Meeting").build();
-    public static final Event OUTING = new EventBuilder().withDescription("Family Outing").build();
+            .withTime("15-11-2020 01:15").build();
+    public static final Event GATHERING = new EventBuilder().withDescription("Family Gathering")
+            .withTime("15-11-2020 02:15").build();
+    public static final Event DINNER = new EventBuilder().withDescription("Welcome Dinner")
+            .withTime("15-11-2020 03:15").build();
+    public static final Event SHOPPING = new EventBuilder().withDescription("Shopping")
+            .withTime("15-11-2020 04:15").build();
+    public static final Event WEBINAR = new EventBuilder().withDescription("Webinar Meeting")
+            .withTime("15-11-2020 05:15").build();
+    public static final Event OUTING = new EventBuilder().withDescription("Family Outing")
+            .withTime("15-11-2020 06:15").build();
 
     // Manually added
     public static final Event LESSON = new EventBuilder().withDescription("Piano Lesson").build();

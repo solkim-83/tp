@@ -95,7 +95,9 @@ public class EditEventCommand extends Command {
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-        if (!eventToEdit.isSameEvent(editedEvent) && model.hasClashingEvent(editedEvent)) {
+        if (!eventToEdit.isSameEvent(editedEvent)
+                && !eventToEdit.getTime().equals(editedEvent.getTime())
+                && model.hasClashingEvent(editedEvent)) {
             throw new CommandException(MESSAGE_CLASHING_EVENT);
         }
 
