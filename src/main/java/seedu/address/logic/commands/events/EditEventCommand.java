@@ -111,6 +111,7 @@ public class EditEventCommand extends Command {
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
 
         // updatedAssociatedPersons' part, sorting is necessary to sync with the order of displayed names in the GUI
+        // Sorting for display in the GUI component can be found in EventCard class
         ArrayList<FauxPerson> tempAssociatedPersons = new ArrayList<>(eventToEdit.getAssociatedPersons());
         tempAssociatedPersons.sort(Comparator.comparing(current -> current.displayName));
 

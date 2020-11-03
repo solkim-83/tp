@@ -18,7 +18,7 @@ public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
 
-    private static final String MESSAGE_PERSON_LIMIT_REACHED = "...";
+    private static final String MESSAGE_PERSON_LIMIT_REACHED = "... %d more attendee(s)";
 
     private static final int associatedPersonsLimit = 6;
 
@@ -67,6 +67,9 @@ public class EventCard extends UiPart<Region> {
     private void setAssociatedPersons(Event event) {
         ArrayList<FauxPerson> associatedPersons = new ArrayList<>();
         associatedPersons.addAll(event.getAssociatedPersons());
+        /* Sorted by alphabetical order.
+         * This needs to sync with the sorting of associated persons before modification in EditEvent class.
+         */
         associatedPersons.sort(Comparator.comparing(current -> current.displayName));
 
         int numOfDisplayedNames = 0;
@@ -75,7 +78,9 @@ public class EventCard extends UiPart<Region> {
                 tags.getChildren().add(new Label(fauxPerson.displayName));
                 numOfDisplayedNames++;
             } else {
-                tags.getChildren().add(new Label(MESSAGE_PERSON_LIMIT_REACHED));
+                assert numOfDisplayedNames >= associatedPersonsLimit;
+                tags.getChildren().add(new Label(String.format(MESSAGE_PERSON_LIMIT_REACHED,
+                        associatedPersons.size() - associatedPersonsLimit)));
                 break;
             }
         }
