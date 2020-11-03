@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -109,8 +110,10 @@ public class EditEventCommand extends Command {
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
 
-        // updatedAssociatedPersons' part
+        // updatedAssociatedPersons' part, sorting is necessary to sync with the order of displayed names in the GUI
+        // Sorting for display in the GUI component can be found in EventCard class
         ArrayList<FauxPerson> tempAssociatedPersons = new ArrayList<>(eventToEdit.getAssociatedPersons());
+        tempAssociatedPersons.sort(Comparator.comparing(current -> current.displayName));
 
         tempAssociatedPersons = removeFauxPersons(tempAssociatedPersons, editEventDescriptor);
         tempAssociatedPersons = addFauxPersons(tempAssociatedPersons, editEventDescriptor, lastShownPersonList);
