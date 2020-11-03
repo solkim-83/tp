@@ -25,10 +25,20 @@ public class Event {
      * Every field must be present and not null.
      */
     public Event(Description description, Time time, Set<FauxPerson> associatedPersons) {
-        requireAllNonNull(description, time);
+        requireAllNonNull(description, time, associatedPersons);
         this.description = description;
         this.time = time;
         this.associatedPersons.addAll(associatedPersons);
+    }
+
+    /**
+     * Makes a copy of {@Code toBeCopied}
+     */
+    public Event(Event toBeCopied) {
+        requireAllNonNull(toBeCopied);
+        this.description = toBeCopied.description;
+        this.time = toBeCopied.time;
+        this.associatedPersons.addAll(toBeCopied.associatedPersons);
     }
 
     public Description getDescription() {
@@ -48,7 +58,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same description
+     * Returns true if both events have the same description and time.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -56,7 +66,24 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getDescription().equals(getDescription());
+                && otherEvent.getDescription().equals(getDescription())
+                && otherEvent.getTime().equals(getTime());
+    }
+
+    /**
+     * Deletes instances of {@code fauxPerson} associated to this event.
+     */
+    public void deleteFauxPerson(FauxPerson toBeDeleted) {
+        associatedPersons.remove(toBeDeleted);
+    }
+
+    /**
+     * Sets associated {@code target} to {@code editedFauxPerson} in this event.
+     */
+    public void setFauxPerson(FauxPerson target, FauxPerson editedFauxPerson) {
+        if (associatedPersons.remove(target)) {
+            associatedPersons.add(editedFauxPerson);
+        }
     }
 
     @Override
@@ -85,7 +112,7 @@ public class Event {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append("\nAt: ")
-                .append(getTime());
+                .append(getTime().getDisplayName());
 
         if (associatedPersons.size() != 0) {
             builder.append("\n\nPeople attending: ");
