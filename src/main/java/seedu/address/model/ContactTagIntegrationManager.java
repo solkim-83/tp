@@ -154,8 +154,8 @@ public class ContactTagIntegrationManager {
     }
 
     /**
-     * Changes the {@code person} in the addressbook with {@code editedPerson}.
-     * If there {@code person} was the only contact in a tag and {@code editedPerson} has them removed,
+     * Changes {@code person} in the addressbook to {@code editedPerson}.
+     * If {@code person} is the only contact in a tag and {@code editedPerson} has them removed,
      * the tag is deleted as well.
      */
     public void setPerson(Person person, Person editedPerson) {
