@@ -40,6 +40,7 @@ section below.
     * [Reminders](#reminder)
         * [`add`](#adding-a-reminder-add) - Adding a reminder
         * [`list`](#listing-all-reminders-list) - Listing all reminders
+* [Data saving](#data-saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
@@ -504,14 +505,14 @@ Example:
 
 ---
 
-### Saving the data
+### Data saving
+
+Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
+need to save manually. 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-
-**Q**: How do I save changes?
-**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 **Q**: Where are the save files that Athena uses stored?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
@@ -519,8 +520,8 @@ Example:
 **Q**: What are the save files that Athena uses?<br>
 **A**: Athena uses three separate save files. They are `addressbook.json`, `calendar.json` and `tagtree.json`.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Download the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
 
 --------------------------------------------------------------------------------------------------------------------
 
