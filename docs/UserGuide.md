@@ -9,13 +9,13 @@ section below.
 
 #### Table of Contents
 
-* [Introduction](#Introduction)
-* [Quick Start](#Quick-start)
-* [Features](#Features)
-    * [General](#General)
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [General](#general)
         * [`help`](#viewing-help) - Viewing help
         * [`exit`](#exiting-the-program--exit) - Exiting the program
-    * [Contact](#Contact)
+    * [Contacts](#contact)
         * [`add`](#adding-a-contact-add) - Adding a contact
         * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
         * [`delete`](#deleting-a-contact--delete) - Deleting a contact
@@ -23,7 +23,7 @@ section below.
         * [`find`](#finding-a-contact--find) - Finding a contact
         * [`list`](#listing-all-contacts--list) - Listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
-    * [Event](#event)
+    * [Events](#event)
         * [`add`](#adding-an-event-add) - Adding an event
         * [`clear`](#clearing-all-events--clear) - Clearing all events
         * [`delete`](#deleting-an-event--delete) - Deleting an event
@@ -31,19 +31,17 @@ section below.
         * [`find`](#finding-an-event--find) - Finding an event
         * [`list`](#listing-all-events--list) - Listing all events
         * [`sort`](#sorting-displayed-events--sort) - Sorting displayed events
-
-    * [Tag](#tag)
+    * [Tags](#tag)
         * [`add`](#adding-a-tag-add) - Adding a tag
         * [`delete`](#deleting-a-tag-delete) - Deleting a tag
         * [`edit`](#editing-a-tag-edit) - Editing a tag
         * [`list`](#listing-all-tags-list) - Listing all tags
         * [`view`](#viewing-tags-view) - Viewing tag details
-        
-    * [Reminder](#reminder)
+    * [Reminders](#reminder)
         * [`add`](#adding-a-reminder-add) - Adding a reminder
         * [`list`](#listing-all-reminders-list) - Listing all reminders
-* [FAQ](#FAQ)
-* [Command Summary](#Command-summary)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 * [Glossary](#glossary)
 
 ---
