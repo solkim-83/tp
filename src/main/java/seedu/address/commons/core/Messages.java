@@ -11,4 +11,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
+    public static final String MESSAGE_ABSENT_COMMAND_TYPE = "%s requires a recognized specifier; use:\n%s";
+    public static final String MESSAGE_INVALID_COMMAND_TYPE = "%s is not a valid specifier for %s; use:\n%s";
+
 }

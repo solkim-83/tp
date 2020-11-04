@@ -25,13 +25,13 @@ public class DeleteContactCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Deletes the person identified by the index number used in the displayed person list.\n\n"
+            + ": Deletes the contact identified by the index number used in the displayed contact list.\n\n"
             + "Parameters: CONTACT_INDEX_LIST (must be positive integer(s))\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + COMMAND_TYPE + " 1" + "\n"
             + COMMAND_WORD + " " + COMMAND_TYPE + " 1,2";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted contact(s): %1$s";
 
     private final ArrayList<Index> targetIndexes;
 

@@ -9,13 +9,13 @@ section below.
 
 #### Table of Contents
 
-* [Introduction](#Introduction)
-* [Quick Start](#Quick-start)
-* [Features](#Features)
-    * [General](#General)
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [General](#general)
         * [`help`](#viewing-help) - Viewing help
         * [`exit`](#exiting-the-program--exit) - Exiting the program
-    * [Contact](#Contact)
+    * [Contacts](#contacts)
         * [`add`](#adding-a-contact-add) - Adding a contact
         * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
         * [`delete`](#deleting-a-contact--delete) - Deleting a contact
@@ -23,7 +23,7 @@ section below.
         * [`find`](#finding-a-contact--find) - Finding a contact
         * [`list`](#listing-all-contacts--list) - Listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
-    * [Event](#event)
+    * [Events](#events)
         * [`add`](#adding-an-event-add) - Adding an event
         * [`clear`](#clearing-all-events--clear) - Clearing all events
         * [`delete`](#deleting-an-event--delete) - Deleting an event
@@ -31,19 +31,18 @@ section below.
         * [`find`](#finding-an-event--find) - Finding an event
         * [`list`](#listing-all-events--list) - Listing all events
         * [`sort`](#sorting-displayed-events--sort) - Sorting displayed events
-
-    * [Tag](#tag)
+    * [Tags](#tags)
         * [`add`](#adding-a-tag-add) - Adding a tag
         * [`delete`](#deleting-a-tag-delete) - Deleting a tag
         * [`edit`](#editing-a-tag-edit) - Editing a tag
         * [`list`](#listing-all-tags-list) - Listing all tags
         * [`view`](#viewing-tags-view) - Viewing tag details
-        
-    * [Reminder](#reminder)
+    * [Reminders](#reminders)
         * [`add`](#adding-a-reminder-add) - Adding a reminder
         * [`list`](#listing-all-reminders-list) - Listing all reminders
-* [FAQ](#FAQ)
-* [Command Summary](#Command-summary)
+* [Data saving](#data-saving)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 * [Glossary](#glossary)
 
 ---
@@ -95,12 +94,13 @@ Athena is perfect for you if you:
 
 Athena supports two key functionalities - the management of contacts and events. Thus, commands are tailored to manage 
 each of these specific functionalities. In addition, to better categorise contacts, they may also be *tagged* with
-specific key-words. Thus, there are **four** types of commands:
+specific key-words. Thus, there are **five** types of commands:
 
-* [general](#general) - commands that are not targeted at any specific functionality
-* [contact](#contact) - commands that are targeted at contacts, distinguished by `-c`
-* [event](#event) - commands that are targeted at events, distinguished by `-e`
-* [tag](#tag) - commands that are targeted at tags, distinguished by `-t`
+* [general](#general) - commands that do not target any specific functionality
+* [contact](#contacts) - commands that target contacts, distinguished by `-c`
+* [event](#events) - commands that target events, distinguished by `-e`
+* [tag](#tags) - commands that target tags, distinguished by `-t`
+* [reminder](#reminders) - commands that target reminders, distinguished by `-r`
 
 <div markdown="block" class="alert alert-info">
 
@@ -117,6 +117,9 @@ specific key-words. Thus, there are **four** types of commands:
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  
+* Commands that do not make changes to data in the address book can be followed by anything.<br>
+  e.g. `list -e` and `list -e asdfg` both list all events.
 
 </div>
 
@@ -140,13 +143,13 @@ Format: `exit`
 
 ---
 
-### Contact
+### Contacts
 
 #### Adding a contact: `add`
 
 Adds a contact to Athena.
 
-Format: `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -c n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -249,11 +252,11 @@ Format: `sort -c INDEX`
 1. By lexicographical order of their email
 
 Examples:
-* `sort -c 2` would sort all currently displayed contacts by their names in alphabetical order.
+* `sort -c 2` would sort all currently displayed contacts by their address in alphabetical order.
 
 ---
 
-### Event
+### Events
 
 #### Adding an event: `add`
 
@@ -375,7 +378,7 @@ Examples:
 
 ---
 
-### Tag
+### Tags
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
 allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an event. 
@@ -506,14 +509,14 @@ Example:
 
 ---
 
-### Saving the data
+### Data saving
+
+Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
+need to save manually. 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-
-**Q**: How do I save changes?
-**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 **Q**: Where are the save files that Athena uses stored?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
@@ -521,8 +524,8 @@ Example:
 **Q**: What are the save files that Athena uses?<br>
 **A**: Athena uses three separate save files. They are `addressbook.json`, `calendar.json` and `tagtree.json`.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Download the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
 
 --------------------------------------------------------------------------------------------------------------------
 
