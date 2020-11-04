@@ -389,6 +389,9 @@ Below are some commands to facilitate tag management.
 **Note: For a tag to exist, it has to have at least one contact tagged OR contains at least one child-tag.**
 Tags that do not meet this criterion will be deleted. 
 
+**Note: Tags are lowercase alphanumeric only. Spaces or other symbols are not supported.** A tag with uppercase 
+letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
+
 #### Adding a tag: `add`
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
