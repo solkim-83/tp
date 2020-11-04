@@ -384,6 +384,8 @@ Tags present a new way for you to classify and group your contacts together. Man
 allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an event. 
 Below are some commands to facilitate tag management.
 
+**Note: Tags can exist without being displayed within the contact window.** I.e. A super-tag with no contacts directly associated with it.
+
 **Note: For a tag to exist, it has to have at least one contact tagged OR contains at least one child-tag.**
 Tags that do not meet this criterion will be deleted. 
 
