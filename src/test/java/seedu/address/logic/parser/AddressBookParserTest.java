@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_ABSENT_COMMAND_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.contacts.AddContactCommand;
 import seedu.address.logic.commands.contacts.ClearContactCommand;
 import seedu.address.logic.commands.contacts.DeleteContactCommand;
@@ -182,6 +186,18 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
                 ListEventCommand.COMMAND_WORD + " " + ListEventCommand.COMMAND_TYPE + " 3")
                 instanceof ListEventCommand);
+    }
+
+    @Test
+    public void parseCommand_unrecognizedCommandType_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_ABSENT_COMMAND_TYPE, CommandWord.SHOW,
+                CommandWord.SHOW.listAcceptedTypesAsString()), () -> parser.parseCommand("show -a"));
+    }
+
+    @Test
+    public void parseCommand_invalidCommandType_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_TYPE, CommandType.CONTACT,
+                CommandWord.SHOW, CommandWord.SHOW.listAcceptedTypesAsString()), () -> parser.parseCommand("show -c"));
     }
 
     @Test
