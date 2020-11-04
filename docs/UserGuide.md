@@ -266,6 +266,12 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
+* yyyy-dd-MM HH:mm
+* The following symbols can be used interchangeably to indicate date, time, year of the event.
+    * [.] (full stop)
+    * [/] (slash)
+    * [-] (hyphen)
+    * [:] (colon)
 
 Legend:
 
@@ -371,7 +377,6 @@ Format: `sort -e INDEX`
 
 Examples:
 * `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
-
 
 ---
 
