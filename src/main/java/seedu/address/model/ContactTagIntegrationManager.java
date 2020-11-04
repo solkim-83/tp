@@ -107,8 +107,11 @@ public class ContactTagIntegrationManager {
      */
     public void deleteTagRecursive(Tag tag) {
         removeTagFromContactsInAddressBook(tag);
-        tagTree.getSubTagsOf(tag).stream().forEach(subTag -> deleteTagRecursive(subTag));
+        Set<Tag> superTagSet = tagTree.getSuperTagsOf(tag);
+        tagTree.getSubTagsOf(tag).forEach(subTag -> deleteTagRecursive(subTag));
         tagTree.deleteTagAndAllSubTags(tag);
+        superTagSet.stream().filter(superTag -> !hasTag(superTag))
+                .forEach(superTag -> deleteTag(superTag));
     }
 
     /**
@@ -117,8 +120,8 @@ public class ContactTagIntegrationManager {
      * @param tag {@code tag} to be deleted together with the {@code person}s directly under this {@code tag}.
      */
     public void deleteTagAndDirectContacts(Tag tag) {
-        tagTree.deleteTag(tag);
         removeContactsUnderTagFromAddressBook(tag);
+        deleteTag(tag);
     }
 
     /**
@@ -138,10 +141,17 @@ public class ContactTagIntegrationManager {
      */
     public void deleteTagAndDirectContactsRecursive(Tag tag) {
         removeContactsUnderTagFromAddressBook(tag);
+        Set<Tag> superTagSet = tagTree.getSuperTagsOf(tag);
         tagTree.getSubTagsOf(tag).stream().forEach(subTag -> deleteTagAndDirectContactsRecursive(subTag));
         tagTree.deleteTagAndAllSubTags(tag);
+        superTagSet.stream().filter(superTag -> !hasTag(superTag))
+                .forEach(superTag -> deleteTag(superTag));
     }
 
+    /**
+     * Deletes the {@code person} from the addressbook.
+     * If this {@code person} is the only contact belonging to a specific tag, that tag is also deleted.
+     */
     public void deletePerson(Person person) {
         Set<Tag> personTags = person.getTags();
         addressBook.removePerson(person);
@@ -152,6 +162,11 @@ public class ContactTagIntegrationManager {
         }
     }
 
+    /**
+     * Changes the {@code person} in the addressbook with {@code editedPerson}.
+     * If there {@code person} was the only contact in a tag and {@code editedPerson} has them removed,
+     * the tag is deleted as well.
+     */
     public void setPerson(Person person, Person editedPerson) {
         Set<Tag> tagsRemoved = new HashSet<>(person.getTags());
         tagsRemoved.removeAll(editedPerson.getTags());
