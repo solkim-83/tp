@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagTree;
-import seedu.address.model.tag.TagTreeImpl;
 
 /**
  * Class that controls {@code Tag} relationships and interactions between {@code Tag}s and {@Code Person}s.
