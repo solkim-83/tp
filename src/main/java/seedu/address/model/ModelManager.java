@@ -284,7 +284,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removePersonFromTag(Tag tag, Person person) {
-        addressBook.removePersonFromTag(tag, person);
+        contactTagIntegrationManager.removePersonFromTag(tag, person);
     }
 
     @Override

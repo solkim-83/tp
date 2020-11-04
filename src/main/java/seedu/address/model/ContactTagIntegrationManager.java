@@ -18,14 +18,6 @@ public class ContactTagIntegrationManager {
     private TagTree tagTree;
 
     /**
-     * Creates a {@code ContactTagIntegrationManager} from the given {@code addressBook} and a new {@code tagTree}.
-     */
-    public ContactTagIntegrationManager(AddressBook addressBook) {
-        this.addressBook = addressBook;
-        tagTree = new TagTreeImpl();
-    }
-
-    /**
      * Creates a ContactTagIntegrationManager from the given {@code addressBook} and {@code tagTree}.
      */
     public ContactTagIntegrationManager(AddressBook addressBook, TagTree tagTree) {
@@ -175,6 +167,13 @@ public class ContactTagIntegrationManager {
             if (!hasTag(tag)) {
                 deleteTag(tag);
             }
+        }
+    }
+
+    public void removePersonFromTag(Tag tag, Person person) {
+        addressBook.removePersonFromTag(tag, person);
+        if (!hasTag(tag)) {
+            deleteTag(tag);
         }
     }
 
