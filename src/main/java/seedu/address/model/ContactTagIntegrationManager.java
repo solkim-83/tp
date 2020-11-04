@@ -170,6 +170,10 @@ public class ContactTagIntegrationManager {
         }
     }
 
+    /**
+     * Removes the {@code tag} from a {@code person}.
+     * If the {@code tag} no longer exists, the {@code tag} is deleted.
+     */
     public void removePersonFromTag(Tag tag, Person person) {
         addressBook.removePersonFromTag(tag, person);
         if (!hasTag(tag)) {
