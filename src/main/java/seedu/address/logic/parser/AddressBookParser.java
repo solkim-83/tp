@@ -72,10 +72,10 @@ public class AddressBookParser {
 
         if (commandWord.requiresType() && commandType.isInvalid()) {
             throw new ParseException(
-                    String.format(MESSAGE_ABSENT_COMMAND_TYPE, commandWord, commandWord.acceptedTypes()));
+                    String.format(MESSAGE_ABSENT_COMMAND_TYPE, commandWord, commandWord.listAcceptedTypesAsString()));
         } else if (commandWord.requiresType() && !commandWord.containsType(commandType)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_TYPE, commandType, commandWord, commandWord.acceptedTypes()));
+                    String.format(MESSAGE_INVALID_COMMAND_TYPE, commandType, commandWord, commandWord.listAcceptedTypesAsString()));
         }
 
         switch (commandType) {

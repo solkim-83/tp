@@ -16,16 +16,16 @@ public enum CommandWord {
     CLEAR("clear", List.of(CommandType.CONTACT, CommandType.EVENT)),
     DELETE("delete", List.of(CommandType.CONTACT, CommandType.EVENT, CommandType.TAG, CommandType.REMINDER)),
     EDIT("edit", List.of(CommandType.CONTACT, CommandType.EVENT, CommandType.TAG)),
-    EXIT("exit", new ArrayList<>()),
+    EXIT("exit", List.of()),
     FIND("find", List.of(CommandType.CONTACT, CommandType.EVENT)),
-    HELP("help", new ArrayList<>()),
-    INTRO("intro", new ArrayList<>()),
+    HELP("help", List.of()),
+    INTRO("intro", List.of()),
     LIST("list", List.of(CommandType.CONTACT, CommandType.EVENT, CommandType.TAG, CommandType.REMINDER)),
-    VIEW("view", List.of(CommandType.CONTACT, CommandType.EVENT, CommandType.TAG)),
+    VIEW("view", List.of(CommandType.TAG)),
     SHOW("show", List.of(CommandType.REMINDER)),
     SORT("sort", List.of(CommandType.CONTACT, CommandType.EVENT)),
     PERMASORT("psort", List.of(CommandType.CONTACT)),
-    DEFAULT("", new ArrayList<>());
+    DEFAULT("", List.of());
 
     /**
      * Unfortunately, {@code switch} statements do not permit the use of cases that are not constant at compile-time.
@@ -58,7 +58,7 @@ public enum CommandWord {
         return !validTypes.isEmpty();
     }
 
-    public String acceptedTypes() {
+    public String listAcceptedTypesAsString() {
         return validTypes.stream().map(CommandType::getTypeString).reduce("", (x, y) -> x + "\n" + y);
     }
 
