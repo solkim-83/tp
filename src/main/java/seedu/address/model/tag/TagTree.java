@@ -28,6 +28,11 @@ public abstract class TagTree implements ReadOnlyTagTree {
     public abstract Set<Tag> getSubTagsOf(Tag tag);
 
     /**
+     * Returns all super-tags of {@code tag}.
+     */
+    public abstract Set<Tag> getSuperTagsOf(Tag tag);
+
+    /**
      * Returns all sub-tags below {@code tag} in the tag-hierarchy.
      * I.e. All sub-tags of {@code tag}, all sub-tags of those sub-tags, etc.
      */

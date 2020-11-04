@@ -218,7 +218,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        contactTagIntegrationManager.deletePerson(target);
         calendar.deletePersonAssociation(target);
     }
 
@@ -291,7 +291,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        contactTagIntegrationManager.setPerson(target, editedPerson);
         calendar.setPersonAssociation(target, editedPerson);
     }
 

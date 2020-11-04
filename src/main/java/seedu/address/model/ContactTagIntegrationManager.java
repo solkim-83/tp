@@ -81,7 +81,10 @@ public class ContactTagIntegrationManager {
     public void deleteTag(Tag tag) {
         assert tag != null;
 
+        Set<Tag> superTagSet = tagTree.getSuperTagsOf(tag);
         tagTree.deleteTag(tag);
+        superTagSet.stream().filter(superTag -> !hasTag(superTag))
+                .forEach(superTag -> deleteTag(superTag));
         removeTagFromContactsInAddressBook(tag);
     }
 
@@ -139,6 +142,27 @@ public class ContactTagIntegrationManager {
         tagTree.deleteTagAndAllSubTags(tag);
     }
 
+    public void deletePerson(Person person) {
+        Set<Tag> personTags = person.getTags();
+        addressBook.removePerson(person);
+        for (Tag tag : personTags) {
+            if (!hasTag(tag)) {
+                deleteTag(tag);
+            }
+        }
+    }
+
+    public void setPerson(Person person, Person editedPerson) {
+        Set<Tag> tagsRemoved = new HashSet<>(person.getTags());
+        tagsRemoved.removeAll(editedPerson.getTags());
+        addressBook.setPerson(person, editedPerson);
+        for (Tag tag : tagsRemoved) {
+            if (!hasTag(tag)) {
+                deleteTag(tag);
+            }
+        }
+    }
+
     /**
      * Returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
      * {@code tagRemoved} removed.
@@ -146,20 +170,6 @@ public class ContactTagIntegrationManager {
     private Person copyPersonWithoutTag(Person personToCopy, Tag tagRemoved) {
         HashSet<Tag> newTagSet = new HashSet<>(personToCopy.getTags());
         newTagSet.remove(tagRemoved);
-        return new Person(personToCopy.getName(),
-                personToCopy.getPhone(),
-                personToCopy.getEmail(),
-                personToCopy.getAddress(),
-                newTagSet);
-    }
-
-    /**
-     * Returns a new {@code person} object which is nearly identical to {@code personToCopy} except with
-     * {@code tagAdded} added.
-     */
-    private Person copyPersonWithTag(Person personToCopy, Tag tagAdded) {
-        HashSet<Tag> newTagSet = new HashSet<>(personToCopy.getTags());
-        newTagSet.add(tagAdded);
         return new Person(personToCopy.getName(),
                 personToCopy.getPhone(),
                 personToCopy.getEmail(),
