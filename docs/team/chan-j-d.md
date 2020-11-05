@@ -18,8 +18,8 @@ Given below are my contributions to the project.
 * **New Feature**: Added support for parent-child-tag relationship and integration with current contact commands.
   * What it does: allows creation of directional tag-to-tag relationship. It also handles management of tag-to-tag relationship when contacts and tags are edited, and saves it to the hard disk.
   * Justification: This allows future developers to develop higher-level commands that 
-        1. allows users to categorise their contacts into complex relationship trees
-        1. perform actions on groups of contacts identified by tags rather than individual contacts. 
+       * allows users to categorise their contacts into complex relationship trees
+       * perform actions on groups of contacts identified by tags rather than individual contacts. 
   * Highlights: This enhancement was crucial to several upcoming tag-level features that our team intended to implement. This feature was particularly difficult to implement as it required a data structure implementation that supported frequent edits of tag-to-tag relations. 
   Additionally, very specific behavior choices needed to be made regarding several key issues (e.g. deletion of a tag in the middle of the tag tree). There were also many potential issues with the feature that had to be predicted and protected against (e.g. creation of cyclic tag relations).
   
