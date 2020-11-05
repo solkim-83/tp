@@ -33,24 +33,22 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         ArgumentMultimap argumentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_SUPERTAG_ONLY);
 
-        NameContainsKeywordsPredicate findPredicate = new NameContainsKeywordsPredicate();
+        Optional<NameContainsKeywordsPredicate> findPredicate = Optional.empty();
+        Optional<BooleanInput> showSuperTagOnly = Optional.empty();
 
         boolean hasKeywordInput = argumentMultimap.getValue(PREFIX_TAG).isPresent();
         if (hasKeywordInput) {
             String trimmedKeyword = parseKeywordsField(argumentMultimap.getValue(PREFIX_TAG).get());
-            findPredicate.setKeyword(trimmedKeyword);
+            NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate();
+            predicate.setKeyword(trimmedKeyword);
+            findPredicate = Optional.of(predicate);
         }
 
         boolean hasSuperTagInput = argumentMultimap.getValue(PREFIX_SUPERTAG_ONLY).isPresent();
-        Optional<BooleanInput> showSuperTagOnly = hasSuperTagInput
-                /*
-                * it may seem intuitive to do
-                * argumentMultimap.getValue(PREFIX_RECURSIVE).map(ParserUtil::parseBooleanInput)
-                * but the exception would not be handled naturally
-                */
-                ? Optional.of(ParserUtil.parseBooleanInput(argumentMultimap.getValue(PREFIX_SUPERTAG_ONLY).get()))
-//                ? Optional.empty()
-                : Optional.empty();
+        if (hasSuperTagInput) {
+            showSuperTagOnly = Optional.of(
+                    ParserUtil.parseBooleanInput(argumentMultimap.getValue(PREFIX_SUPERTAG_ONLY).get()));
+        }
 
         if (!hasKeywordInput && !hasSuperTagInput) {
             throw new ParseException(

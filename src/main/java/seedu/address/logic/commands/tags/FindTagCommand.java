@@ -1,10 +1,6 @@
 package seedu.address.logic.commands.tags;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -13,6 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
@@ -50,10 +47,10 @@ public class FindTagCommand extends Command {
             + "[" + PREFIX_SUPERTAG_ONLY + "BOOLEAN]\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " t/CS2103 st/1";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Optional<NameContainsKeywordsPredicate> predicate;
     private final Optional<BooleanInput> showSuperTagOnly;
 
-    public FindTagCommand(NameContainsKeywordsPredicate predicate, Optional<BooleanInput> showSuperTagOnly) {
+    public FindTagCommand(Optional<NameContainsKeywordsPredicate> predicate, Optional<BooleanInput> showSuperTagOnly) {
         this.predicate = predicate;
         this.showSuperTagOnly = showSuperTagOnly;
     }
@@ -82,7 +79,7 @@ public class FindTagCommand extends Command {
             }
         }, () -> { fullTagSet.addAll(tagPersonSet); fullTagSet.addAll(superTagSet);});
         return fullTagSet.stream()
-                .filter(predicate)
+                .filter(tag -> predicate.map(p -> p.test(tag)).orElse(true))
                 .map(tag -> tag.toString() + (superTagSet.contains(tag) ? INDICATOR_SUPERTAG : "")
                         + ": " + parsePersonSetIntoString(model.getPersonsWithTag(tag), INDICATOR_NO_CONTACTS_TAGGED))
                 .reduce((s1, s2) -> s1 + '\n' + s2)
