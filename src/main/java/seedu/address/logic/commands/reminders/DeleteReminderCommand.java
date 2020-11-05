@@ -42,7 +42,7 @@ public class DeleteReminderCommand extends Command {
         List<Reminder> reminders = model.getSortedFilteredReminderList();
 
         if (targetIndex.getZeroBased() >= reminders.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_REMINDER_DISPLAYED_INDEX);
         }
 
         Reminder reminderToDelete = reminders.get(targetIndex.getZeroBased());

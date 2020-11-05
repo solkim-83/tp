@@ -224,6 +224,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteEvent(Event target) {
+        reminders.deleteReminderOfEvent(target);
         calendar.removeEvent(target);
     }
 
