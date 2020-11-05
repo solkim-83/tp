@@ -37,3 +37,6 @@ Given below are my contributions to the project.
     * Amended errors (e.g. grammatical) to existing documentation of all existing features (Pull request [\#74]())
   * Developer Guide:
     * Added implementation details of the `sort -e`, `find -e`, `list -e` and `clear -e` feature. (Pull request [\#151](), [\#32]()))
+
+* **Community**:
+  * Reported bugs and suggestions for other teams in the class ([Link](https://github.com/solkim-83/ped/issues))
