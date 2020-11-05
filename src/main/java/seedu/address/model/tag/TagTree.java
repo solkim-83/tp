@@ -131,5 +131,9 @@ public abstract class TagTree implements ReadOnlyTagTree {
         }
     }
 
+    /**
+     * Returns true if the {@code tag} is a {@code supertag}.
+     */
+    public abstract boolean isSuperTag(Tag tag);
 
 }

@@ -20,6 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMIND_IN = new Prefix("in/");
     public static final Prefix PREFIX_ADD_PERSON = new Prefix("ap/");
     public static final Prefix PREFIX_REMOVE_PERSON = new Prefix("rp/");
+    public static final Prefix PREFIX_SUPERTAG_ONLY = new Prefix("st/");
 
     /* Symbol definitions */
     public static final String SYMBOL_WILDCARD = "*";

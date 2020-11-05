@@ -1,5 +1,6 @@
 package seedu.address.model.tag;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -10,7 +11,12 @@ import seedu.address.commons.util.StringUtil;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Tag> {
 
-    private List<String> keywords;
+    public static final String NON_TAG_CONSTRAINTS = "Search specifiers cannot be empty! "
+            + "Specify the field or remove the prefix!";
+
+    private List<String> keywords = new ArrayList<>();
+
+    public NameContainsKeywordsPredicate() {}
 
     public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
@@ -18,10 +24,15 @@ public class NameContainsKeywordsPredicate implements Predicate<Tag> {
 
     @Override
     public boolean test(Tag tag) {
-        return keywords.stream()
+        return hasKeywordMatch(tag);
+    }
+
+    private boolean hasKeywordMatch(Tag tag) {
+        return keywords.isEmpty() || keywords.stream()
                 .anyMatch(keyword ->
                         StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
     }
+
 
     @Override
     public boolean equals(Object other) {

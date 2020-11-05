@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 import java.util.HashSet;
@@ -33,12 +34,12 @@ public class FindTagCommand extends Command {
 
     public static final String INDICATOR_NO_CONTACTS_TAGGED = "no contacts tagged";
 
-    private final String tagToFind;
-    private final Optional<BooleanInput> superTagOnly;
+    private final NameContainsKeywordsPredicate predicate;
+    private final Optional<BooleanInput> showSuperTagOnly;
 
-    public FindTagCommand(String tagToFind, Optional<BooleanInput> superTagOnly) {
-        this.tagToFind = tagToFind;
-        this.superTagOnly = superTagOnly;
+    public FindTagCommand(NameContainsKeywordsPredicate predicate, Optional<BooleanInput> showSuperTagOnly) {
+        this.predicate = predicate;
+        this.showSuperTagOnly = showSuperTagOnly;
     }
 
     @Override
@@ -57,7 +58,7 @@ public class FindTagCommand extends Command {
      */
     protected String constructFilteredTagSummaryMessage(Model model, Set<Tag> tagPersonSet, Set<Tag> superTagSet) {
         Set<Tag> fullTagSet = new HashSet<>();
-        superTagOnly.ifPresentOrElse(bool -> {
+        showSuperTagOnly.ifPresentOrElse(bool -> {
             if (bool.getBooleanValue()) {
                 fullTagSet.addAll(tagPersonSet);
             } else {
@@ -66,7 +67,7 @@ public class FindTagCommand extends Command {
         }, () -> { fullTagSet.addAll(tagPersonSet); fullTagSet.addAll(superTagSet);});
         fullTagSet.addAll(superTagSet);
         return fullTagSet.stream()
-                .filter(tag -> tag.containsInName(tagToFind))
+                .filter(predicate)
                 .map(tag -> tag.toString() + (superTagSet.contains(tag) ? INDICATOR_SUPERTAG : "")
                         + ": " + parsePersonSetIntoString(model.getPersonsWithTag(tag), INDICATOR_NO_CONTACTS_TAGGED))
                 .reduce((s1, s2) -> s1 + '\n' + s2)
