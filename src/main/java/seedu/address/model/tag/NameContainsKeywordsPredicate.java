@@ -29,7 +29,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Tag> {
     }
 
     private boolean hasKeywordMatch(Tag tag) {
-        return keyword.isEmpty() || StringUtil.containsWordIgnoreCase(tag.tagName, keyword);
+        return keyword.isEmpty() || StringUtil.containsPartialMatchIgnoreCase(tag.tagName, keyword);
     }
 
     public static boolean isValidKeyword(String predicateField) {
