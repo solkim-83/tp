@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Jun Da's Project Portfolio Page
+title: Chan Jun Da's Project Portfolio Page
 ---
 
 ## Project: Athena
