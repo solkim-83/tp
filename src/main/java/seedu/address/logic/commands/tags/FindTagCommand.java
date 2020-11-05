@@ -19,7 +19,8 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Finds and lists all tags in the system-display that contain any of the keywords used in the search.
+ * Finds and lists all tags in the system-display that either partially match the keyword used in the search
+ * or is a super/regular tag.
  * Keyword matching is case insensitive.
  */
 public class FindTagCommand extends Command {
@@ -64,7 +65,7 @@ public class FindTagCommand extends Command {
     }
 
     /**
-     * Returns one String containing a summary of all tags present in the system.
+     * Returns one String containing a summary of all tags that match the user's specification.
      * For a tag to be present, it has to have at least one {@code Person} with the tag OR has sub-tags.
      * Summary of each tag contains only the tag name and all contacts directly tagged with the tag.
      */

@@ -22,9 +22,9 @@ import java.util.Optional;
 public class FindTagCommandParser implements Parser<FindTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of an FindagCommand and returns it for execution.
-     * Looks for the name of the added tag under PREFIX_NAME, and looks for indices and tag parameters.
-     * There must be at least one index or sub-tag specified.
+     * Parses the given {@code String} of arguments in the context of an FindTagCommand
+     * and returns it for execution. Either filters by tags that partially match the
+     * keyword, type of tag (super or regular), or both, depending on user input.
      * @throws ParseException if the user input does not conform to the expected format
      */
     public FindTagCommand parse(String args) throws ParseException {
@@ -59,6 +59,9 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
 
     }
 
+    /**
+     * Returns a trimmed keyword. Throws a ParseException if the field is invalid.
+     */
     private String parseKeywordsField(String keyword) throws ParseException {
         if (!NameContainsKeywordsPredicate.isValidKeyword(keyword)) {
             throw new ParseException(NameContainsKeywordsPredicate.NON_TAG_CONSTRAINTS);
