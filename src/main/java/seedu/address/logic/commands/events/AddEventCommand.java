@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -62,7 +63,12 @@ public class AddEventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Event toAdd = createEvent(addEventDescriptor, model.getSortedFilteredPersonList());
+        Event toAdd;
+        try {
+            toAdd = createEvent(addEventDescriptor, model.getSortedFilteredPersonList());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -114,6 +120,7 @@ public class AddEventCommand extends Command {
         // add FauxPersons to event
         if (addEventDescriptor.getPersonsToAdd().isPresent()) {
             for (Index index : addEventDescriptor.getPersonsToAdd().get()) {
+                assert index.getZeroBased() >= lastShownPersonList.size() : "No person at given index";
 
                 Person personToAdd = lastShownPersonList.get(index.getZeroBased());
                 FauxPerson newFauxPerson = new FauxPerson(personToAdd);
