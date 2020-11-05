@@ -46,4 +46,3 @@ Given below are my contributions to the project.
 * **Community**:
   * Reported bugs and suggestions for other teams in the class. ([Link](https://github.com/LinkedInk/ped/issues))
   * Helped a teammate with some issues he faced for his reminder feature with some suggested changes. ([Link](https://github.com/bangyiwu/tp/pull/1))
-  
