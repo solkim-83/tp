@@ -49,7 +49,7 @@ public class ListTagCommand extends Command {
         fullTagSet.addAll(superTagSet);
         return fullTagSet.stream()
                 .map(tag -> tag.toString() + (superTagSet.contains(tag) ? INDICATOR_SUPERTAG : "")
-                        + ": " + parsePersonSetIntoString(model.getPersonsWithTag(tag), ""))
+                        + ": " + parsePersonSetIntoString(model.getPersonsWithTag(tag), INDICATOR_NO_CONTACTS_TAGGED))
                 .reduce((s1, s2) -> s1 + '\n' + s2)
                 .map(string -> MESSAGE_TAGS_FOUND + '\n' + string)
                 .orElse(MESSAGE_NO_TAGS_FOUND);
