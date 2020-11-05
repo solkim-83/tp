@@ -300,6 +300,7 @@ public class ModelManager implements Model {
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
+        reminders.updateReminder(target, editedEvent);
         calendar.setEvent(target, editedEvent);
     }
 
