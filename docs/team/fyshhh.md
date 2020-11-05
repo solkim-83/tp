@@ -74,3 +74,4 @@ Given below are my contributions to the project.
   [\#143](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/143), [\#180](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/180)
   are more significant ones.
   * Reported bugs and suggestions for other teams in the class. ([examples can be found here](https://github.com/fyshhh/ped/issues))
+  
