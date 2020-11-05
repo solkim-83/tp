@@ -26,7 +26,7 @@ Given below are my contributions to the project.
   * Justification: This allows for users to change only specific details of events that they want.
   Without this, users will have to delete an old event and create a complete new event again if there is a change. Hence, saving time in the process.
   
-* **New Feature**: Added ability for events to be saved into a .json file and to read from it when Athena launches.
+* **New Feature**: Added ability for events to be saved into a .json file and for Athena to read from it.
   * What it does: Events created are able to be stored when the app closes and be loaded again when the app reopens.
   * Justification: Allows for events to be kept from session to session.
 
