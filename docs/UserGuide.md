@@ -269,6 +269,13 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
+* yyyy-dd-MM HH:mm
+* The following symbols can be used interchangeably to indicate date, time and year of the event.
+    * [.] (full stop)
+    * [/] (forward slash)
+    * [-] (hyphen)
+    * [:] (colon)
+* For example, 12/10.2020 12:00 can be keyed in by the user, and will be registered as 12th October 2020, 12pm.
 
 Legend:
 
@@ -375,7 +382,6 @@ Format: `sort -e INDEX`
 Examples:
 * `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
 
-
 ---
 
 ### Tags
@@ -475,7 +481,7 @@ Example:
 
 ### Reminders
 
-Reminders allows you to set custom reminders for your events. You can call up your reminders in application or
+Reminders allow you to set custom reminders for your events. You can call up your reminders in application or
 have them pop up whenever Athena starts. 
 
 #### Adding a reminder: `add`
@@ -497,7 +503,7 @@ Deletes the specified reminder from the reminders list.
 
 Format: `delete -r INDEX`
 
-* Deletes the remind at the specified `INDEX`.
+* Deletes the reminder at the specified `INDEX`.
 * The index refers to the index number shown in the displayed reminder list.
 * You can get the displayed reminder list by using `list -r`
 * The index must be a positive integer 1, 2, 3, ...
