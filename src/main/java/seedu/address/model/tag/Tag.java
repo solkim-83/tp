@@ -61,6 +61,10 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public boolean containsInName(String test) {
+        return tagName.contains(test);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
