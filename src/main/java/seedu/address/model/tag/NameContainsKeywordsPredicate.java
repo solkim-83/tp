@@ -13,13 +13,14 @@ public class NameContainsKeywordsPredicate implements Predicate<Tag> {
 
     public static final String NON_TAG_CONSTRAINTS = "Search specifiers cannot be empty! "
             + "Specify the field or remove the prefix!";
+    private static final String EMPTY_FIELD = "\0";
 
-    private List<String> keywords = new ArrayList<>();
+    private String keyword = EMPTY_FIELD;
 
     public NameContainsKeywordsPredicate() {}
 
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override
@@ -28,17 +29,18 @@ public class NameContainsKeywordsPredicate implements Predicate<Tag> {
     }
 
     private boolean hasKeywordMatch(Tag tag) {
-        return keywords.isEmpty() || keywords.stream()
-                .anyMatch(keyword ->
-                        StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
+        return keyword.isEmpty() || StringUtil.containsWordIgnoreCase(tag.tagName, keyword);
     }
 
+    public static boolean isValidKeyword(String predicateField) {
+        return !predicateField.isBlank();
+    }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+                && keyword.equals(((NameContainsKeywordsPredicate) other).keyword)); // state check
     }
 
 }

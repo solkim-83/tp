@@ -1,6 +1,12 @@
 package seedu.address.logic.commands.tags;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.logic.commands.Command;
@@ -34,6 +40,16 @@ public class FindTagCommand extends Command {
 
     public static final String INDICATOR_NO_CONTACTS_TAGGED = "no contacts tagged";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Finds the tags which names (partially or entirely) contain the specified keyword (case-insensitive)."
+            + "At least one of the optional fields must be provided."
+            + "If the " + PREFIX_SUPERTAG_ONLY + " field is 1, it shows supertags only. If it is 0, it "
+            + "shows regular tags only. If it is empty, it shows all tags.\n\n"
+            + "Parameters:\n"
+            + "[" + PREFIX_TAG + "KEYWORD]\n"
+            + "[" + PREFIX_SUPERTAG_ONLY + "BOOLEAN]\n\n"
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " t/CS2103 st/1";
+
     private final NameContainsKeywordsPredicate predicate;
     private final Optional<BooleanInput> showSuperTagOnly;
 
@@ -60,12 +76,11 @@ public class FindTagCommand extends Command {
         Set<Tag> fullTagSet = new HashSet<>();
         showSuperTagOnly.ifPresentOrElse(bool -> {
             if (bool.getBooleanValue()) {
-                fullTagSet.addAll(tagPersonSet);
-            } else {
                 fullTagSet.addAll(superTagSet);
+            } else {
+                fullTagSet.addAll(tagPersonSet);
             }
         }, () -> { fullTagSet.addAll(tagPersonSet); fullTagSet.addAll(superTagSet);});
-        fullTagSet.addAll(superTagSet);
         return fullTagSet.stream()
                 .filter(predicate)
                 .map(tag -> tag.toString() + (superTagSet.contains(tag) ? INDICATOR_SUPERTAG : "")

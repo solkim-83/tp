@@ -14,8 +14,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,8 +37,8 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
 
         boolean hasKeywordInput = argumentMultimap.getValue(PREFIX_TAG).isPresent();
         if (hasKeywordInput) {
-            List<String> trimmedKeywordsAsList = parseKeywordsField(argumentMultimap.getValue(PREFIX_TAG).get());
-            findPredicate.setKeywords(trimmedKeywordsAsList);
+            String trimmedKeyword = parseKeywordsField(argumentMultimap.getValue(PREFIX_TAG).get());
+            findPredicate.setKeyword(trimmedKeyword);
         }
 
         boolean hasSuperTagInput = argumentMultimap.getValue(PREFIX_SUPERTAG_ONLY).isPresent();
@@ -50,19 +48,25 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
                 * argumentMultimap.getValue(PREFIX_RECURSIVE).map(ParserUtil::parseBooleanInput)
                 * but the exception would not be handled naturally
                 */
-                ? Optional.of(ParserUtil.parseBooleanInput(argumentMultimap.getValue(PREFIX_RECURSIVE).get()))
+                ? Optional.of(ParserUtil.parseBooleanInput(argumentMultimap.getValue(PREFIX_SUPERTAG_ONLY).get()))
+//                ? Optional.empty()
                 : Optional.empty();
 
         if (!hasKeywordInput && !hasSuperTagInput) {
-            throw new ParseException("placeholder");
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
         return new FindTagCommand(findPredicate, showSuperTagOnly);
 
     }
 
-    private List<String> parseKeywordsField(String keywords) {
-        return Arrays.asList(keywords.trim().split("\\+"));
+    private String parseKeywordsField(String keyword) throws ParseException {
+        if (!NameContainsKeywordsPredicate.isValidKeyword(keyword)) {
+            throw new ParseException(NameContainsKeywordsPredicate.NON_TAG_CONSTRAINTS);
+        } else {
+            return keyword.trim();
+        }
     }
 
 }

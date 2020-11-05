@@ -218,9 +218,4 @@ public class TagTreeImpl extends TagTree {
         }
     }
 
-    @Override
-    public boolean isSuperTag(Tag tag) {
-        return tagSuperTagMap.containsKey(tag);
-    }
-
 }
