@@ -17,9 +17,14 @@ import java.util.Locale;
  */
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
-            + "dd-MM-yyyy HH:mm";
+            + "dd-MM-yyyy HH:mm\n"
+            + "yyyy-dd-MM HH:mm\n"
+            + "[.][/][-][:] can be used interchangeably to indicate date, time, year of the event.";
 
-    private static final String STANDARD_TIME_PATTERN = "dd-MM-yyyy HH:mm";
+    private static final String symbol = "[.][/][-][:]";
+    private static final String STANDARD_TIME_PATTERN =
+            "[dd" + symbol + "MM" + symbol + "yyyy HH" + symbol + "mm]"
+                    + "[yyyy" + symbol + "dd" + symbol + "MM HH" + symbol + "mm]";
 
     public final LocalDateTime time;
 
@@ -51,7 +56,6 @@ public class Time {
     /**
      * Returns if a given string is a valid time.
      */
-    // TODO: change this checker whenever more formats are added in the parse method below
     public static boolean isValidTime(String timeInput) {
         try {
             LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
@@ -61,13 +65,11 @@ public class Time {
         }
     }
 
-    // TODO: add more formats to be parsed here, add them to the isValidTime checking method above
     public static LocalDateTime parse(String timeInput) {
         return LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
     }
 
     // getDisplayName controls the format of time displayed in the GUI panel and in the response.
-    // TODO: make display prettier/more relevant to the user
     public String getDisplayName() {
         StringBuilder builder = new StringBuilder();
 
@@ -127,7 +129,7 @@ public class Time {
     // toString() controls the format of time saved in calendar.json file
     @Override
     public String toString() {
-        return time.format(DateTimeFormatter.ofPattern(STANDARD_TIME_PATTERN));
+        return time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     @Override
