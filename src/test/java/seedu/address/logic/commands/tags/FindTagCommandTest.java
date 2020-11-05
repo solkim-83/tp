@@ -1,23 +1,34 @@
 package seedu.address.logic.commands.tags;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.commons.core.booleaninput.BooleanInput;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.tags.FindTagCommandParser;
 import seedu.address.model.Model;
+import seedu.address.model.tag.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ModelManagerBuilder;
 
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.tags.FindTagCommand.INDICATOR_SUPERTAG;
 import static seedu.address.logic.commands.tags.FindTagCommand.parsePersonSetIntoString;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_1;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_2;
 import static seedu.address.model.ContactTagIntegrationManagerTest.buildTestIntegrationAddressBook;
+import static seedu.address.testutil.TagTreeUtil.SET_ARCHITECTURE_MOD;
+import static seedu.address.testutil.TagTreeUtil.TAG_ARCHITECTURE;
+import static seedu.address.testutil.TagTreeUtil.TAG_ARCHITECTURE_MOD;
 import static seedu.address.testutil.TagTreeUtil.TAG_COMPUTING;
 import static seedu.address.testutil.TagTreeUtil.TAG_NUS;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
 
+/**
+ * Contains integration tests (interaction with the Model) for {@code FindTagCommand}.
+ */
 public class FindTagCommandTest {
 
     private static final String STRING_IF_EMPTY = "empty string rep";
@@ -26,6 +37,36 @@ public class FindTagCommandTest {
         return new ModelManagerBuilder()
                 .withAddressBook(buildTestIntegrationAddressBook())
                 .withTagTree(buildTestTree()).build();
+    }
+
+    @Test
+    public void equals() {
+        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate();
+        firstPredicate.setKeyword("first");
+
+        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate();
+        secondPredicate.setKeyword("second");
+
+        BooleanInput trueInput = BooleanInput.isTrue();
+
+        FindTagCommand findFirstCommand = new FindTagCommand(Optional.of(firstPredicate), Optional.of(trueInput));
+        FindTagCommand findSecondCommand = new FindTagCommand(Optional.of(secondPredicate), Optional.of(trueInput));
+
+        // same object -> returns true
+        assertEquals(findFirstCommand, findFirstCommand);
+
+        // same values -> returns true
+        FindTagCommand findFirstCommandCopy = new FindTagCommand(Optional.of(firstPredicate), Optional.of(trueInput));
+        assertEquals(findFirstCommandCopy, findFirstCommand);
+
+        // different types -> returns false
+        assertNotEquals(findFirstCommand, 1);
+
+        // null -> returns false
+        assertNotEquals(findFirstCommand, null);
+
+        // different tag -> returns false
+        assertNotEquals(findSecondCommand, findFirstCommand);
     }
 
     @Test
@@ -42,7 +83,7 @@ public class FindTagCommandTest {
     }
 
     @Test
-    public void constructUnfilteredTagSummaryMessage_validTags_success() {
+    public void constructUnfilteredTagSummaryMessage_success() {
         Model model = createTestModel();
         FindTagCommand command = new FindTagCommand(Optional.empty(), Optional.empty());
         String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
@@ -55,8 +96,28 @@ public class FindTagCommandTest {
     }
 
     @Test
-    public void findTagByFullMatch_success() {
+    public void findTagByFullMatchOnly_success() throws ParseException {
         Model model = createTestModel();
+        FindTagCommand command = new FindTagCommandParser().parse(" t/architecturemod");
+        String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
+
+        // Check if tag is found in the message
+        assertTrue(message.contains(TAG_ARCHITECTURE_MOD.toString()));
+
+    }
+
+    @Test
+    public void findTagByPartialMatchOnly_success() throws ParseException {
+        Model model = createTestModel();
+        FindTagCommand command = new FindTagCommandParser().parse(" t/architecture");
+        String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
+
+        // Check if tag is found in the message
+        assertTrue(message.contains(TAG_ARCHITECTURE.toString()));
+
+        // Check if partially matched tag is found in the message
+        assertTrue(message.contains(TAG_ARCHITECTURE_MOD.toString()));
+
     }
 
 }

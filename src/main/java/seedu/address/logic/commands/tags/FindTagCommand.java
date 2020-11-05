@@ -99,4 +99,12 @@ public class FindTagCommand extends Command {
                 .orElse(messageIfNoneFound);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindTagCommand // instanceof handles nulls
+                && predicate.equals(((FindTagCommand) other).predicate)) // state check
+                && showSuperTagOnly.equals(((FindTagCommand) other).showSuperTagOnly);
+    }
+
 }
