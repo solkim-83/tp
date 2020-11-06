@@ -4,6 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.tags.FindTagCommand;
@@ -13,8 +15,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
-
-import java.util.Optional;
 
 /**
  * Parses input arguments and creates a new FindTagCommand object.

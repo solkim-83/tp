@@ -4,20 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * Finds and lists all tags in the system-display that either partially match the keyword used in the search
@@ -53,6 +52,11 @@ public class FindTagCommand extends Command {
     private final Optional<NameContainsKeywordsPredicate> predicate;
     private final Optional<BooleanInput> showSuperTagOnly;
 
+    /**
+     * Creates a FindTagCommand object that finds tags based on the given keyword or the given supertag only boolean.
+     * @param predicate NameContainsKeywordsPrediate that contains the keyword to test keywords against
+     * @param showSuperTagOnly BooleanInput that determines whether super tag or regular tags should be displayed
+     */
     public FindTagCommand(Optional<NameContainsKeywordsPredicate> predicate, Optional<BooleanInput> showSuperTagOnly) {
         this.predicate = predicate;
         this.showSuperTagOnly = showSuperTagOnly;
@@ -80,7 +84,10 @@ public class FindTagCommand extends Command {
             } else {
                 fullTagSet.addAll(tagPersonSet);
             }
-        }, () -> { fullTagSet.addAll(tagPersonSet); fullTagSet.addAll(superTagSet);});
+        }, () -> {
+                fullTagSet.addAll(tagPersonSet);
+                fullTagSet.addAll(superTagSet);
+            });
         return fullTagSet.stream()
                 .filter(tag -> predicate.map(p -> p.test(tag)).orElse(true))
                 .map(tag -> tag.toString() + (superTagSet.contains(tag) ? INDICATOR_SUPERTAG : "")
