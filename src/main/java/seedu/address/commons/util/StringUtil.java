@@ -13,6 +13,19 @@ import java.util.Arrays;
 public class StringUtil {
 
     /**
+     * Returns true if the {@code word} is a single word long (i.e. contains no spaces).
+      * @param word cannot be null, cannot be empty
+     */
+    public static boolean isOneWordLong(String word) {
+        requireNonNull(word);
+
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        return preppedWord.split("\\s+").length == 1;
+    }
+
+    /**
      * Returns true if the {@code wordToCheck} contains a partial match to {@code word}.
      *   Ignores case.
      *   <br>examples:<pre>

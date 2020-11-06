@@ -9,6 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
@@ -32,6 +33,8 @@ public class FindTagCommand extends Command {
     public static final String MESSAGE_NO_TAGS_FOUND = "No tag assignments were found!";
 
     public static final String MESSAGE_TAGS_FOUND = "Listed all tags and contacts directly under these tags:";
+
+    public static final String MESSAGE_INVALID_SEARCH_FIELD = "Tag queries should be alphanumeric with no spaces.";
 
     public static final String INDICATOR_SUPERTAG = " (supertag)";
 

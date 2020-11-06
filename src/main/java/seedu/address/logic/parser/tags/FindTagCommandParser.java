@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.booleaninput.BooleanInput;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.tags.FindTagCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -38,6 +39,9 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         boolean hasKeywordInput = argumentMultimap.getValue(PREFIX_TAG).isPresent();
         if (hasKeywordInput) {
             String trimmedKeyword = parseKeywordsField(argumentMultimap.getValue(PREFIX_TAG).get());
+            if (!StringUtil.isOneWordLong(trimmedKeyword)) {
+                throw new ParseException(FindTagCommand.MESSAGE_INVALID_SEARCH_FIELD);
+            }
             NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate();
             predicate.setKeyword(trimmedKeyword);
             findPredicate = Optional.of(predicate);
