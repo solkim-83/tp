@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.Time;
 import seedu.address.model.reminder.ReadOnlyReminders;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.UniqueRemindersList;

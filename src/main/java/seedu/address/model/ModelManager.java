@@ -224,8 +224,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteEvent(Event target) {
-        reminders.deleteReminderOfEvent(target);
         calendar.removeEvent(target);
+        reminders.deleteReminderOfEvent(target);
     }
 
     @Override
@@ -299,9 +299,8 @@ public class ModelManager implements Model {
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
-
-        reminders.updateReminder(target, editedEvent);
         calendar.setEvent(target, editedEvent);
+        reminders.updateReminder(target, editedEvent);
     }
 
     @Override
