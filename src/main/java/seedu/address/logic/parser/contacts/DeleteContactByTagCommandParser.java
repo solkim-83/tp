@@ -3,6 +3,7 @@ package seedu.address.logic.parser.contacts;
 
 import seedu.address.logic.commands.contacts.DeleteContactByTagCommand;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -16,9 +17,8 @@ public class DeleteContactByTagCommandParser implements Parser<DeleteContactByTa
      * and returns a DeleteContactCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteContactByTagCommand parse(String args) {
-        assert Tag.isValidTagName(args.trim()) : "User input is not a valid tag name";
-        Tag tagForDeletion = new Tag(args.trim());
+    public DeleteContactByTagCommand parse(String args) throws ParseException {
+        Tag tagForDeletion = ParserUtil.parseTag(args);
         return new DeleteContactByTagCommand(tagForDeletion);
     }
 

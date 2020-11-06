@@ -13,7 +13,7 @@ public enum CommandWord {
     ADD("add"),
     CLEAR("clear"),
     DELETE("delete"),
-    DELETE_BY_TAG("deletetag"),
+    DELETE_BY_TAG("deletebytag"),
     EDIT("edit"),
     EXIT("exit"),
     FIND("find"),

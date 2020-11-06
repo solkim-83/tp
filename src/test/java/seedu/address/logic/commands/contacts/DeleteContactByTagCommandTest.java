@@ -53,12 +53,5 @@ public class DeleteContactByTagCommandTest {
         assertCommandFailure(deleteContactByTagCommand, model, deleteContactByTagCommand.MESSAGE_NON_EXISTENT_TAG);
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
 
-        assertTrue(model.getSortedFilteredPersonList().isEmpty());
-    }
 }

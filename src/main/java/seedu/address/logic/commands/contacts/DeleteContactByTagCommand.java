@@ -38,7 +38,7 @@ public class DeleteContactByTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!isValidTag(model, tagForDeletion)) {
+        if (!isExistingTag(model, tagForDeletion)) {
             throw new CommandException(MESSAGE_NON_EXISTENT_TAG);
         }
         model.deletePersonsByTag(tagForDeletion);
@@ -49,7 +49,7 @@ public class DeleteContactByTagCommand extends Command {
     /**
      * Checks if this tag exists.
      */
-    private static boolean isValidTag(Model model, Tag tag) {
+    private static boolean isExistingTag(Model model, Tag tag) {
         return model.getPersonTags().contains(tag) || model.getSuperTags().contains(tag);
     }
     @Override
