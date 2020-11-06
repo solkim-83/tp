@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.tags.FindTagCommand.INDICATOR_SUPERTAG;
@@ -19,7 +20,6 @@ import static seedu.address.logic.commands.tags.FindTagCommand.parsePersonSetInt
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_1;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_2;
 import static seedu.address.model.ContactTagIntegrationManagerTest.buildTestIntegrationAddressBook;
-import static seedu.address.testutil.TagTreeUtil.SET_ARCHITECTURE_MOD;
 import static seedu.address.testutil.TagTreeUtil.TAG_ARCHITECTURE;
 import static seedu.address.testutil.TagTreeUtil.TAG_ARCHITECTURE_MOD;
 import static seedu.address.testutil.TagTreeUtil.TAG_COMPUTING;
@@ -88,10 +88,10 @@ public class FindTagCommandTest {
         FindTagCommand command = new FindTagCommand(Optional.empty(), Optional.empty());
         String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
 
-        // Check if supertag identification is shown
+        // Check that supertag identification is shown
         assertTrue(message.contains(TAG_NUS + INDICATOR_SUPERTAG));
 
-        // Check if persons are shown
+        // Check that persons are shown
         assertTrue(message.contains(parsePersonSetIntoString(model.getPersonsWithTag(TAG_COMPUTING), STRING_IF_EMPTY)));
     }
 
@@ -101,7 +101,7 @@ public class FindTagCommandTest {
         FindTagCommand command = new FindTagCommandParser().parse(" t/architecturemod");
         String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
 
-        // Check if tag is found in the message
+        // Check that tag is found in the message
         assertTrue(message.contains(TAG_ARCHITECTURE_MOD.toString()));
 
     }
@@ -112,12 +112,51 @@ public class FindTagCommandTest {
         FindTagCommand command = new FindTagCommandParser().parse(" t/architecture");
         String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
 
-        // Check if tag is found in the message
+        // Check that tag is found in the message
         assertTrue(message.contains(TAG_ARCHITECTURE.toString()));
 
-        // Check if partially matched tag is found in the message
+        // Check that partially matched tag is found in the message
         assertTrue(message.contains(TAG_ARCHITECTURE_MOD.toString()));
 
+    }
+
+    @Test
+    public void findTagBySuperTagFilterOnly_success() throws ParseException {
+        Model model = createTestModel();
+        FindTagCommand command = new FindTagCommandParser().parse(" st/1");
+        String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
+
+        // Check that super tags are found in the message
+        assertTrue(message.contains(TAG_NUS.toString()));
+
+        // Check that regular tags are not found in the message
+        assertFalse(message.contains(TAG_ARCHITECTURE_MOD.toString()));
+    }
+
+    @Test
+    public void findTagByRegularTagFilterOnly_success() throws ParseException {
+        Model model = createTestModel();
+        FindTagCommand command = new FindTagCommandParser().parse(" st/0");
+        String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
+
+        // Check that super tags are not found in the message
+        assertFalse(message.contains(TAG_NUS.toString()));
+
+        // Check that regular tags are found in the message
+        assertTrue(message.contains(TAG_ARCHITECTURE_MOD.toString()));
+    }
+
+    @Test
+    public void findTagByPartialMatchAndSuperTagFilter_success() throws ParseException {
+        Model model = createTestModel();
+        FindTagCommand command = new FindTagCommandParser().parse(" t/architecture st/1");
+        String message = command.constructFilteredTagSummaryMessage(model, model.getPersonTags(), model.getSuperTags());
+
+        // Check that matching super tags are found in the message
+        assertTrue(message.contains(TAG_ARCHITECTURE.toString()));
+
+        // Check that matching regular tags are not found in the message
+        assertFalse(message.contains(TAG_ARCHITECTURE_MOD.toString()));
     }
 
 }
