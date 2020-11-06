@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.contacts;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -171,6 +172,36 @@ public class EditContactCommandTest {
                         .withName("someName").build());
         assertThrows(CommandException.class, () -> editContactCommand2.execute(model));
         assertThrows(CommandException.class, () -> editContactCommand3.execute(model));
+    }
+
+    @Test
+    public void execute_addTagAlreadyPresent_correctResult() {
+
+        Person firstPerson = model.getSortedFilteredPersonList().get(0);
+        String tagString = firstPerson.getTags().stream().findAny().get().toString();
+
+        // Tag to be added already exists
+        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                        .withTagsToAdd(tagString.substring(1, tagString.length() - 1))
+                        .build());
+        assertThrows(CommandException.class, () -> editContactCommand.execute(model));
+
+        // Tag to be added already exists but is removed before being readded. This is a valid result.
+        EditContactCommand editContactCommand2 = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                        .withTagsToAdd(tagString.substring(1, tagString.length() - 1))
+                        .withTagsToRemove(tagString.substring(1, tagString.length() - 1))
+                        .build());
+        assertDoesNotThrow(() -> editContactCommand2.execute(model));
+        EditContactCommand editContactCommand3 = new EditContactCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                        .withTagsToAdd(tagString.substring(1, tagString.length() - 1))
+                        .withTagsToRemove(tagString.substring(1, tagString.length() - 1), "*")
+                        .build());
+        assertDoesNotThrow(() -> editContactCommand3.execute(model));
+
+
     }
 
     @Test

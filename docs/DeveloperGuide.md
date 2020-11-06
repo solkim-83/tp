@@ -114,8 +114,8 @@ It is meant to fulfill the Facade pattern as the Facade class by hiding the indi
 It is made up of three major components:
 
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
+1. `Calendar` which manages the events in the form of `Event` objects.
 1. `TagTree` which manages `tag` to `tag` relations.
-1. `Calendar` which manages `Event` objects.
 
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
@@ -289,12 +289,15 @@ The following activity diagram summarizes what happens when a user executes `sor
   
 ![CommitActivityDiagram](images/SortEventActivityDiagram.png)
 
+### List events feature
+
 ### Display feature
 The display feature for the events is facilitated by `Calendar` that stores event entries and their details in Athena,
 and has a specific command of `list -e` where the command makes use of `ListEventCommand`. 
 
 ListEventCommand#execute() : Does validity check of current list and displayed all event-related entries.
 
+##### Aspect: How list executes
 The feature is designed to provide the users with the entire list of event-related entries, especially after 
 when user executes certain commands that display partial list of event list (e.g. SearchEvent Command).
 --------------------------------------------------------------------------------------------------------------------
@@ -351,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Athena` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: View introduction**
+#### **Use case: View introduction**
 
 1.  User opens Athena for the first time
 
@@ -360,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: Add a contact**
+#### **Use case: Add a contact**
 
 **MSS**
 
@@ -375,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Delete a contact**
+#### **Use case: Delete a contact**
 
 **MSS**
 
@@ -398,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Sort through contacts**
+#### **Use case: Sort through contacts**
 
 **MSS**
 
@@ -420,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Editing contact information**
+#### **Use case: Edit contact information**
 
 Preconditions: The contact the user wishes to edit is displayed on the UI.
 
@@ -440,7 +443,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
       Use case ends.
 
-**Use case: Searching for contacts**
+#### **Use case: Search for contacts**
 
 **MSS**
 
@@ -456,7 +459,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
        Use case ends.
 
-**Use case: Add an event**
+#### **Use case: Add an event**
 
 **MSS**
 
@@ -478,7 +481,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
        
       Use case ends.
          
-**Use case: Delete an event**
+#### **Use case: Delete an event**
 
 **MSS**
 
@@ -501,7 +504,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
       Use case resumes at step 2.
       
-**Use case: Edit an event**
+#### **Use case: Edit an event**
 
 **MSS**
 
@@ -530,7 +533,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
       Use case resumes at step 2.
 
-#### **Use case: search for events**
+#### **Use case: Search for events**
 
 **MSS**
 
@@ -551,7 +554,29 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
       Use case resumes at step 2.
       
-#### **Use case: view all saved events**
+#### **Use case: Sort through events**
+
+**MSS**
+
+1.  User requests to list events
+2.  Athena shows a list of events in default order
+3.  User requests to sort the events in the list
+4.  Athena displays the events in the requested order
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+  * 3a1. Athena shows an error message.
+
+    Use case resumes at step 2.
+      
+#### **Use case: View all saved events**
 
 **MSS**
 
@@ -566,7 +591,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
   Use case ends.
   
-#### **Use case: list all tags**
+#### **Use case: List all tags**
 
 **MSS**
 

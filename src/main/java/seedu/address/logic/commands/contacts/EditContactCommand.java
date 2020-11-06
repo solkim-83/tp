@@ -62,6 +62,8 @@ public class EditContactCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in Athena.";
     public static final String INDICATOR_TAG_TO_BE_REMOVED_NOT_PRESENT =
             "The specified contact does not have at least one of the tags designated for removal.";
+    public static final String INDICATOR_TAG_TO_BE_ADDED_ALREADY_PRESENT =
+            "The specified contact already has at least one of the tags designated for addition.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -125,14 +127,11 @@ public class EditContactCommand extends Command {
             Optional<Set<Tag>> tagsToRemove) throws CommandException {
         Set<Tag> finalTagSet = new HashSet<>(personToEdit.getTags());
 
-        Set<Tag> tagSetToRemove = tagsToRemove.isPresent() ? tagsToRemove.get() : Set.of();
-        for (Tag tagToRemove: tagSetToRemove) {
-            if (tagToRemove.equals(Tag.ALL_TAGS_TAG)) {
-                continue;
-            }
-            if (!finalTagSet.contains(tagToRemove)) {
-                throw new CommandException(INDICATOR_TAG_TO_BE_REMOVED_NOT_PRESENT);
-            }
+        boolean hasInvalidTagsToRemove = tagsToRemove.map(tagSet -> tagSet.stream()
+                .filter(tag -> !tag.equals(Tag.ALL_TAGS_TAG))
+                .anyMatch(tag -> !finalTagSet.contains(tag))).orElse(false);
+        if (hasInvalidTagsToRemove) {
+            throw new CommandException(INDICATOR_TAG_TO_BE_REMOVED_NOT_PRESENT);
         }
 
         tagsToRemove.ifPresent(set -> {
@@ -142,6 +141,14 @@ public class EditContactCommand extends Command {
                 finalTagSet.removeAll(set);
             }
         });
+
+        boolean hasInvalidTagsToAdd = tagsToAdd.map(tagSet -> tagSet.stream()
+                .filter(tag -> !tag.equals(Tag.ALL_TAGS_TAG))
+                .anyMatch(tag -> finalTagSet.contains(tag))).orElse(false);
+        if (hasInvalidTagsToAdd) {
+            throw new CommandException(INDICATOR_TAG_TO_BE_ADDED_ALREADY_PRESENT);
+        }
+
         tagsToAdd.ifPresent(set -> finalTagSet.addAll(set));
         return finalTagSet;
     }

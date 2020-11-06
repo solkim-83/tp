@@ -1,8 +1,10 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TagTreeUtil.TAG_COMPUTING;
+import static seedu.address.testutil.TagTreeUtil.TAG_CS1231S;
 import static seedu.address.testutil.TagTreeUtil.TAG_CS2040S_NOT_TREE;
 import static seedu.address.testutil.TagTreeUtil.TAG_MA1101R;
 import static seedu.address.testutil.TagTreeUtil.TAG_SCIENCE_COMP;
@@ -79,6 +81,14 @@ public class ContactTagIntegrationManagerTest {
                 .withTags().build();
         assertTrue(manager.getAddressBook().hasPerson(expectedScienceCompPerson));
         assertTrue(manager.getAddressBook().getPersonsWithTag(TAG_SCIENCE_COMP).isEmpty());
+
+        // check that newly empty super tags are properly deleted
+        // In this case, TAG_SCIENCE_COMP is relying on TAG_CS1231S to exist.
+        manager = buildTestContactTagIntegrationManager();
+        manager.removePersonFromTag(TAG_SCIENCE_COMP, PERSON_SCIENCECOMP);
+        manager.deleteTag(TAG_MA1101R);
+        manager.deleteTag(TAG_CS1231S);
+        assertFalse(manager.hasTag(TAG_SCIENCE_COMP));
     }
 
     @Test
@@ -96,6 +106,15 @@ public class ContactTagIntegrationManagerTest {
         Person expectedPersonScienceComp = new PersonBuilder(PERSON_SCIENCECOMP).withTags().build();
         assertTrue(manager.getAddressBook().hasPerson(expectedPersonMA1101R));
         assertTrue(manager.getAddressBook().hasPerson(expectedPersonScienceComp));
+
+        // check that newly empty super tags are properly deleted
+        // In this case, TAG_CS2040S_NOT_TREE is relying on TAG_CS1231S to exist.
+        // TAG_CS1231S is a subtag of TAG_SCIENCE_COMP and so s hould be deleted.
+        manager = buildTestContactTagIntegrationManager();
+        manager.getTagTree().addSubTagTo(TAG_CS2040S_NOT_TREE, TAG_CS1231S);
+        assertTrue(manager.hasTag(TAG_CS2040S_NOT_TREE));
+        manager.deleteTagRecursive(TAG_SCIENCE_COMP);
+        assertFalse(manager.hasTag(TAG_CS2040S_NOT_TREE));
     }
 
     @Test
@@ -135,6 +154,44 @@ public class ContactTagIntegrationManagerTest {
         ContactTagIntegrationManager manager = buildTestContactTagIntegrationManager();
         manager.deleteTagAndDirectContactsRecursive(TAG_CS2040S_NOT_TREE);
         assertEquals(manager, buildTestContactTagIntegrationManager());
+    }
+
+    @Test
+    public void deletePerson_validPersonWithReliantTags_nonExistentTagsProperlyDeleted() {
+        // Tests to see if the tag structure properly holds up. Addressbook tests to see the person is deleted.
+        ContactTagIntegrationManager manager = buildTestContactTagIntegrationManager();
+        manager.deletePerson(PERSON_SCIENCECOMP);
+
+        // Check that the tag exists even after the person is deleted (has 2 child-tags, CS1231s and MA1101r)
+        assertTrue(manager.hasTag(TAG_SCIENCE_COMP));
+        manager.deletePerson(PERSON_MA1101R);
+        manager.deletePerson(PERSON_CS1231S_1);
+        manager.deletePerson(PERSON_CS1231S_2);
+        assertFalse(manager.hasTag(TAG_SCIENCE_COMP));
+    }
+
+    @Test
+    public void setPerson_validPersonWithReliantTagsRemoved_nonExistentTagsProperlyDeleted() {
+        ContactTagIntegrationManager manager = buildTestContactTagIntegrationManager();
+        manager.deletePerson(PERSON_SCIENCECOMP);
+        manager.deletePerson(PERSON_CS1231S_1);
+        manager.deletePerson(PERSON_CS1231S_2);
+
+        Person personMA1101RWithoutMA1101RTag = new PersonBuilder(PERSON_MA1101R)
+                .withTags().build();
+        manager.setPerson(PERSON_MA1101R, personMA1101RWithoutMA1101RTag);
+        assertFalse(manager.hasTag(TAG_SCIENCE_COMP));
+
+    }
+
+    @Test
+    public void removePersonFromTag_validPersonWithReliantTag_nonExistentTagsProperlyDeleted() {
+        ContactTagIntegrationManager manager = buildTestContactTagIntegrationManager();
+        manager.deletePerson(PERSON_SCIENCECOMP);
+        manager.deletePerson(PERSON_CS1231S_1);
+        manager.deletePerson(PERSON_CS1231S_2);
+        manager.removePersonFromTag(TAG_MA1101R, PERSON_MA1101R);
+        assertFalse(manager.hasTag(TAG_SCIENCE_COMP));
     }
 
 

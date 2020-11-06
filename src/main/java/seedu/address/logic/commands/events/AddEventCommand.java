@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -41,11 +42,12 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_ADD_PERSON + "CONTACT_INDEX_LIST]\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " "
             + PREFIX_DESCRIPTION + "CS2103 Team meeting" + " "
-            + PREFIX_DATETIME + "12-12-1234 12:34"
+            + PREFIX_DATETIME + "12-10-2020 12:00" + " "
             + PREFIX_ADD_PERSON + "1,2,3";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Athena";
+    public static final String MESSAGE_CLASHING_EVENT = "An event exists at this time in Athena";
 
     private final AddEventDescriptor addEventDescriptor;
 
@@ -61,10 +63,18 @@ public class AddEventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Event toAdd = createEvent(addEventDescriptor, model.getSortedFilteredPersonList());
+        Event toAdd;
+        try {
+            toAdd = createEvent(addEventDescriptor, model.getSortedFilteredPersonList());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+        if (model.hasClashingEvent(toAdd)) {
+            throw new CommandException(MESSAGE_CLASHING_EVENT);
         }
 
         model.addEvent(toAdd);
@@ -107,9 +117,10 @@ public class AddEventCommand extends Command {
             return tempAssociatedPersons;
         }
 
-        // add FauxPersons to event, in user order, no sorting, duplicates are not added
+        // add FauxPersons to event
         if (addEventDescriptor.getPersonsToAdd().isPresent()) {
             for (Index index : addEventDescriptor.getPersonsToAdd().get()) {
+                assert index.getZeroBased() >= lastShownPersonList.size() : "No person at given index";
 
                 Person personToAdd = lastShownPersonList.get(index.getZeroBased());
                 FauxPerson newFauxPerson = new FauxPerson(personToAdd);

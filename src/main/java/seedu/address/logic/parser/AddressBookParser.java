@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ABSENT_COMMAND_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -32,6 +34,7 @@ import seedu.address.logic.parser.events.FindEventCommandParser;
 import seedu.address.logic.parser.events.RemindEventCommandParser;
 import seedu.address.logic.parser.events.SortEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.reminders.DeleteReminderCommandParser;
 import seedu.address.logic.parser.tags.AddTagCommandParser;
 import seedu.address.logic.parser.tags.DeleteTagCommandParser;
 import seedu.address.logic.parser.tags.EditTagCommandParser;
@@ -67,6 +70,15 @@ public class AddressBookParser {
         final CommandWord commandWord = CommandWord.get(matcher.group("commandWord"));
         final CommandType commandType = CommandType.get(matcher.group("commandType"));
         final String arguments = matcher.group("arguments");
+
+        if (commandWord.requiresType() && commandType.isInvalid()) {
+            throw new ParseException(
+                    String.format(MESSAGE_ABSENT_COMMAND_TYPE, commandWord, commandWord.listAcceptedTypesAsString()));
+        } else if (commandWord.requiresType() && !commandWord.containsType(commandType)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_TYPE, commandType, commandWord,
+                            commandWord.listAcceptedTypesAsString()));
+        }
 
         switch (commandType) {
 
@@ -169,6 +181,9 @@ public class AddressBookParser {
 
             case ADD:
                 return new RemindEventCommandParser().parse(arguments);
+
+            case DELETE:
+                return new DeleteReminderCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

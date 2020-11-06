@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 
 
 /**
- * Sorts the contacts in Athena's address book permanently.
+ * Sorts the persons in Athena's address book permanently.
  * Index entered determines the specific order.
  */
 public class PermaSortContactCommand extends Command {
@@ -22,7 +22,7 @@ public class PermaSortContactCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Sort your contacts permanently "
+            + ": Sorts the currently displayed contact list permanently"
             + "by the index command entered:\n"
             + "1 sorts by lexicographical order of their names,\n"
             + "2 sorts by lexicographical order of their address,\n"

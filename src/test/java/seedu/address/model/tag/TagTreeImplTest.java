@@ -113,7 +113,7 @@ public class TagTreeImplTest {
     }
 
     @Test
-    public void deleteTag_tagInTree_noChange() {
+    public void deleteTag_tagNotInTree_noChange() {
         TagTreeImpl testTree = buildTestTree();
         testTree.deleteTag(TAG_CS2040S_NOT_TREE);
         assertEquals(testTree, buildTestTree());

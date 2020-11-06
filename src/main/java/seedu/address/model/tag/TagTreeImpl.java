@@ -84,6 +84,11 @@ public class TagTreeImpl extends TagTree {
     }
 
     @Override
+    public Set<Tag> getSuperTagsOf(Tag tag) {
+        return tagSuperTagMap.containsKey(tag) ? Set.copyOf(tagSuperTagMap.get(tag)) : Set.of();
+    }
+
+    @Override
     public Set<Tag> getSubTagsRecursive(Tag tag) {
         Set<Tag> finalSet = new HashSet<>();
         Consumer<Tag> consumer = new Consumer<Tag>() {

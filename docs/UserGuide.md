@@ -9,13 +9,13 @@ section below.
 
 #### Table of Contents
 
-* [Introduction](#Introduction)
-* [Quick Start](#Quick-start)
-* [Features](#Features)
-    * [General](#General)
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [General](#general)
         * [`help`](#viewing-help) - Viewing help
         * [`exit`](#exiting-the-program--exit) - Exiting the program
-    * [Contact](#Contact)
+    * [Contacts](#contacts)
         * [`add`](#adding-a-contact-add) - Adding a contact
         * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
         * [`delete`](#deleting-a-contact--delete) - Deleting a contact
@@ -23,7 +23,7 @@ section below.
         * [`find`](#finding-a-contact--find) - Finding a contact
         * [`list`](#listing-all-contacts--list) - Listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
-    * [Event](#event)
+    * [Events](#events)
         * [`add`](#adding-an-event-add) - Adding an event
         * [`clear`](#clearing-all-events--clear) - Clearing all events
         * [`delete`](#deleting-an-event--delete) - Deleting an event
@@ -31,19 +31,18 @@ section below.
         * [`find`](#finding-an-event--find) - Finding an event
         * [`list`](#listing-all-events--list) - Listing all events
         * [`sort`](#sorting-displayed-events--sort) - Sorting displayed events
-
-    * [Tag](#tag)
+    * [Tags](#tags)
         * [`add`](#adding-a-tag-add) - Adding a tag
         * [`delete`](#deleting-a-tag-delete) - Deleting a tag
         * [`edit`](#editing-a-tag-edit) - Editing a tag
         * [`list`](#listing-all-tags-list) - Listing all tags
         * [`view`](#viewing-tags-view) - Viewing tag details
-        
-    * [Reminder](#reminder)
+    * [Reminders](#reminders)
         * [`add`](#adding-a-reminder-add) - Adding a reminder
         * [`list`](#listing-all-reminders-list) - Listing all reminders
-* [FAQ](#FAQ)
-* [Command Summary](#Command-summary)
+* [Data saving](#data-saving)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 * [Glossary](#glossary)
 
 ---
@@ -95,12 +94,13 @@ Athena is perfect for you if you:
 
 Athena supports two key functionalities - the management of contacts and events. Thus, commands are tailored to manage 
 each of these specific functionalities. In addition, to better categorise contacts, they may also be *tagged* with
-specific key-words. Thus, there are **four** types of commands:
+specific key-words. Thus, there are **five** types of commands:
 
-* [general](#general) - commands that are not targeted at any specific functionality
-* [contact](#contact) - commands that are targeted at contacts, distinguished by `-c`
-* [event](#event) - commands that are targeted at events, distinguished by `-e`
-* [tag](#tag) - commands that are targeted at tags, distinguished by `-t`
+* [general](#general) - commands that do not target any specific functionality
+* [contact](#contacts) - commands that target contacts, distinguished by `-c`
+* [event](#events) - commands that target events, distinguished by `-e`
+* [tag](#tags) - commands that target tags, distinguished by `-t`
+* [reminder](#reminders) - commands that target reminders, distinguished by `-r`
 
 <div markdown="block" class="alert alert-info">
 
@@ -117,6 +117,9 @@ specific key-words. Thus, there are **four** types of commands:
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  
+* Commands that do not make changes to data in the address book can be followed by anything.<br>
+  e.g. `list -e` and `list -e asdfg` both list all events.
 
 </div>
 
@@ -140,25 +143,26 @@ Format: `exit`
 
 ---
 
-### Contact
+### Contacts
 
 #### Adding a contact: `add`
 
 Adds a contact to Athena.
 
-Format: `add -c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add -c n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you are missing some of the information, like ADDRESS, you can just end the field with a "." (e.g. "a/.")
+If you are missing some of the information, like ADDRESS, you can just remove the prefix and leave the fields empty, 
+just like the second example below
 </div>
 
 Examples:
 * `add -c n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add -c n/Betsy Crowe t/friend e/betsycrowe@example.com a/. p/1234567 t/criminal`
+* `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
 
 #### Clearing all contacts : `clear`
 
@@ -168,23 +172,23 @@ Format: `clear -c`
 
 #### Deleting a contact : `delete`
 
-Deletes the specified contact from Athena.
+Deletes the specified contact(s) from Athena.
 
-Format: `delete -c INDEX`
+Format: `delete -c CONTACT_INDEX_LIST`
 
-* Deletes the contact at the specified `INDEX`.
+* Deletes the contact(s) at the specified index(es) in `CONTACT_INDEX_LIST`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list -c` followed by `delete -c 2` deletes the 2nd contact in Athena.
+* `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
 #### Deleting contacts by Tag : `deletetag`
 
 Deletes all contacts under a specific tag.
 
-Format: `deletetag -c TAG`
+Format: `deletebytag -c TAG`
 
 * Deletes all contacts with a specific tag.
 * The tag must be a valid tag.
@@ -260,11 +264,11 @@ Format: `sort -c INDEX`
 1. By lexicographical order of their email
 
 Examples:
-* `sort -c 2` would sort all currently displayed contacts by their names in alphabetical order.
+* `sort -c 2` would sort all currently displayed contacts by their address in alphabetical order.
 
 ---
 
-### Event
+### Events
 
 #### Adding an event: `add`
 
@@ -277,6 +281,13 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
+* yyyy-dd-MM HH:mm
+* The following symbols can be used interchangeably to indicate date, time and year of the event.
+    * [.] (full stop)
+    * [/] (forward slash)
+    * [-] (hyphen)
+    * [:] (colon)
+* For example, 12/10.2020 12:00 can be keyed in by the user, and will be registered as 12th October 2020, 12pm.
 
 Legend:
 
@@ -311,14 +322,14 @@ Format: `clear -e`
 
 Deletes the specified event from the event list.
 
-Format: `delete -e INDEX`
+Format: `delete -e EVENT_INDEX_LIST`
 
-* Deletes the event at the specified `INDEX`.
+* Deletes the event(s) at the specified index(es) in `EVENT_INDEX_LIST`.
 * The index refers to the index number shown in the displayed event list.
-* The index must be a positive integer 1, 2, 3, ...
+* The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `list -e` followed by `delete -e 2` deletes the 2nd event in the event list.
+* `list -e` followed by `delete -e 2,3` deletes the 2nd and 3rd event in Athena.
 
 #### Editing an event : `edit`
 
@@ -383,17 +394,21 @@ Format: `sort -e INDEX`
 Examples:
 * `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
 
-
 ---
 
-### Tag
+### Tags
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
 allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an event. 
 Below are some commands to facilitate tag management.
 
+**Note: Tags can exist without being displayed within the contact window.** I.e. A super-tag with no contacts directly associated with it.
+
 **Note: For a tag to exist, it has to have at least one contact tagged OR contains at least one child-tag.**
 Tags that do not meet this criterion will be deleted. 
+
+**Note: Tags are lowercase alphanumeric only. Spaces or other symbols are not supported.** A tag with uppercase 
+letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
 
 #### Adding a tag: `add`
 
@@ -478,14 +493,14 @@ Example:
 
 ### Reminders
 
-Reminders allows you to set custom reminders for your events. You can call up your reminders in application or
+Reminders allow you to set custom reminders for your events. You can call up your reminders in application or
 have them pop up whenever Athena starts. 
 
 #### Adding a reminder: `add`
 
 Adds a new reminder for an event.
 
-Format: `add -r [EVENT_INDEX] [in/DAYS]`
+Format: `add -r EVENT_INDEX in/DAYS`
 
 * `EVENT_INDEX` refers to the index of an event as is shown in the event window.
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
@@ -493,6 +508,20 @@ Format: `add -r [EVENT_INDEX] [in/DAYS]`
 Examples:
 * `add -r 3 in/4` Creates a new reminder for the 3rd event, the reminder will start to pop up every time
 Athena opens 4 days prior to that event 
+
+#### Deleting a reminder : `delete`
+
+Deletes the specified reminder from the reminders list.
+
+Format: `delete -r INDEX`
+
+* Deletes the reminder at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reminder list.
+* You can get the displayed reminder list by using `list -r`
+* The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `list -r` followed by `delete -r 2` deletes the 2nd reminder in the reminders list.
 
 #### Listing all reminders: `list`
 
@@ -503,14 +532,14 @@ Example:
 
 ---
 
-### Saving the data
+### Data saving
+
+Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
+need to save manually. 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-
-**Q**: How do I save changes?
-**A**: Athena's data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 **Q**: Where are the save files that Athena uses stored?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
@@ -518,8 +547,8 @@ Example:
 **Q**: What are the save files that Athena uses?<br>
 **A**: Athena uses three separate save files. They are `addressbook.json`, `calendar.json` and `tagtree.json`.
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Download the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -533,10 +562,11 @@ Action | Format, Examples
 **Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
-**Delete Contact** | `delete -c INDEX`<br> e.g., `delete -c 3`
-**Delete ContactBy Tag** | `deletetag -c TAG`<br> e.g., `delete -c computing`
-**Delete Event** | `delete -e INDEX`<br> e.g., `delete -e 2`
+**Delete Contact By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
+**Delete Contact** | `delete -c CONTACT_INDEX_LIST`<br> e.g., `delete -c 3,1,2`
+**Delete Event** | `delete -e EVENT_INDEX_LIST`<br> e.g., `delete -e 3,1,2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
+**Delete Reminder** | `delete -r INDEX` <br> e.g., `delete -r 1`
 **Edit Contact** | `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`<br> e.g.,`edit -c 2 n/James Lee e/jameslee@example.com`
 **Edit Event** | `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME] [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`<br> e.g., `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30 ap/1,2,3 rp/1,2`
 **Edit Tag** | `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]… [rt/TAG_REMOVE]…` <br> e.g., `edit -t n/computing ri/1 t/cs2030 rt/cs2040`

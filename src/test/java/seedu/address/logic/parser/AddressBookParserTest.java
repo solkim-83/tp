@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_ABSENT_COMMAND_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_TYPE;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -11,12 +13,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.contacts.AddContactCommand;
 import seedu.address.logic.commands.contacts.ClearContactCommand;
 import seedu.address.logic.commands.contacts.DeleteContactCommand;
@@ -71,7 +77,9 @@ public class AddressBookParserTest {
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
                 DeleteContactCommand.COMMAND_WORD + " " + DeleteContactCommand.COMMAND_TYPE + " "
                         + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteContactCommand(INDEX_FIRST_PERSON), command);
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_PERSON);
+        assertEquals(new DeleteContactCommand(indexes), command);
     }
 
     @Test
@@ -141,7 +149,10 @@ public class AddressBookParserTest {
         DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
                 DeleteEventCommand.COMMAND_WORD + " " + DeleteEventCommand.COMMAND_TYPE + " "
                         + INDEX_FIRST_EVENT.getOneBased());
-        assertEquals(new DeleteEventCommand(INDEX_FIRST_EVENT), command);
+
+        ArrayList<Index> indexes = new ArrayList<>();
+        indexes.add(INDEX_FIRST_EVENT);
+        assertEquals(new DeleteEventCommand(indexes), command);
     }
 
     @Test
@@ -175,6 +186,18 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
                 ListEventCommand.COMMAND_WORD + " " + ListEventCommand.COMMAND_TYPE + " 3")
                 instanceof ListEventCommand);
+    }
+
+    @Test
+    public void parseCommand_unrecognizedCommandType_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_ABSENT_COMMAND_TYPE, CommandWord.SHOW,
+                CommandWord.SHOW.listAcceptedTypesAsString()), () -> parser.parseCommand("show -a"));
+    }
+
+    @Test
+    public void parseCommand_invalidCommandType_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_TYPE, CommandType.CONTACT,
+                CommandWord.SHOW, CommandWord.SHOW.listAcceptedTypesAsString()), () -> parser.parseCommand("show -c"));
     }
 
     @Test
