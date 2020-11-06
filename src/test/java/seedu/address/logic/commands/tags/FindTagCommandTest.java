@@ -1,16 +1,5 @@
 package seedu.address.logic.commands.tags;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.booleaninput.BooleanInput;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.tags.FindTagCommandParser;
-import seedu.address.model.Model;
-import seedu.address.model.tag.NameContainsKeywordsPredicate;
-import seedu.address.testutil.ModelManagerBuilder;
-
-import java.util.Optional;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -25,6 +14,18 @@ import static seedu.address.testutil.TagTreeUtil.TAG_ARCHITECTURE_MOD;
 import static seedu.address.testutil.TagTreeUtil.TAG_COMPUTING;
 import static seedu.address.testutil.TagTreeUtil.TAG_NUS;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
+
+import java.util.Optional;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.booleaninput.BooleanInput;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.tags.FindTagCommandParser;
+import seedu.address.model.Model;
+import seedu.address.model.tag.NameContainsKeywordsPredicate;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindTagCommand}.

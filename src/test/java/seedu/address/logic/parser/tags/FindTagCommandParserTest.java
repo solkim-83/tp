@@ -6,13 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.booleaninput.BooleanInput;
 import seedu.address.logic.commands.tags.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
-
-import java.util.Optional;
 
 public class FindTagCommandParserTest {
 
