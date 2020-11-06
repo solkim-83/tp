@@ -28,15 +28,24 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=solkim-83)
 
 * **Enhancements to existing features**:
-  * Updated `add -e` to include more time input formats from the users (Pull request [\#237]())
-  * Wrote additional tests for all event features to increase coverage by 4.49% (Pull request [\#156]())
+  * Updated `add -e` to include more time input formats from the users (Pull request
+    [\#237](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/237))
+  * Wrote additional tests for all event features to increase coverage by 4.49% (Pull request
+    [\#156](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/156))
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `sort -e`, `find -e`, `list -e` and `clear -e`. (Pull request [\#72]())
-    * Amended errors (e.g. grammatical) to existing documentation of all existing features (Pull request [\#74]())
+    * Added documentation for the features `sort -e`, `find -e`, `list -e` and `clear -e`. (Pull request
+    [\#33](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/33),
+    [\#54](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/54),
+    [\#178](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/178))
+    * Amended errors (e.g. grammatical) to existing documentation of all existing features (Pull request
+    [\#250](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/250))
   * Developer Guide:
-    * Added implementation details of the `sort -e`, `find -e`, `list -e` and `clear -e` feature. (Pull request [\#151](), [\#32]()))
+    * Added implementation details of the `sort -e`, `find -e`, `list -e` and `clear -e` feature. (Pull request
+    [\#32](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/32),
+    [\#151](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/151),
+    [\#250](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/250))
 
 * **Community**:
   * Reported bugs and suggestions for other teams in the class ([Link](https://github.com/solkim-83/ped/issues))
