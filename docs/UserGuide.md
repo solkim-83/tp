@@ -562,8 +562,8 @@ Action | Format, Examples
 **Add Reminder** | `add -r [EVENT_INDEX] [in/DAYS]`
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
-**Delete Contact By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
 **Delete Contact** | `delete -c CONTACT_INDEX_LIST`<br> e.g., `delete -c 3,1,2`
+**Delete Contact By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
 **Delete Event** | `delete -e EVENT_INDEX_LIST`<br> e.g., `delete -e 3,1,2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Delete Reminder** | `delete -r INDEX` <br> e.g., `delete -r 1`
