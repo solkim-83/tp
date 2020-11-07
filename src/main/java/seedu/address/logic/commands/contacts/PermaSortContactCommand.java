@@ -6,6 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.CommandWord;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.comparators.PersonComparator;
 import seedu.address.model.Model;
@@ -17,7 +18,7 @@ import seedu.address.model.Model;
  */
 public class PermaSortContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "psort";
+    public static final String COMMAND_WORD = CommandWord.PERMASORT.toString();
 
     public static final String COMMAND_TYPE = CommandType.CONTACT.toString();
 

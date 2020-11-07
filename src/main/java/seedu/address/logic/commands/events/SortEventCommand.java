@@ -35,7 +35,7 @@ public class SortEventCommand extends Command {
     private final Index index;
 
     /**
-     * @param index the order in which to sort the event entries in Athena.
+     * @param index the order in which to sort the calendar
      */
     public SortEventCommand(Index index) {
         requireAllNonNull(index);
