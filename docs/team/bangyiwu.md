@@ -87,6 +87,6 @@ Given below are my contributions to the project.
   [\#185](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/185), 
   [\#183](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/183)
   * Reported bugs and suggestions for other teams in the class (examples: https://github.com/bangyiwu/ped/issues)
-  * Reported bugs and suggestions for our own team member's implementations, e.g. PR [\#247](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/242) was created because of a bug I found
+  * Reported bugs and suggestions for our own team member's implementations, e.g. PR [\#247](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/247) was created because of a bug I found
   * Some parts of the sorting feature I added was adopted by the event team ([\#66]())
 

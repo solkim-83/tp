@@ -18,13 +18,16 @@ import java.util.Locale;
 public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Date time format not accepted, the following are accepted:\n"
             + "dd-MM-yyyy HH:mm\n"
+            + "d-M-yy H:m\n"
             + "yyyy-dd-MM HH:mm\n"
+            + "yy-d-M H:m\n"
             + "[.][/][-][:] can be used interchangeably to indicate date, time, year of the event.";
 
     private static final String symbol = "[.][/][-][:]";
-    private static final String STANDARD_TIME_PATTERN =
-            "[dd" + symbol + "MM" + symbol + "yyyy HH" + symbol + "mm]"
-                    + "[yyyy" + symbol + "dd" + symbol + "MM HH" + symbol + "mm]";
+    private static final String STANDARD_TIME_PATTERN = "[d" + symbol + "M" + symbol + "yyyy H" + symbol + "m]"
+            + "[yyyy" + symbol + "d" + symbol + "M H" + symbol + "m]"
+            + "[d" + symbol + "M" + symbol + "yy H" + symbol + "m]"
+            + "[yy" + symbol + "d" + symbol + "M H" + symbol + "m]";
 
     public final LocalDateTime time;
 

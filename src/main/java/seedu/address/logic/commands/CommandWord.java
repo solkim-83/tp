@@ -21,7 +21,7 @@ public enum CommandWord {
     HELP("help", List.of()),
     INTRO("intro", List.of()),
     LIST("list", List.of(CommandType.CONTACT, CommandType.EVENT, CommandType.TAG, CommandType.REMINDER)),
-    VIEW("view", List.of(CommandType.TAG)),
+    VIEW("view", List.of(CommandType.EVENT, CommandType.TAG)),
     SHOW("show", List.of(CommandType.REMINDER)),
     SORT("sort", List.of(CommandType.CONTACT, CommandType.EVENT)),
     PERMASORT("psort", List.of(CommandType.CONTACT)),
