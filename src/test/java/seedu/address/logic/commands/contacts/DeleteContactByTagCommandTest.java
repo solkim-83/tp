@@ -6,14 +6,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.RemindersImpl;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagTreeImpl;
+import seedu.address.testutil.ModelManagerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -21,8 +18,7 @@ import seedu.address.model.tag.TagTreeImpl;
  */
 public class DeleteContactByTagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new Calendar(),
-            new TagTreeImpl(), new UserPrefs(), new RemindersImpl());
+    private Model model = new ModelManagerBuilder().withAddressBook(getTypicalAddressBook()).build();
 
     @Test
     public void execute_deleteContactByTag_success() {
@@ -32,8 +28,7 @@ public class DeleteContactByTagCommandTest {
         String expectedMessage = DeleteContactByTagCommand.MESSAGE_DELETE_PERSON_SUCCESS + tagForDeletion.tagName;
 
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(),
-                new Calendar(), new TagTreeImpl(), new UserPrefs(), new RemindersImpl());
+        ModelManager expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook()).build();
         Person personToDelete = model.getSortedFilteredPersonList().get(0);
         Person secondPersonToDelete = model.getSortedFilteredPersonList().get(1);
         Person thirdPersonToDelete = model.getSortedFilteredPersonList().get(3);
@@ -51,6 +46,5 @@ public class DeleteContactByTagCommandTest {
 
         assertCommandFailure(deleteContactByTagCommand, model, deleteContactByTagCommand.MESSAGE_NON_EXISTENT_TAG);
     }
-
 
 }
