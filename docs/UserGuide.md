@@ -32,6 +32,7 @@ section below.
         * [`find`](#finding-an-event---find) - Finding an event
         * [`list`](#listing-all-events---list) - Listing all events
         * [`sort`](#sorting-displayed-events---sort) - Sorting displayed events
+        * [`view`](#viewing-an-event---view) - Viewing an event
     * [Tags](#tags)
         * [`add`](#adding-a-tag---add) - Adding a tag
         * [`delete`](#deleting-a-tag---delete) - Deleting a tag
@@ -412,7 +413,7 @@ Format: `sort -e INDEX`
 Examples:
 * `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
 
-#### Viewing an event: `view`
+#### Viewing an event - `view`
 
 Shows specific details of an event.
 Details include:
@@ -426,6 +427,8 @@ Format: `view -e INDEX`
 
 Example:
 * `view -e 1` Shows the details (as specified above) for the event indexed at 1.
+
+![View Event Behaviour](images/ug-images/eventBehaviourImages/view-event-behaviour.png)
 
 ---
 
