@@ -191,11 +191,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_viewEvent() throws Exception {
-        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD + " " + ViewEventCommand.COMMAND_TYPE)
-                instanceof ViewEventCommand);
-        assertTrue(parser.parseCommand(
-                ViewEventCommand.COMMAND_WORD + " " + ViewEventCommand.COMMAND_TYPE + " 3")
-                instanceof ViewEventCommand);
+        ViewEventCommand command = (ViewEventCommand) parser.parseCommand(
+                ViewEventCommand.COMMAND_WORD + " " + ViewEventCommand.COMMAND_TYPE + " "
+                        + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new ViewEventCommand(INDEX_FIRST_EVENT), command);
     }
 
     @Test
