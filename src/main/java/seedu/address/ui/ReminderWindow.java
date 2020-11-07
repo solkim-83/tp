@@ -27,7 +27,6 @@ public class ReminderWindow extends UiPart<Stage> {
      */
     public ReminderWindow(Logic logic) {
         super(FXML, new Stage());
-        System.out.println(logic == null);
         this.logic = logic;
 
         reminderMessage.setWrapText(true);
@@ -77,7 +76,6 @@ public class ReminderWindow extends UiPart<Stage> {
      */
     public String buildAlertMessage() {
         String alertMessage = "Here are your active reminders: \n";
-        System.out.println(logic == null);
         ObservableList<Reminder> reminders = logic.getFilteredReminderList();
         if (reminders.size() == 0) {
             return "You currently do not have any reminders";

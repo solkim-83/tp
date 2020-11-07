@@ -68,7 +68,7 @@ public class Reminder {
 
     @Override
     public String toString() {
-        return eventToRemind.toString() + " in " + countdownFromNow() + " days";
+        return eventToRemind.toString();
     }
 
 }

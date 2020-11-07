@@ -309,6 +309,8 @@ mm | Digits for minutes of an hour
 
 Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
 
+![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
+
 
 Examples:
 * `add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 1, 2 and 3 from the contact list.
@@ -505,6 +507,7 @@ Format: `view -t t/TAG [t/TAG]…`
 Example:
 * `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
+---
 
 ### Reminders
 
@@ -521,8 +524,15 @@ Format: `add -r EVENT_INDEX in/DAYS`
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
 
 Examples:
-* `add -r 3 in/4` Creates a new reminder for the 3rd event, the reminder will start to pop up every time
-Athena opens 4 days prior to that event 
+* `add -r 5 in/3` Creates a new reminder for the 5th event, the reminder will start to pop up every time
+Athena opens 3 days prior to that event 
+
+(After entering the command "add -r 5 in/3")
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
+
+(When reminders are active, every time Athena is opened, the alert window will pop up as shown below)
+
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
 #### Deleting a reminder : `delete`
 
@@ -544,6 +554,8 @@ Lists all reminders in the remarks panel. It lists each reminder and a countdown
 
 Example:
 * `list -r` 
+
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
 
 ---
 
