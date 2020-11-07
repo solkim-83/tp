@@ -524,6 +524,7 @@ Format: `view -t t/TAG [t/TAG]…`
 Example:
 * `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
+
 ---
 
 ### Reminders
