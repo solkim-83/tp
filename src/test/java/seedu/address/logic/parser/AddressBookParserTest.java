@@ -37,6 +37,7 @@ import seedu.address.logic.commands.events.EditEventCommand;
 import seedu.address.logic.commands.events.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.commands.events.FindEventCommand;
 import seedu.address.logic.commands.events.ListEventCommand;
+import seedu.address.logic.commands.events.ViewEventCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -186,6 +187,15 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(
                 ListEventCommand.COMMAND_WORD + " " + ListEventCommand.COMMAND_TYPE + " 3")
                 instanceof ListEventCommand);
+    }
+
+    @Test
+    public void parseCommand_viewEvent() throws Exception {
+        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD + " " + ViewEventCommand.COMMAND_TYPE)
+                instanceof ViewEventCommand);
+        assertTrue(parser.parseCommand(
+                ViewEventCommand.COMMAND_WORD + " " + ViewEventCommand.COMMAND_TYPE + " 3")
+                instanceof ViewEventCommand);
     }
 
     @Test
