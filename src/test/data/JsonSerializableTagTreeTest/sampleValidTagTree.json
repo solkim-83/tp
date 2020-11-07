@@ -1,5 +1,6 @@
 {
   "tagSubTagMap" : {
+    "architecture" : [ "architecturemod" ],
     "science" : [ "sciencecomp" ],
     "computing" : [ "sciencecomp" ],
     "sciencecomp" : [ "ma1101r", "cs1231s" ],

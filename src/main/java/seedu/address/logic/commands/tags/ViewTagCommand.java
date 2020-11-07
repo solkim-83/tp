@@ -1,9 +1,10 @@
 package seedu.address.logic.commands.tags;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.tags.ListTagCommand.INDICATOR_SUPERTAG;
-import static seedu.address.logic.commands.tags.ListTagCommand.parsePersonSetIntoString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.util.TagUtil.INDICATOR_SUPERTAG;
+import static seedu.address.model.util.TagUtil.parsePersonSetIntoString;
+import static seedu.address.model.util.TagUtil.parseTagSetIntoString;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -115,17 +116,6 @@ public class ViewTagCommand extends Command {
                 INDICATOR_NO_RELATED_CONTACTS_FOUND));
 
         return sb;
-    }
-
-    /**
-     * Returns a String of comma separated sub-tags within curly braces.
-     */
-    private static String parseTagSetIntoString(Set<Tag> tagSet, String messageIfEmpty) {
-        return tagSet.stream()
-                .map(tag -> tag.toString())
-                .reduce((s1, s2) -> s1 + ", " + s2)
-                .map(string -> "{ " + string + " }")
-                .orElse(messageIfEmpty);
     }
 
     @Override
