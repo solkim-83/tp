@@ -3,6 +3,11 @@ package seedu.address.logic.commands.tags;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.util.TagUtil.INDICATOR_NO_CONTACTS_TAGGED;
+import static seedu.address.model.util.TagUtil.INDICATOR_SUPERTAG;
+import static seedu.address.model.util.TagUtil.MESSAGE_NO_TAGS_FOUND;
+import static seedu.address.model.util.TagUtil.MESSAGE_TAGS_FOUND;
+import static seedu.address.model.util.TagUtil.parsePersonSetIntoString;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -14,7 +19,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
@@ -28,16 +32,6 @@ public class FindTagCommand extends Command {
     public static final String COMMAND_WORD = CommandWord.FIND.toString();
 
     public static final String COMMAND_TYPE = CommandType.TAG.toString();
-
-    public static final String MESSAGE_NO_TAGS_FOUND = "No tag assignments were found!";
-
-    public static final String MESSAGE_TAGS_FOUND = "Listed all tags and contacts directly under these tags:";
-
-    public static final String MESSAGE_INVALID_SEARCH_FIELD = "Tag queries should be alphanumeric with no spaces.";
-
-    public static final String INDICATOR_SUPERTAG = " (supertag)";
-
-    public static final String INDICATOR_NO_CONTACTS_TAGGED = "no contacts tagged";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Finds the tags which names (partially or entirely) contain the specified keyword (case-insensitive)."
@@ -95,18 +89,6 @@ public class FindTagCommand extends Command {
                 .reduce((s1, s2) -> s1 + '\n' + s2)
                 .map(string -> MESSAGE_TAGS_FOUND + '\n' + string)
                 .orElse(MESSAGE_NO_TAGS_FOUND);
-    }
-
-    /**
-     * Returns a string that combines the {@code Person} set by commas, then adds curly braces.
-     * If the set is empty, returns {@code messageIfNoneFound}.
-     */
-    protected static String parsePersonSetIntoString(Set<Person> set, String messageIfNoneFound) {
-        return set.stream()
-                .map(t -> t.getName().toString())
-                .reduce((s1, s2) -> s1 + ", " + s2)
-                .map(string -> "{ " + string + " }")
-                .orElse(messageIfNoneFound);
     }
 
     @Override

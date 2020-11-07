@@ -3,6 +3,7 @@ package seedu.address.logic.parser.tags;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.util.TagUtil.MESSAGE_INVALID_SEARCH_FIELD;
 
 import java.util.Optional;
 
@@ -40,7 +41,7 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         if (hasKeywordInput) {
             String trimmedKeyword = parseKeywordsField(argumentMultimap.getValue(PREFIX_TAG).get());
             if (!StringUtil.isOneWordLong(trimmedKeyword)) {
-                throw new ParseException(FindTagCommand.MESSAGE_INVALID_SEARCH_FIELD);
+                throw new ParseException(MESSAGE_INVALID_SEARCH_FIELD);
             }
             NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate();
             predicate.setKeyword(trimmedKeyword);

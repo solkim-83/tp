@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPERTAG_ONLY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.model.util.TagUtil.MESSAGE_INVALID_SEARCH_FIELD;
 
 import java.util.Optional;
 
@@ -47,7 +48,7 @@ public class FindTagCommandParserTest {
     public void parse_invalidTagInput_failure() {
 
         // invalid prefix used
-        assertParseFailure(parser, " " + PREFIX_TAG + "@ #", FindTagCommand.MESSAGE_INVALID_SEARCH_FIELD);
+        assertParseFailure(parser, " " + PREFIX_TAG + "@ #", MESSAGE_INVALID_SEARCH_FIELD);
 
     }
 
