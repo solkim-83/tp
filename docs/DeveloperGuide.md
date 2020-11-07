@@ -343,12 +343,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                        | view my events in an ordered manner   | view the details of my events                                                                             |
 | `* *`    | user                                        | search for a contact                  | locate details of contacts without having to go through the entire list                                   |
 | `* *`    | user                                        | edit a contact's details              | change outdated information without having to delete and re-add contacts                                  |
-| `* *`    | user with many contacts in the address book | sort contacts by name                 | so that I can view my contacts in a more consistent manner and find the contacts I want quickly           |
+| `* *`    | user with many contacts in the address book | sort contacts by contact details      | so that I can view my contacts in a more consistent manner and find the contacts I want quickly           |
 | `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
-| `* *`    | user with many events in the address book   | sort events by name                   | so that I can view my events in a more consistent manner and find the events I want quickly               |
+| `* *`    | user with many events in the calendar       | sort events by event details          | so that I can view my events in a more consistent manner and find the events I want quickly               |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -356,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### **Use case: View introduction**
 
-1.  User opens Athena for the first time
+1.  User opens Athena for the first time.
 
 1.  Athena displays an introduction message, with a guide on how to use basic commands.
 
@@ -367,25 +366,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a contact
+1.  User requests to add a contact.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User input missing one or multiple fields
+* 1a. User input missing one or multiple fields.
+
     * 1a1. Athena shows an error message.
 
-  Use case ends.
+    Use case ends.
 
 #### **Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list contacts
-2.  Athena shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  Athena deletes the contact
+1.  User requests to list contacts.
+
+1.  Athena shows a list of contacts.
+
+1.  User requests to delete a specific contact in the list.
+
+1.  Athena deletes the contact.
 
     Use case ends.
 
@@ -405,16 +408,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts
-2.  Athena shows a list of contacts in default order
-3.  User requests to sort the contacts in the list
-4.  Athena displays the contacts in the requested order
+1.  User requests to list contacts.
+
+1.  Athena shows a list of contacts in default order.
+
+1.  User requests to sort the contacts in the list.
+
+1.  Athena displays the contacts in the requested order.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+
     Use case ends.
 
 * 3a. The given index is invalid.
@@ -430,15 +437,19 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1.  User uses the edit command to inform the system of which fields of the contact they wish to change.
-2.  Athena updates the contact information.
-3.  Athena sends an acknowledgement message to the user to notify of the edits made.
+
+1.  Athena updates the contact information.
+
+1.  Athena sends an acknowledgement message to the user to notify of the edits made.
 
     Use case ends.
 
 **Extensions**
 
 * 1a. Tag to be removed does not exist.
+
     * 1a1. Athena notifies the user of the error.
+    
     * 1a2. Athena aborts the command without making changes.
 
       Use case ends.
@@ -448,13 +459,15 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 **MSS**
 
 1. User uses the find command and informs the systems of keywords and additional fields the contact has to match.
-2. Athena displays a list of contacts that matches the keywords and contains the additional fields.
+
+1. Athena displays a list of contacts that matches the keywords and contains the additional fields.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+
     * 2a1. Athena informs the user that their search did not come up with any valid matches.
 
        Use case ends.
@@ -485,10 +498,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to view events
-2.  Athena shows a list of events
-3.  User requests to delete a specific event in the list
-4.  Athena deletes the event
+1.  User requests to view events.
+
+1.  Athena shows a list of events.
+
+1.  User requests to delete a specific event in the list.
+
+1.  Athena deletes the event.
 
     Use case ends.
 
@@ -496,7 +512,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -508,10 +524,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to view events
-2.  Athena shows a list of events
-3.  User requests to edit a specific event in the list
-4.  Athena edits the event
+1.  User requests to view events.
+
+1.  Athena shows a list of events.
+
+1.  User requests to edit a specific event in the list.
+
+1.  Athena edits the event.
 
     Use case ends.
 
@@ -519,7 +538,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -537,8 +556,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to search for a particular event 
-2.  Athena shows a list of events that match the criteria (e.g. contain a certain keyword) 
+1.  User requests to search for a particular event.
+
+1.  Athena shows a list of events that match the criteria (e.g. contain a certain keyword).
 
     Use case ends.
 
@@ -546,7 +566,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given keyword is invalid.
 
@@ -558,17 +578,21 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to list events
-2.  Athena shows a list of events in default order
-3.  User requests to sort the events in the list
-4.  Athena displays the events in the requested order
+1.  User requests to list events.
 
-  Use case ends.
+1.  Athena shows a list of events in default order.
+
+1.  User requests to sort the events in the list.
+
+1.  Athena displays the events in the requested order.
+
+    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-  Use case ends.
+
+    Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -580,8 +604,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to view all events recorded 
-2.  Athena shows a list of events  
+1.  User requests to view all events recorded.
+
+1.  Athena shows a list of events. 
 
     Use case ends.
 
@@ -589,14 +614,15 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
   
 #### **Use case: List all tags**
 
 **MSS**
 
-1. User requests to view all tags in Athena
-2. Athena shows a list of tags.
+1. User requests to view all tags in Athena.
+
+1. Athena shows a list of tags.
 
     Use case ends.
     
@@ -604,22 +630,32 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1. User requests to add a tag 
-2. User specifies contacts to be added to this tag
-3. User specifies other tags to be added as child-tags
-4. Athena adds the new tag and its relations to specified contacts and child-tags
+1. User requests to add a tag.
+
+1. User specifies contacts to be added to this tag.
+
+1. User specifies other tags to be added as child-tags.
+
+1. Athena adds the new tag and its relations to specified contacts and child-tags.
+
     Use case ends.
 
 **Extensions**
 * 1a. The tag already exists in Athena.
+
     * 1a1. Athena shows an error message.
-    Use case ends.
+    
+      Use case ends.
 * 2a. Contact specified is invalid.
+
     * 2a1. Athena shows an error message.
-    Use case ends.
+    
+      Use case ends.
 * 3a. Child-tag specified does not exist.
+
     * 3a1. Athena shows an error message.
-    Use case ends.
+    
+      Use case ends.
  
 
 ### Non-Functional Requirements
@@ -628,9 +664,8 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 1.  Should be able to hold up to 1000 contacts and events without a noticeable sluggishness in performance for typical usage.
 1.  Should be sufficiently intuitive for new or inexperienced users to understand and navigate.
 1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-1.  Should not require an internet connection (bar downloading the app)
+1.  Should not require an internet connection (bar downloading the app).
 
-*{More to be added}*
 
 ### Glossary
 
@@ -653,7 +688,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -682,7 +717,7 @@ testers are expected to do more *exploratory* testing.
        
 ### Finding a person
 
-1. Finding a person.
+1. Finding a person
 
     1. Test case: `find -c n/alex betsy`
        Expected: For default contact list, shows `Alex Yeoh` and `Betsy Crower` (and possibly other contacts containing either `alex` or `betsy`).
@@ -711,7 +746,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a tag
 
-1. Add a new tag to various contacts.
+1. Adding a new tag to various contacts
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
@@ -726,7 +761,7 @@ testers are expected to do more *exploratory* testing.
       
 ### Deleting a tag
 
-1. Deleting a tag.
+1. Deleting a tag
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
@@ -740,7 +775,7 @@ testers are expected to do more *exploratory* testing.
    
 ### Editing a tag
 
-1. Editing a tag.
+1. Editing a tag
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
@@ -777,6 +812,5 @@ testers are expected to do more *exploratory* testing.
 Additionally, a major challenge was that we intended to implement commands that could affect tags and persons in a way where other persons and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
 There were also issues that were more difficult to spot, such as the ability to create cyclic relations between tags.
 As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
-Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons.
- 
+Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons. 
 
