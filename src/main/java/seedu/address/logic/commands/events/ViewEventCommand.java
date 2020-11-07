@@ -30,7 +30,8 @@ public class ViewEventCommand extends Command {
     public static final String COMMAND_TYPE = CommandType.EVENT.toString();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
-            + ": Shows the full details of the event identified by the index number used in the displayed event list.\n\n"
+            + ": Shows the full details of the event "
+            + "identified by the index number used in the displayed event list.\n\n"
             + "Parameters: INDEX (must be positive a integer)\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + COMMAND_TYPE + " 1" + "\n"
