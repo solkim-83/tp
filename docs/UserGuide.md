@@ -368,7 +368,7 @@ Picture example:
 
 1. Entering edit command "edit -e 1 ap/1,2 rp/1,2" to edit the participants of CS2103 Meeting.
 
-![Edit Event Behaviour before](images/ug-images/eventBehaviourImages/edit-event-before-behaviour.png)
+![Edit Event Behaviour before](images/ug-images/eventBehaviourImages/edit-event-behaviour-before.png)
 
 2. Event participants successfully edited.
 
