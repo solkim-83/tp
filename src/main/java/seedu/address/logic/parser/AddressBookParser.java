@@ -32,6 +32,7 @@ import seedu.address.logic.parser.events.EditEventCommandParser;
 import seedu.address.logic.parser.events.FindEventCommandParser;
 import seedu.address.logic.parser.events.RemindEventCommandParser;
 import seedu.address.logic.parser.events.SortEventCommandParser;
+import seedu.address.logic.parser.events.ViewEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.reminders.DeleteReminderCommandParser;
 import seedu.address.logic.parser.tags.AddTagCommandParser;
@@ -134,6 +135,9 @@ public class AddressBookParser {
 
             case LIST:
                 return new ListEventCommand();
+
+            case VIEW:
+                return new ViewEventCommandParser().parse(arguments);
 
             case SORT:
                 return new SortEventCommandParser().parse(arguments);
