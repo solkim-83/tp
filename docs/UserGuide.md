@@ -200,7 +200,7 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 * Tags that are not mentioned will *NOT* be affected.
 * `t/TAG` adds `TAG` to the user.
 * `rt/TAG` removes `TAG` from the user.
-* Tags are removed before new tags are added.
+* Tag removal is done before tag addition.
 * You can remove all the person’s tags by typing `rt/*`.
 
 Examples:
