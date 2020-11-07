@@ -6,8 +6,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.CommandWord;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * Clears Athena of Persons.
@@ -23,7 +24,12 @@ public class ClearContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        // This implementation is inefficient but it will remove said person from both the contact and event list.
+        // model.deletePerson removes the person from any event they attend
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        for (Person person : addressBook.getPersonList()) {
+            model.deletePerson(person);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
