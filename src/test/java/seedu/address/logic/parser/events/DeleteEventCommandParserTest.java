@@ -3,7 +3,8 @@ package seedu.address.logic.parser.events;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import seedu.address.logic.commands.events.DeleteEventCommand;
  */
 public class DeleteEventCommandParserTest {
 
-    private DeleteEventCommandParser parser = new DeleteEventCommandParser();
+    private final DeleteEventCommandParser parser = new DeleteEventCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

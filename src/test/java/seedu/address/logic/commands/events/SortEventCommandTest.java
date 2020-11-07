@@ -22,7 +22,7 @@ public class SortEventCommandTest {
     private Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
 
     @Test
-    public void execute_validSortingOfEvents_byAlphabeticalOrder_success() {
+    public void execute_validSortingOfEventsByAlphabeticalOrder_success() {
         SortEventCommand sortEventCommand = new SortEventCommand(Index.fromZeroBased(0));
 
         String expectedMessage = "Sorted by description in alphabetical order";
@@ -39,7 +39,7 @@ public class SortEventCommandTest {
     }
 
     @Test
-    public void execute_validSortingOfEvents_byChronologicalOrder_success() {
+    public void execute_validSortingOfEventsByChronologicalOrder_success() {
         SortEventCommand sortEventCommand = new SortEventCommand(Index.fromZeroBased(1));
 
         String expectedMessage = "Sorted by time in chronological order";

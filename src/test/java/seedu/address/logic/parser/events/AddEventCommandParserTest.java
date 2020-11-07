@@ -1,30 +1,38 @@
 package seedu.address.logic.parser.events;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ADD_PERSON_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.ADD_PERSON_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.ADD_PERSON_WILD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_LUNCH;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADD_PERSON_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADD_PERSON_WILD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_LUNCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_INDEX_LIST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.contacts.AddContactCommand;
 import seedu.address.logic.commands.events.AddEventCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Time;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 import java.util.ArrayList;
 
 public class AddEventCommandParserTest {
-    private AddEventCommandParser parser = new AddEventCommandParser();
+    private final AddEventCommandParser parser = new AddEventCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

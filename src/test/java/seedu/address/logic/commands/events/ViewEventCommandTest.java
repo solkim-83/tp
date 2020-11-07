@@ -10,10 +10,10 @@ import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
