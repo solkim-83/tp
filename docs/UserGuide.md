@@ -23,6 +23,7 @@ section below.
         * [`find`](#finding-a-contact--find) - Finding a contact
         * [`list`](#listing-all-contacts--list) - Listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
+        * [`psort`](#sorting-displayed-contacts--psort) - Sorting contacts permanently
     * [Events](#events)
         * [`add`](#adding-an-event--add) - Adding an event
         * [`clear`](#clearing-all-events--clear) - Clearing all events
@@ -39,6 +40,7 @@ section below.
         * [`view`](#viewing-tags--view) - Viewing tag details
     * [Reminders](#reminders)
         * [`add`](#adding-a-reminder--add) - Adding a reminder
+        * [`delete`](#deleting-a-reminder--delete) - Deleting a reminder
         * [`list`](#listing-all-reminders--list) - Listing all reminders
 * [Data saving](#data-saving)
 * [FAQ](#faq)
@@ -248,11 +250,29 @@ Format: `sort -c INDEX`
 * Sorts through all contacts currently on screen and lists them according to the user-requested order
 * Index definitions:
 1. By lexicographical order of their names
-1. By lexicographical order of their address
-1. By lexicographical order of their email
+2. By lexicographical order of their address
+3. By lexicographical order of their email
 
 Examples:
 * `sort -c 2` would sort all currently displayed contacts by their address in alphabetical order.
+
+![Add Event Behaviour](images/ug-images/contactBehaviourImages/sort-contacts-behaviour.png)
+
+
+#### Sorting displayed contacts permanently : `psort`
+
+Sorts all contacts stored in Athena permanently.
+
+Format: `psort -c INDEX`
+
+* Sorts through all contacts currently on screen and lists them according to the user-requested order
+* Index definitions:
+1. By lexicographical order of their names
+2. By lexicographical order of their address
+3. By lexicographical order of their email
+
+Examples:
+* `psort -c 2` would sort all contacts by their address in alphabetical order.
 
 ---
 
@@ -288,11 +308,15 @@ HH | Digits for hour of the day in 24-hr time
 mm | Digits for minutes of an hour
 
 Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
-![Add Event Behaviour](images/ug-images/add-event-behaviour.png)
+
 
 Examples:
 * `add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 1, 2 and 3 from the contact list.
 * `add -e at/20-10-2020 14:00 d/CS2103 Team meeting ap/5,1,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 5, 1 and 3 from the contact list.
+
+1. After adding a contact using "add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3"
+
+![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
 
 #### Clearing all events : `clear`
 
@@ -304,7 +328,7 @@ Format: `clear -e`
 :exclamation: **WARNING:** :exclamation: **All events will be deleted following the use of this command! (shown below)**
 </div>
 
-![Clear Event Behaviour](images/ug-images/clear-event-behaviour.png)
+![Clear Event Behaviour](images/ug-images/eventBehaviourImages/clear-event-behaviour.png)
 
 #### Deleting an event : `delete`
 
@@ -342,10 +366,13 @@ Examples:
 
 Picture example:
 
-Before
-![Edit Event Behaviour before](images/ug-images/edit-event-behaviour-before.png)
-After
-![Edit Event Behaviour after](images/ug-images/edit-event-behaviour-after.png)
+1. Entering edit command "edit -e 1 ap/1,2 rp/1,2" to edit the participants of CS2103 Meeting.
+
+![Edit Event Behaviour before](images/ug-images/eventBehaviourImages/edit-event-before-behaviour.png)
+
+2. Event participants successfully edited.
+
+![Edit Event Behaviour after](images/ug-images/eventBehaviourImages/edit-event-behaviour-after.png)
 
 #### Finding an event : `find`
 
@@ -566,6 +593,7 @@ Action | Format, Examples
 **List Tags** | `list -t`
 **List Reminders** | `list -r`
 **Sort Contacts** | `sort -c INDEX`
+**Sort Contacts Permanently** | `psort -c INDEX`
 **Sort Events** | `sort -e INDEX`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
 

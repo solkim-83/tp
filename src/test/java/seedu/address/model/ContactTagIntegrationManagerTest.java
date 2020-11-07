@@ -38,7 +38,7 @@ public class ContactTagIntegrationManagerTest {
             .withTags("computing").build();
     public static final Person PERSON_COMPUTING_SCIENCE = new PersonBuilder()
             .withName("person6")
-            .withTags("computing", "science").build();
+            .withTags("computing", "science", "architecturemod").build();
     public static final Person PERSON_CS2040S_NOT_IN = new PersonBuilder()
             .withName("person7")
             .withTags("CS2040S").build();
