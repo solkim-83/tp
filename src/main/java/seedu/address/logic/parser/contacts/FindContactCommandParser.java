@@ -61,7 +61,7 @@ public class FindContactCommandParser implements Parser<FindContactCommand> {
     }
 
     /**
-     * Returns a trimmed predicateField. If the field is not valid, throws a ParseException instead.
+     * Returns a trimmed predicateField. Throws a ParseException if the field is invalid.
      */
     private String parseNonTagPredicateField(String predicateField) throws ParseException {
         if (!ContactContainsFieldsPredicate.isValidPredicateField(predicateField)) {

@@ -1,6 +1,6 @@
 package seedu.address.commons.core.booleaninput;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Represents a boolean user input.
@@ -11,15 +11,15 @@ import java.util.Set;
  */
 public class BooleanInput {
 
-    private static final Set<String> SET_TRUE_STRINGS = Set.of("t", "true", "1");
-    private static final Set<String> SET_FALSE_STRINGS = Set.of("f", "false", "0");
+    private static final List<String> SET_TRUE_STRINGS = List.of("t", "true", "1");
+    private static final List<String> SET_FALSE_STRINGS = List.of("f", "false", "0");
 
     private static final BooleanInput BOOLEAN_TRUE = new BooleanInput(true);
     private static final BooleanInput BOOLEAN_FALSE = new BooleanInput(false);
 
-    public static final String MESSAGE_CONSTRAINTS = "A boolean indicator must be one of the following: "
-            + String.join(",", SET_TRUE_STRINGS) + " (true) "
-            + String.join(",", SET_FALSE_STRINGS) + " (false)";
+    public static final String MESSAGE_CONSTRAINTS = "A boolean indicator must be one of the following:\n"
+            + "[true]: " + String.join(", ", SET_TRUE_STRINGS) + "\n"
+            + "[false]: " + String.join(", ", SET_FALSE_STRINGS);
 
     private final boolean boolValue;
 
