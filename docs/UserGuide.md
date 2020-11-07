@@ -288,10 +288,9 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 
 DATE_TIME formats currently accepted
-* dd-MM-yyyy HH:mm
-* d-M-yy H:m
-* yyyy-dd-MM HH:mm
-* yy-d-M H:m
+* d-M-y H:m
+* y-d-M H:m
+* 2 digit inputs for `y` will automatically be in the 21st century. (e.g. `20` is interpreted as the year 2020)
 * The following symbols can be used interchangeably to indicate date, time and year of the event.
     * [.] (full stop)
     * [/] (forward slash)
@@ -303,11 +302,11 @@ Legend:
 
 Short form | What it represents
 ----------- | -----------
-dd | Digits for date
-MM | Digits for month
-yyyy | Digits for year
-HH | Digits for hour of the day in 24-hr time
-mm | Digits for minutes of an hour
+d | Day of month (e.g. `7`, `23`)
+M | Month of year (e.g. `2`, `10`)
+y | Year (e.g. `20`, `2020` both meaning the year 2020)
+H | Hour of the day in 24-hr time (e.g. `8`, `23`)
+m | Minutes of an hour (e.g. `9`, `45`)
 
 Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
 
@@ -316,7 +315,7 @@ Behaviour: a new event item will be added to the event list and displayed on the
 
 Examples:
 * `add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 1, 2 and 3 from the contact list.
-* `add -e at/20-10-2020 14:00 d/CS2103 Team meeting ap/5,1,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 5, 1 and 3 from the contact list.
+* `add -e at/20-10-20 14:00 d/CS2103 Team meeting ap/5,1,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 5, 1 and 3 from the contact list.
 
 1. After adding a contact using "add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3"
 
