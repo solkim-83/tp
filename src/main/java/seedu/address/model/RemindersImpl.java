@@ -3,10 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.reminder.ReadOnlyReminders;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.reminder.UniqueRemindersList;
@@ -109,6 +111,44 @@ public class RemindersImpl implements ReadOnlyReminders {
             toBeDeleted.stream()
                         .forEach(reminder -> removeReminder(reminder));
         }
+    }
+
+    /**
+     * When an event is being deleted, the associated reminder should be deleted as well.
+     * This is what the command aims to achieve.
+     */
+    public void deleteReminderOfEvent(Event eventToDelete) {
+        Reminder toDelete = null;
+        for (Reminder r: reminders) {
+            if (r.getEventToRemind().equals(eventToDelete)) {
+                toDelete = r;
+            }
+        }
+        if (toDelete != null) {
+            removeReminder(toDelete);
+        }
+    }
+
+    /**
+     * When an event is being edited, the associated reminder should be edited as well.
+     * This is what the command aims to achieve.
+     */
+    public void updateReminder(Event targetEvent, Event editedEvent) {
+        Reminder toDelete = null;
+        for (Reminder r: reminders) {
+            if (r.getEventToRemind().equals(targetEvent)) {
+                toDelete = r;
+            }
+        }
+        if (toDelete != null) {
+            removeReminder(toDelete);
+            int daysInAdvance = (int) ChronoUnit.DAYS.between(toDelete.getEventToRemind().getTime().time.toLocalDate(),
+                    toDelete.getReminderDate().time.toLocalDate());
+            Reminder editedReminder = new Reminder(editedEvent, daysInAdvance);
+
+            addReminder(editedReminder);
+        }
+
     }
 
     //// util methods

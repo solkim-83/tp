@@ -289,7 +289,9 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
+* d-M-yy H:m
 * yyyy-dd-MM HH:mm
+* yy-d-M H:m
 * The following symbols can be used interchangeably to indicate date, time and year of the event.
     * [.] (full stop)
     * [/] (forward slash)
@@ -308,6 +310,8 @@ HH | Digits for hour of the day in 24-hr time
 mm | Digits for minutes of an hour
 
 Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
+
+![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
 
 
 Examples:
@@ -368,7 +372,7 @@ Picture example:
 
 1. Entering edit command "edit -e 1 ap/1,2 rp/1,2" to edit the participants of CS2103 Meeting.
 
-![Edit Event Behaviour before](images/ug-images/eventBehaviourImages/edit-event-before-behaviour.png)
+![Edit Event Behaviour before](images/ug-images/eventBehaviourImages/edit-event-behaviour-before.png)
 
 2. Event participants successfully edited.
 
@@ -506,6 +510,8 @@ Example:
 * `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
+---
+
 ### Reminders
 
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
@@ -523,6 +529,13 @@ Format: `add -r EVENT_INDEX in/DAYS`
 Examples:
 * `add -r 3 in/4` Creates a new reminder for the 3rd event. The reminder will start to pop up every time
 Athena opens within 4 days of that event.
+
+(After entering the command "add -r 5 in/3")
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
+
+(When reminders are active, every time Athena is opened, the alert window will pop up as shown below)
+
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
 #### Deleting a reminder : `delete`
 
@@ -544,6 +557,8 @@ Lists all reminders in the remarks panel. It lists each reminder and a countdown
 
 Example:
 * `list -r` 
+
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
 
 ---
 
