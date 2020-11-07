@@ -14,7 +14,7 @@ section below.
 * [Features](#features)
     * [General](#general)
         * [`help`](#viewing-help--help) - Viewing help
-        * [`exit`](#exiting-the-program--exit) - Exiting the program
+        * [`exit`](#exiting-the-program-exit) - Exiting the program
     * [Contacts](#contacts)
         * [`add`](#adding-a-contact--add) - Adding a contact
         * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
@@ -129,7 +129,7 @@ specific key-words. Thus, there are **five** types of commands:
 
 ### General
 
-#### Viewing help : `help`
+#### Viewing help - `help`
 
 Shows a message explaining how to access the help page.
 
@@ -137,7 +137,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-#### Exiting the program : `exit`
+#### Exiting the program - `exit`
 
 Exits the program.
 
