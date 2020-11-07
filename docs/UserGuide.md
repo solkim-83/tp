@@ -198,7 +198,7 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 * Tags that are not mentioned will *NOT* be affected.
 * `t/TAG` adds `TAG` to the user.
 * `rt/TAG` removes `TAG` from the user.
-* Tag removal is done before new tags are added.
+* Tags are removed before new tags are added.
 * You can remove all the person’s tags by typing `rt/*`.
 
 Examples:
@@ -209,7 +209,7 @@ and `johndoe@example.com` respectively.
 
 #### Finding a contact : `find`
 
-Finds persons whose names contain any of the given keywords. Also supports search with additional specifiers such as 
+Finds persons whose names contain any of the given keywords. This also supports search with additional specifiers such as 
 phone number or email.
 
 Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
@@ -481,8 +481,8 @@ Example:
 
 ### Reminders
 
-Reminders allow you to set custom reminders for your events. You can call up your reminders in application or
-have them pop up whenever Athena starts. 
+Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
+A reminder window with relevant reminders will also pop up whenever Athena starts.
 
 #### Adding a reminder : `add`
 
@@ -494,8 +494,8 @@ Format: `add -r EVENT_INDEX in/DAYS`
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
 
 Examples:
-* `add -r 3 in/4` Creates a new reminder for the 3rd event, the reminder will start to pop up every time
-Athena opens 4 days prior to that event 
+* `add -r 3 in/4` Creates a new reminder for the 3rd event. The reminder will start to pop up every time
+Athena opens within 4 days to that event.
 
 #### Deleting a reminder : `delete`
 
