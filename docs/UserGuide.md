@@ -289,7 +289,9 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 DATE_TIME formats currently accepted
 * dd-MM-yyyy HH:mm
+* d-M-yy H:m
 * yyyy-dd-MM HH:mm
+* yy-d-M H:m
 * The following symbols can be used interchangeably to indicate date, time and year of the event.
     * [.] (full stop)
     * [/] (forward slash)
