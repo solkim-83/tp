@@ -41,6 +41,9 @@ public class ViewEventCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * @param targetIndex of the event in the filtered event list to view
+     */
     public ViewEventCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
