@@ -304,7 +304,7 @@ Short form | What it represents
 ----------- | -----------
 d | Day of month (e.g. `7`, `23`)
 M | Month of year (e.g. `2`, `10`)
-y | Year (e.g. `20`, `2020` both meaning the year 2020)
+y | Year (e.g. `20`, `2020` both means the year 2020)
 H | Hour of the day in 24-hr time (e.g. `8`, `23`)
 m | Minutes of an hour (e.g. `9`, `45`)
 
