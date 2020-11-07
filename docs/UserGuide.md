@@ -32,6 +32,7 @@ section below.
         * [`find`](#finding-an-event---find) - Finding an event
         * [`list`](#listing-all-events---list) - Listing all events
         * [`sort`](#sorting-displayed-events---sort) - Sorting displayed events
+        * [`view`](#viewing-an-event---view) - Viewing an event
     * [Tags](#tags)
         * [`add`](#adding-a-tag---add) - Adding a tag
         * [`delete`](#deleting-a-tag---delete) - Deleting a tag
@@ -383,7 +384,7 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 Examples:
 * `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
 * `edit -e 2 at/23-10-1234 12:30` Edits the time of the 2nd event to be 23-10-1234 12:30
-* `edit -e 1 ap/1,2 rp/1,2`  Adds the contacts at index 1 and 2 from the contact list to event 1 attendees list. Removes the first 2 contacts from event 1 attendees list.
+* `edit -e 1 ap/1,2 rp/1,2` Adds the contacts at index 1 and 2 from the contact list to event 1 attendees list. Removes the first 2 contacts from event 1 attendees list.
 
 Picture example:
 
@@ -430,7 +431,7 @@ Format: `sort -e INDEX`
 Examples:
 * `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
 
-#### Viewing an event: `view`
+#### Viewing an event - `view`
 
 Shows specific details of an event.
 Details include:
@@ -444,6 +445,8 @@ Format: `view -e INDEX`
 
 Example:
 * `view -e 1` Shows the details (as specified above) for the event indexed at 1.
+
+![View Event Behaviour](images/ug-images/eventBehaviourImages/view-event-behaviour.png)
 
 ---
 
