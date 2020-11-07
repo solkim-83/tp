@@ -3,7 +3,7 @@ layout: page
 title: Wu Bangyi's Project Portfolio Page
 ---
 
-## Project: AddressBook Level 3
+## Project: Athena
 
 Athena is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while
 still having the benefits of a Graphical User Interface (GUI).
@@ -30,7 +30,7 @@ Given below are my contributions to the project.
   Instead of just being a passive display, it can now actively remind the user of current reminders.
   * Highlights: The code created when implementing the reminder function sets the base for all future reminder function.
   It mimics the storage system used by contacts and events, ensuring that any further development on reminders can be
-  done easily.
+  done easily. 
 
 * **New Feature**: Added the List Reminder function.
   * What it does: Allows the user to list all their custom reminders in the feedback panel.
@@ -58,9 +58,10 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Creating and editing the user stories chart
+  * Standardized application screenshots and annotations
 
 * **Enhancements to existing features**:
-  * Added the ability to add contacts without filling in all the fields.[\#79]()
+  * Added the ability to add contacts without filling in all the fields.[\#79](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/79)
       * What it does: Allows the user to add contact with some fields left empty. The empty fields will hold a temporary
       placeholder till the user decides to edit those information in.
       * Justification: This feature improves the product's usability because a user usually won't have all the information
@@ -70,10 +71,11 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the reminder-related [\#184]()
+    * Added documentation for the reminder-related function [\#184](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/184)
     * Edited and added Ui.png. (First iteration)
-    * Added documentation for the sorting function [\#148]()
-    * Did cosmetic tweaks to fix documentation issues raised in PED: [\#226]()
+    * Added documentation for the sorting function [\#148](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/148)
+    * Did cosmetic tweaks to fix documentation issues raised in PED: [\#226](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/226)
+    * Drew and uploaded the new application logo
   * Developer Guide:
     * Added implementation details of the reminder-related functions.
     * Added implementation details of the sorting feature. [\#148]()
@@ -81,7 +83,10 @@ Given below are my contributions to the project.
     
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#242](), [\#185](), [\#183]()
+  * PRs reviewed (with non-trivial review comments): e.g. [\#242](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/242), 
+  [\#185](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/185), 
+  [\#183](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/183)
   * Reported bugs and suggestions for other teams in the class (examples: https://github.com/bangyiwu/ped/issues)
+  * Reported bugs and suggestions for our own team member's implementations, e.g. PR [\#247](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/242) was created because of a bug I found
   * Some parts of the sorting feature I added was adopted by the event team ([\#66]())
 
