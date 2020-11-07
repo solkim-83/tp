@@ -25,6 +25,7 @@ public enum CommandWord {
     SHOW("show", List.of(CommandType.REMINDER)),
     SORT("sort", List.of(CommandType.CONTACT, CommandType.EVENT)),
     PERMASORT("psort", List.of(CommandType.CONTACT)),
+    DELETE_BY_TAG("deletebytag", List.of(CommandType.CONTACT)),
     DEFAULT("", List.of());
 
     /**

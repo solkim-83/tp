@@ -298,4 +298,9 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public void deletePersonsByTag(Tag tagForDeletion) {
+        throw new AssertionError("This method should not be called.");
+    }
+
 }

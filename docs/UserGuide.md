@@ -187,7 +187,25 @@ Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
-#### Editing a contact - `edit`
+#### Deleting contacts by Tag : `deletebytag`
+
+Deletes all contacts under a specific tag.
+
+Format: `deletebytag -c TAG`
+
+* Deletes all contacts with a specific tag.
+* The tag must be a valid tag.
+
+Examples:
+* `deletebytag -c computing` deletes all contacts tagged under computing
+
+1. Entering the above example into the user input panel will delete all the contacts tagged under computing.
+![delete-by-tag-success](images/ug-images/contactsBeahviourImages/deletebytag-beofre-behaviour.png)
+
+2. All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
+![groups of computing contacts](images/ug-images/contactsBeahviourImages/deletebytag-success-behaviour.png)
+
+#### Editing a contact : `edit`
 
 Edits an existing person in the address book.
 
@@ -610,6 +628,7 @@ Action | Format, Examples
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
 **Delete Contact** | `delete -c CONTACT_INDEX_LIST`<br> e.g., `delete -c 3,1,2`
+**Delete Contact By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
 **Delete Event** | `delete -e EVENT_INDEX_LIST`<br> e.g., `delete -e 3,1,2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Delete Reminder** | `delete -r INDEX` <br> e.g., `delete -r 1`
