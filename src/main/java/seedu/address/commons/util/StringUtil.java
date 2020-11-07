@@ -13,6 +13,47 @@ import java.util.Arrays;
 public class StringUtil {
 
     /**
+     * Returns true if the {@code word} is a single word long (i.e. contains no spaces).
+      * @param word cannot be null, cannot be empty
+     */
+    public static boolean isOneWordLong(String word) {
+        requireNonNull(word);
+
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+
+        return preppedWord.split("\\s+").length == 1;
+    }
+
+    /**
+     * Returns true if the {@code wordToCheck} contains a partial match to {@code word}.
+     *   Ignores case.
+     *   <br>examples:<pre>
+     *       containsWordIgnoreCase("ABcdef", "ABcdef") == true
+     *       containsWordIgnoreCase("ABcdef", "abcdef") == true
+     *       containsWordIgnoreCase("ABcdef", "AB") == true
+     *       containsWordIgnoreCase("ABcdef", "ab" == true
+     *       </pre>
+     * @param wordToCheck cannot be null, must be a single word
+     * @param word cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsPartialMatchIgnoreCase(String wordToCheck, String word) {
+        requireNonNull(wordToCheck);
+        requireNonNull(word);
+
+        String preppedWord = word.trim().toLowerCase();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+
+        String preppedWordToCheck = wordToCheck.trim();
+        checkArgument(preppedWordToCheck.split("\\s+").length == 1,
+                "Word to be checked parameter should be a single word");
+
+        return preppedWordToCheck.contains(preppedWord);
+
+    }
+
+    /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
      *   <br>examples:<pre>

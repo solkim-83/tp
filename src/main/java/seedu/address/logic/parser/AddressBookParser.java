@@ -38,6 +38,7 @@ import seedu.address.logic.parser.reminders.DeleteReminderCommandParser;
 import seedu.address.logic.parser.tags.AddTagCommandParser;
 import seedu.address.logic.parser.tags.DeleteTagCommandParser;
 import seedu.address.logic.parser.tags.EditTagCommandParser;
+import seedu.address.logic.parser.tags.FindTagCommandParser;
 import seedu.address.logic.parser.tags.ViewTagCommandParser;
 
 /**
@@ -164,6 +165,9 @@ public class AddressBookParser {
 
             case DELETE:
                 return new DeleteTagCommandParser().parse(arguments);
+
+            case FIND:
+                return new FindTagCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
