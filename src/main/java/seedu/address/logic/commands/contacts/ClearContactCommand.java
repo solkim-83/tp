@@ -25,7 +25,7 @@ public class ClearContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // This implementation is inefficient but it will remove said person from both the contact and event list.
+        // This implementation is inefficient but it will remove all persons from both the contact and event list.
         // model.deletePerson removes the person from any event they attend
         ObservableList<Person> personObservableList = FXCollections.observableArrayList();
         // make a copy of the list as the direct list from getPersonList is affected by deletePerson
