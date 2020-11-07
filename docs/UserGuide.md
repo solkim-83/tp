@@ -13,10 +13,10 @@ section below.
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [General](#general)
-        * [`help`](#viewing-help) - Viewing help
+        * [`help`](#viewing-help--help) - Viewing help
         * [`exit`](#exiting-the-program--exit) - Exiting the program
     * [Contacts](#contacts)
-        * [`add`](#adding-a-contact-add) - Adding a contact
+        * [`add`](#adding-a-contact--add) - Adding a contact
         * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
         * [`delete`](#deleting-a-contact--delete) - Deleting a contact
         * [`edit`](#editing-a-contact--edit) - Editing a contact
@@ -24,7 +24,7 @@ section below.
         * [`list`](#listing-all-contacts--list) - Listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
     * [Events](#events)
-        * [`add`](#adding-an-event-add) - Adding an event
+        * [`add`](#adding-an-event--add) - Adding an event
         * [`clear`](#clearing-all-events--clear) - Clearing all events
         * [`delete`](#deleting-an-event--delete) - Deleting an event
         * [`edit`](#editing-an-event--edit) - Editing an event
@@ -32,14 +32,14 @@ section below.
         * [`list`](#listing-all-events--list) - Listing all events
         * [`sort`](#sorting-displayed-events--sort) - Sorting displayed events
     * [Tags](#tags)
-        * [`add`](#adding-a-tag-add) - Adding a tag
-        * [`delete`](#deleting-a-tag-delete) - Deleting a tag
-        * [`edit`](#editing-a-tag-edit) - Editing a tag
-        * [`list`](#listing-all-tags-list) - Listing all tags
-        * [`view`](#viewing-tags-view) - Viewing tag details
+        * [`add`](#adding-a-tag--add) - Adding a tag
+        * [`delete`](#deleting-a-tag--delete) - Deleting a tag
+        * [`edit`](#editing-a-tag--edit) - Editing a tag
+        * [`list`](#listing-all-tags--list) - Listing all tags
+        * [`view`](#viewing-tags--view) - Viewing tag details
     * [Reminders](#reminders)
-        * [`add`](#adding-a-reminder-add) - Adding a reminder
-        * [`list`](#listing-all-reminders-list) - Listing all reminders
+        * [`add`](#adding-a-reminder--add) - Adding a reminder
+        * [`list`](#listing-all-reminders--list) - Listing all reminders
 * [Data saving](#data-saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -127,7 +127,7 @@ specific key-words. Thus, there are **five** types of commands:
 
 ### General
 
-#### Viewing help: `help`
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -145,7 +145,7 @@ Format: `exit`
 
 ### Contacts
 
-#### Adding a contact: `add`
+#### Adding a contact : `add`
 
 Adds a contact to Athena.
 
@@ -258,7 +258,7 @@ Examples:
 
 ### Events
 
-#### Adding an event: `add`
+#### Adding an event : `add`
 
 Adds an event to the event list.
 
@@ -330,8 +330,8 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `[ap/CONTACT_INDEX_LIST]` adds contacts with the specified indexes to the event.
-* `[rp/ATTENDEE_INDEX_LIST]` removes contacts with the specified indexes from the event.
+* `[ap/CONTACT_INDEX_LIST]` add contacts with the specified indexes to the event.
+* `[rp/ATTENDEE_INDEX_LIST]` remove contacts with the specified indexes from the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 * You can remove all the attendees for the event by using `rp/*`.
 
@@ -398,7 +398,7 @@ Tags that do not meet this criterion will be deleted.
 **Note: Tags are lowercase alphanumeric only. Spaces or other symbols are not supported.** A tag with uppercase 
 letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
 
-#### Adding a tag: `add`
+#### Adding a tag : `add`
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
 of tags under one parent-tag.
@@ -417,7 +417,7 @@ Examples:
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
 will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
 
-#### Deleting a tag: `delete`
+#### Deleting a tag : `delete`
 
 Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
 Additionally, if you would like to delete a tag and all its sub-tags, you can specify `true` under the `r/` input field.
@@ -435,7 +435,7 @@ Examples:
 * `delete -t t/cs2030` Deletes the tag `cs2030`.
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
-#### Editing a tag: `edit`
+#### Editing a tag : `edit`
 
 Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
 - add and/or remove contacts from a tag
@@ -455,14 +455,14 @@ Examples:
 * `edit -t n/computing i/1` Adds the contact at index `1` to `computing`.
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
-#### Listing all tags: `list`
+#### Listing all tags : `list`
 
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
 Example:
 * `list -t` 
 
-#### Viewing tags: `view`
+#### Viewing tags : `view`
 
 Shows specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
@@ -484,7 +484,7 @@ Example:
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application or
 have them pop up whenever Athena starts. 
 
-#### Adding a reminder: `add`
+#### Adding a reminder : `add`
 
 Adds a new reminder for an event.
 
@@ -511,7 +511,7 @@ Format: `delete -r INDEX`
 Examples:
 * `list -r` followed by `delete -r 2` deletes the 2nd reminder in the reminders list.
 
-#### Listing all reminders: `list`
+#### Listing all reminders : `list`
 
 Lists all reminders in the remarks panel. It lists each reminder and a countdown to its event.
 
