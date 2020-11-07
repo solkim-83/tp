@@ -1,9 +1,9 @@
 package seedu.address.model.util;
 
+import java.util.Set;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
-import java.util.Set;
 
 /**
  * A container for Tag specific utility functions and messages
