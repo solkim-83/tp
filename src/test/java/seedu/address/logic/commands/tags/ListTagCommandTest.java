@@ -2,12 +2,12 @@ package seedu.address.logic.commands.tags;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.tags.ListTagCommand.INDICATOR_SUPERTAG;
 import static seedu.address.logic.commands.tags.ListTagCommand.constructTagSummaryMessage;
-import static seedu.address.logic.commands.tags.ListTagCommand.parsePersonSetIntoString;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_1;
 import static seedu.address.model.ContactTagIntegrationManagerTest.PERSON_CS1231S_2;
 import static seedu.address.model.ContactTagIntegrationManagerTest.buildTestIntegrationAddressBook;
+import static seedu.address.model.util.TagUtil.INDICATOR_SUPERTAG;
+import static seedu.address.model.util.TagUtil.parsePersonSetIntoString;
 import static seedu.address.testutil.TagTreeUtil.TAG_COMPUTING;
 import static seedu.address.testutil.TagTreeUtil.TAG_NUS;
 import static seedu.address.testutil.TagTreeUtil.buildTestTree;
