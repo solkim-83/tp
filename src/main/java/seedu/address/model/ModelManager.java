@@ -371,6 +371,14 @@ public class ModelManager implements Model {
         return contactTagIntegrationManager.getAllPersonsUnderTag(tag);
     }
 
+    @Override
+    public void deletePersonsByTag(Tag tag) {
+        //clears all deleted persons from events associating them.
+        contactTagIntegrationManager.getAllPersonsUnderTag(tag).stream()
+                                    .forEach(person -> { calendar.deletePersonAssociation(person); });
+        contactTagIntegrationManager.deleteTagAndDirectContacts(tag);
+    }
+
     // Filter/sort related methods
 
     @Override
