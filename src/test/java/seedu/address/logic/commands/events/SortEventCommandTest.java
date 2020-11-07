@@ -22,7 +22,7 @@ public class SortEventCommandTest {
     private Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
 
     @Test
-    public void execute_validSortingOfEventsByAlphabeticalOrder_success() {
+    public void execute_validSortingOfEvents_byAlphabeticalOrder_success() {
         SortEventCommand sortEventCommand = new SortEventCommand(Index.fromZeroBased(0));
 
         String expectedMessage = "Sorted by description in alphabetical order";
@@ -32,14 +32,14 @@ public class SortEventCommandTest {
         try {
             expectedModel.sortEvent(EventComparator.chooseComparator(Index.fromZeroBased(0)));
         } catch (CommandException ce) {
-            throw new AssertionError("Choosing a event comparator should not fail.", ce);
+            throw new AssertionError("Choosing an event comparator should not fail.", ce);
         }
 
         assertCommandSuccess(sortEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_validSortingOfEventsByChronologicalOrder_success() {
+    public void execute_validSortingOfEvents_byChronologicalOrder_success() {
         SortEventCommand sortEventCommand = new SortEventCommand(Index.fromZeroBased(1));
 
         String expectedMessage = "Sorted by time in chronological order";
@@ -49,7 +49,7 @@ public class SortEventCommandTest {
         try {
             expectedModel.sortEvent(EventComparator.chooseComparator(Index.fromZeroBased(1)));
         } catch (CommandException ce) {
-            throw new AssertionError("Choosing a event comparator should not fail.", ce);
+            throw new AssertionError("Choosing an event comparator should not fail.", ce);
         }
 
         assertCommandSuccess(sortEventCommand, model, expectedMessage, expectedModel);
