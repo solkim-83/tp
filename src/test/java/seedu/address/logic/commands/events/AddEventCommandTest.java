@@ -40,7 +40,8 @@ public class AddEventCommandTest {
 
         AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
                 .withDescription(validEvent.getDescription())
-                .withTime(validEvent.getTime()).build();
+                .withTime(validEvent.getTime())
+                .setWildCardAdd().build();
 
         CommandResult commandResult = new AddEventCommand(validEventDescriptor).execute(modelStub);
 
@@ -53,7 +54,8 @@ public class AddEventCommandTest {
         Event validEvent = new EventBuilder().build();
         AddEventCommand.AddEventDescriptor validEventDescriptor = new AddEventDescriptorBuilder()
                 .withDescription(validEvent.getDescription())
-                .withTime(validEvent.getTime()).build();
+                .withTime(validEvent.getTime())
+                .setWildCardAdd().build();
 
         AddEventCommand addEventCommand = new AddEventCommand(validEventDescriptor);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);
@@ -69,10 +71,12 @@ public class AddEventCommandTest {
 
         AddEventCommand.AddEventDescriptor meetingDescriptor = new AddEventDescriptorBuilder()
                 .withDescription(meeting.getDescription())
-                .withTime(meeting.getTime()).build();
+                .withTime(meeting.getTime())
+                .setWildCardAdd().build();
         AddEventCommand.AddEventDescriptor consultationDescriptor = new AddEventDescriptorBuilder()
                 .withDescription(consultation.getDescription())
-                .withTime(consultation.getTime()).build();
+                .withTime(consultation.getTime())
+                .setWildCardAdd().build();
 
         AddEventCommand addMeetingCommand = new AddEventCommand(meetingDescriptor);
         AddEventCommand addConsultationCommand = new AddEventCommand(consultationDescriptor);

@@ -30,6 +30,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Time;
+import seedu.address.testutil.AddEventDescriptorBuilder;
 
 public class AddEventCommandParserTest {
     private final AddEventCommandParser parser = new AddEventCommandParser();
@@ -42,13 +43,10 @@ public class AddEventCommandParserTest {
         } catch (ParseException pe) {
             throw new AssertionError("Parsing index list should not fail.", pe);
         }
-        AddEventCommand.AddEventDescriptor expectedEventDescriptor1 = new AddEventCommand.AddEventDescriptor();
-        expectedEventDescriptor1.setDescription(new Description(VALID_DESCRIPTION_BREAKFAST));
-        expectedEventDescriptor1.setTime(new Time(VALID_TIME_BREAKFAST));
-        AddEventCommand.AddEventDescriptor expectedEventDescriptor2 =
-                new AddEventCommand.AddEventDescriptor(expectedEventDescriptor1);
-
-        expectedEventDescriptor1.setPersonsToAdd(personsToAdd);
+        AddEventCommand.AddEventDescriptor expectedEventDescriptor1 = new AddEventDescriptorBuilder()
+                .withDescription(new Description(VALID_DESCRIPTION_BREAKFAST))
+                .withTime(new Time(VALID_TIME_BREAKFAST))
+                .withPersonsToAdd(personsToAdd).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + DESCRIPTION_DESC_BREAKFAST
@@ -66,7 +64,10 @@ public class AddEventCommandParserTest {
         assertParseSuccess(parser, DESCRIPTION_DESC_BREAKFAST + TIME_DESC_LUNCH + TIME_DESC_BREAKFAST
                 + ADD_PERSON_DESC_2 + ADD_PERSON_DESC_1, new AddEventCommand(expectedEventDescriptor1));
 
-        expectedEventDescriptor2.setWildCardAdd();
+        AddEventCommand.AddEventDescriptor expectedEventDescriptor2 = new AddEventDescriptorBuilder()
+                .withDescription(new Description(VALID_DESCRIPTION_BREAKFAST))
+                .withTime(new Time(VALID_TIME_BREAKFAST))
+                .setWildCardAdd().build();
 
         // wildcard add persons
         assertParseSuccess(parser, DESCRIPTION_DESC_BREAKFAST + TIME_DESC_BREAKFAST
