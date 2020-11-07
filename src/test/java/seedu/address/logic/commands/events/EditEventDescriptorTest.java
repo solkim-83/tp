@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.events.EditEventCommand;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 
 public class EditEventDescriptorTest {

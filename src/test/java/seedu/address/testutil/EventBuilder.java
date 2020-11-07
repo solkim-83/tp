@@ -35,6 +35,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         description = eventToCopy.getDescription();
         time = eventToCopy.getTime();
+        associatedPersons = eventToCopy.getAssociatedPersons();
     }
 
     /**
