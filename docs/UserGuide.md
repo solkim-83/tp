@@ -482,7 +482,7 @@ Example:
 ### Reminders
 
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
-A reminder window with relevant reminders will also pop up whenever Athena starts.
+If there are relevant reminders, a reminder window will also pop up whenever Athena starts.
 
 #### Adding a reminder : `add`
 
