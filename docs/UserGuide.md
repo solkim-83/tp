@@ -13,35 +13,35 @@ section below.
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [General](#general)
-        * [`help`](#viewing-help--help) - Viewing help
-        * [`exit`](#exiting-the-program-exit) - Exiting the program
+        * [`help`](#viewing-help---help) - Viewing help
+        * [`exit`](#exiting-the-program---exit) - Exiting the program
     * [Contacts](#contacts)
-        * [`add`](#adding-a-contact--add) - Adding a contact
-        * [`clear`](#clearing-all-contacts--clear) - Clearing all contacts
-        * [`delete`](#deleting-a-contact--delete) - Deleting a contact
-        * [`edit`](#editing-a-contact--edit) - Editing a contact
-        * [`find`](#finding-a-contact--find) - Finding a contact
-        * [`list`](#listing-all-contacts--list) - Listing all contacts
-        * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
-        * [`psort`](#sorting-displayed-contacts--psort) - Sorting contacts permanently
+        * [`add`](#adding-a-contact---add) - Adding a contact
+        * [`clear`](#clearing-all-contacts---clear) - Clearing all contacts
+        * [`delete`](#deleting-a-contact---delete) - Deleting a contact
+        * [`edit`](#editing-a-contact---edit) - Editing a contact
+        * [`find`](#finding-a-contact---find) - Finding a contact
+        * [`list`](#listing-all-contacts---list) - Listing all contacts
+        * [`sort`](#sorting-displayed-contacts---sort) - Sorting displayed contacts
+        * [`psort`](#sorting-displayed-contacts-permanently---psort) - Sorting contacts permanently
     * [Events](#events)
-        * [`add`](#adding-an-event--add) - Adding an event
-        * [`clear`](#clearing-all-events--clear) - Clearing all events
-        * [`delete`](#deleting-an-event--delete) - Deleting an event
-        * [`edit`](#editing-an-event--edit) - Editing an event
-        * [`find`](#finding-an-event--find) - Finding an event
-        * [`list`](#listing-all-events--list) - Listing all events
-        * [`sort`](#sorting-displayed-events--sort) - Sorting displayed events
+        * [`add`](#adding-an-event---add) - Adding an event
+        * [`clear`](#clearing-all-events---clear) - Clearing all events
+        * [`delete`](#deleting-an-event---delete) - Deleting an event
+        * [`edit`](#editing-an-event---edit) - Editing an event
+        * [`find`](#finding-an-event---find) - Finding an event
+        * [`list`](#listing-all-events---list) - Listing all events
+        * [`sort`](#sorting-displayed-events---sort) - Sorting displayed events
     * [Tags](#tags)
-        * [`add`](#adding-a-tag--add) - Adding a tag
-        * [`delete`](#deleting-a-tag--delete) - Deleting a tag
-        * [`edit`](#editing-a-tag--edit) - Editing a tag
-        * [`list`](#listing-all-tags--list) - Listing all tags
-        * [`view`](#viewing-tags--view) - Viewing tag details
+        * [`add`](#adding-a-tag---add) - Adding a tag
+        * [`delete`](#deleting-a-tag---delete) - Deleting a tag
+        * [`edit`](#editing-a-tag---edit) - Editing a tag
+        * [`list`](#listing-all-tags---list) - Listing all tags
+        * [`view`](#viewing-tags---view) - Viewing tag details
     * [Reminders](#reminders)
-        * [`add`](#adding-a-reminder--add) - Adding a reminder
-        * [`delete`](#deleting-a-reminder--delete) - Deleting a reminder
-        * [`list`](#listing-all-reminders--list) - Listing all reminders
+        * [`add`](#adding-a-reminder---add) - Adding a reminder
+        * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
+        * [`list`](#listing-all-reminders---list) - Listing all reminders
 * [Data saving](#data-saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -147,7 +147,7 @@ Format: `exit`
 
 ### Contacts
 
-#### Adding a contact : `add`
+#### Adding a contact - `add`
 
 Adds a contact to Athena.
 
@@ -166,13 +166,13 @@ Examples:
 * `add -c n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
 
-#### Clearing all contacts : `clear`
+#### Clearing all contacts - `clear`
 
 Clears all contacts from Athena.
 
 Format: `clear -c`
 
-#### Deleting a contact : `delete`
+#### Deleting a contact - `delete`
 
 Deletes the specified contact(s) from Athena.
 
@@ -186,7 +186,7 @@ Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
-#### Editing a contact : `edit`
+#### Editing a contact - `edit`
 
 Edits an existing person in the address book.
 
@@ -209,7 +209,7 @@ and `johndoe@example.com` respectively.
 * `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `CS2030`.
 * `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `CS2103` to it.
 
-#### Finding a contact : `find`
+#### Finding a contact - `find`
 
 Finds persons whose names contain any of the given keywords. This command also supports search with additional specifiers such as 
 phone number or email.
@@ -235,13 +235,13 @@ Examples:
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
 
-#### Listing all contacts : `list`
+#### Listing all contacts - `list`
 
 Shows a list of all contacts in Athena.
 
 Format: `list -c`
 
-#### Sorting displayed contacts : `sort`
+#### Sorting displayed contacts - `sort`
 
 Sorts all currently displayed contacts in Athena.
 
@@ -259,7 +259,7 @@ Examples:
 ![Add Event Behaviour](images/ug-images/contactBehaviourImages/sort-contacts-behaviour.png)
 
 
-#### Sorting displayed contacts permanently : `psort`
+#### Sorting displayed contacts permanently - `psort`
 
 Sorts all contacts stored in Athena permanently.
 
@@ -278,7 +278,7 @@ Examples:
 
 ### Events
 
-#### Adding an event : `add`
+#### Adding an event - `add`
 
 Adds an event to the event list.
 
@@ -322,7 +322,7 @@ Examples:
 
 ![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
 
-#### Clearing all events : `clear`
+#### Clearing all events - `clear`
 
 Clears all events from Athena's calendar.
 
@@ -334,7 +334,7 @@ Format: `clear -e`
 
 ![Clear Event Behaviour](images/ug-images/eventBehaviourImages/clear-event-behaviour.png)
 
-#### Deleting an event : `delete`
+#### Deleting an event - `delete`
 
 Deletes the specified event from the event list.
 
@@ -347,7 +347,7 @@ Format: `delete -e EVENT_INDEX_LIST`
 Examples:
 * `list -e` followed by `delete -e 2,3` deletes the 2nd and 3rd event in Athena.
 
-#### Editing an event : `edit`
+#### Editing an event - `edit`
 
 Edits an existing event in the event list. `d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
 
@@ -378,7 +378,7 @@ Picture example:
 
 ![Edit Event Behaviour after](images/ug-images/eventBehaviourImages/edit-event-behaviour-after.png)
 
-#### Finding an event : `find`
+#### Finding an event - `find`
 
 Finds events which names contain any of the given keywords.
 
@@ -392,13 +392,13 @@ Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
 * `find -e seminar` returns `CS Seminar` and `seminar 1`.
 
-#### Listing all events : `list`
+#### Listing all events - `list`
 
 Shows a list of all events saved in Athena's calendar.
 
 Format: `list -e`
 
-#### Sorting displayed events : `sort`
+#### Sorting displayed events - `sort`
 
 Sorts all currently displayed events in Athena.
 
@@ -429,7 +429,7 @@ Tags that do not meet this criterion will be deleted.
 **Note: Tags are lowercase alphanumeric only. Spaces or other symbols are not supported.** A tag with uppercase 
 letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
 
-#### Adding a tag : `add`
+#### Adding a tag - `add`
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
 of tags under one parent-tag.
@@ -448,7 +448,7 @@ Examples:
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
 will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
 
-#### Deleting a tag : `delete`
+#### Deleting a tag - `delete`
 
 Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
 Additionally, if you would like to delete a tag and all its sub-tags, you can specify `true` under the `r/` input field.
@@ -466,7 +466,7 @@ Examples:
 * `delete -t t/cs2030` Deletes the tag `cs2030`.
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
-#### Editing a tag : `edit`
+#### Editing a tag - `edit`
 
 Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
 - add and/or remove contacts from a tag
@@ -486,14 +486,14 @@ Examples:
 * `edit -t n/computing i/1` Adds the contact at index `1` to `computing`.
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
-#### Listing all tags : `list`
+#### Listing all tags - `list`
 
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
 Example:
 * `list -t` 
 
-#### Viewing tags : `view`
+#### Viewing tags - `view`
 
 Shows specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
@@ -517,7 +517,7 @@ Example:
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
 If there are relevant reminders, a reminder window will also pop up whenever Athena starts.
 
-#### Adding a reminder : `add`
+#### Adding a reminder - `add`
 
 Adds a new reminder for an event.
 
@@ -537,7 +537,7 @@ Athena opens within 4 days of that event.
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
-#### Deleting a reminder : `delete`
+#### Deleting a reminder - `delete`
 
 Deletes the specified reminder from the reminders list.
 
@@ -551,7 +551,7 @@ Format: `delete -r INDEX`
 Examples:
 * `list -r` followed by `delete -r 2` deletes the 2nd reminder in the reminders list.
 
-#### Listing all reminders : `list`
+#### Listing all reminders - `list`
 
 Lists all reminders in the remarks panel. It lists each reminder and a countdown to its event.
 
