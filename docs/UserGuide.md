@@ -382,6 +382,21 @@ Format: `sort -e INDEX`
 Examples:
 * `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
 
+#### Viewing an event: `view`
+
+Shows specific details of an event.
+Details include:
+* Description
+* Time
+* Details of all the attendees (phone number, address etc.)
+
+Format: `view -e INDEX`
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Example:
+* `view -e 1` Shows the details (as specified above) for the event indexed at 1.
+
 ---
 
 ### Tags
@@ -567,6 +582,7 @@ Action | Format, Examples
 **List Reminders** | `list -r`
 **Sort Contacts** | `sort -c INDEX`
 **Sort Events** | `sort -e INDEX`
+**View Event** | `view -e INDEX` <br> e.g., `view -e 1`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
 
 ## Glossary
