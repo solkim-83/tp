@@ -42,7 +42,7 @@ public class Time {
     /**
      * Constructs a {@code Time}.
      *
-     * @param timeInput A valid time.
+     * @param timeInput A valid {@link LocalDateTime}.
      */
     public Time(LocalDateTime timeInput) {
         requireNonNull(timeInput);
