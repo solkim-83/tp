@@ -10,12 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADD_PERSON_DE
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADD_PERSON_WILD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_BREAKFAST;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_LUNCH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_INDEX_LIST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
