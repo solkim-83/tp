@@ -3,7 +3,7 @@ layout: page
 title: Wu Bangyi's Project Portfolio Page
 ---
 
-## Project: AddressBook Level 3
+## Project: Athena
 
 Athena is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while
 still having the benefits of a Graphical User Interface (GUI).
@@ -30,7 +30,7 @@ Given below are my contributions to the project.
   Instead of just being a passive display, it can now actively remind the user of current reminders.
   * Highlights: The code created when implementing the reminder function sets the base for all future reminder function.
   It mimics the storage system used by contacts and events, ensuring that any further development on reminders can be
-  done easily.
+  done easily. 
 
 * **New Feature**: Added the List Reminder function.
   * What it does: Allows the user to list all their custom reminders in the feedback panel.
@@ -74,6 +74,7 @@ Given below are my contributions to the project.
     * Edited and added Ui.png. (First iteration)
     * Added documentation for the sorting function [\#148]()
     * Did cosmetic tweaks to fix documentation issues raised in PED: [\#226]()
+    * Drew and uploaded the new application logo
   * Developer Guide:
     * Added implementation details of the reminder-related functions.
     * Added implementation details of the sorting feature. [\#148]()
