@@ -20,6 +20,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,8 +30,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Time;
-
-import java.util.ArrayList;
 
 public class AddEventCommandParserTest {
     private final AddEventCommandParser parser = new AddEventCommandParser();
@@ -59,8 +59,8 @@ public class AddEventCommandParserTest {
                         + TIME_DESC_BREAKFAST + ADD_PERSON_DESC_1, new AddEventCommand(expectedEventDescriptor1));
 
         // multiple time inputs - last time input accepted
-        assertParseSuccess(parser, DESCRIPTION_DESC_BREAKFAST + TIME_DESC_LUNCH +
-                        TIME_DESC_BREAKFAST + ADD_PERSON_DESC_1, new AddEventCommand(expectedEventDescriptor1));
+        assertParseSuccess(parser, DESCRIPTION_DESC_BREAKFAST + TIME_DESC_LUNCH
+                + TIME_DESC_BREAKFAST + ADD_PERSON_DESC_1, new AddEventCommand(expectedEventDescriptor1));
 
         // multiple add person inputs - last add person input accepted
         assertParseSuccess(parser, DESCRIPTION_DESC_BREAKFAST + TIME_DESC_LUNCH + TIME_DESC_BREAKFAST
