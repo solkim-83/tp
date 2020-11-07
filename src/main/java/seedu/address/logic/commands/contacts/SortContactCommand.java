@@ -36,7 +36,7 @@ public class SortContactCommand extends Command {
     private final Index index;
 
     /**
-     * @param index the order in which to sort the address book
+     * @param index The order in which to sort the contact entries in Athena.
      */
     public SortContactCommand(Index index) {
         requireAllNonNull(index);

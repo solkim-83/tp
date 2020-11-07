@@ -62,8 +62,8 @@ public class EditEventCommand extends Command {
     private final EditEventDescriptor editEventDescriptor;
 
     /**
-     * @param index of the event in the filtered event list to edit
-     * @param editEventDescriptor details to edit the event with
+     * @param index Index of the event in the filtered event list to edit.
+     * @param editEventDescriptor Descriptor containing details to edit the event with.
      */
     public EditEventCommand(Index index, EditEventDescriptor editEventDescriptor) {
         requireNonNull(index);
