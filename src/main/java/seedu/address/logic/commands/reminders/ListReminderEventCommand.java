@@ -37,7 +37,7 @@ public class ListReminderEventCommand extends Command {
         String result = "";
         int count = 1;
         if (reminders.getRemindersList().size() == 0) {
-            result = "You currently have no reminders set. \nSet one by using add -r!";
+            result = "You currently have no reminders set. \nSet one by using add -r";
         } else {
             result += "Here are your reminders: \n";
             for (Reminder reminder : reminders.getRemindersList()) {
