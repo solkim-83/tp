@@ -565,10 +565,10 @@ Examples:
 * `add -r 5 in/3` Creates a new reminder for the 5th event. The reminder will start to pop up every time
 Athena opens within 3 days of that event.
 
-(After entering the command "add -r 5 in/3")
+1. After entering the command "add -r 5 in/3"
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
 
-(When reminders are active, every time Athena is opened, the alert window will pop up as shown below)
+2. When reminders are active, every time Athena is opened, the alert window will pop up as shown below
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
