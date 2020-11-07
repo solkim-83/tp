@@ -13,7 +13,7 @@ section below.
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [General](#general)
-        * [`help`](#viewing-help) - Viewing help
+        * [`help`](#viewing-help-help) - Viewing help
         * [`exit`](#exiting-the-program--exit) - Exiting the program
     * [Contacts](#contacts)
         * [`add`](#adding-a-contact-add) - Adding a contact
@@ -23,7 +23,7 @@ section below.
         * [`find`](#finding-a-contact--find) - Finding a contact
         * [`list`](#listing-all-contacts--list) - Listing all contacts
         * [`sort`](#sorting-displayed-contacts--sort) - Sorting displayed contacts
-        * [`psort`](#sorting-displayed-contacts--psort) - Sorting contacts permanently
+        * [`psort`](#sorting-displayed-contacts-permanently--psort) - Sorting contacts permanently
     * [Events](#events)
         * [`add`](#adding-an-event-add) - Adding an event
         * [`clear`](#clearing-all-events--clear) - Clearing all events
@@ -40,7 +40,7 @@ section below.
         * [`view`](#viewing-tags-view) - Viewing tag details
     * [Reminders](#reminders)
         * [`add`](#adding-a-reminder-add) - Adding a reminder
-        * [`delete`](#deleting-a-reminder-delete) - Deleting a reminder
+        * [`delete`](#deleting-a-reminder--delete) - Deleting a reminder
         * [`list`](#listing-all-reminders-list) - Listing all reminders
 * [Data saving](#data-saving)
 * [FAQ](#faq)
@@ -527,10 +527,10 @@ Examples:
 * `add -r 5 in/3` Creates a new reminder for the 5th event, the reminder will start to pop up every time
 Athena opens 3 days prior to that event 
 
-(After entering the command "add -r 5 in/3")
+1. After entering the command "add -r 5 in/3"
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
 
-(When reminders are active, every time Athena is opened, the alert window will pop up as shown below)
+2. When reminders are active, every time Athena is opened, the alert window will pop up as shown below
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
