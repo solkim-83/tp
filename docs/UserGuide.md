@@ -211,7 +211,7 @@ and `johndoe@example.com` respectively.
 
 #### Finding a contact : `find`
 
-Finds persons whose names contain any of the given keywords. This also supports search with additional specifiers such as 
+Finds persons whose names contain any of the given keywords. This command also supports search with additional specifiers such as 
 phone number or email.
 
 Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
@@ -284,7 +284,7 @@ Adds an event to the event list.
 
 Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
-* `CONTACT_INDEX_LIST` are the indexes of contacts in the middle panel you want to add to the event.
+* `CONTACT_INDEX_LIST` are the indices of contacts in the middle panel you want to add to the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 
 DATE_TIME formats currently accepted
@@ -354,8 +354,8 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* `[ap/CONTACT_INDEX_LIST]` add contacts with the specified indexes to the event.
-* `[rp/ATTENDEE_INDEX_LIST]` remove contacts with the specified indexes from the event.
+* `[ap/CONTACT_INDEX_LIST]` adds contacts with the specified indices to the event.
+* `[rp/ATTENDEE_INDEX_LIST]` removes contacts with the specified indices from the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 * You can remove all the attendees for the event by using `rp/*`.
 
@@ -522,7 +522,7 @@ Format: `add -r EVENT_INDEX in/DAYS`
 
 Examples:
 * `add -r 3 in/4` Creates a new reminder for the 3rd event. The reminder will start to pop up every time
-Athena opens within 4 days to that event.
+Athena opens within 4 days of that event.
 
 #### Deleting a reminder : `delete`
 
