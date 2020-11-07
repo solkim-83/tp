@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Time;
+import seedu.address.model.event.association.FauxPerson;
 
 /**
  * A utility class to help with building Event objects.
@@ -16,6 +18,7 @@ public class EventBuilder {
 
     private Description description;
     private Time time;
+    private Set<FauxPerson> associatedPersons;
 
     /**
      * Creates an {@code EventBuilder} with the default details.
@@ -23,6 +26,7 @@ public class EventBuilder {
     public EventBuilder() {
         description = new Description(DEFAULT_DESCRIPTION);
         time = new Time(DEFAULT_TIME);
+        associatedPersons = new HashSet<>();
     }
 
     /**
@@ -49,8 +53,16 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the associated persons of the {@code Event} that we are building.
+     */
+    public EventBuilder withAttendees(Set<FauxPerson> attendees) {
+        this.associatedPersons = attendees;
+        return this;
+    }
+
     public Event build() {
-        return new Event(description, time, new HashSet<>());
+        return new Event(description, time, associatedPersons);
     }
 
 }

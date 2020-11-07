@@ -120,7 +120,7 @@ public class AddEventCommand extends Command {
         // add FauxPersons to event
         if (addEventDescriptor.getPersonsToAdd().isPresent()) {
             for (Index index : addEventDescriptor.getPersonsToAdd().get()) {
-                assert index.getZeroBased() >= lastShownPersonList.size() : "No person at given index";
+                assert index.getZeroBased() < lastShownPersonList.size() : "No person at given index";
 
                 Person personToAdd = lastShownPersonList.get(index.getZeroBased());
                 FauxPerson newFauxPerson = new FauxPerson(personToAdd);
