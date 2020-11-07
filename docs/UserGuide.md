@@ -527,8 +527,8 @@ Format: `add -r EVENT_INDEX in/DAYS`
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
 
 Examples:
-* `add -r 3 in/4` Creates a new reminder for the 3rd event. The reminder will start to pop up every time
-Athena opens within 4 days of that event.
+* `add -r 5 in/3` Creates a new reminder for the 5th event. The reminder will start to pop up every time
+Athena opens within 3 days of that event.
 
 (After entering the command "add -r 5 in/3")
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
