@@ -13,8 +13,8 @@ import seedu.address.model.tag.Tag;
 public class DeleteContactByTagCommandParser implements Parser<DeleteContactByTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteContactCommand
-     * and returns a DeleteContactCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteContactByTagCommand
+     * and returns a DeleteContactByTagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteContactByTagCommand parse(String args) throws ParseException {
