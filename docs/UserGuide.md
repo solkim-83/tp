@@ -184,7 +184,7 @@ Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
-#### Deleting contacts by Tag : `deletetag`
+#### Deleting contacts by Tag : `deletebytag`
 
 Deletes all contacts under a specific tag.
 
@@ -194,7 +194,14 @@ Format: `deletebytag -c TAG`
 * The tag must be a valid tag.
 
 Examples:
-* `deletetag -c computing` deletes all contacts tagged under computing
+* `deletebytag -c computing` deletes all contacts tagged under computing
+
+1. Entering the above example into the user input panel will delete all the contacts tagged under computing.
+![delete-by-tag-success](images/ug-images/contactsBeahviourImages/deletebytag-beofre-behaviour.png)
+
+2. All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
+![groups of computing contacts](images/ug-images/contactsBeahviourImages/deletebytag-success-behaviour.png)
+
 
 #### Editing a contact : `edit`
 
