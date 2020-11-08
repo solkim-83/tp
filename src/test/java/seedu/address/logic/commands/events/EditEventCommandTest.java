@@ -10,8 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,27 +23,36 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.association.FauxPerson;
+import seedu.address.testutil.AttendeesBuilder;
 import seedu.address.testutil.EditEventDescriptorBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ModelManagerBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * Contains integration tests (interaction with the Model) and unit tests for
  * EditEventCommand.
  */
 public class EditEventCommandTest {
 
-    private Model model = new ModelManagerBuilder().withCalendar(getTypicalCalendar()).build();
+    private Model model = new ModelManagerBuilder().withAddressBook(getTypicalAddressBook())
+            .withCalendar(getTypicalCalendar()).build();
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Event editedEvent = new EventBuilder().build();
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent).build();
+        Set<FauxPerson> attendees = new AttendeesBuilder()
+                .withPerson(model.getSortedFilteredPersonList().get(0))
+                .withPerson(model.getSortedFilteredPersonList().get(1)).build();
+        Event editedEvent = new EventBuilder().withAttendees(attendees).build();
+        EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent)
+                .setPersonsToAdd(0,1).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
+        Model expectedModel = new ModelManagerBuilder()
+                .withAddressBook(model.getAddressBook())
+                .withCalendar(new Calendar(model.getCalendar())).build();
         expectedModel.setEvent(model.getSortedFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -86,9 +98,11 @@ public class EditEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Event eventInFilteredList = model.getSortedFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        Event editedEvent = new EventBuilder(eventInFilteredList).withDescription(VALID_DESCRIPTION_BREAKFAST).build();
+        Event editedEvent = new EventBuilder(eventInFilteredList).withDescription(VALID_DESCRIPTION_BREAKFAST)
+                .withAttendees(new AttendeesBuilder().withPerson(model.getSortedFilteredPersonList().get(0)).build()).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT,
-                        new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST).build());
+                        new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST)
+                                .setPersonsToAdd(0).build());
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
