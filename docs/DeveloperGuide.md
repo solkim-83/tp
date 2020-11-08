@@ -364,6 +364,7 @@ When creating a reminder through int *daysInAdvance*, the Reminder constructor c
 
 The below sequence diagram shows how Athena handles the construction and addition of a reminder.
 
+![CommitActivityDiagram](images/AddReminderSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
