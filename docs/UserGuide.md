@@ -37,6 +37,7 @@ section below.
         * [`add`](#adding-a-tag---add) - Adding a tag
         * [`delete`](#deleting-a-tag---delete) - Deleting a tag
         * [`edit`](#editing-a-tag---edit) - Editing a tag
+        * [`find`](#finding-a-tag---find) - Finding a tag
         * [`list`](#listing-all-tags---list) - Listing all tags
         * [`view`](#viewing-tags---view) - Viewing tag details
     * [Reminders](#reminders)
@@ -100,7 +101,7 @@ each of these specific functionalities.
 
 Athena also supports two sub-functionalities:
 * contacts may have **tags** of specific key-words so they can be better categorised,
-* events may have **reminders** to remind you of upcoming events.
+* events may have **reminders** to remind you of upcoming ones.
 
 Thus, there are **five** types of commands:
 
