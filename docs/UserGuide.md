@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 This document is a *User Guide* for Athena, a contact- and event- management desktop application. For more details on
-the suitability and functionalities of the application for your usage, please refer to the [Introduction](#Introduction)
+the suitability and functionalities of the application for your usage, please refer to the [Introduction](#introduction)
 section below.
 
 #### Table of Contents
@@ -37,6 +37,7 @@ section below.
         * [`add`](#adding-a-tag---add) - Adding a tag
         * [`delete`](#deleting-a-tag---delete) - Deleting a tag
         * [`edit`](#editing-a-tag---edit) - Editing a tag
+        * [`find`](#finding-a-tag---find) - Finding a tag
         * [`list`](#listing-all-tags---list) - Listing all tags
         * [`view`](#viewing-tags---view) - Viewing tag details
     * [Reminders](#reminders)
@@ -95,9 +96,14 @@ Athena is perfect for you if you:
 
 ## Features
 
-Athena supports two key functionalities - the management of contacts and events. Thus, commands are tailored to manage 
-each of these specific functionalities. In addition, to better categorise contacts, they may also be *tagged* with
-specific key-words. Thus, there are **five** types of commands:
+Athena supports two key functionalities - the management of **contacts** and **events**. Commands are tailored to manage 
+each of these specific functionalities.
+
+Athena also supports two sub-functionalities:
+* contacts may have **tags** of specific key-words so they can be better categorised,
+* events may have **reminders** to remind you of upcoming ones.
+
+Thus, there are **five** types of commands:
 
 * [general](#general) - commands that do not target any specific functionality
 * [contact](#contacts) - commands that target contacts, distinguished by `-c`
@@ -123,6 +129,9 @@ specific key-words. Thus, there are **five** types of commands:
   
 * Commands that do not make changes to data in the address book can be followed by anything.<br>
   e.g. `list -e` and `list -e asdfg` both list all events.
+  
+* Commands that take in a single input per prefix will default to the last one if multiple are entered.<br>
+  e.g. `add -c n/John n/Peter` will add a contact named `Peter` to Athena.
 
 </div>
 
@@ -187,7 +196,7 @@ Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
-#### Deleting contacts by Tag : `deletebytag`
+#### Deleting contacts by Tag - `deletebytag`
 
 Deletes all contacts under a specific tag.
 
@@ -205,7 +214,7 @@ Examples:
 2. All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
 ![groups of computing contacts](images/ug-images/contactsBeahviourImages/deletebytag-success-behaviour.png)
 
-#### Editing a contact : `edit`
+#### Editing a contact - `edit`
 
 Edits an existing person in the address book.
 
@@ -277,9 +286,9 @@ Format: `sort -c INDEX`
 3. By lexicographical order of their email
 
 Examples:
-* `sort -c 2` would sort all currently displayed contacts by their address in alphabetical order.
+* `sort -c 2` would sort all currently displayed contacts by their address in lexicographical order.
 
-![Add Event Behaviour](images/ug-images/contactBehaviourImages/sort-contacts-behaviour.png)
+![Sort Contact Behaviour](images/ug-images/contactBehaviourImages/sort-contacts-behaviour.png)
 
 
 #### Sorting displayed contacts permanently - `psort`
@@ -295,7 +304,7 @@ Format: `psort -c INDEX`
 3. By lexicographical order of their email
 
 Examples:
-* `psort -c 2` would sort all contacts by their address in alphabetical order.
+* `psort -c 2` would sort all contacts by their address in lexicographical order.
 
 ---
 
@@ -433,7 +442,7 @@ Format: `sort -e INDEX`
     2. By lexicographical order of the events' timing.
 
 Examples:
-* `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
+* `sort -e 2` Sorts all currently displayed events by their descriptions in lexicographical order.
 
 #### Viewing an event - `view`
 
@@ -532,6 +541,24 @@ Examples:
 ![edit-tag-image](images/ug-images/tagBehaviourImages/edit-tag-image.png)
 
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
+
+#### Finding a tag - `find`
+
+Finds tags which names partially match the given keyword and lists them in the remarks panel. Super-tags are also
+denoted with `(supertag)`. Additionally, if you would like to find super-tags only, you can specify `true` in the `st/`
+field; conversely, if you would like to find regular tags only, you can specify `false` in the `st/` field.
+
+Format: `find -t [t/KEYWORD] [st/BOOLEAN]`
+
+* At least one of the optional fields must be provided.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The search can match words partially. e.g. `han` will match both `han` and `hans`
+* `BOOLEAN` must be of the form `1`, `t`, `true` for a true case or `0`, `f`, `false` for a false case.
+
+Examples:
+* `find -t st/1` Finds all super-tags.
+* `find -t t/computing` Finds tags that partially contain the word `computing`.
+* `find -t t/friends st/0` Finds regular tags that partially contain the word `friends`.
 
 #### Listing all tags - `list`
 
@@ -656,6 +683,7 @@ Action | Format, Examples
 **Exit** | `exit`
 **Find Contact** | `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g., `find -c n/alex david e/gmail`
 **Find Event** | `find -e KEYWORD`<br> e.g., `find -e Seminar`
+**Find Tag** | `find -t [t/KEYWORD] [st/BOOLEAN]`<br> e.g., `find -t t/computing`
 **Help** | `help`
 **List Contact** | `list -c`
 **List Events** | `list -e`
@@ -680,5 +708,3 @@ The other tag in the relation is known as a [_child-tag_](#child-tag).
 ###### _Sub-tag_
 - A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, ...).
 A child-tag of a tag is also a _sub-tag_.
- 
-
