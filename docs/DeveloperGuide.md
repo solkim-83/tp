@@ -300,6 +300,44 @@ ListEventCommand#execute() : Does validity check of current list and displayed a
 ##### Aspect: How list executes
 The feature is designed to provide the users with the entire list of event-related entries, especially after 
 when user executes certain commands that display partial list of event list (e.g. SearchEvent Command).
+
+### Reminders Management
+
+##### General design
+**`Reminders`** component: 
+
+In Athena, reminders are represented by `Reminder` objects. 
+Reminder objects have two fields, an Event *eventForReminder* and a Time *dateForReminder*, which indicates when the reminder will be activated.
+- `RemindersImpl` handles all direct matters concerning `Reminder` objects. It has a `UniqueRemindersList`. 
+- `UniqueReminderList` keeps track of all `Reminder` objects. It uses `Reminder` class' `isSameReminder(Reminder)` method to ensure that there are no duplicate reminders in Athena.
+
+All manipulation of `Reminder` objects have to be done through `RemindersImpl`. `RemindersImpl` provides simple methods that can be used by higher-level components such as 
+- `boolean hasReminder(Reminder)`
+- `void addReminder(Reminder)`
+- `void deletePerson(Reminder)`
+- and more
+
+When reminders are active (the current date is after or equals to the *dateForReminder* of the reminder), a pop up window
+be displayed whenever Athena is opened. The pop up window will alert the user of this reminder. 
+
+##### Design choice
+Reminder implements a very similar storage and manipulating system to events and contacts. This is to maintain homogeneity
+and ensure that developers can add-on or edit its features easily as long as they understand the other systems.
+The pop up window is designed as such so that reminders are less passive and can actively remind the users without them pulling 
+up the list of reminders themselves.
+ 
+##### Design improvement
+More features such as edit reminders should be implemented for user convenience.
+
+##### Add Reminder Feature
+RemindEventCommand#execute() : Creates the reminder and adds it to the uniqueRemindersList in RemindersImpl. It also
+handles validation of the reminder before it's created. Making sure there is no duplicate reminder and the reminder is 
+not set for a date that has already passed. 
+
+When creating a reminder through int *daysInAdvance*, the Reminder constructor calculates the *dateForReminder* by subtracting
+*daysInAdvance* from the *eventForReminder*'s scheduled date.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -399,6 +437,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+
+    * 3a1. Athena shows an error message.
+
+      Use case resumes at step 2.
+      
+#### **Use case: Delete contacts by tag**
+
+**MSS**
+
+1.  User requests to delete contacts tagged under a specific tag.
+
+1.  User specifies a tag.
+
+1.  Athena deletes all contacts under the specified tag.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tag does not exist.
 
     * 3a1. Athena shows an error message.
 
@@ -626,36 +684,66 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
     Use case ends.
     
-#### **Use case: Add a tag**
+
+#### **Use case: Add a reminder**
 
 **MSS**
 
-1. User requests to add a tag.
+1. User requests to add a reminder.
 
-1. User specifies contacts to be added to this tag.
+1. User specifies which event this reminder is for.
 
-1. User specifies other tags to be added as child-tags.
+1. User specifies when he wants to activate this reminder.
 
-1. Athena adds the new tag and its relations to specified contacts and child-tags.
+1. Athena adds the new reminder.
 
     Use case ends.
 
 **Extensions**
-* 1a. The tag already exists in Athena.
+* 2a. There is already a reminder for the event.
 
     * 1a1. Athena shows an error message.
     
       Use case ends.
-* 2a. Contact specified is invalid.
+* 2a. The target event does not exist. Event index entered is negative or greater than the size of the events list.
 
     * 2a1. Athena shows an error message.
     
       Use case ends.
-* 3a. Child-tag specified does not exist.
+* 3a. The reminder is set to activate before the current date.
 
     * 3a1. Athena shows an error message.
     
       Use case ends.
+      
+#### **Use case: Delete a reminder**
+
+**MSS**
+
+1. User requests to delete a reminder.
+
+1. User specifies which reminder to delete.
+
+1. Athena deletes the reminder.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The reminder does not exist. Reminder index entered is negative or greater than the size of the reminders list.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+
+#### **Use case: List all reminders**
+
+**MSS**
+
+1. User requests to view all reminders in Athena.
+
+1. Athena shows a list of reminders.
+
+    Use case ends.   
  
 
 ### Non-Functional Requirements
