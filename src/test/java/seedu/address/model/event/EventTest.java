@@ -2,95 +2,82 @@ package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_LUNCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_LUNCH;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.GATHERING;
+import static seedu.address.testutil.TypicalEvents.LESSON;
+import static seedu.address.testutil.TypicalEvents.LUNCH;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.event.association.FauxPerson;
+import seedu.address.testutil.AttendeesBuilder;
+import seedu.address.testutil.EventBuilder;
 
 public class EventTest {
-    
+
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Event event = new EventBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> event
+                .getAssociatedPersons().remove(new FauxPerson("test", 21341)));
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameEvent() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(GATHERING.isSameEvent(GATHERING));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(GATHERING.isSameEvent(null));
 
-        // different phone and email -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        // different attendees, same description and time -> returns true
+        Event editedLunch = new EventBuilder(LUNCH)
+                .withAttendees(new AttendeesBuilder().withPerson(ALICE).build()).build();
+        assertTrue(LUNCH.isSameEvent(editedLunch));
 
-        // different name -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        // different description -> returns false
+        editedLunch = new EventBuilder(LUNCH).withDescription(VALID_DESCRIPTION_BREAKFAST).build();
+        assertFalse(LUNCH.isSameEvent(editedLunch));
 
-        // same name, same phone, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
-
-        // same name, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
-
-        // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        // different time -> returns false
+        editedLunch = new EventBuilder(LUNCH).withTime(VALID_TIME_BREAKFAST).build();
+        assertFalse(LUNCH.isSameEvent(editedLunch));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Event gatheringCopy = new EventBuilder(GATHERING).build();
+        assertTrue(GATHERING.equals(gatheringCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(GATHERING.equals(GATHERING));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(GATHERING.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(GATHERING.equals(5));
 
-        // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        // different event -> returns false
+        assertFalse(GATHERING.equals(LESSON));
 
-        // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different description -> returns false
+        Event editedGathering = new EventBuilder(GATHERING).withDescription(VALID_DESCRIPTION_LUNCH).build();
+        assertFalse(GATHERING.equals(editedGathering));
 
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different time -> returns false
+        editedGathering = new EventBuilder(GATHERING).withTime(VALID_TIME_LUNCH).build();
+        assertFalse(GATHERING.equals(editedGathering));
 
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different attendees -> returns false
+        editedGathering = new EventBuilder(GATHERING)
+                .withAttendees(new AttendeesBuilder().withPerson(ALICE).build()).build();
+        assertFalse(GATHERING.equals(editedGathering));
     }
 }

@@ -12,7 +12,6 @@ import seedu.address.model.event.association.FauxPerson;
  * A utility class to help with building Event objects.
  */
 public class EventBuilder {
-    // TODO: incorporate person associations into this builder
     public static final String DEFAULT_DESCRIPTION = "Group Meeting";
     public static final String DEFAULT_TIME = "01-01-2001 01:01";
 
