@@ -176,7 +176,7 @@ As the presence of save files are used to check if the introduction window shoul
 users who have no save file as first time users and show the introduction window nonetheless.
 
 ### Sort contacts feature
-The sort contacts feature is facilitated by `RemindersImpl` that stores reminder entries and their details in Athena. 
+The sort contacts feature is facilitated by `Addressbook` that stores reminder entries and their details in Athena. 
 
 Additionally, it executes the sorting operation based on 3 sorting patterns:
 * `sort -c 1` - Sorts the contacts based on the name of the contacts in alphabetical order.
