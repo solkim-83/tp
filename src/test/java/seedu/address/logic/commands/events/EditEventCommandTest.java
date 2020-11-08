@@ -74,7 +74,8 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
+        Model expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook())
+                .withCalendar(new Calendar(model.getCalendar())).build();
         expectedModel.setEvent(lastEvent, editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
@@ -88,7 +89,8 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
+        Model expectedModel = new ModelManagerBuilder().withAddressBook(model.getAddressBook())
+                .withCalendar(new Calendar(model.getCalendar())).build();
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
     }
@@ -106,7 +108,8 @@ public class EditEventCommandTest {
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManagerBuilder().withCalendar(new Calendar(model.getCalendar())).build();
+        Model expectedModel = new ModelManagerBuilder()
+                .withAddressBook(model.getAddressBook()).withCalendar(new Calendar(model.getCalendar())).build();
         expectedModel.setEvent(model.getSortedFilteredEventList().get(0), editedEvent);
 
         assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);

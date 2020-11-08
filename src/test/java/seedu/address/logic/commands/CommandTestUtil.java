@@ -109,9 +109,9 @@ public class CommandTestUtil {
 
     static {
         DESC_LUNCH = new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_LUNCH)
-                .withTime(VALID_TIME_LUNCH).build();
+                .withTime(VALID_TIME_LUNCH).setPersonsToAdd(1,2).setPersonsToRemove(3,1).build();
         DESC_BREAKFAST = new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST)
-                .withTime(VALID_TIME_BREAKFAST).build();
+                .withTime(VALID_TIME_BREAKFAST).setPersonsToAdd(1,2).setPersonsToRemove(3,1).build();
     }
 
     /**
