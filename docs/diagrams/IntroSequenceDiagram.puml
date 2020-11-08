@@ -30,6 +30,7 @@ IntroCommand --> LogicManager :
 deactivate IntroCommand
 
 LogicManager --> MainWindow
+deactivate LogicManager
 deactivate MainWindow
 
 MainWindow --> UiManager
