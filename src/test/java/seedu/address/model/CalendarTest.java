@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalEvents.MEETING;
 import static seedu.address.testutil.TypicalEvents.PROJECT;
 import static seedu.address.testutil.TypicalEvents.WEBINAR;
+import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -17,9 +17,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.testutil.AttendeesBuilder;
