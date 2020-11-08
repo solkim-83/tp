@@ -798,7 +798,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
    
    1. Test case: `delete -t t/testtag2` <br>
       Expected: Contact at index 3 no longer has the tag `testtag2`. When `list -t` is used, `testtag2` can no longer be found. When using `view -t t/testtag3`, `testtag1` is listed as a child-tag of `testtag3`.
@@ -812,7 +812,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. 
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. 
    
    1. Test case: `edit -t n/testtag2 i/2 ri/3` <br>
       Expected: Contact at index 3 no longer has the tag `testtag2`. Contact at index 1 has the tag `testtag1`.
