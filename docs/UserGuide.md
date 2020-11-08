@@ -175,7 +175,7 @@ just like the second example below
 Examples:
 * `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
 
-![Add Contact Behaviour](images/ug-images/contactsBeahviourImages/add-contact-behaviour.png)
+![Add Contact Behaviour](images/ug-images/contactsBehaviourImages/add-contact-behaviour.png)
 
 #### Clearing all contacts - `clear`
 
@@ -215,11 +215,11 @@ Examples:
 
 * Entering `deletebytag -c computing` into the user input panel will delete all the contacts tagged under computing.
 
-![delete-by-tag-success](images/ug-images/contactsBeahviourImages/deletebytag-before-behaviour.png)
+![delete-by-tag-success](images/ug-images/contactsBehaviourImages/deletebytag-before-behaviour.png)
 
 * All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
 
-![groups of computing contacts](images/ug-images/contactsBeahviourImages/deletebytag-success-behaviour.png)
+![groups of computing contacts](images/ug-images/contactsBehaviourImages/deletebytag-success-behaviour.png)
 
 #### Editing a contact - `edit`
 
@@ -291,12 +291,12 @@ Format: `sort -c INDEX`
 Examples:
 * `sort -c 1` would sort all currently displayed contacts by their name in lexicographical order.
 
-![Sort Contact Behaviour](images/ug-images/contactsBeahviourImages/sort-contacts-behaviour.png)
+![Sort Contact Behaviour](images/ug-images/contactsBehaviourImages/sort-contacts-behaviour.png)
 
 
 #### Sorting displayed contacts permanently - `psort`
 
-Sorts all contacts stored in Athena permanently. Use this 
+Sorts all contacts stored in Athena permanently.
 
 Format: `psort -c INDEX`
 
