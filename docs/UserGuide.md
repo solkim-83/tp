@@ -225,8 +225,8 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 Examples:
 * `edit -c 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` 
 and `johndoe@example.com` respectively.
-* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `CS2030`.
-* `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `CS2103` to it.
+* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `cs2030`.
+* `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `cs2103` to it.
 
 #### Finding a contact - `find`
 
@@ -452,17 +452,20 @@ Example:
 
 ### Tags
 
-Tags present a new way for you to classify and group your contacts together. Managing your tags properly will 
-allow you to perform tag-level actions (to be implemented) such as adding all contacts under a tag into an event. 
+Tags present a new way for you to classify and group your contacts together. Managing your tags properly will allow you to perform tag-level actions.
+Tag management features are advanced features meant for more proficient users of Athena who have a large number of contacts and events to manage.
 Below are some commands to facilitate tag management.
 
-**Note: Tags can exist without being displayed within the contact window.** I.e. A super-tag with no contacts directly associated with it.
+<div markdown="block" class="alert alert-info">
 
-**Note: For a tag to exist, it has to have at least one contact tagged OR contains at least one child-tag.**
-Tags that do not meet this criterion will be deleted. 
-
-**Note: Tags are lowercase alphanumeric only. Spaces or other symbols are not supported.** A tag with uppercase 
+**Notes**: 
+* **Tags can exist without being displayed within the contact panel.** I.e. A super-tag with no contacts directly associated with it will not show up on any of the contacts in the contact panel.
+* **For a tag to exist, it has to have at least one contact tagged OR contains at least one child-tag.**
+Tags that do not meet this criterion will be deleted.  
+* **Tags are lowercase alphanumeric only. Spaces or other symbols are not supported.** A tag with uppercase 
 letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
+
+</div>
 
 #### Adding a tag - `add`
 
