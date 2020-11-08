@@ -92,7 +92,7 @@ The `UI` component,
 
 1. `Logic` uses the `Parser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -100,7 +100,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### Model component
@@ -179,7 +179,7 @@ users who have no save file as first time users and show the introduction window
 ![contact_tag_diagram](images/ContactTagDiagram.png)
 
 ##### General design
-**`Person`** component: 
+**Contact (`Person`)** component: 
 
 In Athena, contacts are represented by `Person` objects. `Person` objects have several properties such as email, address, etc. A `Person` can also be tagged with multiple `Tag`s.
 - `AddressBook` handles all direct matters concerning `Person` objects. It has a `TagManager` and `UniquePersonList`.  
@@ -702,7 +702,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 ### Glossary
 
-* **Contact**: A person to be tracked by Athena; comprises a name, phone number, email and address, as well as an arbitrary quantity of tags
+* **Contact**: A contact to be tracked by Athena; comprises a name, phone number, email and address, as well as an arbitrary quantity of tags
 * **Event**: An event to be tracked by Athena; comprises a name and a date and time, as well as an arbitrary quantity of tags
 * **Mainstream OS**: Windows, Linux, Unix, OS-X 
 
@@ -732,9 +732,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
        
-### Editing a person
+### Editing a contact
 
-1. Editing a person while all persons are being shown
+1. Editing a contact while all contacts are being shown
 
     1. Test case: `edit -c 1 n/test name p/912345 t/edittest` <br>
        Expected: Contact at index `1` in the list has its name changed to `test name`, phone number to `912345` and the tag `edittest` added.
@@ -748,30 +748,30 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit -c 1 n/$%^&a` <br>
        Expected: Error message shown as the name input fails the field constraints.
        
-### Finding a person
+### Finding a contact
 
-1. Finding a person
+1. Finding a contact
 
     1. Test case: `find -c n/alex betsy`
        Expected: For default contact list, shows `Alex Yeoh` and `Betsy Crower` (and possibly other contacts containing either `alex` or `betsy`).
        
     1. Test case: `find -c e/@example`
-       Expected: Lists all persons with `@example` in their emails.
+       Expected: Lists all contacts with `@example` in their emails.
        
     1. Test case: `find -c t/friends`
-       Expected: Lists all persons with the tag `cs2030`.
+       Expected: Lists all contacts with the tag `cs2030`.
        
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
 
    1. Test case: `delete -c 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete -c 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete -c`, `delete -c x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -781,7 +781,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a new tag to various contacts
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
    
    1. Test case: `add -t n/testtag1 i/1 i/2`<br>
       Expected: Contacts at indices `1` and `2` now have the tag `testtag1`.
@@ -796,7 +796,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a tag
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
    
    1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
    
@@ -810,7 +810,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a tag
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
    
    1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. 
    
@@ -842,8 +842,8 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 
 * **Contact and Tag management**: It was difficult to come up with a good OOP solution in order to keep track of tag-contact and tag-tag relations while avoiding cyclic dependency. Such functionality was not present within AB3 prior so it had to be implemented from scratch.
-Additionally, a major challenge was that we intended to implement commands that could affect tags and persons in a way where other persons and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
+Additionally, a major challenge was that we intended to implement commands that could affect tags and contacts in a way where other contacts and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
 There were also issues that were more difficult to spot, such as the ability to create cyclic relations between tags.
 As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
-Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons. 
+Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and contacts. 
 
