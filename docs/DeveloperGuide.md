@@ -691,6 +691,34 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
       Use case ends.
  
 
+#### **Use case: Find a tag**
+
+**MSS**
+
+1. User requests to find a tag.
+
+1. User specifies keyword to use in the search.
+
+1. User specifies whether any tag filters should be used.
+
+1. Athena displays all tags that match the keyword and filter.
+
+   Use case ends.
+   
+**Extensions**
+
+* 3a. Tag filter input is invalid.
+
+    * 3a1. Athena displays an error message.
+    
+    Use case resumes at step 3.
+
+* 4a. List is empty.
+
+    * 4a1. Athena displays a message stating there are no matches.
+    
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -822,6 +850,24 @@ testers are expected to do more *exploratory* testing.
       
    1. Test case: `edit -t n/testtag2 t/testtag1` followed by `edit -t n/testtag1 t/testtag2`
       Expected: Error message shown, indicating an attempt in making a cyclic relationship.
+
+### Finding a tag
+
+1. Finding a tag
+
+   1. Prerequisites: List all persons using the `list -c` command. Multiple persons in the list.
+       
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done.
+    
+   1. Test case: `find -t t/testtag1` <br>
+      Expected: Only `testtag1` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/testtag` <br>
+      Expected: Both `testtag1` and `testtag2` are displayed, with their corresponding contacts.
+      
+   1. Test case: `find -t t/testtag st/1` <br>
+      Expected: Only `testtag2` is displayed, with its corresponding contacts.
+       
 
 ### Saving data
 
