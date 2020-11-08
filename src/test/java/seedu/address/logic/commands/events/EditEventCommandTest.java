@@ -10,9 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Set;
 
@@ -45,7 +45,7 @@ public class EditEventCommandTest {
                 .withPerson(model.getSortedFilteredPersonList().get(1)).build();
         Event editedEvent = new EventBuilder().withAttendees(attendees).build();
         EditEventCommand.EditEventDescriptor descriptor = new EditEventDescriptorBuilder(editedEvent)
-                .setPersonsToAdd(0,1).build();
+                .setPersonsToAdd(0, 1).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, descriptor);
 
         String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS, editedEvent);
@@ -101,7 +101,8 @@ public class EditEventCommandTest {
 
         Event eventInFilteredList = model.getSortedFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         Event editedEvent = new EventBuilder(eventInFilteredList).withDescription(VALID_DESCRIPTION_BREAKFAST)
-                .withAttendees(new AttendeesBuilder().withPerson(model.getSortedFilteredPersonList().get(0)).build()).build();
+                .withAttendees(new AttendeesBuilder().withPerson(model.getSortedFilteredPersonList().get(0)).build())
+                .build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT,
                         new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST)
                                 .setPersonsToAdd(0).build());

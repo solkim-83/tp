@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class AttendeesBuilder {
 
-    Set<FauxPerson> associatedPersons;
+    private Set<FauxPerson> associatedPersons;
 
     /**
      * Creates a AttendeesBuilder with no associated persons
