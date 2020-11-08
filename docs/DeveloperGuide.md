@@ -242,6 +242,39 @@ A possible way to improve the current design is to remove dependency from `Model
 As such, only the relevant methods required for specific `Command`s to work will be exposed to `Model`. For example, right now, both `ContactTagIntegrationManager`'s `deleteTag(Tag)` method and `TagTree`'s `deleteTag(Tag)` method are exposed to `ModelManager` when only one of them is actually used.
 This makes it easier for others working at a similar level of abstraction to avoid using the wrong methods.  
 
+##### Testing
+Testing of `ContactTagIntegrationManager` methods are inherently difficult as unit testing is in this context achieves very little. To help with integration testing of methods in `ContactTagIntegrationManager`, a test `contactTagIntegrationManager` object can be created from `ContactTagIntegrationManagerTest.buildTestContactTagIntegrationManager()`.    
+The test object structure is presented in the diagram below.
+![ContactTagIntegrationManager-test-object](images/tagtree-test-tree.png)
+
+This provides support for testing of new methods, making it easy to write new test cases and check the expected behaviour. It is also easier for others to understand what the test cases are accomplishing.
+
+##### [Proposed] Visualisation
+The current implementation of parent-child tagging is difficult to visualise. Currently, there exists only the `list -t` method that states a brief summary, and `view -t` that lists out full details for singular tag.
+This proposed feature is a new command `viewtree -t` that displays a pop-up visual of a tag tree display together with a summary of contacts tagged under each tag. 
+
+**Required modules**:
+1. Graphical node: Given a tag and a set of contacts, the node will contain the tag name and a summary of contacts.
+1. Graphical edge: An arrow directing from parent-tag to child-tag.
+1. Graph: A class that holds all graphical nodes and graphical edges
+1. Graph layout algorithm: Given a graph, this algorithm decides how to layout the various nodes in the graph
+
+A partial implementation can be found [here](https://github.com/chan-j-d/tp/tree/add-gui-tag-support). The image used in [testing](#testing) was created by this partial implementation.
+This implementation supports the `viewtree -t` command that shows the current tag tree for all contacts in Athena.
+
+**Way forward**:
+The current implementation always displays every single parent-child tag relation. As such, it can get convoluted really quickly. We can implement a way to distill only the requested information such as displaying the nodes and edges of a tag and all its child-tags. 
+Additionally, there is a need to scope the tag tree viewing feature towards the target user, with a focus towards keyboard commands.
+As such, there are two general alternatives:
+1. Add a textbox in the graph display that allows input commands. The supported commands could include
+    1. `{tag name}`: Displays only relevant information for `{tag name}` and all its sub-tags.
+    1. `-all`: Shows all parent-child tag relations.
+    1. `-exit`: Exits the graphical display.
+2. Replace the current `view -t` command. Instead, the `view -t` command will support only one tag argument and display a visual representation of the tag and all its sub-tags.
+
+**Issues**:
+As of now, the ability for commands to affect GUI components in Athena is limited. Thus, properly implementing this would likely require additional backend support for allowing commands to produce GUI effects.
+
 ##### Additional notes:
 _Definitions_:
 - For a `Tag` to _exist_ in Athena, the `Tag` must have either at least one `Person` with the `Tag` **or** at least one child-tag.
@@ -765,7 +798,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
    
    1. Test case: `delete -t t/testtag2` <br>
       Expected: Contact at index 3 no longer has the tag `testtag2`. When `list -t` is used, `testtag2` can no longer be found. When using `view -t t/testtag3`, `testtag1` is listed as a child-tag of `testtag3`.
@@ -779,7 +812,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. 
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. 
    
    1. Test case: `edit -t n/testtag2 i/2 ri/3` <br>
       Expected: Contact at index 3 no longer has the tag `testtag2`. Contact at index 1 has the tag `testtag1`.
