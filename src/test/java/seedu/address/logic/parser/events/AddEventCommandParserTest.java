@@ -14,8 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_BREAKFAST;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_LUNCH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_INDEX_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BREAKFAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INDEX_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_BREAKFAST;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -39,7 +39,7 @@ public class AddEventCommandParserTest {
     public void parse_allFieldsPresent_success() {
         ArrayList<Index> personsToAdd;
         try {
-            personsToAdd = ParserUtil.parseIndexes(VALID_CONTACT_INDEX_LIST);
+            personsToAdd = ParserUtil.parseIndexes(VALID_INDEX_LIST);
         } catch (ParseException pe) {
             throw new AssertionError("Parsing index list should not fail.", pe);
         }

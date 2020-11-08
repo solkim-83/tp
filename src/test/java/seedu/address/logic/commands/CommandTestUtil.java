@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -72,21 +73,26 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_LUNCH = "Lunch with Friends";
     public static final String VALID_TIME_BREAKFAST = "15-12-2020 09:00";
     public static final String VALID_TIME_LUNCH = "10-10-2020 13:00";
-    public static final String VALID_CONTACT_INDEX_LIST = "1,3,4";
+    public static final String VALID_INDEX_LIST = "1,3,4";
     public static final String VALID_WILD = "*";
 
     public static final String DESCRIPTION_DESC_BREAKFAST = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BREAKFAST;
     public static final String DESCRIPTION_DESC_LUNCH = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_LUNCH;
     public static final String TIME_DESC_BREAKFAST = " " + PREFIX_DATETIME + VALID_TIME_BREAKFAST;
     public static final String TIME_DESC_LUNCH = " " + PREFIX_DATETIME + VALID_TIME_LUNCH;
-    public static final String ADD_PERSON_DESC_1 = " " + PREFIX_ADD_PERSON + VALID_CONTACT_INDEX_LIST;
-    public static final String ADD_PERSON_DESC_2 = " " + PREFIX_ADD_PERSON + VALID_CONTACT_INDEX_LIST + ",2";
+    public static final String ADD_PERSON_DESC_1 = " " + PREFIX_ADD_PERSON + VALID_INDEX_LIST;
+    public static final String ADD_PERSON_DESC_2 = " " + PREFIX_ADD_PERSON + VALID_INDEX_LIST + ",2";
     public static final String ADD_PERSON_WILD_DESC = " " + PREFIX_ADD_PERSON + VALID_WILD;
+    public static final String REMOVE_PERSON_DESC_1 = " " + PREFIX_REMOVE_PERSON + VALID_INDEX_LIST;
+    public static final String REMOVE_PERSON_DESC_2 = " " + PREFIX_REMOVE_PERSON + VALID_INDEX_LIST + ",2";
+    public static final String REMOVE_PERSON_WILD_DESC = " " + PREFIX_REMOVE_PERSON + VALID_WILD;
 
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION; // empty description not allowed
     public static final String INVALID_TIME_DESC = " " + PREFIX_DATETIME + "12:0"; // incorrect format
     public static final String INVALID_ADD_PERSON_DESC = " " + PREFIX_ADD_PERSON + "1.2"; // only commas btwn indices
     public static final String INVALID_ADD_PERSON_WILD_DESC = " " + PREFIX_ADD_PERSON + "+"; // incorrect symbol
+    public static final String INVALID_REMOVE_PERSON_DESC = " " + PREFIX_REMOVE_PERSON + "1.2"; // only commas btwn indices
+    public static final String INVALID_REMOVE_PERSON_WILD_DESC = " " + PREFIX_REMOVE_PERSON + "+"; // incorrect symbol
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

@@ -75,6 +75,22 @@ public class EditEventDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code wildCardAdd} of the {@code EditEventDescriptor} that we are building.
+     */
+    public EditEventDescriptorBuilder setWildCardAdd() {
+        descriptor.setWildCardAdd();
+        return this;
+    }
+
+    /**
+     * Sets the {@code wildCardRemove} of the {@code EditEventDescriptor} that we are building.
+     */
+    public EditEventDescriptorBuilder setWildCardRemove() {
+        descriptor.setWildCardRemove();
+        return this;
+    }
+
     public EditEventDescriptor build() {
         return descriptor;
     }
