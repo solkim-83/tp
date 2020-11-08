@@ -77,13 +77,15 @@ public class ReminderWindow extends UiPart<Stage> {
     public String buildAlertMessage() {
         String alertMessage = "Here are your active reminders: \n";
         ObservableList<Reminder> reminders = logic.getFilteredReminderList();
+        int count = 1;
         if (reminders.size() == 0) {
             return "You currently do not have any reminders";
         } else {
             for (Reminder r: reminders) {
                 if (r.getReminderDate().getTime().toLocalDate().isBefore(LocalDate.now())
                         || r.getReminderDate().getTime().toLocalDate().isEqual(LocalDate.now())) {
-                    alertMessage += r.toString() + "\n";
+                    alertMessage += count + ". " + r.toString() + "\n";
+                    count ++;
                 }
             }
         }

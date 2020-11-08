@@ -142,9 +142,9 @@ public class UniqueRemindersList implements Iterable<Reminder> {
      * Returns true if there are active reminders.
      */
     public boolean hasRemindersDue() {
-        for (int i = 0; i < internalList.size() - 1; i++) {
+        for (int i = 0; i < internalList.size() ; i++) {
             if (internalList.get(i).getReminderDate().getTime().toLocalDate().isEqual(LocalDate.now())
-                    || internalList.get(i).getReminderDate().getTime().toLocalDate().isAfter(LocalDate.now())) {
+                    || internalList.get(i).getReminderDate().getTime().toLocalDate().isBefore(LocalDate.now())) {
                 return true;
             }
         }
