@@ -74,7 +74,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultPanel`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -155,9 +155,9 @@ The sequence diagram below illustrates the interaction between `UiManager`, `Mai
 
 ![intro_sequence_diagram](images/IntroSequenceDiagram.png)
 
-This implementation deviates from the sequence regular commands obey (see below) by implementing `executeIntro()`,
-whereas regular commands use `execute(String)`. This is to prevent users from being able to display the introduction
-window through the invocation of a command.
+This implementation deviates from the sequence regular commands obey (see [below](#command-implementation))
+by implementing `executeIntro()`, whereas regular commands use `execute(String)`. This is to prevent users from being
+able to display the introduction window through the invocation of a command.
 
 ##### Design choice
 
@@ -174,6 +174,10 @@ inapplicable, thus necessitating creation of custom methods such as `handleIntro
 
 As the presence of save files are used to check if the introduction window should be shown, Athena will falsely flag
 users who have no save file as first time users and show the introduction window nonetheless.
+
+### Command implementation
+
+
 
 ### Contact and tag management
 ![contact_tag_diagram](images/ContactTagDiagram.png)
