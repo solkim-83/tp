@@ -33,7 +33,9 @@ LogicManager --> MainWindow
 deactivate MainWindow
 
 MainWindow --> UiManager
+deactivate MainWindow
 
 UiManager -->[
+deactivate UiManager
 
 @enduml
