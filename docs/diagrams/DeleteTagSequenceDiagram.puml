@@ -30,9 +30,9 @@ deactivate TagTree
 ContactTagIntegrationManager -> AddressBook : getPersonsWithTag(tagCS2103)
 activate AddressBook
 
-AddressBook --> ContactTagIntegrationManager : set_tagCS2103
+AddressBook --> ContactTagIntegrationManager : tagSetCS2103
 
-loop for each person in set_tagCS2103
+loop for each person in tagSetCS2103
 
 ContactTagIntegrationManager -> ContactTagIntegrationManager : copyPersonWithoutTag(person)
 activate ContactTagIntegrationManager
