@@ -54,7 +54,7 @@ Given below are my contributions to the project.
   group of contacts. This allows the user to purge all unwanted contacts in one command. It also allows the user to do
   a pseudo-selecting of contacts before they delete selected contacts.
 
-* **Code contributed**: https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=bangyiwu
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=bangyiwu)
 
 * **Project management**:
   * Creating and editing the user stories chart
