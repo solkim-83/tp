@@ -2,11 +2,12 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureEvent;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -16,9 +17,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ModelManagerBuilder;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code RemindEventCommand}.
@@ -47,7 +45,7 @@ public class RemindEventCommandTest {
         expectedModel.addEvent(validEvent);
         expectedModel.addReminder(testReminder);
 
-        RemindEventCommand remindEventCommand= new RemindEventCommand(Index.fromZeroBased(0), daysInAdvance);
+        RemindEventCommand remindEventCommand = new RemindEventCommand(Index.fromZeroBased(0), daysInAdvance);
 
         assertCommandSuccess(remindEventCommand, model,
                 String.format(RemindEventCommand.MESSAGE_REMIND_EVENT_SUCCESS, daysInAdvance) + validEvent.toString(),
@@ -56,7 +54,7 @@ public class RemindEventCommandTest {
 
     @Test
     public void execute_targetEventInvalidIndex_throwsCommandException() {
-        RemindEventCommand remindEventCommand= new RemindEventCommand(Index.fromZeroBased(0), 0);
+        RemindEventCommand remindEventCommand = new RemindEventCommand(Index.fromZeroBased(0), 0);
         assertCommandFailureEvent(remindEventCommand,
                 model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
