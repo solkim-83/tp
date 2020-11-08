@@ -39,13 +39,15 @@ Given below are my contributions to the project.
     [\#33](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/33),
     [\#54](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/54),
     [\#178](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/178))
-    * Amended errors (e.g. grammatical) to existing documentation of all existing features (Pull request
+    * Amended errors (e.g. grammatical, formatting) to existing documentation of all existing features (Pull request
     [\#250](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/250))
   * Developer Guide:
     * Added implementation details of the `sort -e`, `find -e`, `list -e` and `clear -e` feature. (Pull request
     [\#32](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/32),
     [\#151](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/151),
     [\#250](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/250))
+    * Amended errors (e.g. grammatical, formatting) to existing documentation of all existing features (Pull request
+    [\#265](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/265))
 
 * **Community**:
   * Reported bugs and suggestions for other teams in the class ([Link](https://github.com/solkim-83/ped/issues))
