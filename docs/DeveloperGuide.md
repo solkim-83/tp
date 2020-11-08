@@ -187,11 +187,6 @@ SortContactCommand#execute() : Does validity check of input and then sorts the c
 
 The sorting function is designed with the aim of temporary modification of the contact-related entries in `RemindersImpl``. 
 
-The following sequence diagram shows how the `sort -e` operation works:
-
-![Interactions Inside the Logic Component for the `sort -e 1` Command](images/SortEventSequenceDiagram.png)
-
-
 ##### How sort contact executes
   
 The following activity diagram summarizes what happens when a user executes `sort -e` command:
