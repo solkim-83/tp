@@ -64,6 +64,14 @@ public class ModelManagerBuilder {
         return this;
     }
 
+    /**
+     * Replaces the {@code RemindersImpl} in the {@code ModelManager} that we are building.
+     */
+    public ModelManagerBuilder withUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        model.setUserPrefs(userPrefs);
+        return this;
+    }
+
     public ModelManager build() {
         return model;
     }
