@@ -225,7 +225,9 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 Examples:
 * `edit -c 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` 
 and `johndoe@example.com` respectively.
-* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `cs2030`.
+* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `cs2030`. (Example illustrated below)
+![edit-contact-image](images/ug-images/contactBehaviourImages/edit-contact-image.png)
+
 * `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `cs2103` to it.
 
 #### Finding a contact - `find`
@@ -249,7 +251,9 @@ e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find -c n/John` returns `john` and `John Doe`
-* `find -c n/alex david` returns `Alex Yeoh`, `David Li`
+* `find -c n/alex david` returns `Alex Yeoh`, `David Li` (Example illustrated below)
+![find-contact-image](images/ug-images/contactBehaviourImages/find-contact-image.png)
+
 * `find -c a/Serangoon` returns all contacts with an address that contains `Serangoon` 
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
@@ -482,7 +486,9 @@ Format: `add -t n/TAG_NAME [i/CONTACT_INDEX]… [t/CHILD_TAG]…`
 * `CHILD_TAG`s specified must already exist in Athena.
 
 Examples:
-* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assigns contact at index `1` the tag `cs2103`.
+* `add -t n/cs2103 i/1` Creates a new tag `cs2103` and assigns contact at index `1` the tag `cs2103`. (Example illustrated below)
+![add-tag-image](images/ug-images/tagBehaviourImages/add-tag-image.png)
+
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
 will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
 
@@ -501,7 +507,8 @@ Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 ![delete_single_tag_pic](images/DeleteSingleTagPic.png) 
 
 Examples:
-* `delete -t t/cs2030` Deletes the tag `cs2030`.
+* `delete -t t/cs2030` Deletes the tag `cs2030`. (Example illustrated below)
+![delete-tag-image](images/ug-images/tagBehaviourImages/delete-tag-image.png)
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
 #### Editing a tag - `edit`
@@ -521,7 +528,9 @@ Format: `edit -t n/TAG_NAME [i/INDEX_ADD]… [ri/INDEX_REMOVE]… [t/TAG_ADD]…
 * `TAG_REMOVE`s must be existing child-tags of `TAG_NAME`.
 
 Examples:
-* `edit -t n/computing i/1` Adds the contact at index `1` to `computing`.
+* `edit -t n/computing i/1 i/2` Adds the contacts at indices `1` and `2` to `computing`. (Example illustrated below)
+![edit-tag-image](images/ug-images/tagBehaviourImages/edit-tag-image.png)
+
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
 #### Listing all tags - `list`
@@ -530,6 +539,9 @@ Lists all tags in the remarks panel including the corresponding contacts of each
 
 Example:
 * `list -t` 
+
+In the remarks panel, you should see something like the image below.
+![list-tag-image](images/ug-images/tagBehaviourImages/list-tag-image.png)
 
 #### Viewing tags - `view`
 
@@ -545,7 +557,10 @@ Format: `view -t t/TAG [t/TAG]…`
 * `TAG` must be a valid existing tag in Athena.
 
 Example:
-* `view -t t/cs2030` Shows the details (as specified above) for the tag `cs2030` only.
+* `view -t t/friends` Shows the details (as specified above) for the tag `friends` only. (Example illustrated below)
+![view-tag-image](images/ug-images/tagBehaviourImages/view-tag-image.png)
+_Note that for the above image, the tag `friends` does not contain sub-tags._
+
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
 ---
