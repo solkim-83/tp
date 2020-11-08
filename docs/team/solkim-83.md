@@ -42,10 +42,11 @@ Given below are my contributions to the project.
     * Amended errors (e.g. grammatical, formatting) to existing documentation of all existing features (Pull request
     [\#250](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/250))
   * Developer Guide:
-    * Added implementation details of the commands `sort -e`, `find -e`, `list -e` and `clear -e` feature. (Pull request
+    * Added implementation details of the commands `sort -e` and `list -e`. (Pull request
     [\#32](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/32),
     [\#151](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/151),
     [\#250](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/250))
+        * Added UML sequence diagram and activity diagram to illustrate the execution of sort command.
     * Amended errors (e.g. grammatical, formatting) to existing documentation of all existing features (Pull request
     [\#265](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/265))
 
