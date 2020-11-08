@@ -85,7 +85,7 @@ public class ReminderWindow extends UiPart<Stage> {
                 if (r.getReminderDate().getTime().toLocalDate().isBefore(LocalDate.now())
                         || r.getReminderDate().getTime().toLocalDate().isEqual(LocalDate.now())) {
                     alertMessage += count + ". " + r.toString() + "\n";
-                    count ++;
+                    count++;
                 }
             }
         }
