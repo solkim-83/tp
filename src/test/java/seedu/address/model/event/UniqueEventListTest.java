@@ -164,7 +164,7 @@ public class UniqueEventListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> uniqueEventList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniqueEventList
+                .asUnmodifiableObservableList().remove(0));
     }
 }
