@@ -35,7 +35,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_ADD_PERSON);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATETIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATETIME, PREFIX_ADD_PERSON)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_FAILURE));
         }
