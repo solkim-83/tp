@@ -89,9 +89,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION; // empty description not allowed
     public static final String INVALID_TIME_DESC = " " + PREFIX_DATETIME + "12:0"; // incorrect format
-    public static final String INVALID_ADD_PERSON_DESC = " " + PREFIX_ADD_PERSON + "1.2"; // only commas btwn indices
+    public static final String INVALID_ADD_PERSON_DESC = " " + PREFIX_ADD_PERSON + "1.2"; // no fullstops
     public static final String INVALID_ADD_PERSON_WILD_DESC = " " + PREFIX_ADD_PERSON + "+"; // incorrect symbol
-    public static final String INVALID_REMOVE_PERSON_DESC = " " + PREFIX_REMOVE_PERSON + "1.2"; // only commas btwn indices
+    public static final String INVALID_REMOVE_PERSON_DESC = " " + PREFIX_REMOVE_PERSON + "1.2"; // no fullstops
     public static final String INVALID_REMOVE_PERSON_WILD_DESC = " " + PREFIX_REMOVE_PERSON + "+"; // incorrect symbol
 
 

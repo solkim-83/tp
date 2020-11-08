@@ -27,10 +27,9 @@ public class FindEventCommandParserTest {
         DescriptionContainsKeywordsPredicate predicate = new DescriptionContainsKeywordsPredicate();
         predicate.setKeywords(Arrays.asList("CS2103", "Meeting"));
         FindEventCommand expectedFindEventCommand = new FindEventCommand(predicate);
-        assertParseSuccess(parser,  "CS2103 Meeting", expectedFindEventCommand);
+        assertParseSuccess(parser, "CS2103 Meeting", expectedFindEventCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n CS2103 \n \t Meeting  \t",
-                expectedFindEventCommand);
+        assertParseSuccess(parser, " \n CS2103 \n \t Meeting  \t", expectedFindEventCommand);
     }
 }
