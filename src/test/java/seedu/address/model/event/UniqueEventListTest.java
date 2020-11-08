@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.CONSULTATION;
 import static seedu.address.testutil.TypicalEvents.DINNER;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.event.association.FauxPerson;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.AttendeesBuilder;
@@ -160,6 +162,61 @@ public class UniqueEventListTest {
     public void setEvents_listWithDuplicateEvents_throwsDuplicateEventException() {
         List<Event> listWithDuplicateEvents = Arrays.asList(CONSULTATION, CONSULTATION);
         assertThrows(DuplicateEventException.class, () -> uniqueEventList.setEvents(listWithDuplicateEvents));
+    }
+
+    @Test
+    public void deleteFauxPerson_fauxPersonExists() {
+        Event eventWithoutAlice = new EventBuilder().build();
+        UniqueEventList expectedUniqueEventList = new UniqueEventList();
+        expectedUniqueEventList.add(eventWithoutAlice);
+
+        Event eventWithAlice = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(ALICE).build()).build();
+        uniqueEventList.add(eventWithAlice);
+        uniqueEventList.deleteFauxPerson(new FauxPerson(ALICE));
+
+        assertTrue(uniqueEventList.equals(expectedUniqueEventList));
+    }
+
+    @Test
+    public void deleteFauxPerson_fauxPersonDoesNotExist() {
+        Event eventWithBob = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(BOB).build()).build();
+        UniqueEventList expectedUniqueEventList = new UniqueEventList();
+        expectedUniqueEventList.add(eventWithBob);
+
+        uniqueEventList.add(eventWithBob);
+        uniqueEventList.deleteFauxPerson(new FauxPerson(ALICE));
+
+        assertTrue(uniqueEventList.equals(expectedUniqueEventList));
+    }
+
+    @Test
+    public void setFauxPerson_fauxPersonExists() {
+        Event eventWithBob = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(BOB).build()).build();
+        UniqueEventList expectedUniqueEventList = new UniqueEventList();
+        expectedUniqueEventList.add(eventWithBob);
+
+        Event eventWithAlice = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(ALICE).build()).build();
+        uniqueEventList.add(eventWithAlice);
+        uniqueEventList.setFauxPerson(new FauxPerson(ALICE), new FauxPerson(BOB));
+
+        assertTrue(uniqueEventList.equals(expectedUniqueEventList));
+    }
+
+    @Test
+    public void setFauxPerson_fauxPersonDoesNotExist() {
+        Event eventWithBob = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(BOB).build()).build();
+        UniqueEventList expectedUniqueEventList = new UniqueEventList();
+        expectedUniqueEventList.add(eventWithBob);
+
+        uniqueEventList.add(eventWithBob);
+        uniqueEventList.setFauxPerson(new FauxPerson(ALICE), new FauxPerson(BOB));
+
+        assertTrue(uniqueEventList.equals(expectedUniqueEventList));
     }
 
     @Test

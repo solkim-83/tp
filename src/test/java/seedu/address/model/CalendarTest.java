@@ -120,11 +120,12 @@ public class CalendarTest {
 
     @Test
     public void deletePersonAssociation_noPersonAssociated() {
-        Event eventWithoutAlice = new EventBuilder().build();
+        Event eventWithBob = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(BOB).build()).build();
         Calendar expectedCalendar = new Calendar();
-        expectedCalendar.addEvent(eventWithoutAlice);
+        expectedCalendar.addEvent(eventWithBob);
 
-        calendar.addEvent(eventWithoutAlice);
+        calendar.addEvent(eventWithBob);
         calendar.deletePersonAssociation(ALICE);
 
         assertTrue(calendar.equals(expectedCalendar));
@@ -147,11 +148,12 @@ public class CalendarTest {
 
     @Test
     public void setPersonAssociation_noPersonAssociated() {
-        Event eventWithoutAlice = new EventBuilder().build();
+        Event eventWithBob = new EventBuilder()
+                .withAttendees(new AttendeesBuilder().withPerson(BOB).build()).build();
         Calendar expectedCalendar = new Calendar();
-        expectedCalendar.addEvent(eventWithoutAlice);
+        expectedCalendar.addEvent(eventWithBob);
 
-        calendar.addEvent(eventWithoutAlice);
+        calendar.addEvent(eventWithBob);
         calendar.setPersonAssociation(ALICE, BOB);
 
         assertTrue(calendar.equals(expectedCalendar));
