@@ -403,6 +403,7 @@ In Athena, events are represented by `Event` objects. `Event` objects have a des
   * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
   
 This diagram shows the overview of the operation:
+
 ![`add -e` adding attendees](images/AddEventAttendeesDiagram.png)
 
 **During edit event:**
@@ -416,6 +417,7 @@ This diagram shows the overview of the operation:
   * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
   
 This diagram shows the overview of the operation:
+
 ![`edit -e` adding/removing attendees](images/EditedEventAttendeesDiagram.png)
 
  
