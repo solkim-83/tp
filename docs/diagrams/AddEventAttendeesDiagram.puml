@@ -1,0 +1,15 @@
+@startuml
+start
+:New Event;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([attendees to be added])
+    :               FauxPersons made from Persons
+      at indicated indices in AddressBook are added;
+else ([no attendees to be added])
+endif
+    : Attendees added, and Event attendees is set;
+    stop
+@enduml

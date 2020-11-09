@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 [[portfolio](team/linkedink.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: mostly events and its integration with contacts
 
 ### Illio Suardi
 
