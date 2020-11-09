@@ -580,7 +580,7 @@ Format: `find -t [t/KEYWORD] [st/BOOLEAN]`
 Examples:
 * `find -t st/1` Finds all super-tags.
 * `find -t t/computing` Finds tags that partially contain the word `computing`.
-* `find -t t/friends st/0` Finds regular tags that partially contain the word `friends`, like the image below.
+* `find -t t/friends st/0` Finds regular tags that partially contain the word `friends (example illustrated below).
 ![find-tag-image](images/ug-images/tagBehaviourImages/find-tag-image.png)
 
 #### Listing all tags - `list`
