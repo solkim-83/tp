@@ -838,7 +838,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 1a. The list is empty.
 
-      Use case ends.
+     Use case ends.
 
 * 1b. The given keyword is invalid.
 
