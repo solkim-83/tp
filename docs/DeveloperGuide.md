@@ -256,7 +256,7 @@ Additionally, it executes the sorting operation based on 3 sorting patterns:
 
 SortContactCommand#execute() : Does validity check of input and then sorts the contacts according to user input (index))
 
-The sorting function is designed with the aim of temporary modification of the contact-related entries in `RemindersImpl``. 
+The sorting function is designed with the aim of temporary modification of the contact-related entries in `RemindersImpl`.
 
 ##### How sort contact executes
   
@@ -401,7 +401,7 @@ In Athena, events are represented by `Event` objects. `Event` objects have a des
   * The `Person`s representing the contacts are retrieved using the indices provided by user input.
   * A `FauxPerson` is created for each of them
   * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
-  
+
 This diagram shows the overview of the operation:
 
 ![`add -e` adding attendees](images/AddEventAttendeesDiagram.png)
@@ -766,13 +766,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-      Use case ends.
+     Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. Athena shows an error message.
 
-      Use resumes at step 2.
+      Use case resumes at step 2.
       
 #### **Use case: Edit an event**
 
@@ -792,37 +792,37 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-      Use case ends.
+     Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. Athena shows an error message.
 
-      Use resumes at step 2.
+      Use case resumes at step 2.
 
 * 3b. The date time format is not accepted.
 
     * 3b1. Athena shows an error message.
        
-      Use resumes at step 2.
+      Use case resumes at step 2.
       
 * 3c. There is a duplicate event.
 
     * 3c1. Athena shows an error message.
 
-      Use resumes at step 2.
+      Use case resumes at step 2.
       
 * 3d. There is an event that is occurring at the same time.
 
     * 3d1. Athena shows an error message.
 
-      Use resumes at step 2.
+      Use case resumes at step 2.
       
 * 3e. The person(s) to be added or removed is/are not found.
 
     * 3e1. Athena shows an error message.
 
-      Use resumes at step 2.
+      Use case resumes at step 2.
 
 #### **Use case: Search for events**
 
@@ -870,7 +870,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
   * 3a1. Athena shows an error message.
 
-    Use resumes at step 2.
+    Use case resumes at step 2.
     
 #### **Use case: View details of an event**
 
@@ -896,7 +896,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
     * 3a1. Athena shows an error message.
 
-      Use resumes at step 2.
+      Use case resumes at step 2.
       
 #### **Use case: List all saved events**
 
