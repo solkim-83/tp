@@ -362,7 +362,7 @@ We have intentionally chosen this design in order to preserve the effectiveness 
 ### Event and attendees management
 
 ##### General design
-`Event` component:
+**`Event`** component:
 
 In Athena, events are represented by `Event` objects. `Event` objects have a description and a time. An `Event` may or may not have attendees.
 
@@ -370,14 +370,14 @@ In Athena, events are represented by `Event` objects. `Event` objects have a des
 - `UniqueEventList` keeps track of all `Event` objects. It uses Event class’ `isSameEvent(Event)` method to ensure that there are no duplicate events in Athena.
 - All manipulation of `Event` objects have to be done through Calendar. Calendar provides simple methods that can be used by higher-level components such as the `ModelManager` class.
 
-Attendees (`FauxPerson`) component:
+**Attendees (`FauxPerson`)** component:
 
 - `Event` objects can have attendees in the form of a set of `FauxPerson`.
 - `FauxPersons` are created from actual `Person` objects taken from the `AddressBook`
 
 ##### How events gain/lose attendees
 
-During add event:
+**During add event:**
 
 * No change if there are no attendees to add.
 * If the user indicates the indices of the contacts in the contact list they would want to add.
@@ -388,7 +388,7 @@ During add event:
 This diagram shows the overview of the operation:
 ![`add -e` adding attendees](images/AddEventAttendeesDiagram.png)
 
-During edit event:
+**During edit event:**
 
 * No change if there are no attendees to add or remove.
 * Removal of attendees is done first before addition.
