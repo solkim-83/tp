@@ -24,10 +24,10 @@ public class SortEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Sorts the currently displayed list of events "
-            + "by the index command entered:\n"
-            + "1 sorts by alphabetical order of the events' descriptions,\n"
-            + "2 sorts by alphabetical order of the events' time.\n\n"
-            + "Parameters:\nINDEX (must be between 1 and 2)\n\n"
+            + "by the index command entered:\n\n"
+            + "1: sorts by alphabetical order of the events' descriptions\n"
+            + "2: sorts by alphabetical order of the events' time\n\n"
+            + "Parameters:\nINDEX (must be either 1 or 2)\n\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " 1 ";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
