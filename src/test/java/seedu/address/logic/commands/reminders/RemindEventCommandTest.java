@@ -3,9 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureEvent;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +30,8 @@ public class RemindEventCommandTest {
     @Test
     public void execute_newReminder_success() {
         int daysInAdvance = 1;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm");
-        String time = LocalDateTime.now().plusDays(daysInAdvance).format(formatter);
         Event validEvent = new EventBuilder().withDescription("Meeting")
-                .withTime(time).build();
+                .withTime("9999/12/12 12:00").build();
 
         Reminder testReminder = new Reminder(validEvent, daysInAdvance);
         model.addEvent(validEvent);

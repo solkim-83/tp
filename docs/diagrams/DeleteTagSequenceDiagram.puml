@@ -31,6 +31,7 @@ ContactTagIntegrationManager -> AddressBook : getPersonsWithTag(tagCS2103)
 activate AddressBook
 
 AddressBook --> ContactTagIntegrationManager : tagSetCS2103
+deactivate AddressBook
 
 loop for each person in tagSetCS2103
 

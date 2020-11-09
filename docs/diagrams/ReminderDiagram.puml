@@ -1,0 +1,25 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_CONTACT_TAG_COLOR
+skinparam classBackgroundColor MODEL_CONTACT_TAG_COLOR
+
+Package Reminder {
+Class RemindersImpl
+Class UniqueRemindersList
+Class Reminder
+}
+
+
+
+RemindersImpl -down-> "1" UniqueRemindersList
+
+UniqueRemindersList -down-> "*" Reminder
+
+Reminder --> Event
+Reminder --> Time
+
+Class ModelManager MODEL_COLOR
+ModelManager -down-> RemindersImpl MODEL_COLOR
+
+@enduml
