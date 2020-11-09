@@ -1,0 +1,24 @@
+@startuml
+start
+:Edited Event has copied over the original attendees;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([change in attendees])
+if () then ([attendees to be removed])
+    : FauxPersons with the appropriate indices are removed;
+else ([no attendees to be removed])
+endif
+    : Attendees removed;
+if () then ([attendees to be added])
+    :               FauxPersons made from Persons
+      at indicated indices in AddressBook are added;
+else ([no attendees to be added])
+endif
+    : Attendees added, and Event attendees is set;
+    stop
+else ([no change in attendees])
+    : Event attendees is set;
+stop
+@enduml

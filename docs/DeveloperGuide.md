@@ -359,6 +359,49 @@ Suppose we delete a single `Tag`, the parent-tags of `Tag` will be reconnected t
 ![single-tag-delete](images/DeleteSingleTagPic.png) <br>
 We have intentionally chosen this design in order to preserve the effectiveness of top-down queries of all sub-tags.
 
+### Event and attendees management
+
+##### General design
+`Event` component:
+
+In Athena, events are represented by `Event` objects. `Event` objects have a description and a time. An `Event` may or may not have attendees.
+
+- `Calendar` handles all direct matters concerning `Event` objects. It has a `UniqueEventList`.
+- `UniqueEventList` keeps track of all `Event` objects. It uses Event class’ `isSameEvent(Event)` method to ensure that there are no duplicate events in Athena.
+- All manipulation of `Event` objects have to be done through Calendar. Calendar provides simple methods that can be used by higher-level components such as the `ModelManager` class.
+
+`FauxPerson` component:
+
+- `Event` objects can have attendees in the form of a set of `FauxPerson`.
+- `FauxPersons` are created from actual `Person` objects taken from the `AddressBook`
+
+##### How events gain/lose attendees
+
+During add event:
+
+* No change if there are no attendees to add.
+* If the user indicates the indices of the contacts in the contact list they would want to add.
+  * The `Person`s representing the contacts are retrieved using the indices.
+  * A `FauxPerson` is created for each of them
+  * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
+  
+This diagram shows the overview of the operation:
+![`add -e` adding attendees](images/AddEventAttendeesDiagram.png)
+
+During edit event:
+
+* No change if there are no attendees to add or remove.
+* Removal of attendees is done first before addition.
+  * Based on the indices provided, the `FauxPerson`s at the given indices is removed.
+* If user indicates to add contacts
+  * The `Person`s representing the contacts are retrieved the indices.
+  * A `FauxPerson` is created for each of them
+  * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
+  
+This diagram shows the overview of the operation:
+![`edit -e` adding/removing attendees](images/EditedEventAttendeesDiagram.png)
+
+ 
 ### Sort events feature
 The sort events feature is facilitated by `Calendar` that stores event entries and their details in Athena. 
 
@@ -921,6 +964,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete -c 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      
+   1. Test case: `delete -c 1,2`<br>
+      Expected: First 2 contacts are deleted from the list. Details of the contacts events shown in the status message.
 
    1. Test case: `delete -c 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
@@ -935,7 +981,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit -e 1 d/test at/10-10-21 14/00` <br>
        Expected: Event at index `1` in the list has its description changed to `test` and time changed to `Sun 10th Oct 2021 2:00pm`.
        
-    1. Test case: `edit -e 1 ap/*` (done after step 1) <br>
+    1. Test case: `edit -e 1 ap/*` (assuming there are contacts displayed, and done after step 1) <br>
        Expected: All persons show in the contact list is added to event at index `1` as attendees.
        
     1. Test case: `edit -e 1 rp/*` (done after step 1 and 2) <br>
@@ -943,7 +989,34 @@ testers are expected to do more *exploratory* testing.
        
     1. Test case: `edit -e 1 d/` <br>
        Expected: Error message shown as the description input is empty.
+       
+### Finding an event
 
+1. Finding an event
+
+    1. Test case: `find -e meeting`
+       Expected: For default event list, shows `CS2103 Meeting` (and possibly other contacts containing `meeting`).
+       
+    1. Test case: `find -e Run`
+       Expected: For default event list, shows `Night run` (and possibly other contacts containing `run`).
+       
+### Deleting an event
+
+1. Deleting a contact while all events are being shown
+
+   1. Prerequisites: List all events using the `list -e` command. Multiple events in the list.
+
+   1. Test case: `delete -e 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+      
+   1. Test case: `delete -e 1,2`<br>
+      Expected: First 2 events are deleted from the list. Details of the deleted events shown in the status message.
+
+   1. Test case: `delete -e 0`<br>
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete -e`, `delete -e x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Adding a tag
 
@@ -1036,3 +1109,13 @@ There were also issues that were more difficult to spot, such as the ability to 
 As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
 Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and contacts. 
 
+
+
+* **Event and Attendees management**: 
+When contacts were integrated into events as attendees, there was challenge to simplify a Person object so that the calendar save file did not need contain multiple repeated copies of Persons.
+Otherwise, the file size can get unnecessarily big given our aim is to have large number of contacts and events.
+Hence, FauxPerson class was created. 
+When creating the structure for adding and removing attendees, it was also necessary to think ahead and design code that allows commands related to contacts to trigger changes to attendees.
+Namely, when deleting and editing contacts, the GUI should update the event list as well.
+It was also important to design it in such a way that these commands did not need to be modified such that they gained too much coupling from interacting with too many other classes.
+Hence, Calendar gained 2 methods. One for deleting a Person from being associated, and the other for setting a Person with its edited self. 
