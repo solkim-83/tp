@@ -641,11 +641,8 @@ before then, starting on **9th Nov**.
 
 * When reminders are active, every time Athena is opened, the alert window will pop up as shown below. 
 
-<div align="center">
-
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
-</div>
 
 #### Listing all reminders - `list`
 
