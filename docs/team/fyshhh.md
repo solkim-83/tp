@@ -21,12 +21,22 @@ Given below are my contributions to the project.
   necessary to understand both how to call the command in a non-standard manner (when the application is opened, as
   opposed to when a user inputs something), and how to display a new, custom window.
  
+* **New Feature**: Added the following tag command: `find`
+  * What it does: Allows users to search for tags by their names and type
+  * Justification: Tagging was initially implemented as a supplementary feature to the contacts. However, as the depth
+  of tag-related features grew, it became apparent that the ability to search for certain tags would become necessary.
+  * Highlights: A `TagUtil` class was created as a container for commonly used tag-related methods and messages.
+  Additionally, implementation of partial keyword matching was necessary for this feature, which could be used in the
+  future.
+ 
 * **Enhancement to existing features**: Streamlining of command input and parsing structure
 (pull request [\#120](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/120))
   * Justification: At that time, the commands for different functionalities were inconsistent: for instance, `add` added
-  contacts whereas `addEvent` added events. As such, the input structure was standardised by using a common command word
+  contacts and `addEvent` added events. The input structure is now standardised by using a common command word
   (`add` in this case) and a targeted command type (`-c` for contacts and `-e` for events). This also makes it easier to
-  add more commands in the future, as the parser is clearly structured.
+  add more commands in the future, as the parser is structured more clearly.
+
+<div style="page-break-after: always;"></div>
  
 * **Enhancement to existing features**: Refactor command packaging to individual packages 
 (pull request [\#158](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/158))
@@ -65,7 +75,9 @@ Given below are my contributions to the project.
     * Updated product scope, user stories and non-functional requirements [\#51](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/51),
     [\#52](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/52)
     * Updated outdated links to relevant code files [\#141](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/141)
+    * Updated outdated diagrams throughout entire document [\#283](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/283)
     * Added implementation details of introduction window [\#185](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/185)
+    * Added implementation details of commands [\#283](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/283)
     
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#67](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/67),

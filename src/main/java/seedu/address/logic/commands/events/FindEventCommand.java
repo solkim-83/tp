@@ -24,7 +24,7 @@ public class FindEventCommand extends Command {
             + ": Finds all events that contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
             + "Parameters:\nKEYWORD [MORE_KEYWORDS]...\n\n"
-            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " meeting";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_TYPE + " " + "meeting";
 
     private final DescriptionContainsKeywordsPredicate predicate;
 

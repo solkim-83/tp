@@ -39,7 +39,7 @@ UniquePersonList -down-> "*" Person
 TagTreeImpl -up-|> TagTree
 TagTreeImpl --> "*" Tag
 
-Person --> Tag
+Person --> "*" Tag
 
 Class ModelManager MODEL_COLOR
 ModelManager -down-> ContactTagIntegrationManager MODEL_COLOR

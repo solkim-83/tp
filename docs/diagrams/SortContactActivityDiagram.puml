@@ -1,0 +1,23 @@
+@startuml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command commits AddressBook])
+if () then ([sorting index == 1])
+    : Sort the contacts by name in alphabetical order;
+else if () then ([sorting index == 2])
+    : Sort the contacts by address in alphabetical order;
+else if () then ([sorting index == 3])
+    : Sort the contacts by email in alphabetical order;
+else
+    : No sorting of contacts;
+endif
+    : Display the updated contacts list;
+    stop
+else ([command has formatting error])
+    : Display a formatting error;
+stop
+@enduml
