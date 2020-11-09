@@ -120,7 +120,7 @@ It is made up of three major components:
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* does not depend on any of the other three high-level components.
 
 ### Storage component
 
@@ -256,40 +256,30 @@ In Athena, contacts are represented by `Person` objects. `Person` objects have s
 - `UniquePersonList` keeps track of all `Person` objects. It uses `Person` class' `isSamePerson(Person)` method to ensure that there are no duplicate contacts in Athena.
 - `TagManager` keeps track of which contacts contain which tags. It uses a hash map, mapping each `Tag` to the set of `Person`s that contain the `Tag`. 
 
-All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides simple methods that can be used by higher-level components such as 
-- `void removePerson(Person)`
-- `void addPerson(Person)`
-- `boolean hasPerson(Person)`
-- and more
+All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides methods that can be used by higher-level components to query or edit details regarding contacts. 
 
 **`Tag`** component:
 
-`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its child-tags to perform an action.
+`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its sub-tags to perform an action.
 - `TagTree` handles tag-to-tag relations. 
 - `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. 
-The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. 
+The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. For convenience, the reverse mapping (i.e. map from each `Tag` to its set of parent-tags) is also provided. 
 
-Any new links established between tags have to go through the `TagTree`. `TagTree` provides several simple methods such as 
-- `void addSubTagTo(Tag tag)`  
-- `boolean hasTag(Tag tag)`  
-- and more
+Any new links established between tags have to go through the `TagTree`. `TagTree` provides methods to query or edit tag-to-tag relationships.
 
 **`Integration`** component:
 
-The `ContactTagIntegrationManager` class provides a few predefined methods that affect both `Person`s and `Tag`s together. Methods include:
-- `void deleteTag(Tag)`
-- `void deleteTagRecursive(Tag)` - deletes a `Tag` and all its sub-tags
-- and more
+The `ContactTagIntegrationManager` class provides a few predefined methods for functions that will affect both `Person`s and `Tag`s at the same time. 
 
 This class is meant to address the difficulty in preserving consistency within the system.
 For example, two different `deleteTag` methods are implemented in both `TagTree` and `ContactTagIntegrationManager`.
-However, the method in `TagTree` only deletes the specific `Tag` in `TagTree`.
+However, the method in `TagTree` only deletes the specific `Tag` in `TagTree` while `AddressBook` would still maintain a reference to the same `Tag`.
 The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method, then removes the `Tag` from all `Person` objects that has the `Tag`.
 The sequence diagram below illustrates the interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
 
 ![delete-tag-demonstration](images/DeleteTagSequenceDiagram.png)
 
-As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made to `Tag`s that will affect `Person`s stored.
+As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made in either `AddressBook` or `TagTree` that will indirectly affect the other component.
 Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if available.
 
 ##### Design choice
@@ -303,6 +293,9 @@ Using these two mutable constructs, it allows for accurate realtime queries by h
 To ensure that the right commands are called at the right time, `Model` only implements a limited set of methods that can change the internal mapping.
 To support a greater variety of `Command`s, ensure that the correct methods from either `AddressBook`, `TagTree` or `ContactTagIntegrationManager` are chosen. 
 A rule of thumb is to search for the method in `ContactTagIntegrationManager` first before looking for a similar method in the other two classes. 
+
+To implement a new functionality that is not currently supported in any of the three classes, consider whether the method should affect both `AddressBook` _and_ `TagTree`.
+If it has the potential to affect both, the method should be implemented in `ContactTagIntegrationManager`. Otherwise, implement them in the relevant class.
  
 To view the full list of methods and documentation for the three major classes, you can view them at [`AddressBook`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/AddressBook.java), 
 [`TagTree`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/tag/TagTree.java) and [`ContactTagIntegrationManager`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/ContactTagIntegrationManager.java).
@@ -323,7 +316,7 @@ This provides support for testing of new methods, making it easy to write new te
 The current implementation of parent-child tagging is difficult to visualise. Currently, there exists only the `list -t` method that states a brief summary, and `view -t` that lists out full details for singular tag.
 This proposed feature is a new command `viewtree -t` that displays a pop-up visual of a tag tree display together with a summary of contacts tagged under each tag. 
 
-**Required modules**:
+_Required modules_:
 1. Graphical node: Given a tag and a set of contacts, the node will contain the tag name and a summary of contacts.
 1. Graphical edge: An arrow directing from parent-tag to child-tag.
 1. Graph: A class that holds all graphical nodes and graphical edges
@@ -332,7 +325,8 @@ This proposed feature is a new command `viewtree -t` that displays a pop-up visu
 A partial implementation can be found [here](https://github.com/chan-j-d/tp/tree/add-gui-tag-support). The image used in [testing](#testing) was created by this partial implementation.
 This implementation supports the `viewtree -t` command that shows the current tag tree for all contacts in Athena.
 
-**Way forward**:
+_Way forward_:
+
 The current implementation always displays every single parent-child tag relation. As such, it can get convoluted really quickly. We can implement a way to distill only the requested information such as displaying the nodes and edges of a tag and all its child-tags. 
 Additionally, there is a need to scope the tag tree viewing feature towards the target user, with a focus towards keyboard commands.
 As such, there are two general alternatives:
@@ -341,8 +335,12 @@ As such, there are two general alternatives:
     1. `-all`: Shows all parent-child tag relations.
     1. `-exit`: Exits the graphical display.
 2. Replace the current `view -t` command. Instead, the `view -t` command will support only one tag argument and display a visual representation of the tag and all its sub-tags.
+Using the modules listed above, a possible activity diagram for this implementation is shown below.
+![viewtree-activity-diagram](images/ViewTagTreeActivityDiagram.png)
 
-**Issues**:
+
+_Issues_:
+
 As of now, the ability for commands to affect GUI components in Athena is limited. Thus, properly implementing this would likely require additional backend support for allowing commands to produce GUI effects.
 
 ##### Additional notes:

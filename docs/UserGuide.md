@@ -45,7 +45,7 @@ section below.
         * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
         * [`list`](#listing-all-reminders---list) - Listing all reminders
 * [Upcoming features](#upcoming-features)
-    * [`viewtagtree`](#viewing-tag-tree-coming-soon---viewtagtree) - Viewing the tag tree
+    * [`viewtree`](#viewing-tag-tree-coming-soon---viewtree) - Viewing the tag tree
 * [Data saving](#data-saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -657,14 +657,14 @@ Example:
 
 ### Upcoming features
 
-#### Viewing tag tree (coming soon) - `viewtagtree`
+#### Viewing tag tree (coming soon) - `viewtree`
 
 Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
 
 A preview image is shown below for you to understand what this feature will look like.
 ![tagtree](images/tagtree-test-tree.png)
 
-Format: `viewtagtree -t`
+Format: `viewtree -t`
 * Displays the current tag tree in Athena.
 * For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
 
