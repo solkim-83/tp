@@ -434,10 +434,13 @@ Format: `sort -e INDEX`
 
 Examples:
 * `sort -e 1` Sorts all currently displayed events by their descriptions in alphabetical order.
+
 ![Sort Event Behaviour 1](images/ug-images/eventBehaviourImages/sort-event-behaviour-1.png)
 
-* `sort -e 2` Sorts all currently displayed events by their time in chronological order.
+* `sort -e 2` Sorts all currently displayed events by their timings in chronological order.
+
 ![Sort Event Behaviour 2](images/ug-images/eventBehaviourImages/sort-event-behaviour-2.png)
+
 
 #### Viewing an event - `view`
 
