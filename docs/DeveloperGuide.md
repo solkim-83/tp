@@ -836,13 +836,15 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The given keyword is invalid.
 
-     Use case ends.
+    * 1a1. Athena shows an error message.
 
-* 1b. The given keyword is invalid.
+      Use case ends.
 
-    * 1b1. Athena shows an error message.
+* 2a. The list is empty.
+
+    * 2a1. Athena informs the user that their search did not come up with any valid matches.
 
       Use case ends.
       
