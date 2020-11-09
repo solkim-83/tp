@@ -766,7 +766,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-     Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -792,7 +792,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-     Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -844,9 +844,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-    * 2a1. Athena informs the user that their search did not come up with any valid matches.
-
-      Use case ends.
+    Use case ends.
       
 #### **Use case: Sort through events**
 
