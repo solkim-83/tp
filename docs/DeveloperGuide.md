@@ -450,6 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
 | `* *`    | user with many events in the calendar       | sort events by event details          | so that I can view my events in a more consistent manner and find the events I want quickly               |
+| `* *`    | user                                        | add contacts to events                | keep track of the attendees for events                                                                    |
 
 
 ### Use cases
@@ -596,14 +597,30 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
     * 3a1. Athena shows an error message.
        
       Use case ends.
+      
+* 4a. There is a duplicate event.
+
+    * 4a1. Athena shows an error message.
+
+      Use case ends.
+      
+* 5a. There is an event that is occurring at the same time.
+
+    * 5a1. Athena shows an error message.
+
+      Use case ends.
+
+* 6a. The person(s) to be added is/are not found.
+
+    * 6a1. Athena shows an error message.
+
+      Use case ends.
          
 #### **Use case: Delete an event**
 
+Preconditions: The event the user wishes to view is displayed on the UI.
+
 **MSS**
-
-1.  User requests to view events.
-
-1.  Athena shows a list of events.
 
 1.  User requests to delete a specific event in the list.
 
@@ -621,15 +638,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
     * 3a1. Athena shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
       
 #### **Use case: Edit an event**
 
+Preconditions: The event the user wishes to edit is displayed on the UI.
+
 **MSS**
-
-1.  User requests to view events.
-
-1.  Athena shows a list of events.
 
 1.  User requests to edit a specific event in the list.
 
@@ -647,13 +662,31 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
     * 3a1. Athena shows an error message.
 
-      Use case resumes at step 2.
-      
-* 4a. The persons to be added or removed is not found.
+      Use case ends.
+
+* 4a. The date time format is not accepted.
 
     * 4a1. Athena shows an error message.
+       
+      Use case ends.
+      
+* 5a. There is a duplicate event.
 
-      Use case resumes at step 2.
+    * 5a1. Athena shows an error message.
+
+      Use case ends.
+      
+* 6a. There is an event that is occurring at the same time.
+
+    * 6a1. Athena shows an error message.
+
+      Use case ends.
+      
+* 7a. The persons to be added or removed is not found.
+
+    * 7a1. Athena shows an error message.
+
+      Use case ends.
 
 #### **Use case: Search for events**
 
@@ -675,15 +708,13 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
     * 3a1. Athena shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
       
 #### **Use case: Sort through events**
 
+Preconditions: The event the user wishes to view is displayed on the UI.
+
 **MSS**
-
-1.  User requests to list events.
-
-1.  Athena shows a list of events in default order.
 
 1.  User requests to sort the events in the list.
 
@@ -701,13 +732,37 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
   * 3a1. Athena shows an error message.
 
-    Use case resumes at step 2.
-      
-#### **Use case: View all saved events**
+    Use case ends.
+    
+#### **Use case: View details of an event**
+
+Preconditions: The event the user wishes to view is displayed on the UI.
 
 **MSS**
 
-1.  User requests to view all events recorded.
+1.  User requests to view details of an event.
+
+1.  Athena displays the event details in the result panel.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Athena shows an error message.
+
+      Use case ends.
+      
+#### **Use case: List all saved events**
+
+**MSS**
+
+1.  User requests a list of all events saved.
 
 1.  Athena shows a list of events. 
 
