@@ -611,11 +611,12 @@ Examples:
 Athena opens within 3 days of that event.
 
 1. After entering the command "add -r 5 in/3"
+
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
 
 2. When reminders are active, every time Athena is opened, the alert window will pop up as shown below
 
-![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
+![reminder-alert-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
 #### Deleting a reminder - `delete`
 
