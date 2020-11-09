@@ -44,6 +44,8 @@ section below.
         * [`add`](#adding-a-reminder---add) - Adding a reminder
         * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
         * [`list`](#listing-all-reminders---list) - Listing all reminders
+* [Upcoming features](#upcoming-features)
+    * [`viewtagtree`](#viewing-tag-tree-coming-soon---viewtagtree) - Viewing the tag tree
 * [Data saving](#data-saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -164,7 +166,7 @@ Adds a contact to Athena.
 Format: `add -c n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of tags (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -216,7 +218,7 @@ Examples:
 
 #### Editing a contact - `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in Athena.
 
 Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`
 
@@ -229,32 +231,32 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 * `t/TAG` adds `TAG` to the user.
 * `rt/TAG` removes `TAG` from the user.
 * Tag removal is done before tag addition.
-* You can remove all the person’s tags by typing `rt/*`.
+* You can remove all the contact’s tags by typing `rt/*`.
 
 Examples:
 * `edit -c 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` 
 and `johndoe@example.com` respectively.
-* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `cs2030`. (Example illustrated below)
+* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the contact at index `2` to be `Betsy Crower` and adds the tag `cs2030`. (Example illustrated below)
 ![edit-contact-image](images/ug-images/contactBehaviourImages/edit-contact-image.png)
 
-* `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `cs2103` to it.
+* `edit -c 3 t/CS2103 rt/*` Removes all tags of the contact at index `3` and then adds the tag `cs2103` to it.
 
 #### Finding a contact - `find`
 
-Finds persons whose names contain any of the given keywords. This command also supports search with additional specifiers such as 
-phone number or email.
+Finds contacts matching all specified fields. 
 
 Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 * Search field must contain at least one of the optional fields.
-* The search is case-insensitive for all fields except tags. e.g `hans` will match `Hans`
-* For name keywords, only full words will be matched. e.g. `Han` will not match `Hans`
-* For name keywords, you can specify multiple words you would like to match. e.g. `n/Hans John`
-* For search without additional specifiers, persons matching at least one keyword will be returned (i.e. `OR` search).
-* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The `t/TAG` specifier must use an existing tag and does not support partial tag-name searches.
-* If additional specifiers are included, only contacts whose specified field contains the specifier details
+* The search is case-insensitive for all fields. e.g `hans` will match `Hans`
+* For name keywords (`n/KEYWORDS`),
+    * only full words will be matched. e.g. `Han` will not match `Hans`
+    * you can specify multiple words you would like to match. e.g. `n/Hans John`
+    * a match is found if the contact's name has at least one of the keywords (i.e. `OR` search).
+    * the order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The `t/TAG` specifier must use an existing tag and does not support partial tag-name matches.
+* For `p/PHONE`, `e/EMAIL`, `a/ADDRESS` specifiers, a contact matches the field if its corresponding field contains the specific specifier. (i.e. `a/Serangoon` will match any address that contains `Serangoon`)
+* If more than one specifier is included, only contacts matching all specifier details
  will be returned. `find n/John a/Serangoon` will return only contacts whose names contain `John` **and** with 
  `Serangoon` as part of the address.
 
@@ -511,13 +513,14 @@ Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 * `TAG_NAME` must be the name of an existing tag in Athena.
 * `BOOLEAN` must be of the form `1`, `t`, `true` for a true case or `0`, `f`, `false` for a false case.
 * `r/BOOLEAN` field is optional. The default value for this field is `false`.
-* On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
+* **Note**: On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
 
 ![delete_single_tag_pic](images/DeleteSingleTagPic.png) 
 
 Examples:
 * `delete -t t/cs2030` Deletes the tag `cs2030`. (Example illustrated below)
 ![delete-tag-image](images/ug-images/tagBehaviourImages/delete-tag-image.png)
+
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
 #### Editing a tag - `edit`
@@ -565,9 +568,7 @@ Examples:
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
 Example:
-* `list -t` 
-
-In the remarks panel, you should see something like the image below.
+* `list -t` In the remarks panel, you should see something like the image below.
 ![list-tag-image](images/ug-images/tagBehaviourImages/list-tag-image.png)
 
 #### Viewing tags - `view`
@@ -642,6 +643,21 @@ Example:
 
 ---
 
+### Upcoming features
+
+#### Viewing tag tree (coming soon) - `viewtagtree`
+
+Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
+
+A preview image is shown below for you to understand what this feature will look like.
+![tagtree](images/tagtree-test-tree.png)
+
+Format: `viewtagtree -t`
+* Displays the current tag tree in Athena.
+* For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
+
+---
+
 ### Data saving
 
 Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
@@ -705,6 +721,11 @@ The other tag in the relation is known as a [_parent-tag_](#parent-tag).
 - A _parent-tag_ of a tag signifies a directional relation from a _parent-tag_ to a tag. It allows for some commands that affect a _parent-tag_ to also affect the other tag in the relation. The reverse cannot be done.
 The other tag in the relation is known as a [_child-tag_](#child-tag).
 
+###### _Tag tree_
+- A _tag tree_ (or more accurately a tag graph) is a data structure that tracks tags in Athena and the directional (parent-child) relations between the tags.
+
 ###### _Sub-tag_
-- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, ...).
-A child-tag of a tag is also a _sub-tag_.
+- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, etc.). See also [_super-tag_](#super-tag).
+
+###### _Super-tag_
+- A _super-tag_ of a tag signifies a multi-step directional relation from the _super-tag_ to the tag. (i.e. a super-tag of a tag is a [parent-tag](#parent-tag), or a parent-tag of a parent-tag, etc.). See also [_sub-tag_](#sub-tag).
