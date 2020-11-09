@@ -49,8 +49,8 @@ public class EditEventCommand extends Command {
             + "[" + PREFIX_REMOVE_PERSON + "ATTENDEE_INDEX_LIST]\n\n"
             + "Example: \n" + COMMAND_WORD + " " + COMMAND_TYPE + " 1 "
             + PREFIX_DESCRIPTION + "New description "
-            + PREFIX_DATETIME + "12-12-1234 12:34"
-            + PREFIX_ADD_PERSON + "1,2,3"
+            + PREFIX_DATETIME + "12-12-1234 12:34" + " "
+            + PREFIX_ADD_PERSON + "1,2,3" + " "
             + PREFIX_REMOVE_PERSON + "1,2";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
@@ -229,7 +229,11 @@ public class EditEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, time, personsToAdd, personsToRemove);
+            return CollectionUtil.isAnyNonNull(description, time)
+                    || !personsToAdd.isEmpty()
+                    || !personsToRemove.isEmpty()
+                    || wildCardAdd == true
+                    || wildCardRemove == true;
         }
 
         public void setDescription(Description description) {

@@ -1,11 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.events;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.events.ClearEventCommand;
 import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.testutil.ModelManagerBuilder;

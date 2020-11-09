@@ -66,9 +66,28 @@ public class Reminder {
         return String.valueOf(diff);
     }
 
+
     @Override
     public String toString() {
         return eventToRemind.toString();
+    }
+
+    /**
+     * Checks if the two reminders are equal.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Reminder)) {
+            return false;
+        }
+
+        Reminder otherReminder = (Reminder) other;
+        return otherReminder.getReminderDate().equals(getReminderDate())
+                && otherReminder.getEventToRemind().equals(getEventToRemind());
     }
 
 }

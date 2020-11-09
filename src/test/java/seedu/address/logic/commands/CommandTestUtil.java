@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVE_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -45,12 +49,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_MODULE = "CS2103";
 
-    public static final String VALID_DESCRIPTION_LUNCH = "Lunch with Friends";
-    public static final String VALID_DESCRIPTION_BREAKFAST = "Breakfast with Mum";
-    public static final String VALID_TIME_LUNCH = "10-10-2020 13:00";
-    public static final String VALID_TIME_BREAKFAST = "15-12-2020 09:00";
-
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -70,6 +68,32 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby/"; // '*' not allowed in tags
     public static final String INVALID_TAG_ADD_DESC = " " + PREFIX_TAG + "*"; // wildcard not allowed for add tags
+
+    public static final String VALID_DESCRIPTION_BREAKFAST = "Breakfast with Mum";
+    public static final String VALID_DESCRIPTION_LUNCH = "Lunch with Friends";
+    public static final String VALID_TIME_BREAKFAST = "15-12-2020 09:00";
+    public static final String VALID_TIME_LUNCH = "10-10-2020 13:00";
+    public static final String VALID_INDEX_LIST = "1,3,4";
+    public static final String VALID_WILD = "*";
+
+    public static final String DESCRIPTION_DESC_BREAKFAST = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BREAKFAST;
+    public static final String DESCRIPTION_DESC_LUNCH = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_LUNCH;
+    public static final String TIME_DESC_BREAKFAST = " " + PREFIX_DATETIME + VALID_TIME_BREAKFAST;
+    public static final String TIME_DESC_LUNCH = " " + PREFIX_DATETIME + VALID_TIME_LUNCH;
+    public static final String ADD_PERSON_DESC_1 = " " + PREFIX_ADD_PERSON + VALID_INDEX_LIST;
+    public static final String ADD_PERSON_DESC_2 = " " + PREFIX_ADD_PERSON + VALID_INDEX_LIST + ",2";
+    public static final String ADD_PERSON_WILD_DESC = " " + PREFIX_ADD_PERSON + VALID_WILD;
+    public static final String REMOVE_PERSON_DESC_1 = " " + PREFIX_REMOVE_PERSON + VALID_INDEX_LIST;
+    public static final String REMOVE_PERSON_DESC_2 = " " + PREFIX_REMOVE_PERSON + VALID_INDEX_LIST + ",2";
+    public static final String REMOVE_PERSON_WILD_DESC = " " + PREFIX_REMOVE_PERSON + VALID_WILD;
+
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION; // empty description not allowed
+    public static final String INVALID_TIME_DESC = " " + PREFIX_DATETIME + "12:0"; // incorrect format
+    public static final String INVALID_ADD_PERSON_DESC = " " + PREFIX_ADD_PERSON + "1.2"; // no fullstops
+    public static final String INVALID_ADD_PERSON_WILD_DESC = " " + PREFIX_ADD_PERSON + "+"; // incorrect symbol
+    public static final String INVALID_REMOVE_PERSON_DESC = " " + PREFIX_REMOVE_PERSON + "1.2"; // no fullstops
+    public static final String INVALID_REMOVE_PERSON_WILD_DESC = " " + PREFIX_REMOVE_PERSON + "+"; // incorrect symbol
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -91,9 +115,9 @@ public class CommandTestUtil {
 
     static {
         DESC_LUNCH = new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_LUNCH)
-                .withTime(VALID_TIME_LUNCH).build();
+                .withTime(VALID_TIME_LUNCH).setPersonsToAdd(2, 1).setPersonsToRemove(3, 1).build();
         DESC_BREAKFAST = new EditEventDescriptorBuilder().withDescription(VALID_DESCRIPTION_BREAKFAST)
-                .withTime(VALID_TIME_BREAKFAST).build();
+                .withTime(VALID_TIME_BREAKFAST).setPersonsToAdd(2, 1).setPersonsToRemove(3, 1).build();
     }
 
     /**

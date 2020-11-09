@@ -37,7 +37,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_FAILURE));
         }
 
         AddEventDescriptor addEventDescriptor = new AddEventDescriptor();

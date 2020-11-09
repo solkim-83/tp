@@ -12,7 +12,7 @@ public class TagUtil {
 
     public static final String MESSAGE_NO_TAGS_FOUND = "No tag assignments were found!";
     public static final String MESSAGE_TAGS_FOUND = "Listed all tags and contacts directly under these tags:";
-    public static final String MESSAGE_INVALID_SEARCH_FIELD = "Tag queries should be alphanumeric with no spaces.";
+    public static final String MESSAGE_INVALID_SEARCH_FIELD = "Tag queries should be have no spaces.";
     public static final String INDICATOR_SUPERTAG = " (supertag)";
     public static final String INDICATOR_NO_CONTACTS_TAGGED = "no contacts tagged";
 

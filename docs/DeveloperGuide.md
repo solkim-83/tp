@@ -74,7 +74,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultPanel`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -92,15 +92,15 @@ The `UI` component,
 
 1. `Logic` uses the `Parser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete -c 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ### Model component
@@ -121,7 +121,7 @@ It is made up of three major components:
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* does not depend on any of the other three high-level components.
 
 ### Storage component
 
@@ -156,9 +156,9 @@ The sequence diagram below illustrates the interaction between `UiManager`, `Mai
 
 ![intro_sequence_diagram](images/IntroSequenceDiagram.png)
 
-This implementation deviates from the sequence regular commands obey (see below) by implementing `executeIntro()`,
-whereas regular commands use `execute(String)`. This is to prevent users from being able to display the introduction
-window through the invocation of a command.
+This implementation deviates from the sequence regular commands obey (see [below](#command-implementation))
+by implementing `executeIntro()`, whereas regular commands use `execute(String)`. This is to prevent users from being
+able to display the introduction window through the invocation of a command.
 
 ##### Design choice
 
@@ -174,7 +174,77 @@ inapplicable, thus necessitating creation of custom methods such as `handleIntro
 ##### Design improvements
 
 As the presence of save files are used to check if the introduction window should be shown, Athena will falsely flag
-users who have no save file as first time users and show the introduction window nonetheless.
+users who have no save file as first time users and show the introduction window nonetheless. A solution for this
+problem would be to have a file dedicated to storing user preferences. As Athena grows in features and customisability,
+it is likely that such a file would be necessary in the future; however, it is currently difficult to justify this
+implementation.
+
+### Command implementation
+
+This section details the implementation of Athena's Command system.
+
+##### General design
+
+In Athena, actions done by the system are determined by user inputs. There are 3 components that enable this:
+
+* `AddressBookParser` - manages the parsing of user inputs as Strings,
+* `XYZCommand` - contains the logic used in the execution of the Command,
+* `XYZCommandParser` - parses any additional inputs that the Command may need; depending on the actual Command, this class may not exist.
+
+**`AddressBookParser`** component:
+
+User input is parsed by `AddressBookParser`'s `parseCommand(String)` method, which first ensures the input conforms to
+the correct input pattern. It then splits the input into 3 parts:
+
+1. `commandWord` - describes the *command* that is to be invoked e.g. `add`, `list`, etc.,
+2. `commandType` - describes the type of *functionality* that the command targets e.g. `-c` for contacts,
+`-e` for events, etc.,
+3. `arguments` - describes additional arguments that the command may need; this field may be empty depending on the
+commmand.
+
+The `commandWord` and `commandType` fields are both instances of `CommandWord` and `CommandType` enumerations
+respectively. These enumerations each contain a `HashMap` that stores Strings of the commands as keys and the actual
+enumerations as their values. Based on the enumerations that each input generate, either a `ParseException` is thrown
+for an invalid input, or an `XYZCommand` or `XYZCommandParser` object is created, depending on the command.
+
+**`XYZCommand`** component:
+
+All `XYZCommand` classes extend from the `Command` abstract class, which implements the `execute(Model)` method. This
+method updates the model with appropriate changes and returns a `CommandResult` object with a message to display to be
+displayed. The changes are handled by the façade class `Model`: changes to data are reflected in `PersonListPanel` and
+`EventListPanel`, whereas the message is displayed on the `ResultPanel`.
+
+**`XYZCommandParser`** component:
+
+Certain commands may necessitate a way to parse additional inputs - this is done through the implementation of an
+`XYZCommandParser` class that implements the `Parser` interface, which implements the `parse(String)` method. This
+method uses `ArgumentTokenizer.tokenize(String)` to map each prefix to the corresponding input(s), stored in an
+`ArgumentMultimap` object. For instance, an input of `n/John t/tag1 t/tag2` will generate the following
+key-value pairs in `ArgumentMultimap`:
+
+`n/` -> `John`<br>
+`t/` -> `tag1`, `tag2`
+
+Any invalid inputs will throw a `ParseException`. If the necessary inputs exist and are valid, then the corresponding
+`XYZCommand` object will be created.
+
+##### Design choice
+
+As Athena supports multiple functionalities and sub-functionalities, there are many similar commands that have
+overlapping command names. Initially, these command inputs followed closely to AB-3's - adding a contact was done with
+`add`. As the event feature was added, the commands were appended with the appropriate type, so adding an event was
+done with `addEvent`. This led to inconsistency in the command naming structure, proving to be unsustainable should
+more methods and functionalities are added.
+
+This command implementation structure thus makes it easier for users to invoke commands (since there is no need to input
+an uppercase character) and developers to add more commands while keeping the `AddressBookParser` class relatively clean
+and understandable.
+
+##### Design improvements
+
+Ideally, the `AddressBookParser` should not know whether an `XYZCommand` or an `XYZCommandParser` object is created. A
+possible improvement would be to implement an intermediary static method in the `XYZCommandParser` class that creates
+an `XYZCommand` or `XYZCommandParser` object depending on the type of the command.
 
 ### Sort contacts feature
 The sort contacts feature is facilitated by `Addressbook` that stores reminder entries and their details in Athena. 
@@ -198,47 +268,37 @@ The following activity diagram summarizes what happens when a user executes `sor
 ![contact_tag_diagram](images/ContactTagDiagram.png)
 
 ##### General design
-**`Person`** component: 
+**Contact (`Person`)** component: 
 
 In Athena, contacts are represented by `Person` objects. `Person` objects have several properties such as email, address, etc. A `Person` can also be tagged with multiple `Tag`s.
 - `AddressBook` handles all direct matters concerning `Person` objects. It has a `TagManager` and `UniquePersonList`.  
 - `UniquePersonList` keeps track of all `Person` objects. It uses `Person` class' `isSamePerson(Person)` method to ensure that there are no duplicate contacts in Athena.
 - `TagManager` keeps track of which contacts contain which tags. It uses a hash map, mapping each `Tag` to the set of `Person`s that contain the `Tag`. 
 
-All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides simple methods that can be used by higher-level components such as 
-- `void removePerson(Person)`
-- `void addPerson(Person)`
-- `boolean hasPerson(Person)`
-- and more
+All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides methods that can be used by higher-level components to query or edit details regarding contacts. 
 
 **`Tag`** component:
 
-`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its child-tags to perform an action.
+`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its sub-tags to perform an action.
 - `TagTree` handles tag-to-tag relations. 
 - `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. 
-The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. 
+The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. For convenience, the reverse mapping (i.e. map from each `Tag` to its set of parent-tags) is also provided. 
 
-Any new links established between tags have to go through the `TagTree`. `TagTree` provides several simple methods such as 
-- `void addSubTagTo(Tag tag)`  
-- `boolean hasTag(Tag tag)`  
-- and more
+Any new links established between tags have to go through the `TagTree`. `TagTree` provides methods to query or edit tag-to-tag relationships.
 
 **`Integration`** component:
 
-The `ContactTagIntegrationManager` class provides a few predefined methods that affect both `Person`s and `Tag`s together. Methods include:
-- `void deleteTag(Tag)`
-- `void deleteTagRecursive(Tag)` - deletes a `Tag` and all its sub-tags
-- and more
+The `ContactTagIntegrationManager` class provides a few predefined methods for functions that will affect both `Person`s and `Tag`s at the same time. 
 
 This class is meant to address the difficulty in preserving consistency within the system.
 For example, two different `deleteTag` methods are implemented in both `TagTree` and `ContactTagIntegrationManager`.
-However, the method in `TagTree` only deletes the specific `Tag` in `TagTree`.
+However, the method in `TagTree` only deletes the specific `Tag` in `TagTree` while `AddressBook` would still maintain a reference to the same `Tag`.
 The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method, then removes the `Tag` from all `Person` objects that has the `Tag`.
 The sequence diagram below illustrates the interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
 
 ![delete-tag-demonstration](images/DeleteTagSequenceDiagram.png)
 
-As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made to `Tag`s that will affect `Person`s stored.
+As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made in either `AddressBook` or `TagTree` that will indirectly affect the other component.
 Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if available.
 
 ##### Design choice
@@ -252,6 +312,9 @@ Using these two mutable constructs, it allows for accurate realtime queries by h
 To ensure that the right commands are called at the right time, `Model` only implements a limited set of methods that can change the internal mapping.
 To support a greater variety of `Command`s, ensure that the correct methods from either `AddressBook`, `TagTree` or `ContactTagIntegrationManager` are chosen. 
 A rule of thumb is to search for the method in `ContactTagIntegrationManager` first before looking for a similar method in the other two classes. 
+
+To implement a new functionality that is not currently supported in any of the three classes, consider whether the method should affect both `AddressBook` _and_ `TagTree`.
+If it has the potential to affect both, the method should be implemented in `ContactTagIntegrationManager`. Otherwise, implement them in the relevant class.
  
 To view the full list of methods and documentation for the three major classes, you can view them at [`AddressBook`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/AddressBook.java), 
 [`TagTree`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/tag/TagTree.java) and [`ContactTagIntegrationManager`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/ContactTagIntegrationManager.java).
@@ -260,6 +323,44 @@ To view the full list of methods and documentation for the three major classes, 
 A possible way to improve the current design is to remove dependency from `ModelManager` to `TagTree`, `AddressBook` and `ContactTagIntegrationManager` by creating another Facade class containing these three classes.
 As such, only the relevant methods required for specific `Command`s to work will be exposed to `Model`. For example, right now, both `ContactTagIntegrationManager`'s `deleteTag(Tag)` method and `TagTree`'s `deleteTag(Tag)` method are exposed to `ModelManager` when only one of them is actually used.
 This makes it easier for others working at a similar level of abstraction to avoid using the wrong methods.  
+
+##### Testing
+Testing of `ContactTagIntegrationManager` methods are inherently difficult as unit testing is in this context achieves very little. To help with integration testing of methods in `ContactTagIntegrationManager`, a test `contactTagIntegrationManager` object can be created from `ContactTagIntegrationManagerTest.buildTestContactTagIntegrationManager()`.    
+The test object structure is presented in the diagram below.
+![ContactTagIntegrationManager-test-object](images/tagtree-test-tree.png)
+
+This provides support for testing of new methods, making it easy to write new test cases and check the expected behaviour. It is also easier for others to understand what the test cases are accomplishing.
+
+##### [Proposed] Visualisation
+The current implementation of parent-child tagging is difficult to visualise. Currently, there exists only the `list -t` method that states a brief summary, and `view -t` that lists out full details for singular tag.
+This proposed feature is a new command `viewtree -t` that displays a pop-up visual of a tag tree display together with a summary of contacts tagged under each tag. 
+
+_Required modules_:
+1. Graphical node: Given a tag and a set of contacts, the node will contain the tag name and a summary of contacts.
+1. Graphical edge: An arrow directing from parent-tag to child-tag.
+1. Graph: A class that holds all graphical nodes and graphical edges
+1. Graph layout algorithm: Given a graph, this algorithm decides how to layout the various nodes in the graph
+
+A partial implementation can be found [here](https://github.com/chan-j-d/tp/tree/add-gui-tag-support). The image used in [testing](#testing) was created by this partial implementation.
+This implementation supports the `viewtree -t` command that shows the current tag tree for all contacts in Athena.
+
+_Way forward_:
+
+The current implementation always displays every single parent-child tag relation. As such, it can get convoluted really quickly. We can implement a way to distill only the requested information such as displaying the nodes and edges of a tag and all its child-tags. 
+Additionally, there is a need to scope the tag tree viewing feature towards the target user, with a focus towards keyboard commands.
+As such, there are two general alternatives:
+1. Add a textbox in the graph display that allows input commands. The supported commands could include
+    1. `{tag name}`: Displays only relevant information for `{tag name}` and all its sub-tags.
+    1. `-all`: Shows all parent-child tag relations.
+    1. `-exit`: Exits the graphical display.
+2. Replace the current `view -t` command. Instead, the `view -t` command will support only one tag argument and display a visual representation of the tag and all its sub-tags.
+Using the modules listed above, a possible activity diagram for this implementation is shown below.
+![viewtree-activity-diagram](images/ViewTagTreeActivityDiagram.png)
+
+
+_Issues_:
+
+As of now, the ability for commands to affect GUI components in Athena is limited. Thus, properly implementing this would likely require additional backend support for allowing commands to produce GUI effects.
 
 ##### Additional notes:
 _Definitions_:
@@ -809,6 +910,34 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
     Use case ends.   
  
 
+#### **Use case: Find a tag**
+
+**MSS**
+
+1. User requests to find a tag.
+
+1. User specifies keyword to use in the search.
+
+1. User specifies whether any tag filters should be used.
+
+1. Athena displays all tags that match the keyword and filter.
+
+   Use case ends.
+   
+**Extensions**
+
+* 3a. Tag filter input is invalid.
+
+    * 3a1. Athena displays an error message.
+    
+    Use case resumes at step 3.
+
+* 4a. List is empty.
+
+    * 4a1. Athena displays a message stating there are no matches.
+    
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -820,7 +949,7 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 ### Glossary
 
-* **Contact**: A person to be tracked by Athena; comprises a name, phone number, email and address, as well as an arbitrary quantity of tags
+* **Contact**: A contact to be tracked by Athena; comprises a name, phone number, email and address, as well as an arbitrary quantity of tags
 * **Event**: An event to be tracked by Athena; comprises a name and a date and time, as well as an arbitrary quantity of tags
 * **Mainstream OS**: Windows, Linux, Unix, OS-X 
 
@@ -850,9 +979,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
        
-### Editing a person
+### Editing a contact
 
-1. Editing a person while all persons are being shown
+1. Editing a contact while all contacts are being shown
 
     1. Test case: `edit -c 1 n/test name p/912345 t/edittest` <br>
        Expected: Contact at index `1` in the list has its name changed to `test name`, phone number to `912345` and the tag `edittest` added.
@@ -866,30 +995,30 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit -c 1 n/$%^&a` <br>
        Expected: Error message shown as the name input fails the field constraints.
        
-### Finding a person
+### Finding a contact
 
-1. Finding a person
+1. Finding a contact
 
     1. Test case: `find -c n/alex betsy`
        Expected: For default contact list, shows `Alex Yeoh` and `Betsy Crower` (and possibly other contacts containing either `alex` or `betsy`).
        
     1. Test case: `find -c e/@example`
-       Expected: Lists all persons with `@example` in their emails.
+       Expected: Lists all contacts with `@example` in their emails.
        
     1. Test case: `find -c t/friends`
-       Expected: Lists all persons with the tag `cs2030`.
+       Expected: Lists all contacts with the tag `cs2030`.
        
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
 
    1. Test case: `delete -c 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete -c 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete -c`, `delete -c x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -899,7 +1028,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a new tag to various contacts
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
    
    1. Test case: `add -t n/testtag1 i/1 i/2`<br>
       Expected: Contacts at indices `1` and `2` now have the tag `testtag1`.
@@ -914,9 +1043,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a tag
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
    
-   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. Then perform `add -t n/testtag3 t/testtag2`.
    
    1. Test case: `delete -t t/testtag2` <br>
       Expected: Contact at index 3 no longer has the tag `testtag2`. When `list -t` is used, `testtag2` can no longer be found. When using `view -t t/testtag3`, `testtag1` is listed as a child-tag of `testtag3`.
@@ -928,9 +1057,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a tag
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list -c` command. Multiple contacts in the list.
    
-   1. Perform steps 1 & 2 of [Adding a tag](#adding-a-tag) if it has not been done. 
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done. 
    
    1. Test case: `edit -t n/testtag2 i/2 ri/3` <br>
       Expected: Contact at index 3 no longer has the tag `testtag2`. Contact at index 1 has the tag `testtag1`.
@@ -956,6 +1085,27 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add -r 0 in/1` (has to be done after step 2) <br> 
       Expected: Error message shown, saying that the event index is invalid. 
 
+### Finding a tag
+
+1. Finding a tag
+
+   1. Prerequisites: List all persons using the `list -c` command. Multiple persons in the list.
+       
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done.
+    
+   1. Test case: `find -t t/testtag1` <br>
+      Expected: Only `testtag1` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/testtag` <br>
+      Expected: Both `testtag1` and `testtag2` are displayed, with their corresponding contacts.
+      
+   1. Test case: `find -t t/testtag st/1` <br>
+      Expected: Only `testtag2` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/` <br>
+      Expected: Error message shown, stating that search specifiers cannot be empty.
+       
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -975,8 +1125,8 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 
 * **Contact and Tag management**: It was difficult to come up with a good OOP solution in order to keep track of tag-contact and tag-tag relations while avoiding cyclic dependency. Such functionality was not present within AB3 prior so it had to be implemented from scratch.
-Additionally, a major challenge was that we intended to implement commands that could affect tags and persons in a way where other persons and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
+Additionally, a major challenge was that we intended to implement commands that could affect tags and contacts in a way where other contacts and tags that were not specified could also be affected (e.g. deleting a tag requires removal of the tag from contacts with it).
 There were also issues that were more difficult to spot, such as the ability to create cyclic relations between tags.
 As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
-Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and persons. 
+Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and contacts. 
 

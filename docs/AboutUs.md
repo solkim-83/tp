@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 [[github](http://github.com/fyshhh)] [[portfolio](team/fyshhh.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: documentation, UI, general code structure
 
 ### Kim Sol
 
