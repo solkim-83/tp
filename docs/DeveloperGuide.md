@@ -420,7 +420,6 @@ This diagram shows the overview of the operation:
 
 ![`edit -e` adding/removing attendees](images/EditedEventAttendeesDiagram.png)
 
- 
 ### Sort events feature
 The sort events feature is facilitated by `Calendar` that stores event entries and their details in Athena. 
 
@@ -814,7 +813,7 @@ Preconditions: The event the user wishes to edit is displayed on the UI.
 
       Use case ends.
       
-* 7a. The persons to be added or removed is not found.
+* 7a. The person(s) to be added or removed is/are not found.
 
     * 7a1. Athena shows an error message.
 
@@ -1275,8 +1274,6 @@ Additionally, a major challenge was that we intended to implement commands that 
 There were also issues that were more difficult to spot, such as the ability to create cyclic relations between tags.
 As such, multiple solutions and designs were considered, outlining exact behavior that could be supported and allowed within this tracking system.
 Extensive testing was also necessary for every single method as many higher-level components and commands rely on accurate queries of tags and contacts. 
-
-
 
 * **Event and Attendees management**: 
 When contacts were integrated into events as attendees, there was challenge to simplify a Person object so that the calendar save file did not need contain multiple repeated copies of Persons.
