@@ -38,6 +38,15 @@ public class AddEventDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code wildCardAdd} of the {@code AddEventDescriptor} that we are building.
+     */
+    public AddEventDescriptorBuilder setWildCardAdd() {
+        addEventDescriptor.setWildCardAdd();
+        return this;
+    }
+
+
     public AddEventDescriptor build() {
         return addEventDescriptor;
     }
