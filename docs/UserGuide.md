@@ -410,6 +410,7 @@ Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
 * `find -e seminar` returns `CS Seminar` and `seminar 1`.
 * `find -e dinner` returns `Family Dinner`.
+
 ![Find Event Behaviour](images/ug-images/eventBehaviourImages/find-event-behaviour.png)
 
 #### Listing all events - `list`
