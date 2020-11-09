@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 [[portfolio](team/chan-j-d.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, In charge of Contacts Search and Edit
+* Responsibilities: documentation, contact edit and find commands, tag and contact backend management, tag commands, general project requirements
 
 ### Hendey Fan
 
@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]u.nus.edu`
 [[github](http://github.com/LinkedInk)]
 [[portfolio](team/linkedink.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
 ### Illio Suardi
