@@ -191,6 +191,7 @@ Format: `delete -c CONTACT_INDEX_LIST`
 * Deletes the contact(s) at the specified index(es) in `CONTACT_INDEX_LIST`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Deleted contacts will also be removed from any event they attend.
 
 Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
@@ -204,6 +205,7 @@ Format: `deletebytag -c TAG`
 
 * Deletes all contacts with a specific tag.
 * The tag must be a valid tag.
+* Deleted contacts will also be removed from any event they attend.
 
 Examples:
 * `deletebytag -c computing` deletes all contacts tagged under computing
