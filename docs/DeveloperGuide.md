@@ -852,9 +852,9 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **MSS**
 
-1.  User requests to view events.
+1.  User requests to list events.
 
-1.  Athena shows a list of events.
+1.  Athena shows a list of events in default order.
 
 1.  User requests to sort the events in the list.
 
