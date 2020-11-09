@@ -598,7 +598,7 @@ A preview image is shown below for you to understand what this feature will look
 ![tagtree](images/tagtree-test-tree.png)
 
 Format: `viewtagtree -t`
-* Displays the parent-child tag relations currently present in Athena.
+* Displays the current tag tree in Athena.
 * For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
 
 ---
@@ -716,6 +716,11 @@ The other tag in the relation is known as a [_parent-tag_](#parent-tag).
 - A _parent-tag_ of a tag signifies a directional relation from a _parent-tag_ to a tag. It allows for some commands that affect a _parent-tag_ to also affect the other tag in the relation. The reverse cannot be done.
 The other tag in the relation is known as a [_child-tag_](#child-tag).
 
+###### _Tag tree_
+- A _tag tree_ (or more accurately a tag graph) is a data structure that tracks tags in Athena and the directional (parent-child) relations between the tags.
+
 ###### _Sub-tag_
-- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, ...).
-A child-tag of a tag is also a _sub-tag_.
+- A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, etc.). See also [_super-tag_](#super-tag).
+
+###### _Super-tag_
+- A _super-tag_ of a tag signifies a multi-step directional relation from the _super-tag_ to the tag. (i.e. a super-tag of a tag is a [parent-tag](#parent-tag), or a parent-tag of a parent-tag, etc.). See also [_sub-tag_](#sub-tag).
