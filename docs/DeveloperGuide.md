@@ -116,6 +116,7 @@ It is made up of three major components:
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
 1. `Calendar` which manages the events in the form of `Event` objects.
 1. `TagTree` which manages `tag` to `tag` relations.
+1. `Reminder` which manages `reminder` to `event` relations.
 
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
@@ -346,8 +347,13 @@ and ensure that developers can add-on or edit its features easily as long as the
 The pop up window is designed as such so that reminders are less passive and can actively remind the users without them pulling 
 up the list of reminders themselves.
  
-##### Design improvement
-More features such as edit reminders should be implemented for user convenience.
+##### Way Forward: Design improvement
+More reminder functions should be implemented for user convenience. As the RemindersImpl and other components
+of reminders have already been set up. Developers aiming to add more reminder functions should work on these relevant classes.
+
+For instance, if the developer wishes to add an `EditReminderCommand`, they should make use of the setReminder function that
+already exists in the ModelManager and the RemindersImpl classes. If the pre-existing helper functions do not exist, do create
+them within those classes as well so as to follow the encapsulation principle. 
 
 ##### Add Reminder Feature
 RemindEventCommand#execute() : Creates the reminder and adds it to the uniqueRemindersList in RemindersImpl. It also
