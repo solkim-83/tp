@@ -121,7 +121,7 @@ It is made up of three major components:
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three high-level components.
+* does not depend on any of the other four high-level components.
 
 ### Storage component
 
