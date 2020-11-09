@@ -32,9 +32,11 @@ Given below are my contributions to the project.
 * **Enhancement to existing features**: Streamlining of command input and parsing structure
 (pull request [\#120](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/120))
   * Justification: At that time, the commands for different functionalities were inconsistent: for instance, `add` added
-  contacts whereas `addEvent` added events. As such, the input structure was standardised by using a common command word
+  contacts and `addEvent` added events. The input structure is now standardised by using a common command word
   (`add` in this case) and a targeted command type (`-c` for contacts and `-e` for events). This also makes it easier to
   add more commands in the future, as the parser is structured more clearly.
+
+<div style="page-break-after: always;"></div>
  
 * **Enhancement to existing features**: Refactor command packaging to individual packages 
 (pull request [\#158](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/158))
