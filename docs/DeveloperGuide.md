@@ -173,11 +173,77 @@ inapplicable, thus necessitating creation of custom methods such as `handleIntro
 ##### Design improvements
 
 As the presence of save files are used to check if the introduction window should be shown, Athena will falsely flag
-users who have no save file as first time users and show the introduction window nonetheless.
+users who have no save file as first time users and show the introduction window nonetheless. A solution for this
+problem would be to have a file dedicated to storing user preferences. As Athena grows in features and customisability,
+it is likely that such a file would be necessary in the future; however, it is currently difficult to justify this
+implementation.
 
 ### Command implementation
 
+This section details the implementation of Athena's Command system.
 
+##### General design
+
+In Athena, actions done by the system are determined by user inputs. There are 3 components that enable this:
+
+* `AddressBookParser` - manages the parsing of user inputs as Strings,
+* `XYZCommand` - contains the logic used in the execution of the Command,
+* `XYZCommandParser` - parses any additional inputs that the Command may need; depending on the actual Command, this class may not exist.
+
+**`AddressBookParser`** component:
+
+User input is parsed by `AddressBookParser`'s `parseCommand(String)` method, which first ensures the input conforms to
+the correct input pattern. It then splits the input into 3 parts:
+
+1. `commandWord` - describes the *command* that is to be invoked e.g. `add`, `list`, etc.,
+2. `commandType` - describes the type of *functionality* that the command targets e.g. `-c` for contacts,
+`-e` for events, etc.,
+3. `arguments` - describes additional arguments that the command may need; this field may be empty depending on the
+commmand.
+
+The `commandWord` and `commandType` fields are both instances of `CommandWord` and `CommandType` enumerations
+respectively. These enumerations each contain a `HashMap` that stores Strings of the commands as keys and the actual
+enumerations as their values. Based on the enumerations that each input generate, either a `ParseException` is thrown
+for an invalid input, or an `XYZCommand` or `XYZCommandParser` object is created, depending on the command.
+
+**`XYZCommand`** component:
+
+All `XYZCommand` classes extend from the `Command` abstract class, which implements the `execute(Model)` method. This
+method updates the model with appropriate changes and returns a `CommandResult` object with a message to display to be
+displayed. The changes are handled by the façade class `Model`: changes to data are reflected in `PersonListPanel` and
+`EventListPanel`, whereas the message is displayed on the `ResultPanel`.
+
+**`XYZCommandParser`** component:
+
+Certain commands may necessitate a way to parse additional inputs - this is done through the implementation of an
+`XYZCommandParser` class that implements the `Parser` interface, which implements the `parse(String)` method. This
+method uses `ArgumentTokenizer.tokenize(String)` to map each prefix to the corresponding input(s), stored in an
+`ArgumentMultimap` object. For instance, an input of `n/John t/tag1 t/tag2` will generate the following
+key-value pairs in `ArgumentMultimap`:
+
+`n/` -> `John`<br>
+`t/` -> `tag1`, `tag2`
+
+Any invalid inputs will throw a `ParseException`. If the necessary inputs exist and are valid, then the corresponding
+`XYZCommand` object will be created.
+
+##### Design choice
+
+As Athena supports multiple functionalities and sub-functionalities, there are many similar commands that have
+overlapping command names. Initially, these command inputs followed closely to AB-3's - adding a contact was done with
+`add`. As the event feature was added, the commands were appended with the appropriate type, so adding an event was
+done with `addEvent`. This led to inconsistency in the command naming structure, proving to be unsustainable should
+more methods and functionalities are added.
+
+This command implementation structure thus makes it easier for users to invoke commands (since there is no need to input
+an uppercase character) and developers to add more commands while keeping the `AddressBookParser` class relatively clean
+and understandable.
+
+##### Design improvements
+
+Ideally, the `AddressBookParser` should not know whether an `XYZCommand` or an `XYZCommandParser` object is created. A
+possible improvement would be to implement an intermediary static method in the `XYZCommandParser` class that creates
+an `XYZCommand` or `XYZCommandParser` object depending on the type of the command.
 
 ### Contact and tag management
 ![contact_tag_diagram](images/ContactTagDiagram.png)
