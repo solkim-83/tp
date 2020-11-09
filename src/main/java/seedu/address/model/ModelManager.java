@@ -414,8 +414,17 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && calendar.equals(other.calendar)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && tagTree.equals(other.tagTree)
+                && reminders.equals(other.reminders)
+                && contactTagIntegrationManager.equals(other.contactTagIntegrationManager)
+                && filteredPersons.equals(other.filteredPersons)
+                && sortedPersons.equals(other.sortedPersons)
+                && filteredEvents.equals(other.filteredEvents)
+                && sortedEvents.equals(other.sortedEvents)
+                && filteredReminders.equals(other.filteredReminders)
+                && sortedReminders.equals(other.sortedReminders);
     }
 
 }

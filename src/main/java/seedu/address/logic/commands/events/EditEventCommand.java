@@ -229,7 +229,11 @@ public class EditEventCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(description, time, personsToAdd, personsToRemove);
+            return CollectionUtil.isAnyNonNull(description, time)
+                    || !personsToAdd.isEmpty()
+                    || !personsToRemove.isEmpty()
+                    || wildCardAdd == true
+                    || wildCardRemove == true;
         }
 
         public void setDescription(Description description) {
