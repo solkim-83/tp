@@ -27,7 +27,7 @@ public class FindContactCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_TYPE
             + ": Finds all contacts whose fields contain any of "
-            + "the specified keywords (case-insensitive) and matches the tags specified. "
+            + "the specified keywords (case-insensitive) and matches the tags specified.\n"
             + "For fields that are not specified, all contacts are matched by default.\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_NAME + "NAME KEYWORDS]\n"
