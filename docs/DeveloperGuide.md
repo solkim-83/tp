@@ -397,7 +397,7 @@ In Athena, events are represented by `Event` objects. `Event` objects have a des
 **During add event:**
 
 * No change if there are no attendees to add.
-* If the user indicates the indices of the contacts in the contact list they would want to add:
+* If user indicates to add attendees:
   * The `Person`s representing the contacts are retrieved using the indices provided by user input.
   * A `FauxPerson` is created for each of them
   * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
@@ -412,7 +412,7 @@ This diagram shows the overview of the operation:
 * If user indicates to remove attendees:
   * Removal of attendees is done first before addition of attendees.
   * Based on the indices provided, the `FauxPerson`s at the given indices is removed.
-* If user indicates to add contacts:
+* If user indicates to add attendees:
   * The `Person`s representing the contacts are retrieved using the indices provided by user input.
   * A `FauxPerson` is created for each of them
   * `FauxPerson`s are grouped into a set and set as the `Event`'s attendees.
