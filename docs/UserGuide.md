@@ -40,6 +40,7 @@ section below.
         * [`find`](#finding-a-tag---find) - Finding a tag
         * [`list`](#listing-all-tags---list) - Listing all tags
         * [`view`](#viewing-tags---view) - Viewing tag details
+        * [`viewtagtree`](#viewing-tag-tree-coming-soon---viewtagtree) - Viewing the tag tree
     * [Reminders](#reminders)
         * [`add`](#adding-a-reminder---add) - Adding a reminder
         * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
@@ -247,7 +248,7 @@ Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 * Search field must contain at least one of the optional fields.
 * The search is case-insensitive for all fields. e.g `hans` will match `Hans`
-* For name keywords (`n/KEYWORDS),
+* For name keywords (`n/KEYWORDS`),
     * only full words will be matched. e.g. `Han` will not match `Hans`
     * you can specify multiple words you would like to match. e.g. `n/Hans John`
     * a match is found if the contact's name has at least one of the keywords (i.e. `OR` search).
@@ -511,7 +512,7 @@ Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 * `TAG_NAME` must be the name of an existing tag in Athena.
 * `BOOLEAN` must be of the form `1`, `t`, `true` for a true case or `0`, `f`, `false` for a false case.
 * `r/BOOLEAN` field is optional. The default value for this field is `false`.
-* On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
+* **Note**: On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
 
 ![delete_single_tag_pic](images/DeleteSingleTagPic.png) 
 
@@ -588,6 +589,17 @@ Example:
 _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
+
+#### Viewing tag tree (coming soon) - `viewtagtree`
+
+Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
+
+A preview image is shown below for you to understand what this feature will look like.
+![tagtree](images/tagtree-test-tree.png)
+
+Format: `viewtagtree -t`
+* Displays the parent-child tag relations currently present in Athena.
+* For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
 
 ---
 
