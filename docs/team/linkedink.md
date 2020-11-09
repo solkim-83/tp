@@ -70,6 +70,7 @@ Given below are my contributions to the project.
     * Updated UG with a new heading format and fixed some other minor issues (Pull request [#261](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/261))
   * Developer Guide:
     * Added use cases for add, delete, edit and view event(s).
+    * Added manual tests for edit, find and delete event(s).
     * Added the section: Event and attendees management.
 
 * **Community**:
