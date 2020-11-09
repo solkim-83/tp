@@ -256,11 +256,7 @@ In Athena, contacts are represented by `Person` objects. `Person` objects have s
 - `UniquePersonList` keeps track of all `Person` objects. It uses `Person` class' `isSamePerson(Person)` method to ensure that there are no duplicate contacts in Athena.
 - `TagManager` keeps track of which contacts contain which tags. It uses a hash map, mapping each `Tag` to the set of `Person`s that contain the `Tag`. 
 
-All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides simple methods that can be used by higher-level components such as 
-- `void removePerson(Person)`
-- `void addPerson(Person)`
-- `boolean hasPerson(Person)`
-- and more
+All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides methods that can be used by higher-level components to query or edit details regarding contacts. 
 
 **`Tag`** component:
 
@@ -269,27 +265,21 @@ All manipulation of `Person` objects have to be done through `AddressBook`. `Add
 - `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. 
 The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. 
 
-Any new links established between tags have to go through the `TagTree`. `TagTree` provides several simple methods such as 
-- `void addSubTagTo(Tag tag)`  
-- `boolean hasTag(Tag tag)`  
-- and more
+Any new links established between tags have to go through the `TagTree`. `TagTree` provides methods to query or edit tag-to-tag relationships.
 
 **`Integration`** component:
 
-The `ContactTagIntegrationManager` class provides a few predefined methods that affect both `Person`s and `Tag`s together. Methods include:
-- `void deleteTag(Tag)`
-- `void deleteTagRecursive(Tag)` - deletes a `Tag` and all its sub-tags
-- and more
+The `ContactTagIntegrationManager` class provides a few predefined methods for functions that will affect both `Person`s and `Tag`s at the same time. 
 
 This class is meant to address the difficulty in preserving consistency within the system.
 For example, two different `deleteTag` methods are implemented in both `TagTree` and `ContactTagIntegrationManager`.
-However, the method in `TagTree` only deletes the specific `Tag` in `TagTree`.
+However, the method in `TagTree` only deletes the specific `Tag` in `TagTree` while `AddressBook` would still maintain a reference to the same `Tag`.
 The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method, then removes the `Tag` from all `Person` objects that has the `Tag`.
 The sequence diagram below illustrates the interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
 
 ![delete-tag-demonstration](images/DeleteTagSequenceDiagram.png)
 
-As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made to `Tag`s that will affect `Person`s stored.
+As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made in either `AddressBook` or `TagTree` that will indirectly affect the other component.
 Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if available.
 
 ##### Design choice
