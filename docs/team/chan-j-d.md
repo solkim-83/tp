@@ -5,7 +5,6 @@ title: Chan Jun Da's Project Portfolio Page
 ## Project: Athena
 
 Athena - Athena is an integrated contact and events manager. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 Given below are my contributions to the project.
 
