@@ -737,7 +737,7 @@ Action | Format, Examples
 **List Tags** | `list -t`
 **List Reminders** | `list -r`
 **Sort Contacts** | `sort -c INDEX`
-**Sort Contacts Permanently** | `psort -c INDEX`
+**Sort Contacts Permanently** | `psort -c INDEX`<div style="page-break-after: always;"></div>
 **Sort Events** | `sort -e INDEX`
 **View Event** | `view -e INDEX` <br> e.g., `view -e 1`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
