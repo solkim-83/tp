@@ -718,41 +718,43 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 
 **Extensions**
 
-* 2a. The description and/or date time is missing.
+* 1a. The description and/or date time is missing.
 
-    * 2a1. Athena shows an error message.
+    * 1a1. Athena shows an error message.
 
       Use case ends.
 
-* 3a. The date time format is not accepted.
+* 1b. The date time format is not accepted.
 
-    * 3a1. Athena shows an error message.
+    * 1b1. Athena shows an error message.
        
       Use case ends.
       
-* 4a. There is a duplicate event.
+* 1c. There is a duplicate event.
 
-    * 4a1. Athena shows an error message.
+    * 1c1. Athena shows an error message.
 
       Use case ends.
       
-* 5a. There is an event that is occurring at the same time.
+* 1d. There is an event that is occurring at the same time.
 
-    * 5a1. Athena shows an error message.
+    * 1d1. Athena shows an error message.
 
       Use case ends.
 
-* 6a. The person(s) to be added is/are not found.
+* 1e. The person(s) to be added is/are not found.
 
-    * 6a1. Athena shows an error message.
+    * 1e1. Athena shows an error message.
 
       Use case ends.
          
 #### **Use case: Delete an event**
 
-Preconditions: The event the user wishes to view is displayed on the UI.
-
 **MSS**
+
+1.  User requests to view events.
+
+1.  Athena shows a list of events.
 
 1.  User requests to delete a specific event in the list.
 
@@ -764,19 +766,21 @@ Preconditions: The event the user wishes to view is displayed on the UI.
 
 * 2a. The list is empty.
 
-    Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. Athena shows an error message.
 
-      Use case ends.
+      Use resumes at step 2.
       
 #### **Use case: Edit an event**
 
-Preconditions: The event the user wishes to edit is displayed on the UI.
-
 **MSS**
+
+1.  User requests to view events.
+
+1.  Athena shows a list of events.
 
 1.  User requests to edit a specific event in the list.
 
@@ -788,37 +792,37 @@ Preconditions: The event the user wishes to edit is displayed on the UI.
 
 * 2a. The list is empty.
 
-    Use case ends.
+      Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. Athena shows an error message.
 
-      Use case ends.
+      Use resumes at step 2.
 
-* 4a. The date time format is not accepted.
+* 3b. The date time format is not accepted.
 
-    * 4a1. Athena shows an error message.
+    * 3b1. Athena shows an error message.
        
-      Use case ends.
+      Use resumes at step 2.
       
-* 5a. There is a duplicate event.
+* 3c. There is a duplicate event.
 
-    * 5a1. Athena shows an error message.
+    * 3c1. Athena shows an error message.
 
-      Use case ends.
+      Use resumes at step 2.
       
-* 6a. There is an event that is occurring at the same time.
+* 3d. There is an event that is occurring at the same time.
 
-    * 6a1. Athena shows an error message.
+    * 3d1. Athena shows an error message.
 
-      Use case ends.
+      Use resumes at step 2.
       
-* 7a. The person(s) to be added or removed is/are not found.
+* 3e. The person(s) to be added or removed is/are not found.
 
-    * 7a1. Athena shows an error message.
+    * 3e1. Athena shows an error message.
 
-      Use case ends.
+      Use resumes at step 2.
 
 #### **Use case: Search for events**
 
@@ -832,21 +836,23 @@ Preconditions: The event the user wishes to edit is displayed on the UI.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
-    Use case ends.
+      Use case ends.
 
-* 3a. The given keyword is invalid.
+* 1b. The given keyword is invalid.
 
-    * 3a1. Athena shows an error message.
+    * 1b1. Athena shows an error message.
 
       Use case ends.
       
 #### **Use case: Sort through events**
 
-Preconditions: The event the user wishes to view is displayed on the UI.
-
 **MSS**
+
+1.  User requests to view events.
+
+1.  Athena shows a list of events.
 
 1.  User requests to sort the events in the list.
 
@@ -864,13 +870,15 @@ Preconditions: The event the user wishes to view is displayed on the UI.
 
   * 3a1. Athena shows an error message.
 
-    Use case ends.
+    Use resumes at step 2.
     
 #### **Use case: View details of an event**
 
-Preconditions: The event the user wishes to view is displayed on the UI.
-
 **MSS**
+
+1.  User requests to view events.
+
+1.  Athena shows a list of events.
 
 1.  User requests to view details of an event.
 
@@ -888,7 +896,7 @@ Preconditions: The event the user wishes to view is displayed on the UI.
 
     * 3a1. Athena shows an error message.
 
-      Use case ends.
+      Use resumes at step 2.
       
 #### **Use case: List all saved events**
 
