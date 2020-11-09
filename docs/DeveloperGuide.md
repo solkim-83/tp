@@ -111,7 +111,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 The `Model` encapsulates all data required for Athena to run. In particular, it stores all contacts (as `person` objects), `tag`s and `event`s.
 It is meant to fulfill the Facade pattern as the Facade class by hiding the individual classes that store the individual entities and forcing higher level components like the `Command`s and `Logic` to interact only with `Model`.
-It is made up of three major components:
+It is made up of four major components:
 
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
 1. `Calendar` which manages the events in the form of `Event` objects.
@@ -121,7 +121,7 @@ It is made up of three major components:
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other four high-level components.
+* does not depend on any of the other three high-level components.
 
 ### Storage component
 
@@ -517,6 +517,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
 | `* *`    | user with many events in the calendar       | sort events by event details          | so that I can view my events in a more consistent manner and find the events I want quickly               |
 | `* *`    | user with important events                  | set reminders for events              | so that I can get reminder alerts for my important events              |
+| `* *`    | experienced user                            | assign tags to a super-tag            | so that I can manage my tags in a more orderly fashion |
 
 
 ### Use cases
