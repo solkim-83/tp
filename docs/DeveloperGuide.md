@@ -390,7 +390,7 @@ In Athena, events are represented by `Event` objects. `Event` objects have a des
 **Attendees (`FauxPerson`)** component:
 
 - `Event` objects can have attendees in the form of a set of `FauxPerson`.
-- `FauxPersons` are created from actual `Person` objects taken from the `AddressBook`
+- `FauxPersons` are created from `Person` objects taken from the `AddressBook`.
 
 ##### How events gain/lose attendees
 
