@@ -394,7 +394,7 @@ The following activity diagram summarizes what happens when a user executes `sor
 
 ### List events feature
 
-### Display feature
+#### Display feature
 The display feature for the events is facilitated by `Calendar` that stores event entries and their details in Athena,
 and has a specific command of `list -e` where the command makes use of `ListEventCommand`. 
 
@@ -927,6 +927,22 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete -c`, `delete -c x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
+### Editing an event
+
+1. Editing an event while all events are being shown
+
+    1. Test case: `edit -e 1 d/test at/10-10-21 14/00` <br>
+       Expected: Event at index `1` in the list has its description changed to `test` and time changed to `Sun 10th Oct 2021 2:00pm`.
+       
+    1. Test case: `edit -e 1 ap/*` (done after step 1) <br>
+       Expected: All persons show in the contact list is added to event at index `1` as attendees.
+       
+    1. Test case: `edit -e 1 rp/*` (done after step 1 and 2) <br>
+       Expected: Event at index `1` has all attendees removed.
+       
+    1. Test case: `edit -e 1 d/` <br>
+       Expected: Error message shown as the description input is empty.
 
 
 ### Adding a tag
