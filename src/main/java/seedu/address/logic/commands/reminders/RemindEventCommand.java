@@ -34,6 +34,8 @@ public class RemindEventCommand extends Command {
 
     public static final String MESSAGE_FAILURE = "Please input a date with the prefix in/";
 
+    public static final String MESSAGE_NEGATIVE_DAYS = "You cannot enter a negative number for DAYS.";
+
     private final Index targetIndex;
     private final int daysInAdvance;
 
@@ -53,6 +55,10 @@ public class RemindEventCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        if (daysInAdvance < 0) {
+            throw new CommandException(MESSAGE_NEGATIVE_DAYS);
         }
 
         Event eventForReminder = lastShownList.get(targetIndex.getZeroBased());
