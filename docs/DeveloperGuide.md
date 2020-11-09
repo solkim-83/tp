@@ -116,7 +116,7 @@ It is made up of three major components:
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
 1. `Calendar` which manages the events in the form of `Event` objects.
 1. `TagTree` which manages `tag` to `tag` relations.
-1. `Reminder` which manages `reminder` to `event` relations.
+1. `RemindersImpl` which manages `reminder` to `event` relations.
 
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
