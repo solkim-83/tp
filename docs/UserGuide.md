@@ -164,7 +164,7 @@ Adds a contact to Athena.
 Format: `add -c n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of tags (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -216,7 +216,7 @@ Examples:
 
 #### Editing a contact - `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in Athena.
 
 Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`
 
@@ -229,32 +229,32 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 * `t/TAG` adds `TAG` to the user.
 * `rt/TAG` removes `TAG` from the user.
 * Tag removal is done before tag addition.
-* You can remove all the person’s tags by typing `rt/*`.
+* You can remove all the contact’s tags by typing `rt/*`.
 
 Examples:
 * `edit -c 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` 
 and `johndoe@example.com` respectively.
-* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the 2nd contact to be `Betsy Crower` and adds the tag `cs2030`. (Example illustrated below)
+* `edit -c 2 n/Betsy Crower t/CS2030` Edits the name of the contact at index `2` to be `Betsy Crower` and adds the tag `cs2030`. (Example illustrated below)
 ![edit-contact-image](images/ug-images/contactBehaviourImages/edit-contact-image.png)
 
-* `edit -c 3 t/CS2103 rt/*` Removes all tags that contact at index `3` has and then adds the tag `cs2103` to it.
+* `edit -c 3 t/CS2103 rt/*` Removes all tags of the contact at index `3` and then adds the tag `cs2103` to it.
 
 #### Finding a contact - `find`
 
-Finds persons whose names contain any of the given keywords. This command also supports search with additional specifiers such as 
-phone number or email.
+Finds contacts matching all specified fields. 
 
 Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
 * Search field must contain at least one of the optional fields.
-* The search is case-insensitive for all fields except tags. e.g `hans` will match `Hans`
-* For name keywords, only full words will be matched. e.g. `Han` will not match `Hans`
-* For name keywords, you can specify multiple words you would like to match. e.g. `n/Hans John`
-* For search without additional specifiers, persons matching at least one keyword will be returned (i.e. `OR` search).
-* The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The `t/TAG` specifier must use an existing tag and does not support partial tag-name searches.
-* If additional specifiers are included, only contacts whose specified field contains the specifier details
+* The search is case-insensitive for all fields. e.g `hans` will match `Hans`
+* For name keywords (`n/KEYWORDS),
+    * only full words will be matched. e.g. `Han` will not match `Hans`
+    * you can specify multiple words you would like to match. e.g. `n/Hans John`
+    * a match is found if the contact's name has at least one of the keywords (i.e. `OR` search).
+    * The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The `t/TAG` specifier must use an existing tag and does not support partial tag-name matches.
+* For `p/PHONE`, `e/EMAIL`, `a/ADDRESS` specifiers, a contact matches the field if its corresponding field contains the specific specifier. (i.e. `a/Serangoon` will match any address that contains `Serangoon`)
+* If more than one specifier is included, only contacts matching all specifier details
  will be returned. `find n/John a/Serangoon` will return only contacts whose names contain `John` **and** with 
  `Serangoon` as part of the address.
 
@@ -518,6 +518,7 @@ Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 Examples:
 * `delete -t t/cs2030` Deletes the tag `cs2030`. (Example illustrated below)
 ![delete-tag-image](images/ug-images/tagBehaviourImages/delete-tag-image.png)
+
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
 #### Editing a tag - `edit`
@@ -565,9 +566,7 @@ Examples:
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
 Example:
-* `list -t` 
-
-In the remarks panel, you should see something like the image below.
+* `list -t` In the remarks panel, you should see something like the image below.
 ![list-tag-image](images/ug-images/tagBehaviourImages/list-tag-image.png)
 
 #### Viewing tags - `view`
