@@ -10,21 +10,21 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 Given below are my contributions to the project.
 
 * **New Feature**: Added tag-to-contact backend tracking. 
-  * What it does: allows developers to quickly search up all contacts that contain a specific tag. The mapping is updated after every user command that could possibly change a contact's tags. 
+  * What it does: allows developers to quickly search up all contacts that contain a specific tag. Mapping is updated after every command that potentially changes a contact's tags. 
   * Justification: This allows for higher level modules to make use of this relationship without creating cyclic dependency between `Person`s and `Tag`s.
   * Highlights: This enhancement is necessary for upcoming features that require queries by tag. The implementation for this feature was difficult as it had to be done in a way that did not radically affect other modules or require other developers to perform the tag-contact updates manually with new commands.
   
 * **New Feature**: Added support for parent-child-tag relationship and integration with current contact commands.
-  * What it does: allows creation of directional tag-to-tag relationship. It also handles management of tag-to-tag relationship when contacts and tags are edited, and saves it to the hard disk.
+  * What it does: supports creation and maintenance of directional tag-to-tag relationship and saves it to the hard disk. Also integrates tag and contact methods. 
   * Justification: This allows future developers to develop higher-level commands that 
        * allows users to categorise their contacts into complex relationship trees
-       * perform actions on groups of contacts identified by tags rather than individual contacts. 
+       * perform actions on groups of contacts identified by tags rather than contacts 
   * Highlights: This enhancement was crucial to several upcoming tag-level features that our team intended to implement. This feature was particularly difficult to implement as it required a data structure implementation that supported frequent edits of tag-to-tag relations. 
   Additionally, very specific behavior choices needed to be made regarding several key issues (e.g. deletion of a tag in the middle of the tag tree). There were also many potential issues with the feature that had to be predicted and protected against (e.g. creation of cyclic tag relations).
-<div style="page-break-after: always;"></div>
 
 * **New Feature**: Added the following tag commands: `list`, `view`, `add`, `edit` and `delete`
   * Justification: This allows users to fully utilise the parent-child-tag support of Athena by providing users with the tools for creating their own tag-tree relations. It also allows them to perform some actions relating to tags more efficiently. 
+<div style="page-break-after: always;"></div>
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=chan-j-d)
 * **Project management**:
