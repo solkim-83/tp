@@ -40,11 +40,12 @@ section below.
         * [`find`](#finding-a-tag---find) - Finding a tag
         * [`list`](#listing-all-tags---list) - Listing all tags
         * [`view`](#viewing-tags---view) - Viewing tag details
-        * [`viewtagtree`](#viewing-tag-tree-coming-soon---viewtagtree) - Viewing the tag tree
     * [Reminders](#reminders)
         * [`add`](#adding-a-reminder---add) - Adding a reminder
         * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
         * [`list`](#listing-all-reminders---list) - Listing all reminders
+* [Upcoming features](#upcoming-features)
+    * [`viewtagtree`](#viewing-tag-tree-coming-soon---viewtagtree) - Viewing the tag tree
 * [Data saving](#data-saving)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -252,7 +253,7 @@ Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
     * only full words will be matched. e.g. `Han` will not match `Hans`
     * you can specify multiple words you would like to match. e.g. `n/Hans John`
     * a match is found if the contact's name has at least one of the keywords (i.e. `OR` search).
-    * The order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+    * the order of the name keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * The `t/TAG` specifier must use an existing tag and does not support partial tag-name matches.
 * For `p/PHONE`, `e/EMAIL`, `a/ADDRESS` specifiers, a contact matches the field if its corresponding field contains the specific specifier. (i.e. `a/Serangoon` will match any address that contains `Serangoon`)
 * If more than one specifier is included, only contacts matching all specifier details
@@ -590,17 +591,6 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 * `view -t t/cs2030 t/cs2040` Shows the details for the tags `cs2030` and `cs2040` in a sequential order.
 
-#### Viewing tag tree (coming soon) - `viewtagtree`
-
-Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
-
-A preview image is shown below for you to understand what this feature will look like.
-![tagtree](images/tagtree-test-tree.png)
-
-Format: `viewtagtree -t`
-* Displays the current tag tree in Athena.
-* For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
-
 ---
 
 ### Reminders
@@ -650,6 +640,21 @@ Example:
 * `list -r` 
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
+
+---
+
+### Upcoming features
+
+#### Viewing tag tree (coming soon) - `viewtagtree`
+
+Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
+
+A preview image is shown below for you to understand what this feature will look like.
+![tagtree](images/tagtree-test-tree.png)
+
+Format: `viewtagtree -t`
+* Displays the current tag tree in Athena.
+* For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
 
 ---
 
