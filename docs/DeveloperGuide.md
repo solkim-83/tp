@@ -74,7 +74,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultPanel`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -155,9 +155,9 @@ The sequence diagram below illustrates the interaction between `UiManager`, `Mai
 
 ![intro_sequence_diagram](images/IntroSequenceDiagram.png)
 
-This implementation deviates from the sequence regular commands obey (see below) by implementing `executeIntro()`,
-whereas regular commands use `execute(String)`. This is to prevent users from being able to display the introduction
-window through the invocation of a command.
+This implementation deviates from the sequence regular commands obey (see [below](#command-implementation))
+by implementing `executeIntro()`, whereas regular commands use `execute(String)`. This is to prevent users from being
+able to display the introduction window through the invocation of a command.
 
 ##### Design choice
 
@@ -173,7 +173,77 @@ inapplicable, thus necessitating creation of custom methods such as `handleIntro
 ##### Design improvements
 
 As the presence of save files are used to check if the introduction window should be shown, Athena will falsely flag
-users who have no save file as first time users and show the introduction window nonetheless.
+users who have no save file as first time users and show the introduction window nonetheless. A solution for this
+problem would be to have a file dedicated to storing user preferences. As Athena grows in features and customisability,
+it is likely that such a file would be necessary in the future; however, it is currently difficult to justify this
+implementation.
+
+### Command implementation
+
+This section details the implementation of Athena's Command system.
+
+##### General design
+
+In Athena, actions done by the system are determined by user inputs. There are 3 components that enable this:
+
+* `AddressBookParser` - manages the parsing of user inputs as Strings,
+* `XYZCommand` - contains the logic used in the execution of the Command,
+* `XYZCommandParser` - parses any additional inputs that the Command may need; depending on the actual Command, this class may not exist.
+
+**`AddressBookParser`** component:
+
+User input is parsed by `AddressBookParser`'s `parseCommand(String)` method, which first ensures the input conforms to
+the correct input pattern. It then splits the input into 3 parts:
+
+1. `commandWord` - describes the *command* that is to be invoked e.g. `add`, `list`, etc.,
+2. `commandType` - describes the type of *functionality* that the command targets e.g. `-c` for contacts,
+`-e` for events, etc.,
+3. `arguments` - describes additional arguments that the command may need; this field may be empty depending on the
+commmand.
+
+The `commandWord` and `commandType` fields are both instances of `CommandWord` and `CommandType` enumerations
+respectively. These enumerations each contain a `HashMap` that stores Strings of the commands as keys and the actual
+enumerations as their values. Based on the enumerations that each input generate, either a `ParseException` is thrown
+for an invalid input, or an `XYZCommand` or `XYZCommandParser` object is created, depending on the command.
+
+**`XYZCommand`** component:
+
+All `XYZCommand` classes extend from the `Command` abstract class, which implements the `execute(Model)` method. This
+method updates the model with appropriate changes and returns a `CommandResult` object with a message to display to be
+displayed. The changes are handled by the façade class `Model`: changes to data are reflected in `PersonListPanel` and
+`EventListPanel`, whereas the message is displayed on the `ResultPanel`.
+
+**`XYZCommandParser`** component:
+
+Certain commands may necessitate a way to parse additional inputs - this is done through the implementation of an
+`XYZCommandParser` class that implements the `Parser` interface, which implements the `parse(String)` method. This
+method uses `ArgumentTokenizer.tokenize(String)` to map each prefix to the corresponding input(s), stored in an
+`ArgumentMultimap` object. For instance, an input of `n/John t/tag1 t/tag2` will generate the following
+key-value pairs in `ArgumentMultimap`:
+
+`n/` -> `John`<br>
+`t/` -> `tag1`, `tag2`
+
+Any invalid inputs will throw a `ParseException`. If the necessary inputs exist and are valid, then the corresponding
+`XYZCommand` object will be created.
+
+##### Design choice
+
+As Athena supports multiple functionalities and sub-functionalities, there are many similar commands that have
+overlapping command names. Initially, these command inputs followed closely to AB-3's - adding a contact was done with
+`add`. As the event feature was added, the commands were appended with the appropriate type, so adding an event was
+done with `addEvent`. This led to inconsistency in the command naming structure, proving to be unsustainable should
+more methods and functionalities are added.
+
+This command implementation structure thus makes it easier for users to invoke commands (since there is no need to input
+an uppercase character) and developers to add more commands while keeping the `AddressBookParser` class relatively clean
+and understandable.
+
+##### Design improvements
+
+Ideally, the `AddressBookParser` should not know whether an `XYZCommand` or an `XYZCommandParser` object is created. A
+possible improvement would be to implement an intermediary static method in the `XYZCommandParser` class that creates
+an `XYZCommand` or `XYZCommandParser` object depending on the type of the command.
 
 ### Contact and tag management
 ![contact_tag_diagram](images/ContactTagDiagram.png)
@@ -691,6 +761,34 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
       Use case ends.
  
 
+#### **Use case: Find a tag**
+
+**MSS**
+
+1. User requests to find a tag.
+
+1. User specifies keyword to use in the search.
+
+1. User specifies whether any tag filters should be used.
+
+1. Athena displays all tags that match the keyword and filter.
+
+   Use case ends.
+   
+**Extensions**
+
+* 3a. Tag filter input is invalid.
+
+    * 3a1. Athena displays an error message.
+    
+    Use case resumes at step 3.
+
+* 4a. List is empty.
+
+    * 4a1. Athena displays a message stating there are no matches.
+    
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -822,6 +920,27 @@ testers are expected to do more *exploratory* testing.
       
    1. Test case: `edit -t n/testtag2 t/testtag1` followed by `edit -t n/testtag1 t/testtag2`
       Expected: Error message shown, indicating an attempt in making a cyclic relationship.
+
+### Finding a tag
+
+1. Finding a tag
+
+   1. Prerequisites: List all persons using the `list -c` command. Multiple persons in the list.
+       
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done.
+    
+   1. Test case: `find -t t/testtag1` <br>
+      Expected: Only `testtag1` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/testtag` <br>
+      Expected: Both `testtag1` and `testtag2` are displayed, with their corresponding contacts.
+      
+   1. Test case: `find -t t/testtag st/1` <br>
+      Expected: Only `testtag2` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/` <br>
+      Expected: Error message shown, stating that search specifiers cannot be empty.
+       
 
 ### Saving data
 
