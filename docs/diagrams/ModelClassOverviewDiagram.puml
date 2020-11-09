@@ -24,6 +24,10 @@ Package Event {
 Class Calendar MODEL_EVENT_COLOR
 Class Event MODEL_EVENT_COLOR
 }
+Package Reminder {
+Class RemindersImpl MODEL_REMINDER_COLOR
+Class Reminder MODEL_REMINDER_COLOR
+}
 }
 
 Class HiddenOutside #FFFFFF
@@ -43,9 +47,11 @@ ModelManager -down-> "1" ContactTagIntegrationManager
 ModelManager -down-> "1 " AddressBook
 ModelManager -down-> "1  " Calendar
 ModelManager -down-> "1" TagTree
+ModelManager -down-> "1" RemindersImpl
 ModelManager .down.-> Person
 ModelManager .down.-> Tag
 ModelManager .down.-> Event
+ModelManager .down.> Reminder
 
 ContactTagIntegrationManager -down-> AddressBook MODEL_CONTACT_TAG_COLOR
 ContactTagIntegrationManager -down-> TagTree MODEL_CONTACT_TAG_COLOR
@@ -53,6 +59,7 @@ ContactTagIntegrationManager -down-> TagTree MODEL_CONTACT_TAG_COLOR
 AddressBook -down-> "*" Person MODEL_CONTACT_TAG_COLOR
 TagTree -down-> "*" Tag MODEL_CONTACT_TAG_COLOR
 Calendar -down-> "*" Event MODEL_EVENT_COLOR
+RemindersImpl -down-> "*" Reminder MODEL_REMINDER_COLOR
 
 AddressBook ..> Tag MODEL_CONTACT_TAG_COLOR
 Person -right-> Tag MODEL_CONTACT_TAG_COLOR
