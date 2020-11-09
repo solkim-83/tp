@@ -80,7 +80,7 @@ public class Time {
                 .append(getDayOfMonthAsString() + " ")
                 .append(time.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " ")
                 .append(time.getYear() + " ")
-                .append(time.format(DateTimeFormatter.ofPattern("K:mma")).toLowerCase());
+                .append(time.format(DateTimeFormatter.ofPattern("h:mma")).toLowerCase());
 
         LocalDate now = LocalDate.now();
         long dayDifference = DAYS.between(now, time.toLocalDate());
