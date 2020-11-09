@@ -450,7 +450,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
 | `* *`    | user with many events in the calendar       | sort events by event details          | so that I can view my events in a more consistent manner and find the events I want quickly               |
-| `* *`    | user                                        | add contacts to events                | keep track of the attendees for events                                                                    |
 
 
 ### Use cases
