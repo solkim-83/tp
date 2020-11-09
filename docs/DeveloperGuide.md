@@ -116,11 +116,12 @@ It is made up of three major components:
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
 1. `Calendar` which manages the events in the form of `Event` objects.
 1. `TagTree` which manages `tag` to `tag` relations.
+1. `RemindersImpl` which manages `reminder` to `event` relations.
 
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three high-level components.
+* does not depend on any of the other four high-level components.
 
 ### Storage component
 
@@ -244,6 +245,24 @@ and understandable.
 Ideally, the `AddressBookParser` should not know whether an `XYZCommand` or an `XYZCommandParser` object is created. A
 possible improvement would be to implement an intermediary static method in the `XYZCommandParser` class that creates
 an `XYZCommand` or `XYZCommandParser` object depending on the type of the command.
+
+### Sort contacts feature
+The sort contacts feature is facilitated by `Addressbook` that stores reminder entries and their details in Athena. 
+
+Additionally, it executes the sorting operation based on 3 sorting patterns:
+* `sort -c 1` - Sorts the contacts based on the name of the contacts in alphabetical order.
+* `sort -c 2` - Sorts the contacts based on the address of the contacts in alphabetical order. 
+* `sort -c 3` - Sorts the contacts based on the email of the contacts in alphabetical order. 
+
+SortContactCommand#execute() : Does validity check of input and then sorts the contacts according to user input (index))
+
+The sorting function is designed with the aim of temporary modification of the contact-related entries in `RemindersImpl``. 
+
+##### How sort contact executes
+  
+The following activity diagram summarizes what happens when a user executes `sort -e` command:
+  
+![sortContactsActivityDiagram](images/SortContactActivityDiagram.png)
 
 ### Contact and tag management
 ![contact_tag_diagram](images/ContactTagDiagram.png)
@@ -401,6 +420,54 @@ ListEventCommand#execute() : Does validity check of current list and displayed a
 ##### Aspect: How list executes
 The feature is designed to provide the users with the entire list of event-related entries, especially after 
 when user executes certain commands that display partial list of event list (e.g. SearchEvent Command).
+
+### Reminders Management
+
+##### General design
+**`Reminders`** component: 
+
+In Athena, reminders are represented by `Reminder` objects. 
+Reminder objects have two fields, an Event *eventForReminder* and a Time *dateForReminder*, which indicates when the reminder will be activated.
+- `RemindersImpl` handles all direct matters concerning `Reminder` objects. It has a `UniqueRemindersList`. 
+- `UniqueReminderList` keeps track of all `Reminder` objects. It uses `Reminder` class' `isSameReminder(Reminder)` method to ensure that there are no duplicate reminders in Athena.
+
+![CommitActivityDiagram](images/ReminderDiagram.png)
+
+All manipulation of `Reminder` objects have to be done through `RemindersImpl`. `RemindersImpl` provides simple methods that can be used by higher-level components such as 
+- `boolean hasReminder(Reminder)`
+- `void addReminder(Reminder)`
+- `void deletePerson(Reminder)`
+- and more
+
+When reminders are active (the current date is after or equals to the *dateForReminder* of the reminder), a pop up window
+be displayed whenever Athena is opened. The pop up window will alert the user of this reminder. 
+
+##### Design choice
+Reminder implements a very similar storage and manipulating system to events and contacts. This is to maintain homogeneity
+and ensure that developers can add-on or edit its features easily as long as they understand the other systems.
+The pop up window is designed as such so that reminders are less passive and can actively remind the users without them pulling 
+up the list of reminders themselves.
+ 
+##### Way Forward: Design improvement
+More reminder functions should be implemented for user convenience. As the RemindersImpl and other components
+of reminders have already been set up. Developers aiming to add more reminder functions should work on these relevant classes.
+
+For instance, if the developer wishes to add an `EditReminderCommand`, they should make use of the setReminder function that
+already exists in the ModelManager and the RemindersImpl classes. If the pre-existing helper functions do not exist, do create
+them within those classes as well so as to follow the encapsulation principle. 
+
+##### Add Reminder Feature
+RemindEventCommand#execute() : Creates the reminder and adds it to the uniqueRemindersList in RemindersImpl. It also
+handles validation of the reminder before it's created. Making sure there is no duplicate reminder and the reminder is 
+not set for a date that has already passed. 
+
+When creating a reminder through int *daysInAdvance*, the Reminder constructor calculates the *dateForReminder* by subtracting
+*daysInAdvance* from the *eventForReminder*'s scheduled date.
+
+The below sequence diagram shows how Athena handles the construction and addition of a reminder.
+
+![CommitActivityDiagram](images/AddReminderSequenceDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -438,6 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                    | see usage instructions                | understand how to get started by adding new contacts, removing sample ones and learning advanced commands |
 | `* * *`  | user                                        | add a new contact                     | keep track of my contacts                                                                                 |
 | `* * *`  | user                                        | delete a contact                      | remove contacts that I no longer need, keeping my contact storage neat and uncluttered                    |
+| `* * *`  | user                                        | delete all contacts of a specific tag | remove contacts that I no longer need, keeping my contact storage neat and uncluttered                    |
 | `* * *`  | user                                        | view my contacts in an ordered manner | view the details of my contacts                                                                           |
 | `* * *`  | user                                        | add a new event                       | keep track of my events                                                                                   |
 | `* * *`  | user                                        | delete an event                       | remove events that I no longer need, keeping my event storage neat and uncluttered                        |
@@ -448,6 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
 | `* *`    | user with many events in the calendar       | sort events by event details          | so that I can view my events in a more consistent manner and find the events I want quickly               |
+| `* *`    | user with important events                  | set reminders for events              | so that I can get reminder alerts for my important events              |
 
 
 ### Use cases
@@ -500,6 +569,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+
+    * 3a1. Athena shows an error message.
+
+      Use case resumes at step 2.
+      
+#### **Use case: Delete contacts by tag**
+
+**MSS**
+
+1.  User requests to delete contacts tagged under a specific tag.
+
+1.  User specifies a tag.
+
+1.  Athena deletes all contacts under the specified tag.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tag does not exist.
 
     * 3a1. Athena shows an error message.
 
@@ -716,22 +805,12 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 * 2a. The list is empty.
 
     Use case ends.
-  
-#### **Use case: List all tags**
-
-**MSS**
-
-1. User requests to view all tags in Athena.
-
-1. Athena shows a list of tags.
-
-    Use case ends.
     
 #### **Use case: Add a tag**
 
 **MSS**
 
-1. User requests to add a tag.
+1. User requests to add a reminder.
 
 1. User specifies contacts to be added to this tag.
 
@@ -757,6 +836,78 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
     * 3a1. Athena shows an error message.
     
       Use case ends.
+
+  
+#### **Use case: List all tags**
+
+**MSS**
+
+1. User requests to view all tags in Athena.
+
+1. Athena shows a list of tags.
+
+    Use case ends.
+    
+
+#### **Use case: Add a reminder**
+
+**MSS**
+
+1. User requests to add a reminder.
+
+1. User specifies which event this reminder is for.
+
+1. User specifies when he wants to activate this reminder.
+
+1. Athena adds the new reminder.
+
+    Use case ends.
+
+**Extensions**
+* 2a. There is already a reminder for the event.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+* 2a. The target event does not exist. Event index entered is negative or greater than the size of the events list.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+* 3a. The reminder is set to activate before the current date.
+
+    * 3a1. Athena shows an error message.
+    
+      Use case ends.
+      
+#### **Use case: Delete a reminder**
+
+**MSS**
+
+1. User requests to delete a reminder.
+
+1. User specifies which reminder to delete.
+
+1. Athena deletes the reminder.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The reminder does not exist. Reminder index entered is negative or greater than the size of the reminders list.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+
+#### **Use case: List all reminders**
+
+**MSS**
+
+1. User requests to view all reminders in Athena.
+
+1. Athena shows a list of reminders.
+
+    Use case ends.   
  
 
 #### **Use case: Find a tag**
@@ -918,6 +1069,21 @@ testers are expected to do more *exploratory* testing.
       
    1. Test case: `edit -t n/testtag2 t/testtag1` followed by `edit -t n/testtag1 t/testtag2`
       Expected: Error message shown, indicating an attempt in making a cyclic relationship.
+      
+### Adding a reminder
+
+1. Adding a new reminder to various events
+
+   1. Prerequisites: Create an event at index 1 that is scheduled to happen one day from now.
+   
+   1. Test case: `add -r 1 in/1`<br>
+      Expected: Reminder has been added for the Event at index `1` starting today.
+      
+   1. Test case: Exit and re-open the application
+      Expected: Reminder window pops up and displays the event at index 1. 
+      
+   1. Test case: `add -r 0 in/1` (has to be done after step 2) <br> 
+      Expected: Error message shown, saying that the event index is invalid. 
 
 ### Finding a tag
 

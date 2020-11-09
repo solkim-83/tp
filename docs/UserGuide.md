@@ -175,8 +175,9 @@ just like the second example below
 </div>
 
 Examples:
-* `add -c n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
+
+![Add Contact Behaviour](images/ug-images/contactsBehaviourImages/add-contact-behaviour.png)
 
 #### Clearing all contacts - `clear`
 
@@ -207,14 +208,20 @@ Format: `deletebytag -c TAG`
 * Deletes all contacts with a specific tag.
 * The tag must be a valid tag.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Since all contacts with the specified tag will be deleted permanently, we recommend you to list out 
+all those contacts first to make sure you are aware of what contacts will be deleted by using `find -c t/TAG`. 
+</div>
+
 Examples:
-* `deletebytag -c computing` deletes all contacts tagged under computing
 
-1. Entering the above example into the user input panel will delete all the contacts tagged under computing.
-![delete-by-tag-success](images/ug-images/contactsBeahviourImages/deletebytag-beofre-behaviour.png)
+* Entering `deletebytag -c computing` into the user input panel will delete all the contacts tagged under computing.
 
-2. All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
-![groups of computing contacts](images/ug-images/contactsBeahviourImages/deletebytag-success-behaviour.png)
+![delete-by-tag-success](images/ug-images/contactsBehaviourImages/deletebytag-before-behaviour.png)
+
+* All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
+
+![groups of computing contacts](images/ug-images/contactsBehaviourImages/deletebytag-success-behaviour.png)
 
 #### Editing a contact - `edit`
 
@@ -281,16 +288,16 @@ Sorts all currently displayed contacts in Athena.
 
 Format: `sort -c INDEX`
 
-* Sorts through all contacts currently on screen and lists them according to the user-requested order
+* Sorts through all contacts currently on screen and lists them according to the user-requested order.
 * Index definitions:
 1. By lexicographical order of their names
 2. By lexicographical order of their address
 3. By lexicographical order of their email
 
 Examples:
-* `sort -c 2` would sort all currently displayed contacts by their address in lexicographical order.
+* `sort -c 1` would sort all currently displayed contacts by their name in lexicographical order.
 
-![Sort Contact Behaviour](images/ug-images/contactBehaviourImages/sort-contacts-behaviour.png)
+![Sort Contact Behaviour](images/ug-images/contactsBehaviourImages/sort-contacts-behaviour.png)
 
 
 #### Sorting displayed contacts permanently - `psort`
@@ -299,7 +306,7 @@ Sorts all contacts stored in Athena permanently.
 
 Format: `psort -c INDEX`
 
-* Sorts through all contacts currently on screen and lists them according to the user-requested order
+* Sorts through all contacts in Athena and lists them according to the user-requested order.
 * Index definitions:
 1. By lexicographical order of their names
 2. By lexicographical order of their address
@@ -608,11 +615,12 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 ### Reminders
 
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
-If there are relevant reminders, a reminder window will also pop up whenever Athena starts.
+If there are active reminders, an alert window displaying those reminders will also pop up whenever Athena starts.
 
 #### Adding a reminder - `add`
 
-Adds a new reminder for an event.
+Adds a new reminder for an event. Use this when you want Athena to start reminding you of an event X days 
+before its scheduled date.
 
 Format: `add -r EVENT_INDEX in/DAYS`
 
@@ -620,38 +628,46 @@ Format: `add -r EVENT_INDEX in/DAYS`
 * `DAYS` refers to the number of days in advance for the reminder to start showing in the pop-up window.
 
 Examples:
-* `add -r 5 in/3` Creates a new reminder for the 5th event. The reminder will start to pop up every time
-Athena opens within 3 days of that event.
 
-1. After entering the command "add -r 5 in/3"
+* After entering the command "add -r 5 in/3". A reminder for the 5th event "CS2100 Meeting" will be set.
+
+* Since event 5 is on **12th Nov**, the reminder will be activated three days 
+before then, starting on **9th Nov**.
+
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
 
-2. When reminders are active, every time Athena is opened, the alert window will pop up as shown below
+* When reminders are active, every time Athena is opened, the alert window will pop up as shown below. 
+
+<div align="center">
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
-#### Deleting a reminder - `delete`
-
-Deletes the specified reminder from the reminders list.
-
-Format: `delete -r INDEX`
-
-* Deletes the reminder at the specified `INDEX`.
-* The index refers to the index number shown in the displayed reminder list.
-* You can get the displayed reminder list by using `list -r`
-* The index must be a positive integer 1, 2, 3, ...
-
-Examples:
-* `list -r` followed by `delete -r 2` deletes the 2nd reminder in the reminders list.
+</div>
 
 #### Listing all reminders - `list`
 
-Lists all reminders in the remarks panel. It lists each reminder and a countdown to its event.
+Lists all reminders in the remarks panel. Use this to list each reminder and a countdown to its event.
 
 Example:
 * `list -r` 
 
-![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
+![List-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
+
+#### Deleting a reminder - `delete`
+
+Deletes the specified reminder from the list of reminders.
+
+Format: `delete -r INDEX`
+
+* Deletes the reminder at the specified `INDEX`.
+* The index refers to the index number shown in the displayed list of reminders.
+* You can get the displayed reminder list by using `list -r`
+* The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+* `list -r` (refer to the list diagram above) followed by `delete -r 2` deletes the 2nd reminder in the list of reminders.
+
+![Delete-reminder-behaviour](images/ug-images/remindersBehaviourImages/delete-reminders-behaviour.png)
 
 ---
 

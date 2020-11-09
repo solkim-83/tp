@@ -42,7 +42,7 @@ public class DeleteContactByTagCommand extends Command {
             throw new CommandException(MESSAGE_NON_EXISTENT_TAG);
         }
         model.deletePersonsByTag(tagForDeletion);
-        return new CommandResult(MESSAGE_DELETE_PERSON_SUCCESS + tagForDeletion.tagName );
+        return new CommandResult(MESSAGE_DELETE_PERSON_SUCCESS + tagForDeletion.tagName);
     }
 
 
