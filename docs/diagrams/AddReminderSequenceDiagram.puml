@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RemindEventCommandParser" as RemindEventCommandParser LOGIC_COLOR
+participant "remindEventCommand:RemindEventCommand" as RemindEventCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "reminder:Reminder" as Reminder LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add -r 1 in/1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add -r 1 in/1")
+activate AddressBookParser
+
+create RemindEventCommandParser
+AddressBookParser -> RemindEventCommandParser
+activate RemindEventCommandParser
+
+RemindEventCommandParser --> AddressBookParser
+deactivate RemindEventCommandParser
+
+AddressBookParser -> RemindEventCommandParser : parse("1 in/1")
+activate RemindEventCommandParser
+
+create RemindEventCommand
+RemindEventCommandParser -> RemindEventCommand
+activate RemindEventCommand
+
+RemindEventCommand --> RemindEventCommandParser : RemindEventCommand
+deactivate RemindEventCommand
+
+RemindEventCommandParser --> AddressBookParser : RemindEventCommand
+deactivate RemindEventCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RemindEventCommandParser -[hidden]-> AddressBookParser
+destroy RemindEventCommandParser
+
+AddressBookParser --> LogicManager : RemindEventCommand
+deactivate AddressBookParser
+
+LogicManager -> RemindEventCommand : RemindEventCommand.execute(model)
+activate RemindEventCommand
+
+create Reminder
+RemindEventCommand -> Reminder
+activate Reminder
+Reminder --> RemindEventCommand : Reminder
+deactivate Reminder
+
+RemindEventCommand -> Model : addReminder(Reminder)
+activate Model
+Model --> RemindEventCommand
+deactivate Model
+
+create CommandResult
+RemindEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RemindEventCommand
+deactivate CommandResult
+
+RemindEventCommand --> LogicManager : result
+deactivate RemindEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

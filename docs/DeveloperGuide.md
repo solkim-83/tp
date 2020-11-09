@@ -74,7 +74,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultPanel`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-W10-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -111,16 +111,17 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 The `Model` encapsulates all data required for Athena to run. In particular, it stores all contacts (as `person` objects), `tag`s and `event`s.
 It is meant to fulfill the Facade pattern as the Facade class by hiding the individual classes that store the individual entities and forcing higher level components like the `Command`s and `Logic` to interact only with `Model`.
-It is made up of three major components:
+It is made up of four major components:
 
 1. `AddressBook` which manages the contacts in the form of `Person` objects.
 1. `Calendar` which manages the events in the form of `Event` objects.
 1. `TagTree` which manages `tag` to `tag` relations.
+1. `RemindersImpl` which manages `reminder` to `event` relations.
 
 Additionally, `Model` also has the following characteristics: 
 * stores a `UserPref` object that represents the user’s preferences.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+* does not depend on any of the other three high-level components.
 
 ### Storage component
 
@@ -155,9 +156,9 @@ The sequence diagram below illustrates the interaction between `UiManager`, `Mai
 
 ![intro_sequence_diagram](images/IntroSequenceDiagram.png)
 
-This implementation deviates from the sequence regular commands obey (see below) by implementing `executeIntro()`,
-whereas regular commands use `execute(String)`. This is to prevent users from being able to display the introduction
-window through the invocation of a command.
+This implementation deviates from the sequence regular commands obey (see [below](#command-implementation))
+by implementing `executeIntro()`, whereas regular commands use `execute(String)`. This is to prevent users from being
+able to display the introduction window through the invocation of a command.
 
 ##### Design choice
 
@@ -173,7 +174,95 @@ inapplicable, thus necessitating creation of custom methods such as `handleIntro
 ##### Design improvements
 
 As the presence of save files are used to check if the introduction window should be shown, Athena will falsely flag
-users who have no save file as first time users and show the introduction window nonetheless.
+users who have no save file as first time users and show the introduction window nonetheless. A solution for this
+problem would be to have a file dedicated to storing user preferences. As Athena grows in features and customisability,
+it is likely that such a file would be necessary in the future; however, it is currently difficult to justify this
+implementation.
+
+### Command implementation
+
+This section details the implementation of Athena's Command system.
+
+##### General design
+
+In Athena, actions done by the system are determined by user inputs. There are 3 components that enable this:
+
+* `AddressBookParser` - manages the parsing of user inputs as Strings,
+* `XYZCommand` - contains the logic used in the execution of the Command,
+* `XYZCommandParser` - parses any additional inputs that the Command may need; depending on the actual Command, this class may not exist.
+
+**`AddressBookParser`** component:
+
+User input is parsed by `AddressBookParser`'s `parseCommand(String)` method, which first ensures the input conforms to
+the correct input pattern. It then splits the input into 3 parts:
+
+1. `commandWord` - describes the *command* that is to be invoked e.g. `add`, `list`, etc.,
+2. `commandType` - describes the type of *functionality* that the command targets e.g. `-c` for contacts,
+`-e` for events, etc.,
+3. `arguments` - describes additional arguments that the command may need; this field may be empty depending on the
+commmand.
+
+The `commandWord` and `commandType` fields are both instances of `CommandWord` and `CommandType` enumerations
+respectively. These enumerations each contain a `HashMap` that stores Strings of the commands as keys and the actual
+enumerations as their values. Based on the enumerations that each input generate, either a `ParseException` is thrown
+for an invalid input, or an `XYZCommand` or `XYZCommandParser` object is created, depending on the command.
+
+**`XYZCommand`** component:
+
+All `XYZCommand` classes extend from the `Command` abstract class, which implements the `execute(Model)` method. This
+method updates the model with appropriate changes and returns a `CommandResult` object with a message to display to be
+displayed. The changes are handled by the façade class `Model`: changes to data are reflected in `PersonListPanel` and
+`EventListPanel`, whereas the message is displayed on the `ResultPanel`.
+
+**`XYZCommandParser`** component:
+
+Certain commands may necessitate a way to parse additional inputs - this is done through the implementation of an
+`XYZCommandParser` class that implements the `Parser` interface, which implements the `parse(String)` method. This
+method uses `ArgumentTokenizer.tokenize(String)` to map each prefix to the corresponding input(s), stored in an
+`ArgumentMultimap` object. For instance, an input of `n/John t/tag1 t/tag2` will generate the following
+key-value pairs in `ArgumentMultimap`:
+
+`n/` -> `John`<br>
+`t/` -> `tag1`, `tag2`
+
+Any invalid inputs will throw a `ParseException`. If the necessary inputs exist and are valid, then the corresponding
+`XYZCommand` object will be created.
+
+##### Design choice
+
+As Athena supports multiple functionalities and sub-functionalities, there are many similar commands that have
+overlapping command names. Initially, these command inputs followed closely to AB-3's - adding a contact was done with
+`add`. As the event feature was added, the commands were appended with the appropriate type, so adding an event was
+done with `addEvent`. This led to inconsistency in the command naming structure, proving to be unsustainable should
+more methods and functionalities are added.
+
+This command implementation structure thus makes it easier for users to invoke commands (since there is no need to input
+an uppercase character) and developers to add more commands while keeping the `AddressBookParser` class relatively clean
+and understandable.
+
+##### Design improvements
+
+Ideally, the `AddressBookParser` should not know whether an `XYZCommand` or an `XYZCommandParser` object is created. A
+possible improvement would be to implement an intermediary static method in the `XYZCommandParser` class that creates
+an `XYZCommand` or `XYZCommandParser` object depending on the type of the command.
+
+### Sort contacts feature
+The sort contacts feature is facilitated by `Addressbook` that stores reminder entries and their details in Athena. 
+
+Additionally, it executes the sorting operation based on 3 sorting patterns:
+* `sort -c 1` - Sorts the contacts based on the name of the contacts in alphabetical order.
+* `sort -c 2` - Sorts the contacts based on the address of the contacts in alphabetical order. 
+* `sort -c 3` - Sorts the contacts based on the email of the contacts in alphabetical order. 
+
+SortContactCommand#execute() : Does validity check of input and then sorts the contacts according to user input (index))
+
+The sorting function is designed with the aim of temporary modification of the contact-related entries in `RemindersImpl``. 
+
+##### How sort contact executes
+  
+The following activity diagram summarizes what happens when a user executes `sort -e` command:
+  
+![sortContactsActivityDiagram](images/SortContactActivityDiagram.png)
 
 ### Contact and tag management
 ![contact_tag_diagram](images/ContactTagDiagram.png)
@@ -186,40 +275,30 @@ In Athena, contacts are represented by `Person` objects. `Person` objects have s
 - `UniquePersonList` keeps track of all `Person` objects. It uses `Person` class' `isSamePerson(Person)` method to ensure that there are no duplicate contacts in Athena.
 - `TagManager` keeps track of which contacts contain which tags. It uses a hash map, mapping each `Tag` to the set of `Person`s that contain the `Tag`. 
 
-All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides simple methods that can be used by higher-level components such as 
-- `void removePerson(Person)`
-- `void addPerson(Person)`
-- `boolean hasPerson(Person)`
-- and more
+All manipulation of `Person` objects have to be done through `AddressBook`. `AddressBook` provides methods that can be used by higher-level components to query or edit details regarding contacts. 
 
 **`Tag`** component:
 
-`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its child-tags to perform an action.
+`Tag`s are represented by a single alphanumeric string with no spaces. There is support for child-tagging. This allows directional relations to be established between `Tag`s. Certain commands will group a `Tag` together with its sub-tags to perform an action.
 - `TagTree` handles tag-to-tag relations. 
 - `TagTreeImpl` extends from the abstract class `TagTree`. It uses a tree data structure to store directional tag-to-tag relations. 
-The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. 
+The implementation of the tree is done with a hash map, mapping each `Tag` to its set of child-tags. For convenience, the reverse mapping (i.e. map from each `Tag` to its set of parent-tags) is also provided. 
 
-Any new links established between tags have to go through the `TagTree`. `TagTree` provides several simple methods such as 
-- `void addSubTagTo(Tag tag)`  
-- `boolean hasTag(Tag tag)`  
-- and more
+Any new links established between tags have to go through the `TagTree`. `TagTree` provides methods to query or edit tag-to-tag relationships.
 
 **`Integration`** component:
 
-The `ContactTagIntegrationManager` class provides a few predefined methods that affect both `Person`s and `Tag`s together. Methods include:
-- `void deleteTag(Tag)`
-- `void deleteTagRecursive(Tag)` - deletes a `Tag` and all its sub-tags
-- and more
+The `ContactTagIntegrationManager` class provides a few predefined methods for functions that will affect both `Person`s and `Tag`s at the same time. 
 
 This class is meant to address the difficulty in preserving consistency within the system.
 For example, two different `deleteTag` methods are implemented in both `TagTree` and `ContactTagIntegrationManager`.
-However, the method in `TagTree` only deletes the specific `Tag` in `TagTree`.
+However, the method in `TagTree` only deletes the specific `Tag` in `TagTree` while `AddressBook` would still maintain a reference to the same `Tag`.
 The method in `ContactTagIntegrationManager` uses `TagTree`'s `deleteTag(Tag)` method, then removes the `Tag` from all `Person` objects that has the `Tag`.
 The sequence diagram below illustrates the interactions between the `ContactTagIntegrationManager`, `AddressBook` and `TagTree` when `execute("delete -t t/cs2103")`.
 
 ![delete-tag-demonstration](images/DeleteTagSequenceDiagram.png)
 
-As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made to `Tag`s that will affect `Person`s stored.
+As such, the `ContactTagIntegrationManager`'s job is to preserve consistency in the `Model` when a change is made in either `AddressBook` or `TagTree` that will indirectly affect the other component.
 Thus, higher-level modules should use the methods in `ContactTagIntegrationManager` if available.
 
 ##### Design choice
@@ -233,6 +312,9 @@ Using these two mutable constructs, it allows for accurate realtime queries by h
 To ensure that the right commands are called at the right time, `Model` only implements a limited set of methods that can change the internal mapping.
 To support a greater variety of `Command`s, ensure that the correct methods from either `AddressBook`, `TagTree` or `ContactTagIntegrationManager` are chosen. 
 A rule of thumb is to search for the method in `ContactTagIntegrationManager` first before looking for a similar method in the other two classes. 
+
+To implement a new functionality that is not currently supported in any of the three classes, consider whether the method should affect both `AddressBook` _and_ `TagTree`.
+If it has the potential to affect both, the method should be implemented in `ContactTagIntegrationManager`. Otherwise, implement them in the relevant class.
  
 To view the full list of methods and documentation for the three major classes, you can view them at [`AddressBook`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/AddressBook.java), 
 [`TagTree`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/tag/TagTree.java) and [`ContactTagIntegrationManager`](https://github.com/AY2021S1-CS2103T-W10-4/tp/blob/master/src/main/java/seedu/address/model/ContactTagIntegrationManager.java).
@@ -253,7 +335,7 @@ This provides support for testing of new methods, making it easy to write new te
 The current implementation of parent-child tagging is difficult to visualise. Currently, there exists only the `list -t` method that states a brief summary, and `view -t` that lists out full details for singular tag.
 This proposed feature is a new command `viewtree -t` that displays a pop-up visual of a tag tree display together with a summary of contacts tagged under each tag. 
 
-**Required modules**:
+_Required modules_:
 1. Graphical node: Given a tag and a set of contacts, the node will contain the tag name and a summary of contacts.
 1. Graphical edge: An arrow directing from parent-tag to child-tag.
 1. Graph: A class that holds all graphical nodes and graphical edges
@@ -262,7 +344,8 @@ This proposed feature is a new command `viewtree -t` that displays a pop-up visu
 A partial implementation can be found [here](https://github.com/chan-j-d/tp/tree/add-gui-tag-support). The image used in [testing](#testing) was created by this partial implementation.
 This implementation supports the `viewtree -t` command that shows the current tag tree for all contacts in Athena.
 
-**Way forward**:
+_Way forward_:
+
 The current implementation always displays every single parent-child tag relation. As such, it can get convoluted really quickly. We can implement a way to distill only the requested information such as displaying the nodes and edges of a tag and all its child-tags. 
 Additionally, there is a need to scope the tag tree viewing feature towards the target user, with a focus towards keyboard commands.
 As such, there are two general alternatives:
@@ -271,8 +354,12 @@ As such, there are two general alternatives:
     1. `-all`: Shows all parent-child tag relations.
     1. `-exit`: Exits the graphical display.
 2. Replace the current `view -t` command. Instead, the `view -t` command will support only one tag argument and display a visual representation of the tag and all its sub-tags.
+Using the modules listed above, a possible activity diagram for this implementation is shown below.
+![viewtree-activity-diagram](images/ViewTagTreeActivityDiagram.png)
 
-**Issues**:
+
+_Issues_:
+
 As of now, the ability for commands to affect GUI components in Athena is limited. Thus, properly implementing this would likely require additional backend support for allowing commands to produce GUI effects.
 
 ##### Additional notes:
@@ -333,6 +420,54 @@ ListEventCommand#execute() : Does validity check of current list and displayed a
 ##### Aspect: How list executes
 The feature is designed to provide the users with the entire list of event-related entries, especially after 
 when user executes certain commands that display partial list of event list (e.g. SearchEvent Command).
+
+### Reminders Management
+
+##### General design
+**`Reminders`** component: 
+
+In Athena, reminders are represented by `Reminder` objects. 
+Reminder objects have two fields, an Event *eventForReminder* and a Time *dateForReminder*, which indicates when the reminder will be activated.
+- `RemindersImpl` handles all direct matters concerning `Reminder` objects. It has a `UniqueRemindersList`. 
+- `UniqueReminderList` keeps track of all `Reminder` objects. It uses `Reminder` class' `isSameReminder(Reminder)` method to ensure that there are no duplicate reminders in Athena.
+
+![CommitActivityDiagram](images/ReminderDiagram.png)
+
+All manipulation of `Reminder` objects have to be done through `RemindersImpl`. `RemindersImpl` provides simple methods that can be used by higher-level components such as 
+- `boolean hasReminder(Reminder)`
+- `void addReminder(Reminder)`
+- `void deletePerson(Reminder)`
+- and more
+
+When reminders are active (the current date is after or equals to the *dateForReminder* of the reminder), a pop up window
+be displayed whenever Athena is opened. The pop up window will alert the user of this reminder. 
+
+##### Design choice
+Reminder implements a very similar storage and manipulating system to events and contacts. This is to maintain homogeneity
+and ensure that developers can add-on or edit its features easily as long as they understand the other systems.
+The pop up window is designed as such so that reminders are less passive and can actively remind the users without them pulling 
+up the list of reminders themselves.
+ 
+##### Way Forward: Design improvement
+More reminder functions should be implemented for user convenience. As the RemindersImpl and other components
+of reminders have already been set up. Developers aiming to add more reminder functions should work on these relevant classes.
+
+For instance, if the developer wishes to add an `EditReminderCommand`, they should make use of the setReminder function that
+already exists in the ModelManager and the RemindersImpl classes. If the pre-existing helper functions do not exist, do create
+them within those classes as well so as to follow the encapsulation principle. 
+
+##### Add Reminder Feature
+RemindEventCommand#execute() : Creates the reminder and adds it to the uniqueRemindersList in RemindersImpl. It also
+handles validation of the reminder before it's created. Making sure there is no duplicate reminder and the reminder is 
+not set for a date that has already passed. 
+
+When creating a reminder through int *daysInAdvance*, the Reminder constructor calculates the *dateForReminder* by subtracting
+*daysInAdvance* from the *eventForReminder*'s scheduled date.
+
+The below sequence diagram shows how Athena handles the construction and addition of a reminder.
+
+![CommitActivityDiagram](images/AddReminderSequenceDiagram.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -370,6 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                    | see usage instructions                | understand how to get started by adding new contacts, removing sample ones and learning advanced commands |
 | `* * *`  | user                                        | add a new contact                     | keep track of my contacts                                                                                 |
 | `* * *`  | user                                        | delete a contact                      | remove contacts that I no longer need, keeping my contact storage neat and uncluttered                    |
+| `* * *`  | user                                        | delete all contacts of a specific tag | remove contacts that I no longer need, keeping my contact storage neat and uncluttered                    |
 | `* * *`  | user                                        | view my contacts in an ordered manner | view the details of my contacts                                                                           |
 | `* * *`  | user                                        | add a new event                       | keep track of my events                                                                                   |
 | `* * *`  | user                                        | delete an event                       | remove events that I no longer need, keeping my event storage neat and uncluttered                        |
@@ -380,6 +516,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                        | search for an event                   | locate details of events without having to go through the entire list                                     |
 | `* *`    | user                                        | edit an event's details               | change outdated information without having to delete and re-add events                                    |
 | `* *`    | user with many events in the calendar       | sort events by event details          | so that I can view my events in a more consistent manner and find the events I want quickly               |
+| `* *`    | user with important events                  | set reminders for events              | so that I can get reminder alerts for my important events              |
+| `* *`    | experienced user                            | assign tags to a super-tag            | so that I can manage my tags in a more orderly fashion |
 
 
 ### Use cases
@@ -432,6 +570,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
+
+    * 3a1. Athena shows an error message.
+
+      Use case resumes at step 2.
+      
+#### **Use case: Delete contacts by tag**
+
+**MSS**
+
+1.  User requests to delete contacts tagged under a specific tag.
+
+1.  User specifies a tag.
+
+1.  Athena deletes all contacts under the specified tag.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tag does not exist.
 
     * 3a1. Athena shows an error message.
 
@@ -648,22 +806,12 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
 * 2a. The list is empty.
 
     Use case ends.
-  
-#### **Use case: List all tags**
-
-**MSS**
-
-1. User requests to view all tags in Athena.
-
-1. Athena shows a list of tags.
-
-    Use case ends.
     
 #### **Use case: Add a tag**
 
 **MSS**
 
-1. User requests to add a tag.
+1. User requests to add a reminder.
 
 1. User specifies contacts to be added to this tag.
 
@@ -689,7 +837,107 @@ Preconditions: The contact the user wishes to edit is displayed on the UI.
     * 3a1. Athena shows an error message.
     
       Use case ends.
+
+  
+#### **Use case: List all tags**
+
+**MSS**
+
+1. User requests to view all tags in Athena.
+
+1. Athena shows a list of tags.
+
+    Use case ends.
+    
+
+#### **Use case: Add a reminder**
+
+**MSS**
+
+1. User requests to add a reminder.
+
+1. User specifies which event this reminder is for.
+
+1. User specifies when he wants to activate this reminder.
+
+1. Athena adds the new reminder.
+
+    Use case ends.
+
+**Extensions**
+* 2a. There is already a reminder for the event.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+* 2a. The target event does not exist. Event index entered is negative or greater than the size of the events list.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+* 3a. The reminder is set to activate before the current date.
+
+    * 3a1. Athena shows an error message.
+    
+      Use case ends.
+      
+#### **Use case: Delete a reminder**
+
+**MSS**
+
+1. User requests to delete a reminder.
+
+1. User specifies which reminder to delete.
+
+1. Athena deletes the reminder.
+
+    Use case ends.
+
+**Extensions**
+* 2a. The reminder does not exist. Reminder index entered is negative or greater than the size of the reminders list.
+
+    * 2a1. Athena shows an error message.
+    
+      Use case ends.
+
+#### **Use case: List all reminders**
+
+**MSS**
+
+1. User requests to view all reminders in Athena.
+
+1. Athena shows a list of reminders.
+
+    Use case ends.   
  
+
+#### **Use case: Find a tag**
+
+**MSS**
+
+1. User requests to find a tag.
+
+1. User specifies keyword to use in the search.
+
+1. User specifies whether any tag filters should be used.
+
+1. Athena displays all tags that match the keyword and filter.
+
+   Use case ends.
+   
+**Extensions**
+
+* 3a. Tag filter input is invalid.
+
+    * 3a1. Athena displays an error message.
+    
+    Use case resumes at step 3.
+
+* 4a. List is empty.
+
+    * 4a1. Athena displays a message stating there are no matches.
+    
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -822,6 +1070,42 @@ testers are expected to do more *exploratory* testing.
       
    1. Test case: `edit -t n/testtag2 t/testtag1` followed by `edit -t n/testtag1 t/testtag2`
       Expected: Error message shown, indicating an attempt in making a cyclic relationship.
+      
+### Adding a reminder
+
+1. Adding a new reminder to various events
+
+   1. Prerequisites: Create an event at index 1 that is scheduled to happen one day from now.
+   
+   1. Test case: `add -r 1 in/1`<br>
+      Expected: Reminder has been added for the Event at index `1` starting today.
+      
+   1. Test case: Exit and re-open the application
+      Expected: Reminder window pops up and displays the event at index 1. 
+      
+   1. Test case: `add -r 0 in/1` (has to be done after step 2) <br> 
+      Expected: Error message shown, saying that the event index is invalid. 
+
+### Finding a tag
+
+1. Finding a tag
+
+   1. Prerequisites: List all persons using the `list -c` command. Multiple persons in the list.
+       
+   1. Perform steps 2 & 3 of [Adding a tag](#adding-a-tag) if it has not been done.
+    
+   1. Test case: `find -t t/testtag1` <br>
+      Expected: Only `testtag1` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/testtag` <br>
+      Expected: Both `testtag1` and `testtag2` are displayed, with their corresponding contacts.
+      
+   1. Test case: `find -t t/testtag st/1` <br>
+      Expected: Only `testtag2` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/` <br>
+      Expected: Error message shown, stating that search specifiers cannot be empty.
+       
 
 ### Saving data
 

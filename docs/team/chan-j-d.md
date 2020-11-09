@@ -2,7 +2,6 @@
 layout: page
 title: Chan Jun Da's Project Portfolio Page
 ---
-
 ## Project: Athena
 
 Athena - Athena is an integrated contact and events manager. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
@@ -22,11 +21,10 @@ Given below are my contributions to the project.
        * perform actions on groups of contacts identified by tags rather than individual contacts. 
   * Highlights: This enhancement was crucial to several upcoming tag-level features that our team intended to implement. This feature was particularly difficult to implement as it required a data structure implementation that supported frequent edits of tag-to-tag relations. 
   Additionally, very specific behavior choices needed to be made regarding several key issues (e.g. deletion of a tag in the middle of the tag tree). There were also many potential issues with the feature that had to be predicted and protected against (e.g. creation of cyclic tag relations).
-  
+<div style="page-break-after: always;"></div>
+
 * **New Feature**: Added the following tag commands: `list`, `view`, `add`, `edit` and `delete`
-  * What it does: allows users to list out all tags, view details of individual tags, add, delete and edit tag details.  
   * Justification: This allows users to fully utilise the parent-child-tag support of Athena by providing users with the tools for creating their own tag-tree relations. It also allows them to perform some actions relating to tags more efficiently. 
-  * Highlights: There was little precedence for these commands in the original AddressBook-Level 3. Thus, the prefixes and command names were chosen to be as intuitive and close to the other commands as possible while still providing the necessary functionality.
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=chan-j-d)
 
@@ -47,21 +45,22 @@ Given below are my contributions to the project.
   * User Guide:
     * Updated documentation for `edit -c` and `find -c` commands [\#38](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/38)
     * Added documentation for tag commands `list -t`, `view -t`, `add -t`, `delete -t`, `edit -t` [\#175](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/175)
+    * Added documentation for an upcoming feature `viewtree -t`
     * Added specific tag terms to user guide glossary [\#175](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/175)
   * Developer Guide:
     * Removed outdated content in Developer Guide and updated relevant diagrams and commands to fit Athena [\#180](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/180)
         * Updated architecture sequence diagram to use correct command syntax
-        * Changed Model UML class diagram to match Athena's high-level view of Model
-        * Changed Storage UML class diagram to match Athena's implementation
+        * Changed `Model` and `Storage` UML class diagram to match Athena's implementation
     * Added implementation details of contact and tag management [\#180](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/180)
         * Added full Contact and Tag UML class diagram (sub-component of Model)
-        * Added UML sequence diagram to illustrate the tag deletion command and how it utilises each low-level component.
+        * Added UML sequence diagram to illustrate the tag deletion command
+    * Added documentation for an upcoming tag tree visualisation feature [\276](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/276)
+        * Added activity diagram for proposed tag tree visualisation feature [\#285](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/285)
     * Added _Instructions for Manual Testing_ for important commands I implemented (i.e. `edit -c`, `find -c`, `add -t`, `delete -t`, `edit -t`)
     * Added section for contact and tag management to the _Effort_ appendix
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#66](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/66), [\#67](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/67), 
   [\#110](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/110), [\#120](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/120), [\#148](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/148), [\#169](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/169),
-  [\#178](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/178), [\#240](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/240)
+  [\#178](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/178), [\#240](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/240) are the more significant ones
   * Helped with a key implementation of the `sort -c` command (commit [a0a9873](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/66/commits/a0a9873f5c125c1e1fd32e8b42c5eb067765131a) in Pull request [\#66](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/66/))
-

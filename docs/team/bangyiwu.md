@@ -37,6 +37,8 @@ Given below are my contributions to the project.
   * Justification: This feature makes the add reminder feature functional as it allows the users to actually look at 
   the reminders they have created.
   
+  <div style="page-break-after: always;"></div>
+  
 * **New Feature**: Added the Delete reminder function
   * What it does: Allows the user to delete their custom reminders.
   * Justification: This feature improves the product's usability as sometimes users may not need a reminder anymore.
@@ -54,7 +56,7 @@ Given below are my contributions to the project.
   group of contacts. This allows the user to purge all unwanted contacts in one command. It also allows the user to do
   a pseudo-selecting of contacts before they delete selected contacts.
 
-* **Code contributed**: https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=bangyiwu
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=bangyiwu)
 
 * **Project management**:
   * Creating and editing the user stories chart
@@ -72,15 +74,17 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the reminder-related function [\#184](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/184)
+    * Added documentation for the deletebytag function [\#273](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/273)
     * Edited and added Ui.png. (First iteration)
     * Added documentation for the sorting function [\#148](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/148)
     * Did cosmetic tweaks to fix documentation issues raised in PED: [\#226](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/226)
     * Drew and uploaded the new application logo
-  * Developer Guide:
-    * Added implementation details of the reminder-related functions.
-    * Added implementation details of the sorting feature. [\#148]()
-    * Added implementation details of the delete by tag feature.
     
+    <div style="page-break-after: always;"></div>
+    
+  * Developer Guide:
+    * Added implementation details of the reminder-related functions. [\#273](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/273)
+    * Added implementation details of the sorting feature. [\#273](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/273)    
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): e.g. [\#242](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/242), 
