@@ -370,7 +370,7 @@ In Athena, events are represented by `Event` objects. `Event` objects have a des
 - `UniqueEventList` keeps track of all `Event` objects. It uses Event class’ `isSameEvent(Event)` method to ensure that there are no duplicate events in Athena.
 - All manipulation of `Event` objects have to be done through Calendar. Calendar provides simple methods that can be used by higher-level components such as the `ModelManager` class.
 
-`FauxPerson` component:
+Attendees (`FauxPerson`) component:
 
 - `Event` objects can have attendees in the form of a set of `FauxPerson`.
 - `FauxPersons` are created from actual `Person` objects taken from the `AddressBook`
