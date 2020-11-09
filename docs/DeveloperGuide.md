@@ -937,6 +937,9 @@ testers are expected to do more *exploratory* testing.
       
    1. Test case: `find -t t/testtag st/1` <br>
       Expected: Only `testtag2` is displayed, with its corresponding contacts.
+      
+   1. Test case: `find -t t/` <br>
+      Expected: Error message shown, stating that search specifiers cannot be empty.
        
 
 ### Saving data
