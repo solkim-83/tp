@@ -409,12 +409,16 @@ Format: `find -e KEYWORD`
 Examples:
 * `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
 * `find -e seminar` returns `CS Seminar` and `seminar 1`.
+* `find -e dinner` returns `Family Dinner`.
+![Find Event Behaviour](images/ug-images/eventBehaviourImages/find-event-behaviour.png)
 
 #### Listing all events - `list`
 
 Shows a list of all events saved in Athena's calendar.
 
 Format: `list -e`
+
+![List Event Behaviour after](images/ug-images/eventBehaviourImages/list-event-behaviour-after.png)
 
 #### Sorting displayed events - `sort`
 
@@ -429,7 +433,11 @@ Format: `sort -e INDEX`
     2. By lexicographical order of the events' timing.
 
 Examples:
-* `sort -e 2` Sorts all currently displayed events by their descriptions in alphabetical order.
+* `sort -e 1` Sorts all currently displayed events by their descriptions in alphabetical order.
+![Sort Event Behaviour 1](images/ug-images/eventBehaviourImages/sort-event-behaviour-1.png)
+
+* `sort -e 2` Sorts all currently displayed events by their time in chronological order.
+![Sort Event Behaviour 2](images/ug-images/eventBehaviourImages/sort-event-behaviour-2.png)
 
 #### Viewing an event - `view`
 
