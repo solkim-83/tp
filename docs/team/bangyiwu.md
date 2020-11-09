@@ -37,6 +37,8 @@ Given below are my contributions to the project.
   * Justification: This feature makes the add reminder feature functional as it allows the users to actually look at 
   the reminders they have created.
   
+  <div style="page-break-after: always;"></div>
+  
 * **New Feature**: Added the Delete reminder function
   * What it does: Allows the user to delete their custom reminders.
   * Justification: This feature improves the product's usability as sometimes users may not need a reminder anymore.
@@ -76,6 +78,9 @@ Given below are my contributions to the project.
     * Added documentation for the sorting function [\#148](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/148)
     * Did cosmetic tweaks to fix documentation issues raised in PED: [\#226](https://github.com/AY2021S1-CS2103T-W10-4/tp/pull/226)
     * Drew and uploaded the new application logo
+    
+    <div style="page-break-after: always;"></div>
+    
   * Developer Guide:
     * Added implementation details of the reminder-related functions.
     * Added implementation details of the sorting feature. [\#148]()
