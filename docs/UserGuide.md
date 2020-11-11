@@ -390,7 +390,7 @@ Examples:
 
 #### Clearing all events - `clear`
 
-Clears all events from Athena's calendar.
+You can use this command to clear all the events in your calendar.
 
 Format: `clear -e`
 
@@ -402,7 +402,7 @@ Format: `clear -e`
 
 #### Deleting an event - `delete`
 
-Deletes the specified event from the event list.
+You can use this command to delete a specified event in your calendar.
 
 Format: `delete -e EVENT_INDEX_LIST`
 
@@ -415,7 +415,8 @@ Examples:
 
 #### Editing an event - `edit`
 
-Edits an existing event in the event list. `d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
+You can use this command to edit a specified event.
+`d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
@@ -446,7 +447,7 @@ Picture example:
 
 #### Finding an event - `find`
 
-Finds events which names contain any of the given keywords.
+You can use this command to find a specific event using keywords matching the event name.
 
 Format: `find -e KEYWORD`
 
@@ -463,7 +464,7 @@ Examples:
 
 #### Listing all events - `list`
 
-Shows a list of all events saved in Athena's calendar.
+You can use this command to display all the events in your calendar.
 
 Format: `list -e`
 
@@ -471,7 +472,8 @@ Format: `list -e`
 
 #### Sorting displayed events - `sort`
 
-Sorts all currently displayed events in Athena.
+You can use this command to sort through your currently displayed list of contacts. You can choose the order by
+entering a specific index.
 
 Format: `sort -e INDEX`
 
@@ -493,7 +495,7 @@ Examples:
 
 #### Viewing an event - `view`
 
-Shows specific details of an event.
+You can use this command to view the details of your event.
 Details include:
 * Description
 * Time
@@ -639,15 +641,14 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 ---
 
-### Reminders
+### Reminders [Wu Bangyi]
 
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
 If there are active reminders, an alert window displaying those reminders will also pop up whenever Athena starts.
 
 #### Adding a reminder - `add`
 
-Adds a new reminder for an event. Use this when you want Athena to start reminding you of an event X days 
-before its scheduled date.
+You can use this command to set a new reminder for an pre-existing event. 
 
 Format: `add -r EVENT_INDEX in/DAYS`
 
@@ -656,21 +657,21 @@ Format: `add -r EVENT_INDEX in/DAYS`
 
 Examples:
 
-* After entering the command "add -r 5 in/3". A reminder for the 5th event "CS2100 Meeting" will be set.
+1. After entering the command "add -r 5 in/3". A reminder for the 5th event "CS2100 Meeting" will be set.
 
-* Since event 5 is on **12th Nov**, the reminder will be activated three days 
+2. Since event 5 is on **12th Nov**, the reminder will be activated three days 
 before then, starting on **9th Nov**.
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
 
-* When reminders are active, every time Athena is opened, the alert window will pop up as shown below. 
+3. When reminders are active, every time Athena is opened, the alert window will pop up as shown below. 
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
 
 #### Listing all reminders - `list`
 
-Lists all reminders in the remarks panel. Use this to list each reminder and a countdown to its event.
+You can use this command to display all your reminders.
 
 Example:
 * `list -r` 
@@ -679,7 +680,7 @@ Example:
 
 #### Deleting a reminder - `delete`
 
-Deletes the specified reminder from the list of reminders.
+You can use this command to delete a specified reminder.
 
 Format: `delete -r INDEX`
 
@@ -741,7 +742,7 @@ Action | Format, Examples
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
 **Delete Contact** | `delete -c CONTACT_INDEX_LIST`<br> e.g., `delete -c 3,1,2`
-**Delete Contact By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
+**Delete Contacts By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
 **Delete Event** | `delete -e EVENT_INDEX_LIST`<br> e.g., `delete -e 3,1,2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Delete Reminder** | `delete -r INDEX` <br> e.g., `delete -r 1`
