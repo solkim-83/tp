@@ -38,7 +38,7 @@ title: User Guide
         * [`find`](#finding-a-tag---find) - Finding a tag
         * [`list`](#listing-all-tags---list) - Listing all tags
         * [`view`](#viewing-tags---view) - Viewing tag details
-    * [Reminders](#reminders)
+    * [Reminders](#reminders-wu-bangyi)
         * [`add`](#adding-a-reminder---add) - Adding a reminder
         * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
         * [`list`](#listing-all-reminders---list) - Listing all reminders
@@ -73,7 +73,7 @@ The guide also uses the following symbols and formatting:
 
 * Words that looks like [this](#About) can be clicked to navigate you to the related section or its relevant pages.
 * Words that looks like `this` are words related to user input or the commands of Athena.
-* Words that looks like <kbd>this<kbd> are keys that you can press using your keyboard.
+* Words that looks like <kbd>this</kbd> are keys that you can press using your keyboard.
 
 :information_source: This icon is used to indicate additional useful notes and information.
 
@@ -97,7 +97,7 @@ The guide also uses the following symbols and formatting:
    
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing <kbd>Enter<kbd> will
+1. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will
    open the help window.<br>
    
    Some commands you can try:
@@ -131,7 +131,7 @@ Thus, there are **five** types of commands:
 * [contact](#contacts) - commands that target contacts, distinguished by `-c`
 * [event](#events) - commands that target events, distinguished by `-e`
 * [tag](#tags) - commands that target tags, distinguished by `-t`
-* [reminder](#reminders) - commands that target reminders, distinguished by `-r`
+* [reminder](#reminders-wu-bangyi) - commands that target reminders, distinguished by `-r`
 
 <div markdown="block" class="alert alert-info">
 
@@ -155,6 +155,7 @@ Thus, there are **five** types of commands:
   
 * Commands that take in a single input per prefix will default to the last one if multiple are entered.<br>
   e.g. `add -c n/John n/Peter` will add a contact named `Peter` to Athena.
+
 
 </div>
 
@@ -243,12 +244,13 @@ You can do this by using `find -c t/TAG`.
 Example:
 
 1. Entering `deletebytag -c computing` into the user input panel will delete all the contacts tagged under computing.
-
 ![delete-by-tag-success](images/ug-images/contactsBehaviourImages/deletebytag-before-behaviour.png)
 
-2. All contacts tagged under computing have been successfully deleted.
-
+1. All contacts tagged under computing have been successfully deleted.
 ![groups of computing contacts](images/ug-images/contactsBehaviourImages/deletebytag-success-behaviour.png)
+
+
+
 
 #### Editing a contact - `edit`
 
@@ -322,12 +324,12 @@ The order of sorting will reset to default whenever Athena is rebooted.
 
 * Sorts through all contacts currently on screen and lists them according to the user-requested order.
 * Index definitions:
-1. By lexicographical order of their names
-2. By lexicographical order of their address
-3. By lexicographical order of their email
+1. By alphabetical order of their names.
+2. By alphabetical order of their address.
+3. By alphabetical order of their email.
 
 Example:
-* `sort -c 1` would sort all currently displayed contacts by their name in lexicographical order.
+* `sort -c 1` would sort all currently displayed contacts by their name in alphabetical order.
 
 ![Sort Contact Behaviour](images/ug-images/contactsBehaviourImages/sort-contacts-behaviour.png)
 
@@ -340,12 +342,12 @@ Format: `psort -c INDEX`
 
 * Sorts through all contacts in Athena and lists them according to the user-requested order.
 * Index definitions:
-1. By lexicographical order of their names
-2. By lexicographical order of their address
-3. By lexicographical order of their email
+1. By alphabetical order of their names.
+2. By alphabetical order of their address.
+3. By alphabetical order of their email.
 
 Example:
-* `psort -c 2` would sort all contacts by their address in lexicographical order.
+* `psort -c 2` would sort all contacts by their address in alphabetical order.
 
 ---
 
