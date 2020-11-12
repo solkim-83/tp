@@ -67,7 +67,7 @@ Athena is perfect for you if you:
 
 ## 2. About
 This document provides you with all necessary information on the installation and complete usage of Athena. 
-You will be able find comprehensive descriptions of all available features in our Commands section and the Quick Start 
+You will be able to find comprehensive descriptions of all available features in our Commands section and the Quick Start 
 section will get Athena up and running easily.
 
 The guide also uses the following symbols and formatting:
@@ -362,7 +362,7 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 * `CONTACT_INDEX_LIST` are the indices of contacts in the middle panel you want to add to the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 
-DATE_TIME formats currently accepted
+DATE_TIME formats currently accepted [Kim Sol, Hendey Fan]
 * d-M-y H:m
 * y-d-M H:m
 * 2 digit inputs for `y` will automatically be in the 21st century. (e.g. `20` is interpreted as the year 2020)
@@ -392,7 +392,7 @@ Examples:
 
 #### 4.3.2 Clearing all events - `clear`
 
-You can use this command to clear all the events in your calendar.
+You can use this command to clear the events in your calendar all at once.
 
 Format: `clear -e`
 
@@ -449,18 +449,18 @@ Picture example:
 
 #### 4.3.5 Finding an event - `find`
 
-You can use this command to find a specific event using keywords matching the event name.
+You can use this command to search for a specific event or events using keywords matching the event name.
 
 Format: `find -e KEYWORD`
 
 * The search is case-insensitive. e.g `meeting` will match `Meeting`.
-* If the event contains the particular keyword in the command, the name of the event will appear.
+* If the event contains the particular keyword in the command, the corresponding event will appear.
 * Only full words will be matched e.g. `meetin` will not match `meeting`.
 
 Examples:
-* `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
-* `find -e seminar` returns `CS Seminar` and `seminar 1`.
-* `find -e dinner` returns `Family Dinner`.
+* `find -e Meeting` returns events named as `CS2103 Meeting` and `CS2101 meeting`.
+* `find -e seminar` returns events named as `CS Seminar` and `seminar 1`.
+* `find -e dinner` returns event named as `Family Dinner`.
 
 ![Find Event Behaviour](images/ug-images/eventBehaviourImages/find-event-behaviour.png)
 
@@ -474,16 +474,15 @@ Format: `list -e`
 
 #### 4.3.7 Sorting displayed events - `sort`
 
-You can use this command to sort through your currently displayed list of contacts. You can choose the order by
-entering a specific index.
+You can use this command to sort through your currently displayed list of events. You can choose the sorting order by
+keying in a specific index.
 
 Format: `sort -e INDEX`
 
 * Sorts through all events currently on screen and lists them according to the user-requested order.
 * Index definitions:
-
-    1. By lexicographical order of the events' descriptions.
-    2. By lexicographical order of the events' timing.
+    * 1: By lexicographical order of the events' descriptions.
+    * 2: By lexicographical order of the events' timing.
 
 Examples:
 * `sort -e 1` Sorts all currently displayed events by their descriptions in alphabetical order.
