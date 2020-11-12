@@ -6,48 +6,8 @@ title: User Guide
 
 #### Table of Contents
 
-* [Introduction](#introduction)
-* [Quick Start](#quick-start)
-* [Features](#features)
-    * [General](#general)
-        * [`help`](#viewing-help---help) - Viewing help
-        * [`exit`](#exiting-the-program---exit) - Exiting the program
-    * [Contacts](#contacts)
-        * [`add`](#adding-a-contact---add) - Adding a contact
-        * [`clear`](#clearing-all-contacts---clear) - Clearing all contacts
-        * [`delete`](#deleting-a-contact---delete) - Deleting a contact
-        * [`deletebytag`](#deleting-contacts-by-tag---deletebytag-wu-bangyi) - Deleting contacts by tag
-        * [`edit`](#editing-a-contact---edit) - Editing a contact
-        * [`find`](#finding-a-contact---find) - Finding a contact
-        * [`list`](#listing-all-contacts---list) - Listing all contacts
-        * [`sort`](#sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
-        * [`psort`](#sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
-    * [Events](#events)
-        * [`add`](#adding-an-event---add) - Adding an event
-        * [`clear`](#clearing-all-events---clear) - Clearing all events
-        * [`delete`](#deleting-an-event---delete) - Deleting an event
-        * [`edit`](#editing-an-event---edit) - Editing an event
-        * [`find`](#finding-an-event---find) - Finding an event
-        * [`list`](#listing-all-events---list) - Listing all events
-        * [`sort`](#sorting-displayed-events---sort) - Sorting displayed events
-        * [`view`](#viewing-an-event---view) - Viewing an event
-    * [Tags](#tags)
-        * [`add`](#adding-a-tag---add) - Adding a tag
-        * [`delete`](#deleting-a-tag---delete) - Deleting a tag
-        * [`edit`](#editing-a-tag---edit) - Editing a tag
-        * [`find`](#finding-a-tag---find) - Finding a tag
-        * [`list`](#listing-all-tags---list) - Listing all tags
-        * [`view`](#viewing-tags---view) - Viewing tag details
-    * [Reminders](#reminders-wu-bangyi)
-        * [`add`](#adding-a-reminder---add) - Adding a reminder
-        * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
-        * [`list`](#listing-all-reminders---list) - Listing all reminders
-* [Upcoming features](#upcoming-features)
-    * [`viewtree`](#viewing-tag-tree-coming-soon---viewtree) - Viewing the tag tree
-* [Data saving](#data-saving)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
-* [Glossary](#glossary)
+1. Table of Contents
+{:toc}
 
 ---
 
