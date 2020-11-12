@@ -16,12 +16,12 @@ title: User Guide
         * [`add`](#adding-a-contact---add) - Adding a contact
         * [`clear`](#clearing-all-contacts---clear) - Clearing all contacts
         * [`delete`](#deleting-a-contact---delete) - Deleting a contact
-        * [`deletebytag`](#deleting-contacts-by-tag---deletebytag) - Deleting contacts by tag
+        * [`deletebytag`](#deleting-contacts-by-tag---deletebytag-wu-bangyi) - Deleting contacts by tag
         * [`edit`](#editing-a-contact---edit) - Editing a contact
         * [`find`](#finding-a-contact---find) - Finding a contact
         * [`list`](#listing-all-contacts---list) - Listing all contacts
-        * [`sort`](#sorting-displayed-contacts---sort) - Sorting displayed contacts
-        * [`psort`](#sorting-displayed-contacts-permanently---psort) - Sorting contacts permanently
+        * [`sort`](#sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
+        * [`psort`](#sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
     * [Events](#events)
         * [`add`](#adding-an-event---add) - Adding an event
         * [`clear`](#clearing-all-events---clear) - Clearing all events
@@ -231,7 +231,6 @@ You can use this command to delete all contacts with a specified tag.
 
 Format: `deletebytag -c TAG`
 
-* Deletes all contacts with a specific tag.
 * The tag must be a valid tag.
 * Deleted contacts will also be removed from any event they attend.
 
@@ -322,7 +321,7 @@ Format: `sort -c INDEX`
 The order of sorting will reset to default whenever Athena is rebooted. 
 </div>
 
-* Sorts through all contacts currently on screen and lists them according to the user-requested order.
+* Index must be a number from 1 to 3 and they each indicate a specific ordering sequence.
 * Index definitions:
 1. By alphabetical order of their names.
 2. By alphabetical order of their address.
@@ -340,7 +339,7 @@ You can use this command to sort all of Athena's contacts permanently.
 
 Format: `psort -c INDEX`
 
-* Sorts through all contacts in Athena and lists them according to the user-requested order.
+* Index must be a number from 1 to 3 and they each indicate a specific ordering sequence.
 * Index definitions:
 1. By alphabetical order of their names.
 2. By alphabetical order of their address.
@@ -645,8 +644,8 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 ### Reminders [Wu Bangyi]
 
-Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
-If there are active reminders, an alert window displaying those reminders will also pop up whenever Athena starts.
+Reminders allow you to set custom reminders for your events. You can call up your reminders in application or have them
+display through an alert window whenever Athena starts.
 
 #### Adding a reminder - `add`
 
