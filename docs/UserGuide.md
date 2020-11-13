@@ -2,60 +2,59 @@
 layout: page
 title: User Guide
 ---
-
-This document is a *User Guide* for Athena, a contact- and event- management desktop application. For more details on
-the suitability and functionalities of the application for your usage, please refer to the [Introduction](#introduction)
-section below.
+![banner](images/introbanner.png)
 
 #### Table of Contents
 
-* [Introduction](#introduction)
-* [Quick Start](#quick-start)
-* [Features](#features)
-    * [General](#general)
-        * [`help`](#viewing-help---help) - Viewing help
-        * [`exit`](#exiting-the-program---exit) - Exiting the program
-    * [Contacts](#contacts)
-        * [`add`](#adding-a-contact---add) - Adding a contact
-        * [`clear`](#clearing-all-contacts---clear) - Clearing all contacts
-        * [`delete`](#deleting-a-contact---delete) - Deleting a contact
-        * [`edit`](#editing-a-contact---edit) - Editing a contact
-        * [`find`](#finding-a-contact---find) - Finding a contact
-        * [`list`](#listing-all-contacts---list) - Listing all contacts
-        * [`sort`](#sorting-displayed-contacts---sort) - Sorting displayed contacts
-        * [`psort`](#sorting-displayed-contacts-permanently---psort) - Sorting contacts permanently
-    * [Events](#events)
-        * [`add`](#adding-an-event---add) - Adding an event
-        * [`clear`](#clearing-all-events---clear) - Clearing all events
-        * [`delete`](#deleting-an-event---delete) - Deleting an event
-        * [`edit`](#editing-an-event---edit) - Editing an event
-        * [`find`](#finding-an-event---find) - Finding an event
-        * [`list`](#listing-all-events---list) - Listing all events
-        * [`sort`](#sorting-displayed-events---sort) - Sorting displayed events
-        * [`view`](#viewing-an-event---view) - Viewing an event
-    * [Tags](#tags)
-        * [`add`](#adding-a-tag---add) - Adding a tag
-        * [`delete`](#deleting-a-tag---delete) - Deleting a tag
-        * [`edit`](#editing-a-tag---edit) - Editing a tag
-        * [`find`](#finding-a-tag---find) - Finding a tag
-        * [`list`](#listing-all-tags---list) - Listing all tags
-        * [`view`](#viewing-tags---view) - Viewing tag details
-    * [Reminders](#reminders)
-        * [`add`](#adding-a-reminder---add) - Adding a reminder
-        * [`delete`](#deleting-a-reminder---delete) - Deleting a reminder
-        * [`list`](#listing-all-reminders---list) - Listing all reminders
-* [Upcoming features](#upcoming-features)
-    * [`viewtree`](#viewing-tag-tree-coming-soon---viewtree) - Viewing the tag tree
-* [Data saving](#data-saving)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
-* [Glossary](#glossary)
+* [1. Introduction](#1-introduction-illio-suardi)
+* [2. About](#2-about-illio-suardi-wu-bangyi)
+* [3. Quick Start](#3-quick-start-illio-suardi)
+* [4. Features](#4-features-illio-suardi)
+    * [4.1 General](#41-general-illio-suardi)
+        * [4.1.1 `help`](#411-viewing-help---help) - Viewing help
+        * [4.1.2 `exit`](#412-exiting-the-program---exit) - Exiting the program
+    * [4.2 Contacts](#42-contacts)
+        * [4.2.1 `add`](#421-adding-a-contact---add-wu-bangyi) - Adding a contact
+        * [4.2.2 `clear`](#422-clearing-all-contacts---clear-wu-bangyi) - Clearing all contacts
+        * [4.2.3 `delete`](#423-deleting-a-contact---delete-wu-bangyi) - Deleting a contact
+        * [4.2.4 `deletebytag`](#424--deleting-contacts-by-tag---deletebytag-wu-bangyi) - Deleting contacts by tag
+        * [4.2.5 `edit`](#425-editing-a-contact---edit-chan-jun-da) - Editing a contact
+        * [4.2.6`find`](#426-finding-a-contact---find-chan-jun-da) - Finding a contact
+        * [4.2.7 `list`](#427-listing-all-contacts---list-wu-bangyi) - Listing all contacts
+        * [4.2.8 `sort`](#428-sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
+        * [4.2.9 `psort`](#429-sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
+    * [4.3 Events](#43-events)
+        * [4.3.1 `add`](#431-adding-an-event---add) - Adding an event
+        * [4.3.2 `clear`](#432-clearing-all-events---clear-kim-sol) - Clearing all events
+        * [4.3.3 `delete`](#433-deleting-an-event---delete) - Deleting an event
+        * [4.3.4 `edit`](#434-editing-an-event---edit) - Editing an event
+        * [4.3.5 `find`](#435-finding-an-event---find-kim-sol) - Finding an event
+        * [4.3.6 `list`](#436-listing-all-events---list-kim-sol) - Listing all events
+        * [4.3.7 `sort`](#437-sorting-displayed-events---sort-kim-sol) - Sorting displayed events
+        * [4.3.8 `view`](#438-viewing-an-event---view) - Viewing an event
+    * [4.4 Tags](#44-tags-chan-jun-da)
+        * [4.4.1 `add`](#441-adding-a-tag---add-chan-jun-da) - Adding a tag
+        * [4.4.2 `delete`](#442-deleting-a-tag---delete-chan-jun-da) - Deleting a tag
+        * [4.4.3 `edit`](#443-editing-a-tag---edit-chan-jun-da) - Editing a tag
+        * [4.4.4 `find`](#444-finding-a-tag---find-illio-suardi) - Finding a tag
+        * [4.4.5 `list`](#445-listing-all-tags---list-chan-jun-da) - Listing all tags
+        * [4.4.6 `view`](#446-viewing-tags---view-chan-jun-da) - Viewing tag details
+    * [4.5. Reminders](#45-reminders-wu-bangyi)
+        * [4.5.1 `add`](#451-adding-a-reminder---add) - Adding a reminder
+        * [4.5.2 `delete`](#453-deleting-a-reminder---delete) - Deleting a reminder
+        * [4.5.3 `list`](#452-listing-all-reminders---list) - Listing all reminders
+* [5. Upcoming features](#5-upcoming-features-chan-jun-da)
+    * [5.1 `viewtree`](#51-viewing-tag-tree-coming-soon---viewtree) - Viewing the tag tree
+* [6. Data saving](#6-data-saving)
+* [7. FAQ](#7-faq)
+* [8. Command Summary](#8-command-summary)
+* [9. Glossary](#9-glossary-chan-jun-da)
 
 ---
 
-## Introduction
+## 1. Introduction [Illio Suardi]
 
-Athena is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while
+Athena is a **desktop app for managing contacts and events**. It is optimized for use via a Command Line Interface (CLI) while
 still having the benefits of a Graphical User Interface (GUI).
 
 Athena is perfect for you if you:
@@ -63,21 +62,44 @@ Athena is perfect for you if you:
 * need to keep track of the people who attend specific events,
 * can type fast!
 
+
 ---
 
-## Quick start
+## 2. About [Illio Suardi, Wu Bangyi]
+This document provides you with all necessary information on the installation and complete usage of Athena.
+To get started, you may refer to the [Quick Start](#3-quick-start) section below.
+You will also be able to find comprehensive descriptions of all available features in our [Commands](#4-features)
+section.
 
-1. Ensure you have Java `11` or above installed in your computer.
+The guide also uses the following symbols and formatting:
 
-1. Download the latest `Athena.jar` from [here](https://github.com/AY2021S1-CS2103T-W10-4/tp/releases).
+* Words that looks like [this](#2-about) can be clicked to navigate you to the related section or its relevant pages.
+* Words that looks like `this` are words related to user input or the commands of Athena.
+* Words that looks like <kbd>this</kbd> are keys that you can press using your keyboard.
+
+:information_source: This icon is used to indicate additional useful notes and information.
+
+:exclamation: This icon is used to indicate important information or warnings.
+
+:bulb: This icon is used to indicate useful tips of Athena.
+
+---
+
+
+## 3. Quick start [Illio Suardi]
+
+1. Ensure you have **Java 11** or above installed in your computer.
+
+1. Download the latest **Athena.jar** from [here](https://github.com/AY2021S1-CS2103T-W10-4/tp/releases).
 
 1. Copy the JAR file to the folder you want to use as the _home folder_ for Athena.
 
 1. Double-click the file or run it with `java -jar Athena.jar` to start the app. A window similar to the one below
-   should appear in a few seconds. Note how the app contains some sample data.<br>
+   should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
+   
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+1. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will
    open the help window.<br>
    
    Some commands you can try:
@@ -96,7 +118,7 @@ Athena is perfect for you if you:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 4. Features [Illio Suardi]
 
 Athena supports two key functionalities - the management of **contacts** and **events**. Commands are tailored to manage 
 each of these specific functionalities.
@@ -107,14 +129,15 @@ Athena also supports two sub-functionalities:
 
 Thus, there are **five** types of commands:
 
-* [general](#general) - commands that do not target any specific functionality
-* [contact](#contacts) - commands that target contacts, distinguished by `-c`
-* [event](#events) - commands that target events, distinguished by `-e`
-* [tag](#tags) - commands that target tags, distinguished by `-t`
-* [reminder](#reminders) - commands that target reminders, distinguished by `-r`
+* [general](#41-general) - commands that do not target any specific functionality
+* [contact](#42-contacts) - commands that target contacts, distinguished by `-c`
+* [event](#43-events) - commands that target events, distinguished by `-e`
+* [tag](#44-tags) - commands that target tags, distinguished by `-t`
+* [reminder](#45-reminders-wu-bangyi) - commands that target reminders, distinguished by `-r`
 
 <div markdown="block" class="alert alert-info">
 
+### Command Format
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -135,21 +158,24 @@ Thus, there are **five** types of commands:
 * Commands that take in a single input per prefix will default to the last one if multiple are entered.<br>
   e.g. `add -c n/John n/Peter` will add a contact named `Peter` to Athena.
 
+
 </div>
 
 ---
 
-### General
+### 4.1 General [Illio Suardi]
 
-#### Viewing help - `help`
+#### 4.1.1 Viewing help - `help`
 
 Shows a message explaining how to access the help page.
 
+
 ![help message](images/helpMessage.png)
+
 
 Format: `help`
 
-#### Exiting the program - `exit`
+#### 4.1.2 Exiting the program - `exit`
 
 Exits the program.
 
@@ -157,11 +183,11 @@ Format: `exit`
 
 ---
 
-### Contacts
+### 4.2 Contacts
 
-#### Adding a contact - `add`
+#### 4.2.1 Adding a contact - `add` [Wu Bangyi]
 
-Adds a contact to Athena.
+You can use this command to add a contact into Athena's address book.
 
 Format: `add -c n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -170,24 +196,25 @@ A contact can have any number of tags (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you are missing some of the information, like ADDRESS, you can just remove the prefix and leave the fields empty, 
-just like the second example below
+If you are missing some information like ADDRESS, you can just remove the prefix and leave the field empty. 
 </div>
 
-Examples:
+Example:
 * `add -c n/Betsy Crowe t/friend p/1234567 t/criminal`
+
 
 ![Add Contact Behaviour](images/ug-images/contactsBehaviourImages/add-contact-behaviour.png)
 
-#### Clearing all contacts - `clear`
 
-Clears all contacts from Athena.
+#### 4.2.2 Clearing all contacts - `clear` [Wu Bangyi]
+
+You can use this command to permanently clear all of Athena's contacts.
 
 Format: `clear -c`
 
-#### Deleting a contact - `delete`
+#### 4.2.3 Deleting a contact - `delete` [Wu Bangyi]
 
-Deletes the specified contact(s) from Athena.
+You can use this command to delete specified contact(s).
 
 Format: `delete -c CONTACT_INDEX_LIST`
 
@@ -196,38 +223,43 @@ Format: `delete -c CONTACT_INDEX_LIST`
 * The index **must be a positive integer** 1, 2, 3, …​
 * Deleted contacts will also be removed from any event they attend.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can delete multiple contacts at once by entering multiple corresponding indices. 
+</div>
+
 Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
-#### Deleting contacts by Tag - `deletebytag`
+#### 4.2.4  Deleting contacts by Tag - `deletebytag` [Wu Bangyi]
 
-Deletes all contacts under a specific tag.
+You can use this command to delete all contacts with a specified tag.
 
 Format: `deletebytag -c TAG`
 
-* Deletes all contacts with a specific tag.
 * The tag must be a valid tag.
 * Deleted contacts will also be removed from any event they attend.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Since all contacts with the specified tag will be deleted permanently, we recommend you to list out 
-all those contacts first to make sure you are aware of what contacts will be deleted by using `find -c t/TAG`. 
+all those contacts first to make sure you are aware of which contacts will be deleted. 
+You can do this by using `find -c t/TAG`. 
 </div>
 
-Examples:
+Example:
 
-* Entering `deletebytag -c computing` into the user input panel will delete all the contacts tagged under computing.
-
+1. Entering `deletebytag -c computing` into the user input panel will delete all the contacts tagged under computing.
 ![delete-by-tag-success](images/ug-images/contactsBehaviourImages/deletebytag-before-behaviour.png)
 
-* All contacts tagged under computing (contact no.5 to 8 in the previous image) have successfully been deleted.
-
+1. All contacts tagged under computing have been successfully deleted.
 ![groups of computing contacts](images/ug-images/contactsBehaviourImages/deletebytag-success-behaviour.png)
 
-#### Editing a contact - `edit`
 
-Edits an existing contact in Athena.
+
+
+#### 4.2.5 Editing a contact - `edit` [Chan Jun Da]
+
+You can use this command to edit a specific contact.
 
 Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/TAG]…`
 
@@ -237,8 +269,8 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Tags that are not mentioned will *NOT* be affected.
-* `t/TAG` adds `TAG` to the user.
-* `rt/TAG` removes `TAG` from the user.
+* `t/TAG` adds `TAG` to the contact.
+* `rt/TAG` removes `TAG` from the contact.
 * Tag removal is done before tag addition.
 * You can remove all the contact’s tags by typing `rt/*`.
 
@@ -250,9 +282,9 @@ and `johndoe@example.com` respectively.
 
 * `edit -c 3 t/CS2103 rt/*` Removes all tags of the contact at index `3` and then adds the tag `cs2103` to it.
 
-#### Finding a contact - `find`
+#### 4.2.6 Finding a contact - `find` [Chan Jun Da]
 
-Finds contacts matching all specified fields. 
+You can use this command to find a particular contact by applying multiple search filters.
 
 Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 
@@ -272,65 +304,70 @@ Format: `find -c [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 Examples:
 * `find -c n/John` returns `john` and `John Doe`
 * `find -c n/alex david` returns `Alex Yeoh`, `David Li` (example illustrated below).
+
 ![find-contact-image](images/ug-images/contactBehaviourImages/find-contact-image.png)
 
 * `find -c a/Serangoon` returns all contacts with an address that contains `Serangoon` 
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
 
-#### Listing all contacts - `list`
+#### 4.2.7 Listing all contacts - `list` [Wu Bangyi]
 
-Shows a list of all contacts in Athena.
+You can use this command to list out all contacts.
 
 Format: `list -c`
 
-#### Sorting displayed contacts - `sort`
+#### 4.2.8 Sorting displayed contacts - `sort` [Wu Bangyi]
 
-Sorts all currently displayed contacts in Athena.
+You can use this command to sort all currently displayed contacts in Athena.
 
 Format: `sort -c INDEX`
 
-* Sorts through all contacts currently on screen and lists them according to the user-requested order.
-* Index definitions:
-1. By lexicographical order of their names
-2. By lexicographical order of their address
-3. By lexicographical order of their email
+<div markdown="span" class="alert alert-primary">:information_source: **Temporary Sorting:**
+The order of sorting will reset to default whenever Athena is rebooted. 
+</div>
 
-Examples:
-* `sort -c 1` would sort all currently displayed contacts by their name in lexicographical order.
+* Index must be a number from 1 to 3 and they each indicate a specific ordering sequence.
+* Index definitions:
+1. By alphabetical order of their names.
+2. By alphabetical order of their address.
+3. By alphabetical order of their email.
+
+Example:
+* `sort -c 1` would sort all currently displayed contacts by their name in alphabetical order.
 
 ![Sort Contact Behaviour](images/ug-images/contactsBehaviourImages/sort-contacts-behaviour.png)
 
 
-#### Sorting displayed contacts permanently - `psort`
+#### 4.2.9 Sorting displayed contacts permanently - `psort` [Wu Bangyi]
 
-Sorts all contacts stored in Athena permanently.
+You can use this command to sort all of Athena's contacts permanently.
 
 Format: `psort -c INDEX`
 
-* Sorts through all contacts in Athena and lists them according to the user-requested order.
+* Index must be a number from 1 to 3 and they each indicate a specific ordering sequence.
 * Index definitions:
-1. By lexicographical order of their names
-2. By lexicographical order of their address
-3. By lexicographical order of their email
+1. By alphabetical order of their names.
+2. By alphabetical order of their address.
+3. By alphabetical order of their email.
 
-Examples:
-* `psort -c 2` would sort all contacts by their address in lexicographical order.
+Example:
+* `psort -c 2` would sort all contacts by their address in alphabetical order.
 
 ---
 
-### Events
+### 4.3 Events
 
-#### Adding an event - `add`
+#### 4.3.1 Adding an event - `add`
 
-Adds an event to the event list.
+You can use this command to add an event to Athena's calendar.
 
 Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 * `CONTACT_INDEX_LIST` are the indices of contacts in the middle panel you want to add to the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 
-DATE_TIME formats currently accepted
+DATE_TIME formats currently accepted [Kim Sol, Hendey Fan]
 * d-M-y H:m
 * y-d-M H:m
 * 2 digit inputs for `y` will automatically be in the 21st century. (e.g. `20` is interpreted as the year 2020)
@@ -351,22 +388,16 @@ y | Year (e.g. `20`, `2020` both means the year 2020)
 H | Hour of the day in 24-hr time (e.g. `8`, `23`)
 m | Minutes of an hour (e.g. `9`, `45`)
 
-Behaviour: a new event item will be added to the event list and displayed on the right most panel as shown below.
-
-![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
-
 
 Examples:
+* `add -e at/20-10-20 14:00 d/CS2103 Team meeting ap/5,1,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 5, 1 and 3 from the contact list. 
 * `add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 1, 2 and 3 from the contact list.
-* `add -e at/20-10-20 14:00 d/CS2103 Team meeting ap/5,1,3` Adds an event with the description "CS2103 Team meeting", at 20th October 2020, 2pm. With persons 5, 1 and 3 from the contact list.
-
-1. After adding a contact using "add -e d/CS2103 Team meeting at/20-10-2020 14:00 ap/1,2,3"
 
 ![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
 
-#### Clearing all events - `clear`
+#### 4.3.2 Clearing all events - `clear` [Kim Sol]
 
-Clears all events from Athena's calendar.
+You can use this command to clear the events in your calendar all at once.
 
 Format: `clear -e`
 
@@ -376,9 +407,9 @@ Format: `clear -e`
 
 ![Clear Event Behaviour](images/ug-images/eventBehaviourImages/clear-event-behaviour.png)
 
-#### Deleting an event - `delete`
+#### 4.3.3 Deleting an event - `delete`
 
-Deletes the specified event from the event list.
+You can use this command to delete a specified event in your calendar.
 
 Format: `delete -e EVENT_INDEX_LIST`
 
@@ -389,9 +420,10 @@ Format: `delete -e EVENT_INDEX_LIST`
 Examples:
 * `list -e` followed by `delete -e 2,3` deletes the 2nd and 3rd event in Athena.
 
-#### Editing an event - `edit`
+#### 4.3.4 Editing an event - `edit`
 
-Edits an existing event in the event list. `d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
+You can use this command to edit a specified event.
+`d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
@@ -420,42 +452,42 @@ Picture example:
 
 ![Edit Event Behaviour after](images/ug-images/eventBehaviourImages/edit-event-behaviour-after.png)
 
-#### Finding an event - `find`
+#### 4.3.5 Finding an event - `find` [Kim Sol]
 
-Finds events which names contain any of the given keywords.
+You can use this command to search for a specific event or events using keywords matching the event name.
 
 Format: `find -e KEYWORD`
 
 * The search is case-insensitive. e.g `meeting` will match `Meeting`.
-* If the event contains the particular keyword in the command, the name of the event will appear.
+* If the event contains the particular keyword in the command, the corresponding event will appear.
 * Only full words will be matched e.g. `meetin` will not match `meeting`.
 
 Examples:
-* `find -e Meeting` returns `CS2103 Meeting` and `CS2101 meeting`.
-* `find -e seminar` returns `CS Seminar` and `seminar 1`.
-* `find -e dinner` returns `Family Dinner`.
+* `find -e Meeting` returns events named as `CS2103 Meeting` and `CS2101 meeting`.
+* `find -e seminar` returns events named as `CS Seminar` and `seminar 1`.
+* `find -e dinner` returns event named as `Family Dinner`.
 
 ![Find Event Behaviour](images/ug-images/eventBehaviourImages/find-event-behaviour.png)
 
-#### Listing all events - `list`
+#### 4.3.6 Listing all events - `list` [Kim Sol]
 
-Shows a list of all events saved in Athena's calendar.
+You can use this command to display all the events in your calendar.
 
 Format: `list -e`
 
 ![List Event Behaviour after](images/ug-images/eventBehaviourImages/list-event-behaviour-after.png)
 
-#### Sorting displayed events - `sort`
+#### 4.3.7 Sorting displayed events - `sort` [Kim Sol]
 
-Sorts all currently displayed events in Athena.
+You can use this command to sort through your currently displayed list of events. You can choose the sorting order by
+keying in a specific index.
 
 Format: `sort -e INDEX`
 
 * Sorts through all events currently on screen and lists them according to the user-requested order.
 * Index definitions:
-
-    1. By lexicographical order of the events' descriptions.
-    2. By lexicographical order of the events' timing.
+    * 1: By lexicographical order of the events' descriptions.
+    * 2: By lexicographical order of the events' timing.
 
 Examples:
 * `sort -e 1` Sorts all currently displayed events by their descriptions in alphabetical order.
@@ -467,9 +499,9 @@ Examples:
 ![Sort Event Behaviour 2](images/ug-images/eventBehaviourImages/sort-event-behaviour-2.png)
 
 
-#### Viewing an event - `view`
+#### 4.3.8 Viewing an event - `view`
 
-Shows specific details of an event.
+You can use this command to view the details of your event.
 Details include:
 * Description
 * Time
@@ -486,7 +518,7 @@ Example:
 
 ---
 
-### Tags
+### 4.4 Tags [Chan Jun Da]
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will allow you to perform tag-level actions.
 Tag management features are advanced features meant for more proficient users of Athena who have a large number of contacts and events to manage.
@@ -503,7 +535,7 @@ letters is changed to lowercase only. This is to allow you to perform tag action
 
 </div>
 
-#### Adding a tag - `add`
+#### 4.4.1 Adding a tag - `add` [Chan Jun Da]
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
 of tags under one parent-tag.
@@ -524,7 +556,7 @@ Examples:
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
 will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
 
-#### Deleting a tag - `delete`
+#### 4.4.2 Deleting a tag - `delete` [Chan Jun Da]
 
 Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
 Additionally, if you would like to delete a tag and all its sub-tags, you can specify `true` under the `r/` input field.
@@ -532,7 +564,7 @@ Additionally, if you would like to delete a tag and all its sub-tags, you can sp
 Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 
 * `TAG_NAME` must be the name of an existing tag in Athena.
-* `BOOLEAN` must be of the form `1`, `t`, `true` for a true case or `0`, `f`, `false` for a false case.
+* `BOOLEAN` must be of the form `1`, `t`, `true` for true or `0`, `f`, `false` for false.
 * `r/BOOLEAN` field is optional. The default value for this field is `false`.
 * **Note**: On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
 
@@ -544,7 +576,7 @@ Examples:
 
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
-#### Editing a tag - `edit`
+#### 4.4.3 Editing a tag - `edit` [Chan Jun Da]
 
 Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
 - add and/or remove contacts from a tag
@@ -566,11 +598,11 @@ Examples:
 
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
-#### Finding a tag - `find`
+#### 4.4.4 Finding a tag - `find` [Illio Suardi]
 
-Finds tags which names partially match the given keyword and lists them in the remarks panel. Super-tags are also
-denoted with `(supertag)`. Additionally, if you would like to find super-tags only, you can specify `true` in the `st/`
-field; conversely, if you would like to find regular tags only, you can specify `false` in the `st/` field.
+You can use this command to find tags which names partially match the given keyword by listing them in the remarks panel.
+Super-tags are also denoted with `(supertag)`. Additionally, if you would like to find super-tags only, you can specify
+`true` in the `st/` field; conversely, if you would like to find regular tags only, you can specify `false` in the `st/` field.
 
 Format: `find -t [t/KEYWORD] [st/BOOLEAN]`
 
@@ -585,7 +617,7 @@ Examples:
 * `find -t t/friends st/0` Finds regular tags that partially contain the word `friends` (example illustrated below).
 ![find-tag-image](images/ug-images/tagBehaviourImages/find-tag-image.png)
 
-#### Listing all tags - `list`
+#### 4.4.5 Listing all tags - `list` [Chan Jun Da]
 
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
@@ -593,7 +625,7 @@ Example:
 * `list -t` In the remarks panel, a list of all tags and their contacts are displayed (example illustrated below).
 ![list-tag-image](images/ug-images/tagBehaviourImages/list-tag-image.png)
 
-#### Viewing tags - `view`
+#### 4.4.6 Viewing tags - `view` [Chan Jun Da]
 
 Shows specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
@@ -615,15 +647,14 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 ---
 
-### Reminders
+### 4.5 Reminders [Wu Bangyi]
 
-Reminders allow you to set custom reminders for your events. You can call up your reminders in application.
-If there are active reminders, an alert window displaying those reminders will also pop up whenever Athena starts.
+Reminders allow you to set custom reminders for your events. You can call up your reminders in application or have them
+display through an alert window whenever Athena starts.
 
-#### Adding a reminder - `add`
+#### 4.5.1 Adding a reminder - `add`
 
-Adds a new reminder for an event. Use this when you want Athena to start reminding you of an event X days 
-before its scheduled date.
+You can use this command to set a new reminder for a pre-existing event. 
 
 Format: `add -r EVENT_INDEX in/DAYS`
 
@@ -632,30 +663,28 @@ Format: `add -r EVENT_INDEX in/DAYS`
 
 Examples:
 
-* After entering the command "add -r 5 in/3". A reminder for the 5th event "CS2100 Meeting" will be set.
+1. After entering the command "add -r 5 in/3". A reminder for the 5th event "CS2100 Meeting" will be set.
 
-* Since event 5 is on **12th Nov**, the reminder will be activated three days 
+2. Since event 5 is on **12th Nov**, the reminder will be activated three days 
 before then, starting on **9th Nov**.
-
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
-
-* When reminders are active, every time Athena is opened, the alert window will pop up as shown below. 
+3. When reminders are active, every time Athena is opened, the alert window will pop up as shown below.
 
 ![reminder-alert-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
 
-#### Listing all reminders - `list`
+#### 4.5.2 Listing all reminders - `list`
 
-Lists all reminders in the remarks panel. Use this to list each reminder and a countdown to its event.
+You can use this command to display all your reminders.
 
 Example:
 * `list -r` 
 
 ![List-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
 
-#### Deleting a reminder - `delete`
+#### 4.5.3 Deleting a reminder - `delete`
 
-Deletes the specified reminder from the list of reminders.
+You can use this command to delete a specified reminder.
 
 Format: `delete -r INDEX`
 
@@ -671,11 +700,11 @@ Examples:
 
 ---
 
-### Upcoming features
+### 5. Upcoming features [Chan Jun Da]
 
-#### Viewing tag tree (coming soon) - `viewtree`
+#### 5.1 Viewing tag tree (coming soon) - `viewtree`
 
-Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
+Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow you to easily understand the current tag structure that they have built.
 
 A preview image is shown below for you to understand what this feature will look like.
 ![tagtree](images/tagtree-test-tree.png)
@@ -686,14 +715,14 @@ Format: `viewtree -t`
 
 ---
 
-### Data saving
+### 6. Data saving
 
 Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
 need to save manually. 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 7. FAQ
 
 **Q**: Where are the save files that Athena uses stored?<br>
 **A**: The default save directory is in `{Athena home directory}/data`.
@@ -706,7 +735,7 @@ need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 8. Command summary
 
 Action | Format, Examples
 --------|------------------
@@ -717,7 +746,7 @@ Action | Format, Examples
 **Clear Contacts** | `clear -c`
 **Clear Events** | `clear -e`
 **Delete Contact** | `delete -c CONTACT_INDEX_LIST`<br> e.g., `delete -c 3,1,2`
-**Delete Contact By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
+**Delete Contacts By Tag** | `deletebytag -c TAG`<br> e.g., `delete -c computing`
 **Delete Event** | `delete -e EVENT_INDEX_LIST`<br> e.g., `delete -e 3,1,2`
 **Delete Tag** | `delete -t t/TAG_NAME [r/BOOLEAN]` <br> e.g., `delete -t t/computing r/t`
 **Delete Reminder** | `delete -r INDEX` <br> e.g., `delete -r 1`
@@ -739,7 +768,7 @@ Action | Format, Examples
 **View Event** | `view -e INDEX` <br> e.g., `view -e 1`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
 
-## Glossary
+## 9. Glossary [Chan Jun Da]
 
 ###### _Child-tag_ 
 - A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done.
