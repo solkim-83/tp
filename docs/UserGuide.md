@@ -18,8 +18,8 @@ title: User Guide
         * [4.2.2 `clear`](#422-clearing-all-contacts---clear) - Clearing all contacts
         * [4.2.3 `delete`](#423-deleting-a-contact---delete) - Deleting a contact
         * [4.2.4 `deletebytag`](#424--deleting-contacts-by-tag---deletebytag-wu-bangyi) - Deleting contacts by tag
-        * [4.2.5 `edit`](#425-editing-a-contact---edit) - Editing a contact
-        * [4.2.6`find`](#426-finding-a-contact---find) - Finding a contact
+        * [4.2.5 `edit`](#425-editing-a-contact---edit-chan-jun-da) - Editing a contact
+        * [4.2.6`find`](#426-finding-a-contact---find-chan-jun-da) - Finding a contact
         * [4.2.7 `list`](#427-listing-all-contacts---list) - Listing all contacts
         * [4.2.8 `sort`](#428-sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
         * [4.2.9 `psort`](#429-sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
@@ -32,23 +32,23 @@ title: User Guide
         * [4.3.6 `list`](#436-listing-all-events---list) - Listing all events
         * [4.3.7 `sort`](#437-sorting-displayed-events---sort) - Sorting displayed events
         * [4.3.8 `view`](#438-viewing-an-event---view) - Viewing an event
-    * [4.4 Tags](#44-tags)
-        * [4.4.1 `add`](#441-adding-a-tag---add) - Adding a tag
-        * [4.4.2 `delete`](#442-deleting-a-tag---delete) - Deleting a tag
-        * [4.4.3 `edit`](#443-editing-a-tag---edit) - Editing a tag
+    * [4.4 Tags](#44-tags-chan-jun-da)
+        * [4.4.1 `add`](#441-adding-a-tag---add-chan-jun-da) - Adding a tag
+        * [4.4.2 `delete`](#442-deleting-a-tag---delete-chan-jun-da) - Deleting a tag
+        * [4.4.3 `edit`](#443-editing-a-tag---edit-chan-jun-da) - Editing a tag
         * [4.4.4 `find`](#444-finding-a-tag---find-illio-suardi) - Finding a tag
-        * [4.4.5 `list`](#445-listing-all-tags---list) - Listing all tags
-        * [4.4.6 `view`](#446-viewing-tags---view) - Viewing tag details
+        * [4.4.5 `list`](#445-listing-all-tags---list-chan-jun-da) - Listing all tags
+        * [4.4.6 `view`](#446-viewing-tags---view-chan-jun-da) - Viewing tag details
     * [4.5. Reminders](#45-reminders-wu-bangyi)
         * [4.5.1 `add`](#451-adding-a-reminder---add) - Adding a reminder
         * [4.5.2 `delete`](#453-deleting-a-reminder---delete) - Deleting a reminder
         * [4.5.3 `list`](#452-listing-all-reminders---list) - Listing all reminders
-* [5. Upcoming features](#5-upcoming-features)
+* [5. Upcoming features](#5-upcoming-features-chan-jun-da)
     * [5.1 `viewtree`](#51-viewing-tag-tree-coming-soon---viewtree) - Viewing the tag tree
 * [6. Data saving](#6-data-saving)
 * [7. FAQ](#7-faq)
 * [8. Command Summary](#8-command-summary)
-* [9. Glossary](#9-glossary)
+* [9. Glossary](#9-glossary-chan-jun-da)
 
 ---
 
@@ -253,7 +253,7 @@ Example:
 
 
 
-#### 4.2.5 Editing a contact - `edit`
+#### 4.2.5 Editing a contact - `edit` [Chan Jun Da]
 
 You can use this command to edit a specific contact.
 
@@ -265,8 +265,8 @@ Format: `edit -c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [rt/T
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Tags that are not mentioned will *NOT* be affected.
-* `t/TAG` adds `TAG` to the user.
-* `rt/TAG` removes `TAG` from the user.
+* `t/TAG` adds `TAG` to the contact.
+* `rt/TAG` removes `TAG` from the contact.
 * Tag removal is done before tag addition.
 * You can remove all the contact’s tags by typing `rt/*`.
 
@@ -278,7 +278,7 @@ and `johndoe@example.com` respectively.
 
 * `edit -c 3 t/CS2103 rt/*` Removes all tags of the contact at index `3` and then adds the tag `cs2103` to it.
 
-#### 4.2.6 Finding a contact - `find`
+#### 4.2.6 Finding a contact - `find` [Chan Jun Da]
 
 You can use this command to find a particular contact by applying multiple search filters.
 
@@ -514,7 +514,7 @@ Example:
 
 ---
 
-### 4.4 Tags
+### 4.4 Tags [Chan Jun Da]
 
 Tags present a new way for you to classify and group your contacts together. Managing your tags properly will allow you to perform tag-level actions.
 Tag management features are advanced features meant for more proficient users of Athena who have a large number of contacts and events to manage.
@@ -531,7 +531,7 @@ letters is changed to lowercase only. This is to allow you to perform tag action
 
 </div>
 
-#### 4.4.1 Adding a tag - `add`
+#### 4.4.1 Adding a tag - `add` [Chan Jun Da]
 
 Adds a new tag to Athena. Use this when you want to retroactively assign contacts to a tag and/or classify a group 
 of tags under one parent-tag.
@@ -552,7 +552,7 @@ Examples:
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
 will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
 
-#### 4.4.2 Deleting a tag - `delete`
+#### 4.4.2 Deleting a tag - `delete` [Chan Jun Da]
 
 Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
 Additionally, if you would like to delete a tag and all its sub-tags, you can specify `true` under the `r/` input field.
@@ -560,7 +560,7 @@ Additionally, if you would like to delete a tag and all its sub-tags, you can sp
 Format: `delete -t t/TAG_NAME [r/BOOLEAN]`
 
 * `TAG_NAME` must be the name of an existing tag in Athena.
-* `BOOLEAN` must be of the form `1`, `t`, `true` for a true case or `0`, `f`, `false` for a false case.
+* `BOOLEAN` must be of the form `1`, `t`, `true` for true or `0`, `f`, `false` for false.
 * `r/BOOLEAN` field is optional. The default value for this field is `false`.
 * **Note**: On single `tag` deletion, every parent-tag of `tag` will be reconnected to every child-tag of `tag` (as shown by the image below).
 
@@ -572,7 +572,7 @@ Examples:
 
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
 
-#### 4.4.3 Editing a tag - `edit`
+#### 4.4.3 Editing a tag - `edit` [Chan Jun Da]
 
 Edits an existing tag in Athena. Use this when you would like perform either or both of the following functionalities:
 - add and/or remove contacts from a tag
@@ -613,7 +613,7 @@ Examples:
 * `find -t t/friends st/0` Finds regular tags that partially contain the word `friends` (example illustrated below).
 ![find-tag-image](images/ug-images/tagBehaviourImages/find-tag-image.png)
 
-#### 4.4.5 Listing all tags - `list`
+#### 4.4.5 Listing all tags - `list` [Chan Jun Da]
 
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
 
@@ -621,7 +621,7 @@ Example:
 * `list -t` In the remarks panel, a list of all tags and their contacts are displayed (example illustrated below).
 ![list-tag-image](images/ug-images/tagBehaviourImages/list-tag-image.png)
 
-#### 4.4.6 Viewing tags - `view`
+#### 4.4.6 Viewing tags - `view` [Chan Jun Da]
 
 Shows specific details of a tag. Use this when you would like to view full details of a tag.
 Details include:
@@ -698,11 +698,11 @@ Examples:
 
 ---
 
-### 5. Upcoming features
+### 5. Upcoming features [Chan Jun Da]
 
 #### 5.1 Viewing tag tree (coming soon) - `viewtree`
 
-Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow users to easily understand the current tag structure that they have built.
+Displays a visual representation of tag-to-tag relationships that currently exist in Athena. This upcoming feature will allow you to easily understand the current tag structure that they have built.
 
 A preview image is shown below for you to understand what this feature will look like.
 ![tagtree](images/tagtree-test-tree.png)
@@ -766,7 +766,7 @@ Action | Format, Examples
 **View Event** | `view -e INDEX` <br> e.g., `view -e 1`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
 
-## 9. Glossary
+## 9. Glossary [Chan Jun Da]
 
 ###### _Child-tag_ 
 - A _child-tag_ of a tag signifies a directional relation from a tag to its _child-tag_. It allows for some commands that affect a tag to also affect its _child-tag_. The reverse cannot be done.
