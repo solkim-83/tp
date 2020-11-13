@@ -436,7 +436,7 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Please Note:**
-`at/DATE_TIME` has the same format as the adding an event (`add -e`) command.
+`at/DATE_TIME` follows the same fromat rules from adding an event (`add -e`) command.
 </div>
 
 [Click here to jump to: `Adding an event`](#431-adding-an-event---add-hendey-fan)
