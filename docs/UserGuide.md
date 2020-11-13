@@ -24,14 +24,14 @@ title: User Guide
         * [4.2.8 `sort`](#428-sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
         * [4.2.9 `psort`](#429-sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
     * [4.3 Events](#43-events)
-        * [4.3.1 `add`](#431-adding-an-event---add) - Adding an event
+        * [4.3.1 `add`](#431-adding-an-event---add-hendey-fan) - Adding an event
         * [4.3.2 `clear`](#432-clearing-all-events---clear-kim-sol) - Clearing all events
-        * [4.3.3 `delete`](#433-deleting-an-event---delete) - Deleting an event
-        * [4.3.4 `edit`](#434-editing-an-event---edit) - Editing an event
+        * [4.3.3 `delete`](#433-deleting-an-event---delete-hendey-fan) - Deleting an event
+        * [4.3.4 `edit`](#434-editing-an-event---edit-hendey-fan) - Editing an event
         * [4.3.5 `find`](#435-finding-an-event---find-kim-sol) - Finding an event
         * [4.3.6 `list`](#436-listing-all-events---list-kim-sol) - Listing all events
         * [4.3.7 `sort`](#437-sorting-displayed-events---sort-kim-sol) - Sorting displayed events
-        * [4.3.8 `view`](#438-viewing-an-event---view) - Viewing an event
+        * [4.3.8 `view`](#438-viewing-an-event---view-hendey-fan) - Viewing an event
     * [4.4 Tags](#44-tags-chan-jun-da)
         * [4.4.1 `add`](#441-adding-a-tag---add-chan-jun-da) - Adding a tag
         * [4.4.2 `delete`](#442-deleting-a-tag---delete-chan-jun-da) - Deleting a tag
@@ -224,7 +224,7 @@ Format: `delete -c CONTACT_INDEX_LIST`
 * Deleted contacts will also be removed from any event they attend.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can delete multiple contacts at once by entering multiple corresponding indices. 
+You can delete multiple contacts at once by entering multiple corresponding indices with a comma in between (e.g. 3,1,2).
 </div>
 
 Examples:
@@ -358,7 +358,7 @@ Example:
 
 ### 4.3 Events
 
-#### 4.3.1 Adding an event - `add`
+#### 4.3.1 Adding an event - `add` [Hendey Fan]
 
 You can use this command to add an event to Athena's calendar.
 
@@ -366,6 +366,10 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 
 * `CONTACT_INDEX_LIST` are the indices of contacts in the middle panel you want to add to the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add multiple attendees at once by entering multiple corresponding indices with a comma in between (e.g. 3,1,2).
+</div>
 
 DATE_TIME formats currently accepted [Kim Sol, Hendey Fan]
 * d-M-y H:m
@@ -407,7 +411,7 @@ Format: `clear -e`
 
 ![Clear Event Behaviour](images/ug-images/eventBehaviourImages/clear-event-behaviour.png)
 
-#### 4.3.3 Deleting an event - `delete`
+#### 4.3.3 Deleting an event - `delete` [Hendey Fan]
 
 You can use this command to delete a specified event in your calendar.
 
@@ -417,16 +421,25 @@ Format: `delete -e EVENT_INDEX_LIST`
 * The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** 1, 2, 3, ...
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can delete multiple events at once by entering multiple corresponding indices with a comma in between (e.g. 3,1,2).
+</div>
+
 Examples:
 * `list -e` followed by `delete -e 2,3` deletes the 2nd and 3rd event in Athena.
 
-#### 4.3.4 Editing an event - `edit`
+#### 4.3.4 Editing an event - `edit` [Hendey Fan]
 
 You can use this command to edit a specified event.
-`d/DESCRIPTION` and `at/DATE_TIME` have the same specifications as the ones in `add -e` command.
 
 Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Please Note:**
+`at/DATE_TIME` have the same format as the adding an event (`add -e`) command.
+</div>
+
+[Click here to jump to: `Adding an event`](#431-adding-an-event---add-hendey-fan)
 
 * Edits the event at the specified INDEX. 
 * The index must be a positive integer 1, 2, 3, ...
@@ -436,6 +449,10 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 * `[rp/ATTENDEE_INDEX_LIST]` removes contacts with the specified indices from the event.
 * You can add all the attendees from the contact list to the event by using `ap/*`.
 * You can remove all the attendees for the event by using `rp/*`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add/remove multiple attendees at once by entering multiple corresponding indices with a comma in between (e.g. 3,1,2).
+</div>
 
 Examples:
 * `edit -e 1 d/CS2101 Tutorial at/23-10-1234 12:30` Edits the details and datetime of the 1st event to be CS2101 Tutorial and 23-10-1234 12:30 respectively.
@@ -499,13 +516,18 @@ Examples:
 ![Sort Event Behaviour 2](images/ug-images/eventBehaviourImages/sort-event-behaviour-2.png)
 
 
-#### 4.3.8 Viewing an event - `view`
+#### 4.3.8 Viewing an event - `view` [Hendey Fan]
 
 You can use this command to view the details of your event.
 Details include:
 * Description
 * Time
-* Details of all the attendees (phone number, address etc.)
+* Complete information of all the attendees (phone number, address etc.)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When the number of attendees exceed 6, only 6 attendees will be shown and the rest is hidden.
+To view all the attendees, use this commands.
+</div>
 
 Format: `view -e INDEX`
 * The index refers to the index number shown in the displayed event list.
