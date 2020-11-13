@@ -50,8 +50,6 @@ title: User Guide
 * [8. Command Summary](#8-command-summary)
 * [9. Glossary](#9-glossary-chan-jun-da)
 
----
-
 <div style="page-break-after: always;"></div>
 
 ## 1. Introduction [Illio Suardi]
@@ -63,9 +61,6 @@ Athena is perfect for you if you:
 * need to categorise a huge number of contacts or events,
 * need to keep track of the people who attend specific events,
 * can type fast!
-
-
----
 
 <div style="page-break-after: always;"></div>
 
@@ -87,8 +82,7 @@ The guide also uses the following symbols and formatting:
 
 :bulb: This icon is used to indicate useful tips of Athena.
 
----
-
+<div style="page-break-after: always;"></div>
 
 ## 3. Quick start [Illio Suardi]
 
@@ -120,8 +114,6 @@ The guide also uses the following symbols and formatting:
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## 4. Features [Illio Suardi]
@@ -140,6 +132,8 @@ Thus, there are **five** types of commands:
 * [event](#43-events) - commands that target events, distinguished by `-e`
 * [tag](#44-tags) - commands that target tags, distinguished by `-t`
 * [reminder](#45-reminders-wu-bangyi) - commands that target reminders, distinguished by `-r`
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -167,8 +161,6 @@ Thus, there are **five** types of commands:
 
 </div>
 
----
-
 <div style="page-break-after: always;"></div>
 
 ### 4.1 General [Illio Suardi]
@@ -189,7 +181,6 @@ Exits the program.
 
 Format: `exit`
 
----
 
 <div style="page-break-after: always;"></div>
 
@@ -215,14 +206,13 @@ Example:
 
 ![Add Contact Behaviour](images/ug-images/contactsBehaviourImages/add-contact-behaviour.png)
 
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2 Clearing all contacts - `clear` [Wu Bangyi]
 
 You can use this command to permanently clear all of Athena's contacts.
 
 Format: `clear -c`
-
-<div style="page-break-after: always;"></div>
 
 #### 4.2.3 Deleting a contact - `delete` [Wu Bangyi]
 
@@ -326,6 +316,8 @@ Examples:
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.7 Listing all contacts - `list` [Wu Bangyi]
 
 You can use this command to list out all contacts.
@@ -371,8 +363,6 @@ Format: `psort -c INDEX`
 Example:
 * `psort -c 2` would sort all contacts by their address in alphabetical order.
 
----
-
 <div style="page-break-after: always;"></div>
 
 ### 4.3 Events
@@ -396,6 +386,8 @@ DATE_TIME formats currently accepted [Kim Sol, Hendey Fan]
     * [-] (hyphen)
     * [:] (colon)
 * For example, 12/10.2020 12:00 can be keyed in by the user, and will be registered as 12th October 2020, 12pm.
+
+<div style="page-break-after: always;"></div>
 
 Legend:
 
@@ -427,6 +419,8 @@ Format: `clear -e`
 </div>
 
 ![Clear Event Behaviour](images/ug-images/eventBehaviourImages/clear-event-behaviour.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.3 Deleting an event - `delete`
 
@@ -544,8 +538,6 @@ Example:
 
 ![View Event Behaviour](images/ug-images/eventBehaviourImages/view-event-behaviour.png)
 
----
-
 <div style="page-break-after: always;"></div>
 
 ### 4.4 Tags [Chan Jun Da]
@@ -564,6 +556,8 @@ Tags that do not meet this criterion will be deleted.
 letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.1 Adding a tag - `add` [Chan Jun Da]
 
@@ -653,6 +647,8 @@ Examples:
 * `find -t t/friends st/0` Finds regular tags that partially contain the word `friends` (example illustrated below).
 ![find-tag-image](images/ug-images/tagBehaviourImages/find-tag-image.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.5 Listing all tags - `list` [Chan Jun Da]
 
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
@@ -692,6 +688,8 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application or have them
 display through an alert window whenever Athena starts.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.1 Adding a reminder - `add`
 
 You can use this command to set a new reminder for a pre-existing event. 
@@ -723,6 +721,8 @@ Example:
 
 ![List-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.3 Deleting a reminder - `delete`
 
 You can use this command to delete a specified reminder.
@@ -739,8 +739,6 @@ Examples:
 
 ![Delete-reminder-behaviour](images/ug-images/remindersBehaviourImages/delete-reminders-behaviour.png)
 
----
-
 <div style="page-break-after: always;"></div>
 
 ### 5. Upcoming features [Chan Jun Da]
@@ -756,16 +754,12 @@ Format: `viewtree -t`
 * Displays the current tag tree in Athena.
 * For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
 
----
-
 <div style="page-break-after: always;"></div>
 
 ### 6. Data saving
 
 Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
 need to save manually. 
-
------------------------------------------------------------
 
 ## 7. FAQ
 
@@ -777,8 +771,6 @@ need to save manually.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Download the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
