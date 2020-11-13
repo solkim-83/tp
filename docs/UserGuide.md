@@ -15,12 +15,12 @@ title: User Guide
         * [4.1.2 `exit`](#412-exiting-the-program---exit) - Exiting the program
     * [4.2 Contacts](#42-contacts)
         * [4.2.1 `add`](#421-adding-a-contact---add-wu-bangyi) - Adding a contact
-        * [4.2.2 `clear`](#422-clearing-all-contacts---clear) - Clearing all contacts
-        * [4.2.3 `delete`](#423-deleting-a-contact---delete) - Deleting a contact
+        * [4.2.2 `clear`](#422-clearing-all-contacts---clear-wu-bangyi) - Clearing all contacts
+        * [4.2.3 `delete`](#423-deleting-a-contact---delete-wu-bangyi) - Deleting a contact
         * [4.2.4 `deletebytag`](#424--deleting-contacts-by-tag---deletebytag-wu-bangyi) - Deleting contacts by tag
         * [4.2.5 `edit`](#425-editing-a-contact---edit-chan-jun-da) - Editing a contact
         * [4.2.6`find`](#426-finding-a-contact---find-chan-jun-da) - Finding a contact
-        * [4.2.7 `list`](#427-listing-all-contacts---list) - Listing all contacts
+        * [4.2.7 `list`](#427-listing-all-contacts---list-wu-bangyi) - Listing all contacts
         * [4.2.8 `sort`](#428-sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
         * [4.2.9 `psort`](#429-sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
     * [4.3 Events](#43-events)
@@ -206,13 +206,13 @@ Example:
 ![Add Contact Behaviour](images/ug-images/contactsBehaviourImages/add-contact-behaviour.png)
 
 
-#### 4.2.2 Clearing all contacts - `clear`
+#### 4.2.2 Clearing all contacts - `clear` [Wu Bangyi]
 
 You can use this command to permanently clear all of Athena's contacts.
 
 Format: `clear -c`
 
-#### 4.2.3 Deleting a contact - `delete`
+#### 4.2.3 Deleting a contact - `delete` [Wu Bangyi]
 
 You can use this command to delete specified contact(s).
 
@@ -222,6 +222,10 @@ Format: `delete -c CONTACT_INDEX_LIST`
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Deleted contacts will also be removed from any event they attend.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can delete multiple contacts at once by entering multiple corresponding indices. 
+</div>
 
 Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
@@ -307,7 +311,7 @@ Examples:
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
 
-#### 4.2.7 Listing all contacts - `list`
+#### 4.2.7 Listing all contacts - `list` [Wu Bangyi]
 
 You can use this command to list out all contacts.
 
@@ -319,7 +323,7 @@ You can use this command to sort all currently displayed contacts in Athena.
 
 Format: `sort -c INDEX`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:information_source: **Temporary Sorting:**
 The order of sorting will reset to default whenever Athena is rebooted. 
 </div>
 
@@ -650,7 +654,7 @@ display through an alert window whenever Athena starts.
 
 #### 4.5.1 Adding a reminder - `add`
 
-You can use this command to set a new reminder for an pre-existing event. 
+You can use this command to set a new reminder for a pre-existing event. 
 
 Format: `add -r EVENT_INDEX in/DAYS`
 
@@ -663,10 +667,8 @@ Examples:
 
 2. Since event 5 is on **12th Nov**, the reminder will be activated three days 
 before then, starting on **9th Nov**.
-
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
-
-3. When reminders are active, every time Athena is opened, the alert window will pop up as shown below. 
+3. When reminders are active, every time Athena is opened, the alert window will pop up as shown below.
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
