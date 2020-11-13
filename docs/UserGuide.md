@@ -548,7 +548,7 @@ Details include:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 When the number of attendees exceed 6, only 6 attendees will be shown and the rest is hidden.
-To view all the attendees, use this commands.
+To view all the attendees, use this command.
 </div>
 
 Format: `view -e INDEX`
