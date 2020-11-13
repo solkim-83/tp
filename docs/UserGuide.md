@@ -6,11 +6,11 @@ title: User Guide
 
 #### Table of Contents
 
-* [1. Introduction](#1-introduction)
-* [2. About](#2-about)
-* [3. Quick Start](#3-quick-start)
-* [4. Features](#4-features)
-    * [4.1 General](#41-general)
+* [1. Introduction](#1-introduction-illio-suardi)
+* [2. About](#2-about-illio-suardi-wu-bangyi)
+* [3. Quick Start](#3-quick-start-illio-suardi)
+* [4. Features](#4-features-illio-suardi)
+    * [4.1 General](#41-general-illio-suardi)
         * [4.1.1 `help`](#411-viewing-help---help) - Viewing help
         * [4.1.2 `exit`](#412-exiting-the-program---exit) - Exiting the program
     * [4.2 Contacts](#42-contacts)
@@ -36,7 +36,7 @@ title: User Guide
         * [4.4.1 `add`](#441-adding-a-tag---add) - Adding a tag
         * [4.4.2 `delete`](#442-deleting-a-tag---delete) - Deleting a tag
         * [4.4.3 `edit`](#443-editing-a-tag---edit) - Editing a tag
-        * [4.4.4 `find`](#444-finding-a-tag---find) - Finding a tag
+        * [4.4.4 `find`](#444-finding-a-tag---find-illio-suardi) - Finding a tag
         * [4.4.5 `list`](#445-listing-all-tags---list) - Listing all tags
         * [4.4.6 `view`](#446-viewing-tags---view) - Viewing tag details
     * [4.5. Reminders](#45-reminders-wu-bangyi)
@@ -52,7 +52,7 @@ title: User Guide
 
 ---
 
-## 1. Introduction
+## 1. Introduction [Illio Suardi]
 
 Athena is a **desktop app for managing contacts and events**. It is optimized for use via a Command Line Interface (CLI) while
 still having the benefits of a Graphical User Interface (GUI).
@@ -65,14 +65,15 @@ Athena is perfect for you if you:
 
 ---
 
-## 2. About
-This document provides you with all necessary information on the installation and complete usage of Athena. 
-You will be able to find comprehensive descriptions of all available features in our Commands section and the Quick Start 
-section will get Athena up and running easily.
+## 2. About [Illio Suardi, Wu Bangyi]
+This document provides you with all necessary information on the installation and complete usage of Athena.
+To get started, you may refer to the [Quick Start](#3-quick-start) section below.
+You will also be able to find comprehensive descriptions of all available features in our [Commands](#4-features)
+section.
 
 The guide also uses the following symbols and formatting:
 
-* Words that looks like [this](#About) can be clicked to navigate you to the related section or its relevant pages.
+* Words that looks like [this](#2-about) can be clicked to navigate you to the related section or its relevant pages.
 * Words that looks like `this` are words related to user input or the commands of Athena.
 * Words that looks like <kbd>this</kbd> are keys that you can press using your keyboard.
 
@@ -85,7 +86,7 @@ The guide also uses the following symbols and formatting:
 ---
 
 
-## 3. Quick start
+## 3. Quick start [Illio Suardi]
 
 1. Ensure you have **Java 11** or above installed in your computer.
 
@@ -117,7 +118,7 @@ The guide also uses the following symbols and formatting:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Features
+## 4. Features [Illio Suardi]
 
 Athena supports two key functionalities - the management of **contacts** and **events**. Commands are tailored to manage 
 each of these specific functionalities.
@@ -162,7 +163,7 @@ Thus, there are **five** types of commands:
 
 ---
 
-### 4.1 General
+### 4.1 General [Illio Suardi]
 
 #### 4.1.1 Viewing help - `help`
 
@@ -593,11 +594,11 @@ Examples:
 
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
-#### 4.4.4 Finding a tag - `find`
+#### 4.4.4 Finding a tag - `find` [Illio Suardi]
 
-Finds tags which names partially match the given keyword and lists them in the remarks panel. Super-tags are also
-denoted with `(supertag)`. Additionally, if you would like to find super-tags only, you can specify `true` in the `st/`
-field; conversely, if you would like to find regular tags only, you can specify `false` in the `st/` field.
+You can use this command to find tags which names partially match the given keyword by listing them in the remarks panel.
+Super-tags are also denoted with `(supertag)`. Additionally, if you would like to find super-tags only, you can specify
+`true` in the `st/` field; conversely, if you would like to find regular tags only, you can specify `false` in the `st/` field.
 
 Format: `find -t [t/KEYWORD] [st/BOOLEAN]`
 
