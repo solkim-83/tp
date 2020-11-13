@@ -371,7 +371,7 @@ Format: `add -e d/DESCRIPTION at/DATE_TIME [ap/CONTACT_INDEX_LIST]`
 You can add multiple attendees at once by entering multiple corresponding indices with a comma in between (e.g. 3,1,2).
 </div>
 
-DATE_TIME formats currently accepted [Kim Sol, Hendey Fan]
+`DATE_TIME` formats currently accepted [Kim Sol, Hendey Fan]
 * d-M-y H:m
 * y-d-M H:m
 * 2 digit inputs for `y` will automatically be in the 21st century. (e.g. `20` is interpreted as the year 2020)
@@ -436,7 +436,7 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Please Note:**
-`at/DATE_TIME` follows the same fromat rules from adding an event (`add -e`) command.
+`DATE_TIME` for this command follows the same formats as the `DATE_TIME` in adding an event (`add -e`) command.
 </div>
 
 [Click here to jump to: `Adding an event`](#431-adding-an-event---add-hendey-fan)
