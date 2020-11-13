@@ -255,7 +255,7 @@ Example:
 1. Entering `deletebytag -c computing` into the user input panel will delete all the contacts tagged under computing.
 ![delete-by-tag-success](images/ug-images/contactsBehaviourImages/deletebytag-before-behaviour.png)
 
-1. All contacts tagged under computing have been successfully deleted.
+2. As shown below, all contacts tagged under computing have been successfully deleted.
 ![groups of computing contacts](images/ug-images/contactsBehaviourImages/deletebytag-success-behaviour.png)
 
 <div style="page-break-after: always;"></div>
@@ -315,8 +315,6 @@ Examples:
 * `find -c a/Serangoon` returns all contacts with an address that contains `Serangoon` 
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
-
-<div style="page-break-after: always;"></div>
 
 #### 4.2.7 Listing all contacts - `list` [Wu Bangyi]
 
@@ -709,6 +707,16 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application or have them
 display through an alert window whenever Athena starts.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes**: 
+* **Reminders are always coupled to a valid event in your calendar.** I.e. If an event is removed, any reminder for
+that event will also be removed. 
+* **Obsolete reminders are deleted automatically.** I.e. The moment an event has passed, the reminder will be automatically
+deleted by Athena.
+
+</div>
 
 <div style="page-break-after: always;"></div>
 
