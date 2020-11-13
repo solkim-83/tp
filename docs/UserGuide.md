@@ -19,7 +19,7 @@ title: User Guide
         * [4.2.3 `delete`](#423-deleting-a-contact---delete-wu-bangyi) - Deleting a contact
         * [4.2.4 `deletebytag`](#424--deleting-contacts-by-tag---deletebytag-wu-bangyi) - Deleting contacts by tag
         * [4.2.5 `edit`](#425-editing-a-contact---edit-chan-jun-da) - Editing a contact
-        * [4.2.6`find`](#426-finding-a-contact---find-chan-jun-da) - Finding a contact
+        * [4.2.6 `find`](#426-finding-a-contact---find-chan-jun-da) - Finding a contact
         * [4.2.7 `list`](#427-listing-all-contacts---list-wu-bangyi) - Listing all contacts
         * [4.2.8 `sort`](#428-sorting-displayed-contacts---sort-wu-bangyi) - Sorting displayed contacts
         * [4.2.9 `psort`](#429-sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
