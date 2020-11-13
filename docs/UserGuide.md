@@ -25,12 +25,12 @@ title: User Guide
         * [4.2.9 `psort`](#429-sorting-displayed-contacts-permanently---psort-wu-bangyi) - Sorting contacts permanently
     * [4.3 Events](#43-events)
         * [4.3.1 `add`](#431-adding-an-event---add) - Adding an event
-        * [4.3.2 `clear`](#432-clearing-all-events---clear) - Clearing all events
+        * [4.3.2 `clear`](#432-clearing-all-events---clear-kim-sol) - Clearing all events
         * [4.3.3 `delete`](#433-deleting-an-event---delete) - Deleting an event
         * [4.3.4 `edit`](#434-editing-an-event---edit) - Editing an event
-        * [4.3.5 `find`](#435-finding-an-event---find) - Finding an event
-        * [4.3.6 `list`](#436-listing-all-events---list) - Listing all events
-        * [4.3.7 `sort`](#437-sorting-displayed-events---sort) - Sorting displayed events
+        * [4.3.5 `find`](#435-finding-an-event---find-kim-sol) - Finding an event
+        * [4.3.6 `list`](#436-listing-all-events---list-kim-sol) - Listing all events
+        * [4.3.7 `sort`](#437-sorting-displayed-events---sort-kim-sol) - Sorting displayed events
         * [4.3.8 `view`](#438-viewing-an-event---view) - Viewing an event
     * [4.4 Tags](#44-tags)
         * [4.4.1 `add`](#441-adding-a-tag---add) - Adding a tag
@@ -391,7 +391,7 @@ Examples:
 
 ![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
 
-#### 4.3.2 Clearing all events - `clear`
+#### 4.3.2 Clearing all events - `clear` [Kim Sol]
 
 You can use this command to clear the events in your calendar all at once.
 
@@ -448,7 +448,7 @@ Picture example:
 
 ![Edit Event Behaviour after](images/ug-images/eventBehaviourImages/edit-event-behaviour-after.png)
 
-#### 4.3.5 Finding an event - `find`
+#### 4.3.5 Finding an event - `find` [Kim Sol]
 
 You can use this command to search for a specific event or events using keywords matching the event name.
 
@@ -465,7 +465,7 @@ Examples:
 
 ![Find Event Behaviour](images/ug-images/eventBehaviourImages/find-event-behaviour.png)
 
-#### 4.3.6 Listing all events - `list`
+#### 4.3.6 Listing all events - `list` [Kim Sol]
 
 You can use this command to display all the events in your calendar.
 
@@ -473,7 +473,7 @@ Format: `list -e`
 
 ![List Event Behaviour after](images/ug-images/eventBehaviourImages/list-event-behaviour-after.png)
 
-#### 4.3.7 Sorting displayed events - `sort`
+#### 4.3.7 Sorting displayed events - `sort` [Kim Sol]
 
 You can use this command to sort through your currently displayed list of events. You can choose the sorting order by
 keying in a specific index.
