@@ -50,7 +50,7 @@ title: User Guide
 * [8. Command Summary](#8-command-summary)
 * [9. Glossary](#9-glossary-chan-jun-da)
 
----
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction [Illio Suardi]
 
@@ -62,8 +62,7 @@ Athena is perfect for you if you:
 * need to keep track of the people who attend specific events,
 * can type fast!
 
-
----
+<div style="page-break-after: always;"></div>
 
 ## 2. About [Illio Suardi, Wu Bangyi]
 This document provides you with all necessary information on the installation and complete usage of Athena.
@@ -83,8 +82,7 @@ The guide also uses the following symbols and formatting:
 
 :bulb: This icon is used to indicate useful tips of Athena.
 
----
-
+<div style="page-break-after: always;"></div>
 
 ## 3. Quick start [Illio Suardi]
 
@@ -116,7 +114,7 @@ The guide also uses the following symbols and formatting:
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Features [Illio Suardi]
 
@@ -134,6 +132,8 @@ Thus, there are **five** types of commands:
 * [event](#43-events) - commands that target events, distinguished by `-e`
 * [tag](#44-tags) - commands that target tags, distinguished by `-t`
 * [reminder](#45-reminders-wu-bangyi) - commands that target reminders, distinguished by `-r`
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -161,7 +161,7 @@ Thus, there are **five** types of commands:
 
 </div>
 
----
+<div style="page-break-after: always;"></div>
 
 ### 4.1 General [Illio Suardi]
 
@@ -181,7 +181,8 @@ Exits the program.
 
 Format: `exit`
 
----
+
+<div style="page-break-after: always;"></div>
 
 ### 4.2 Contacts
 
@@ -205,6 +206,7 @@ Example:
 
 ![Add Contact Behaviour](images/ug-images/contactsBehaviourImages/add-contact-behaviour.png)
 
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2 Clearing all contacts - `clear` [Wu Bangyi]
 
@@ -231,6 +233,8 @@ Examples:
 * `list -c` followed by `delete -c 2,3` deletes the 2nd and 3rd contact in Athena.
 * `find -c n/Betsy` followed by `delete -c 1` deletes the 1st contact in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.4  Deleting contacts by Tag - `deletebytag` [Wu Bangyi]
 
 You can use this command to delete all contacts with a specified tag.
@@ -254,8 +258,7 @@ Example:
 1. All contacts tagged under computing have been successfully deleted.
 ![groups of computing contacts](images/ug-images/contactsBehaviourImages/deletebytag-success-behaviour.png)
 
-
-
+<div style="page-break-after: always;"></div>
 
 #### 4.2.5 Editing a contact - `edit` [Chan Jun Da]
 
@@ -281,6 +284,8 @@ and `johndoe@example.com` respectively.
 ![edit-contact-image](images/ug-images/contactBehaviourImages/edit-contact-image.png)
 
 * `edit -c 3 t/CS2103 rt/*` Removes all tags of the contact at index `3` and then adds the tag `cs2103` to it.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.6 Finding a contact - `find` [Chan Jun Da]
 
@@ -311,11 +316,15 @@ Examples:
 * `find -c n/alex david e/gmail` returns `Alex Tan e/...@gmail.com` and `David Lim e/...@gmail.com` but not 
 `Alex Yeoh e/...@hotmail.com` 
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.7 Listing all contacts - `list` [Wu Bangyi]
 
 You can use this command to list out all contacts.
 
 Format: `list -c`
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.8 Sorting displayed contacts - `sort` [Wu Bangyi]
 
@@ -354,7 +363,7 @@ Format: `psort -c INDEX`
 Example:
 * `psort -c 2` would sort all contacts by their address in alphabetical order.
 
----
+<div style="page-break-after: always;"></div>
 
 ### 4.3 Events
 
@@ -382,6 +391,8 @@ You can add multiple attendees at once by entering multiple corresponding indice
     * [:] (colon)
 * For example, 12/10.2020 12:00 can be keyed in by the user, and will be registered as 12th October 2020, 12pm.
 
+<div style="page-break-after: always;"></div>
+
 Legend:
 
 Short form | What it represents
@@ -399,6 +410,8 @@ Examples:
 
 ![Add Event Behaviour](images/ug-images/eventBehaviourImages/add-event-behaviour.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.3.2 Clearing all events - `clear` [Kim Sol]
 
 You can use this command to clear the events in your calendar all at once.
@@ -410,6 +423,8 @@ Format: `clear -e`
 </div>
 
 ![Clear Event Behaviour](images/ug-images/eventBehaviourImages/clear-event-behaviour.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.3 Deleting an event - `delete` [Hendey Fan]
 
@@ -427,6 +442,8 @@ You can delete multiple events at once by entering multiple corresponding indice
 
 Examples:
 * `list -e` followed by `delete -e 2,3` deletes the 2nd and 3rd event in Athena.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.4 Editing an event - `edit` [Hendey Fan]
 
@@ -469,6 +486,8 @@ Picture example:
 
 ![Edit Event Behaviour after](images/ug-images/eventBehaviourImages/edit-event-behaviour-after.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.3.5 Finding an event - `find` [Kim Sol]
 
 You can use this command to search for a specific event or events using keywords matching the event name.
@@ -494,6 +513,8 @@ Format: `list -e`
 
 ![List Event Behaviour after](images/ug-images/eventBehaviourImages/list-event-behaviour-after.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.3.7 Sorting displayed events - `sort` [Kim Sol]
 
 You can use this command to sort through your currently displayed list of events. You can choose the sorting order by
@@ -515,6 +536,7 @@ Examples:
 
 ![Sort Event Behaviour 2](images/ug-images/eventBehaviourImages/sort-event-behaviour-2.png)
 
+<div style="page-break-after: always;"></div>
 
 #### 4.3.8 Viewing an event - `view` [Hendey Fan]
 
@@ -538,7 +560,7 @@ Example:
 
 ![View Event Behaviour](images/ug-images/eventBehaviourImages/view-event-behaviour.png)
 
----
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Tags [Chan Jun Da]
 
@@ -556,6 +578,8 @@ Tags that do not meet this criterion will be deleted.
 letters is changed to lowercase only. This is to allow you to perform tag actions more easily without having to worry about the casing of the original tag.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.1 Adding a tag - `add` [Chan Jun Da]
 
@@ -578,6 +602,8 @@ Examples:
 * `add -t n/computing i/1 i/2 t/cs2030 t/cs2040` Creates a new tag `computing`. Contacts at indices `1` and `2` 
 will be assigned the `computing` tag. `cs2030` and `cs2040` are assigned as child-tags of `computing`.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.2 Deleting a tag - `delete` [Chan Jun Da]
 
 Deletes a tag from Athena. Use this when you would like to remove a specific tag from Athena instead of manually editing each contact with the tag. 
@@ -597,6 +623,8 @@ Examples:
 ![delete-tag-image](images/ug-images/tagBehaviourImages/delete-tag-image.png)
 
 * `delete -t t/computing r/t` Deletes the tag `computing` and all its sub-tags.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.3 Editing a tag - `edit` [Chan Jun Da]
 
@@ -620,6 +648,8 @@ Examples:
 
 * `edit -t n/computing ri/1 t/cs2030 rt/cs2040` Removes the contact at index `1` from `computing`. Also, adds `cs2030` as a child-tag to `computing` and removes `cs2040` as a child-tag.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.4 Finding a tag - `find` [Illio Suardi]
 
 You can use this command to find tags which names partially match the given keyword by listing them in the remarks panel.
@@ -639,6 +669,8 @@ Examples:
 * `find -t t/friends st/0` Finds regular tags that partially contain the word `friends` (example illustrated below).
 ![find-tag-image](images/ug-images/tagBehaviourImages/find-tag-image.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.5 Listing all tags - `list` [Chan Jun Da]
 
 Lists all tags in the remarks panel including the corresponding contacts of each tag. Super-tags are also denoted with `(supertag)`.
@@ -646,6 +678,8 @@ Lists all tags in the remarks panel including the corresponding contacts of each
 Example:
 * `list -t` In the remarks panel, a list of all tags and their contacts are displayed (example illustrated below).
 ![list-tag-image](images/ug-images/tagBehaviourImages/list-tag-image.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.6 Viewing tags - `view` [Chan Jun Da]
 
@@ -669,10 +703,14 @@ _Note that for the above image, the tag `friends` does not contain sub-tags._
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### 4.5 Reminders [Wu Bangyi]
 
 Reminders allow you to set custom reminders for your events. You can call up your reminders in application or have them
 display through an alert window whenever Athena starts.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.1 Adding a reminder - `add`
 
@@ -694,6 +732,7 @@ before then, starting on **9th Nov**.
 
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
+<div style="page-break-after: always;"></div>
 
 #### 4.5.2 Listing all reminders - `list`
 
@@ -703,6 +742,8 @@ Example:
 * `list -r` 
 
 ![List-reminder-behaviour](images/ug-images/remindersBehaviourImages/list-reminders-behaviour.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.3 Deleting a reminder - `delete`
 
@@ -720,7 +761,7 @@ Examples:
 
 ![Delete-reminder-behaviour](images/ug-images/remindersBehaviourImages/delete-reminders-behaviour.png)
 
----
+<div style="page-break-after: always;"></div>
 
 ### 5. Upcoming features [Chan Jun Da]
 
@@ -735,14 +776,12 @@ Format: `viewtree -t`
 * Displays the current tag tree in Athena.
 * For each tag, a summary of contacts directly tagged with it is shown. If there are too many contacts, only the first few will be shown together with a number indicating the number of undisplayed contacts.
 
----
+<div style="page-break-after: always;"></div>
 
 ### 6. Data saving
 
 Athena's data is saved in the hard disk automatically after **any command that changes the data**. Thus, there is no
 need to save manually. 
-
---------------------------------------------------------------------------------------------------------------------
 
 ## 7. FAQ
 
@@ -755,7 +794,7 @@ need to save manually.
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Download the app on the other computer and overwrite the empty data files it creates with the three save files from the previous computer. 
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 8. Command summary
 
@@ -790,6 +829,8 @@ Action | Format, Examples
 **View Event** | `view -e INDEX` <br> e.g., `view -e 1`
 **View Tags** | `view -t t/TAG [t/TAG]…` <br> e.g., `view -t t/cs2030 t/cs2040`
 
+<div style="page-break-after: always;"></div>
+
 ## 9. Glossary [Chan Jun Da]
 
 ###### _Child-tag_ 
@@ -802,8 +843,6 @@ The other tag in the relation is known as a [_child-tag_](#child-tag).
 
 ###### _Tag tree_
 - A _tag tree_ (or more accurately a tag graph) is a data structure that tracks tags in Athena and the directional (parent-child) relations between the tags.
-
-<div style="page-break-after: always;"></div>
 
 ###### _Sub-tag_
 - A _sub-tag_ of a tag signifies a multi-step directional relation from a tag to the _sub-tag_ (i.e. a sub-tag of a tag is a [child-tag](#child-tag), or a child-tag of a child-tag, etc.). See also<br>[_super-tag_](#super-tag).
