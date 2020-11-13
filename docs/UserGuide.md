@@ -436,7 +436,7 @@ Format: `edit -e INDEX [d/DESCRIPTION] [at/DATE_TIME]
 [ap/CONTACT_INDEX_LIST] [rp/ATTENDEE_INDEX_LIST]`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Please Note:**
-`at/DATE_TIME` have the same format as the adding an event (`add -e`) command.
+`at/DATE_TIME` has the same format as the adding an event (`add -e`) command.
 </div>
 
 [Click here to jump to: `Adding an event`](#431-adding-an-event---add-hendey-fan)
@@ -692,7 +692,7 @@ before then, starting on **9th Nov**.
 ![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/add-reminders-behaviour.png)
 3. When reminders are active, every time Athena is opened, the alert window will pop up as shown below.
 
-![reminder-alert-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
+![Add-reminder-behaviour](images/ug-images/remindersBehaviourImages/reminder-alert-behaviour.png)
 
 
 #### 4.5.2 Listing all reminders - `list`
